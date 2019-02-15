@@ -1,0 +1,72 @@
+# Documenting most aspects of C2B [Compiles to Batch] programming language.
+
+# A comment's syntax is a hashtag [#] at the start of a line. Only one line comments are available in C2B. 
+# A comment
+
+# To print a line to the console, use print[text]
+print[This is a message. ]
+# Blank line:
+print[]
+
+# Waits a certain amount of time: wait[seconds]
+wait[3]
+# Waits for the user to press any key: 
+wait[user]
+
+# Exits file:
+end[file]
+# Ends current function:
+end[function]
+
+# Maximises screen: disp[max]
+disp[max]
+
+# Clears the screen: clear[]
+clear[]
+
+# If statement:	if[statement] {
+#				content
+#				}
+if[%this%==%that%] {
+print[This is that]
+}
+
+# Executes a Windows Batch / CMD command: cmd[command]
+cmd[echo Hi]
+
+# Changes title: title[text]
+title[This is the title. ]
+
+# Makes a function:	define.function[name]:
+#					content
+#					end[function]
+define.function[function]:
+print[This is a function]
+print[%arg1%]
+print[%arg2%]
+print[%arg3%]
+end[function]
+
+# A place in the code which can be returned to later on with goto[]: place[name]
+place[place]
+
+# Goes to a specified place[] in the code: goto[place]
+goto[place]
+
+# Executes a function: $function arg1 arg2 arg3...
+$function "Argument 1" "Argument 2" "Argument 3"
+
+# Defines a variable:	define[var=text] OR define.text[var=text]
+#						define.math[var=expression]
+#						define.prompt[var=prompt]
+define[textVar=This is text]
+define.text[textVar2=This is also text]
+define.math[mathVar=1+1]
+define.prompt[userVar=Enter text here: ]
+
+# Saves input to variable: prompt[var]
+prompt[userVar2]
+
+# Ends compilation. All text past here is ignored: export[]
+export[]
+ 
