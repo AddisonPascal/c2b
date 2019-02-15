@@ -1,6 +1,6 @@
 :: Made by Addison Djatschenko
-:: Version 0.1.0
-set version=01
+:: Version 0.2.0
+set version=02
 DEVICE=ANSI.SYS
 @echo off
 setlocal enabledelayedexpansion

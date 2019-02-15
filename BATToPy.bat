@@ -2,10 +2,10 @@
 setlocal enabledelayedexpansion
 (
 @echo off
+echo # Converted from Batch
 echo import os
 echo os.system("echo. >FILE.bat"^);
 echo file = open("FILE.bat","w"^);
-echo. 
 )>sys.py
 :home
 echo File?
