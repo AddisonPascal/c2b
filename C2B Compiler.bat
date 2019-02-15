@@ -1,7 +1,6 @@
 :: Made by Addison Djatschenko
 :: Version 0.2.0
 set version=02
-DEVICE=ANSI.SYS
 @echo off
 setlocal enabledelayedexpansion
 mode 1000
@@ -57,7 +56,7 @@ goto compile
 :: From here on is the compiling system, it is fairly straightforward and adds comments to the compiled batch file. 
 set /a line=%line%+1
 set cmd=~linebreak
-set /p cmd= "[0m%line% | [1;32m "
+set /p cmd= "%line% | "
 if "!cmd!"=="~linebreak" goto linebreak
 (
 @echo off
@@ -411,7 +410,7 @@ echo.
 cls
 :ec
 set ce=nul
-echo [0m Compiled!
+echo Compiled!
 echo. 
 echo. 
 :: Gives a few options. The user can edit in Notepad (or anything), a feature I added recently with the copy/paste idea. 
