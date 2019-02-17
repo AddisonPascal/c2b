@@ -5,13 +5,24 @@ cls
 echo c2b Prompt for c2b 0.2
 echo. 
 :compile
-set cmd=linebreak
+set cmd=
+set emptyPrint=false
 echo. 
 set /p cmd= "c2b %~dp0> "
 echo. 
-if "%cmd%"=="linebreak" goto linebreak
-set emptyPrint=false
+if "%cmd:~0,1%"=="$" goto callFunction
 if "%cmd:~0,1%"=="#" goto comment
+if "%cmd:~0,1%"=="}" goto endif
+if "%cmd:~0,3%"=="if[" goto if
+if "%cmd:~0,4%"=="cmd[" goto batchcmd
+if "%cmd:~0,5%"=="wait[" goto wait
+if "%cmd:~0,5%"=="goto[" goto gotoPlace
+if "%cmd:~0,5%"=="clear" goto cls
+if "%cmd:~0,6%"=="export" goto compilend
+if "%cmd:~0,6%"=="place[" goto place
+if "%cmd:~0,6%"=="title[" goto title
+if "%cmd:~0,7%"=="define[" goto define
+if "%cmd:~0,7%"=="prompt[" goto prompt
 if "%cmd:~0,7%"=="print[]" (
 set emptyPrint=true
 goto emptyPrint
@@ -19,26 +30,14 @@ goto emptyPrint
 if "%cmd:~0,6%"=="print[" (
 if %emptyPrint%==false goto echo
 )
-if "%cmd:~0,5%"=="wait[" goto wait
-if "%cmd%"=="end[file]" goto exit
-if "%cmd%"=="end[function]" goto endFunction
-if "%cmd:~0,6%"=="export" goto compilend
+if "%cmd:~0,9%"=="end[file]" goto exit
 if "%cmd:~0,9%"=="disp[max]" goto dispmax
-if "%cmd:~0,5%"=="clear" goto cls
-if "%cmd:~0,3%"=="if[" goto if
-if "%cmd%"=="}" goto endif
-if "%cmd:~0,4%"=="cmd[" goto batchcmd
-if "%cmd:~0,6%"=="title[" goto title
-if "%cmd:~0,16%"=="define.function[" goto startFunction
-if "%cmd:~0,6%"=="place[" goto place
-if "%cmd:~0,5%"=="goto[" goto gotoPlace
-if "%cmd:~0,1%"=="$" goto callFunction
 if "%cmd:~0,12%"=="define.text[" goto defineText
-if "%cmd:~0,7%"=="define[" goto define
-if "%cmd:~0,14%"=="define.prompt[" goto setp
-if "%cmd:~0,7%"=="prompt[" goto prompt
 if "%cmd:~0,12%"=="define.math[" goto defineMath
-echo Error: %cmd% was not recognised as a command. 
+if "%cmd:~0,13%"=="end[function]" goto endFunction
+if "%cmd:~0,14%"=="define.prompt[" goto setp
+if "%cmd:~0,16%"=="define.function[" goto startFunction
+echo Error: "%cmd%" was not recognised as a command. 
 goto compile
 
 :linebreak
