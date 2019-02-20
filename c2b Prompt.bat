@@ -134,7 +134,7 @@ if "%cmdc%"=="user" (
 goto waitUser
 goto compile
 )
-timeout /t %cmdc% /nobreak ^>nul
+timeout /t %cmdc% /nobreak >nul
 goto compile
 
 :waitUser
