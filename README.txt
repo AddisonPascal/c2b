@@ -4,6 +4,7 @@ See DOCUMENTATION.c2b.
 
 Files Included:
 - C2B Compiler
+- C2B Prompt
 - Documentation
 - Batch to Python
 
