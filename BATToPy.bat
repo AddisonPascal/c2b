@@ -5,6 +5,8 @@ setlocal enabledelayedexpansion
 echo # Converted from Batch
 echo import os
 echo import random
+echo os.system("attrib -h FILE*.bat"^);
+echo os.system("del FILE*.bat"^);
 echo task_id=str(random.randint(1,10000^)^)
 echo os.system("echo. >FILE" + task_id + ".bat"^);
 echo file = open("FILE" + task_id + ".bat","w"^);
@@ -28,8 +30,11 @@ echo file.write('!do!'^);>>sys.py
 goto do
 :endcomp
 echo file.close(^);>>sys.py
+echo os.system("attrib +h FILE" + task_id + ".bat");>>sys.py
+echo os.system("cls");>>sys.py
 echo os.system("call FILE" + task_id + ".bat"^);>>sys.py
-echo os.system("del FILE" + task_id + ".bat^");>>sys.py
+echo os.system("attrib -h FILE*.bat");>>sys.py
+echo os.system("del FILE*.bat");>>sys.py
 if exist "%fileName%.py" del "%fileName%.py"
 ren sys.py "%fileName%.py"
 cls
