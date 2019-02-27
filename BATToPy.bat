@@ -26,7 +26,11 @@ echo Right Click!
 set /p do=""
 if "!do:~0,7!"=="ENDCOMP" goto endcomp
 echo file.write("\n"^);>>sys.py
-echo file.write('!do!'^);>>sys.py
+if "!do:~-1,1!"=="'" (
+echo file.write(r"""!do!"""^);>>sys.py
+goto do
+)
+echo file.write(r'''!do!'''^);>>sys.py
 goto do
 :endcomp
 echo file.close(^);>>sys.py
