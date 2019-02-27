@@ -1,6 +1,6 @@
 :: Made by Addison Djatschenko
-:: Version 0.2.0
-set version=02
+:: Version 0.3.0
+set version=03
 @echo off
 setlocal enabledelayedexpansion
 mode 1000
@@ -115,6 +115,100 @@ if "!cmd:~0,7!"=="define[" call :define
 if "!cmd:~0,14!"=="define.prompt[" call :setp
 if "!cmd:~0,7!"=="prompt[" call :prompt
 if "!cmd:~0,12!"=="define.math[" call :defineMath
+if "!cmd:~0,8!"=="download[" call :download
+if "!cmd:~0,4!"=="ren[" call :rename
+if "!cmd:~0,4!"=="del[" call :delete
+if "!cmd:~0,7!"=="mkfile[" call :mkfile
+if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
+if "!cmd:~0,9!"=="file.set[" call :openFile
+if "!cmd!"=="file.write[]:" call :startFileWrite
+if "!cmd!"=="end[write]" call :endFileWrite
+exit /b
+
+:endFileWrite
+(
+@echo off
+type "sys.bat"
+echo ^)^>%%opened_file%%
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:startFileWrite
+(
+@echo off
+type "sys.bat"
+echo (
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:openFile
+set cmdc=!cmd:~9,-1!
+(
+@echo off
+type "sys.bat"
+echo set opened_file=!cmdc!
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:mkfolder
+set cmdc=!cmd:~9,-1!
+(
+@echo off
+type "sys.bat"
+echo md !cmdc!
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:mkfile
+set cmdc=!cmd:~7,-1!
+(
+@echo off
+type "sys.bat"
+echo echo.^>!cmdc!
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:delete
+set cmdc=!cmd:~4,-1!
+(
+@echo off
+type "sys.bat"
+echo del !cmdc!
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:rename
+set cmdc=!cmd:~4,-1!
+(
+@echo off
+type "sys.bat"
+echo ren !cmdc!
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
+exit /b
+
+:download
+set cmdc=!cmd:~8,-1!
+(
+@echo off
+type "sys.bat"
+echo powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
 exit /b
 
 :prompt
