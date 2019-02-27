@@ -67,6 +67,31 @@ define.prompt[userVar=Enter text here: ]
 # Saves input to variable: prompt[var]
 prompt[userVar2]
 
+# Downloads a file from the internet (saved as 'download'): download[URL]
+download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/C2B%20Compiler.bat]
+
+# Renames a file: ren[originalname newname]
+ren[filename newfilename]
+
+# Deletes a file: del[file]
+del[file]
+
+# Makes a new file: mkfile[name]
+mkfile[file]
+
+# Makes a new folder: mkfolder[name]
+mkfolder[folder]
+
+# Gets the file to write to: file.set[name]
+file.set[file]
+
+# Writes the output of commands to a file:	file.write[]:
+#											content
+#											end[write]
+file.write[]:
+print[This will be in a file]
+end[write]
+
 # Ends compilation. All text past here is ignored: export[]
 export[]
  
