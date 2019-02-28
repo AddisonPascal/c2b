@@ -61,6 +61,7 @@ set location=%1
 (
 type %location%
 )|clip
+del %location:~0,-4%.bat"
 goto right_click
 
 :compile
