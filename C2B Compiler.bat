@@ -565,5 +565,7 @@ set new_location=%location:~0,-4%.bat"
 copy sys.bat %new_location%
 del sys.bat
 del sys.c2b
-start explorer %new_location%
+title
+cls
+call %new_location%
 exit
