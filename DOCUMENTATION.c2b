@@ -68,7 +68,7 @@ define.prompt[userVar=Enter text here: ]
 prompt[userVar2]
 
 # Downloads a file from the internet (saved as 'download'): download[URL]
-download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/C2B%20Compiler.bat]
+download[http://raw.githubusercontent.com/AddisonPascal/c2b/master/C2B%20Compiler.bat]
 
 # Renames a file: ren[originalname newname]
 ren[filename newfilename]
