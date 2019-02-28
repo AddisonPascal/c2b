@@ -133,7 +133,7 @@ if "!cmd:~0,7!"=="define[" call :define
 if "!cmd:~0,14!"=="define.prompt[" call :setp
 if "!cmd:~0,7!"=="prompt[" call :prompt
 if "!cmd:~0,12!"=="define.math[" call :defineMath
-if "!cmd:~0,8!"=="download[" call :download
+if "!cmd:~0,9!"=="download[" call :download
 if "!cmd:~0,4!"=="ren[" call :rename
 if "!cmd:~0,4!"=="del[" call :delete
 if "!cmd:~0,7!"=="mkfile[" call :mkfile
