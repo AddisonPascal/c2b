@@ -75,8 +75,8 @@ if %hasBeenOpened%==true goto afterWrite
 type "sys.c2b"
 echo !cmd!
 )>sys-2.c2b
-del "%~dp0/sys.c2b"
-ren "%~dp0/sys-2.c2b" "sys.c2b"
+del "sys.c2b"
+ren "sys-2.c2b" "sys.c2b"
 :afterWrite
 call :convertCommand
 :acb
@@ -89,16 +89,16 @@ if %hasBeenOpened%==true goto afterWriteBreak
 type "sys.c2b"
 echo.
 )>sys-2.c2b
-del "%~dp0/sys.c2b"
-ren "%~dp0/sys-2.c2b" "sys.c2b"
+del "sys.c2b"
+ren "sys-2.c2b" "sys.c2b"
 :afterWriteBreak
 (
 @echo off
 type "sys.bat"
 echo.
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 goto acb
 
 :convertCommand
@@ -148,8 +148,8 @@ set cmdc=!cmd:~5,-1!
 type "sys.bat"
 echo powershell [console]::Beep(!cmdc!)
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :endFileWrite
@@ -158,8 +158,8 @@ exit /b
 type "sys.bat"
 echo ^)^>%%opened_file%%
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :startFileWrite
@@ -168,8 +168,8 @@ exit /b
 type "sys.bat"
 echo (
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :openFile
@@ -179,8 +179,8 @@ set cmdc=!cmd:~9,-1!
 type "sys.bat"
 echo set opened_file=!cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :mkfolder
@@ -190,8 +190,8 @@ set cmdc=!cmd:~9,-1!
 type "sys.bat"
 echo md !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :mkfile
@@ -201,8 +201,8 @@ set cmdc=!cmd:~7,-1!
 type "sys.bat"
 echo echo.^>!cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :delete
@@ -212,8 +212,8 @@ set cmdc=!cmd:~4,-1!
 type "sys.bat"
 echo del !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :rename
@@ -223,8 +223,8 @@ set cmdc=!cmd:~4,-1!
 type "sys.bat"
 echo ren !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :download
@@ -234,8 +234,8 @@ set cmdc=!cmd:~8,-1!
 type "sys.bat"
 echo powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :prompt
@@ -245,8 +245,8 @@ set cmdc=!cmd:~7,-1!
 type "sys.bat"
 echo set /p !cmdc!=""
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :setp
@@ -256,8 +256,8 @@ set cmdc=!cmd:~14,-1!
 type "sys.bat"
 echo set /p !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :defineMath
@@ -267,8 +267,8 @@ set cmdc=!cmd:~12,-1!
 type "sys.bat"
 echo set /a !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :defineText
@@ -278,8 +278,8 @@ set cmdc=!cmd:~12,-1!
 type "sys.bat"
 echo set !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :define
@@ -289,8 +289,8 @@ set cmdc=!cmd:~7,-1!
 type "sys.bat"
 echo set !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :parseGetColumn
@@ -329,8 +329,8 @@ type "sys.bat"
 ::echo set arg1=!cmdd!
 echo call :!cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :gotoPlace
@@ -340,8 +340,8 @@ set cmdc=!cmd:~5,-1!
 type "sys.bat"
 echo goto !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :place
@@ -351,8 +351,8 @@ set cmdc=!cmd:~6,-1!
 type "sys.bat"
 echo :!cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :title
@@ -362,8 +362,8 @@ set cmdc=!cmd:~6,-1!
 type "sys.bat"
 echo title !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :comment
@@ -373,8 +373,8 @@ set cmdc=!cmd:~1!
 type "sys.bat"
 echo ::!cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :endFunction
@@ -383,8 +383,8 @@ exit /b
 type "sys.bat"
 echo exit /b
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :startFunction
@@ -399,8 +399,8 @@ echo set arg3=%%~3
 echo set arg4=%%~4
 echo set arg5=%%~5
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :batchcmd
@@ -410,8 +410,8 @@ set cmdc=!cmd:~4,-1!
 type "sys.bat"
 echo !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :endif
@@ -420,8 +420,8 @@ exit /b
 type "sys.bat"
 echo ^)
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :if
@@ -431,8 +431,8 @@ set cmdc=!cmd:~3,-3!
 type "sys.bat"
 echo if !cmdc! ^(
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :dispmax
@@ -441,8 +441,8 @@ exit /b
 type "sys.bat"
 echo mode 1000
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :echo
@@ -453,8 +453,8 @@ set cmdc=!cmd:~6,-1!
 type "sys.bat"
 echo echo !cmdc!
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :emptyPrint
@@ -463,8 +463,8 @@ exit /b
 type "sys.bat"
 echo echo. 
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :exit
@@ -472,8 +472,8 @@ exit /b
 type "sys.bat"
 echo exit
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :wait
@@ -487,8 +487,8 @@ exit /b
 type "sys.bat"
 echo timeout /t !cmdc! /nobreak ^>nul
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :waitUser
@@ -497,8 +497,8 @@ exit /b
 type "sys.bat"
 echo pause^>nul
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :cls
@@ -506,8 +506,8 @@ exit /b
 type "sys.bat"
 echo cls
 )>sys2.bat
-del "%~dp0/sys.bat"
-ren "%~dp0/sys2.bat" "sys.bat"
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :compilend
@@ -522,8 +522,8 @@ if %hasBeenOpened%==true goto endOpen
 @echo off
 type "sys.c2b"
 )>sys-2.c2b
-del "%~dp0/sys.c2b"
-ren "%~dp0/sys-2.c2b" "sys.c2b"
+del "sys.c2b"
+ren "sys-2.c2b" "sys.c2b"
 del "compiled_%xt%.bat"
 del "%xt%.c2b"
 ren "sys.bat" "compiled_%xt%.bat"
@@ -561,5 +561,6 @@ goto ec
 set new_location=%location:~0,-4%.bat"
 copy sys.bat %new_location%
 del sys.bat
+del sys.c2b
 start explorer %new_location%
 exit
