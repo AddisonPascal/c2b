@@ -146,7 +146,7 @@ set cmdc=!cmd:~5,-1!
 (
 @echo off
 type "sys.bat"
-echo powershell [console]::Beep(!cmdc!)
+echo powershell [console]::Beep(!cmdc!^)
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
