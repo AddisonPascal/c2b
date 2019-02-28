@@ -3,7 +3,6 @@
 set version=03
 @echo off
 setlocal enabledelayedexpansion
-mode 1000
 title c2b Compiler
 goto start
 
