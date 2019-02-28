@@ -231,7 +231,7 @@ ren "sys2.bat" "sys.bat"
 exit /b
 
 :download
-set cmdc=!cmd:~8,-1!
+set cmdc=!cmd:~9,-1!
 (
 @echo off
 type "sys.bat"
