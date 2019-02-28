@@ -123,6 +123,18 @@ if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
 if "!cmd:~0,9!"=="file.set[" call :openFile
 if "!cmd!"=="file.write[]:" call :startFileWrite
 if "!cmd!"=="end[write]" call :endFileWrite
+if "!cmd:~0,5!"=="play[" call :play
+exit /b
+
+:play
+set cmdc=!cmd:~5,-1!
+(
+@echo off
+type "sys.bat"
+echo powershell [console]::Beep(!cmdc!)
+)>sys2.bat
+del "%~dp0/sys.bat"
+ren "%~dp0/sys2.bat" "sys.bat"
 exit /b
 
 :endFileWrite
