@@ -564,7 +564,7 @@ set new_location=%location:~0,-4%.bat"
 copy sys.bat %new_location%
 del sys.bat
 del sys.c2b
-title
+title 
 cls
 call %new_location%
 exit
