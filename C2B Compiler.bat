@@ -17,6 +17,8 @@ echo rem Compiled by the c2b Compiler from c2b v%version%.
 (
 @echo off
 )>sys.c2b
+set hasBeenOpened=false
+if %1. NEQ . goto opened
 cls
 echo 1= Start new
 echo 2= Import from c2b
@@ -47,10 +49,19 @@ if not exist "%xt%.c2b" goto er
 type "%~dp0%xt%.c2b"
 )|clip
 cls
+:right_click
 echo Right-click to confirm:
 :: When the user right clicks, the script and a new line will be pasted and dealt with as if the user had written it himself - a rather neat concept I would say!
 set fromFile=true
 goto compile
+
+:opened
+set hasBeenOpened=true
+set location=%1
+(
+type %location%
+)|clip
+goto right_click
 
 :compile
 :: From here on is the compiling system, it is fairly straightforward and adds comments to the compiled batch file. 
@@ -58,6 +69,7 @@ set /a line=%line%+1
 set cmd=~linebreak
 set /p cmd= "%line% | "
 if "!cmd!"=="~linebreak" goto linebreak
+if %hasBeenOpened%==true goto afterWrite
 (
 @echo off
 type "sys.c2b"
@@ -65,11 +77,13 @@ echo !cmd!
 )>sys-2.c2b
 del "%~dp0/sys.c2b"
 ren "%~dp0/sys-2.c2b" "sys.c2b"
+:afterWrite
 call :convertCommand
 :acb
 goto compile
 
 :linebreak
+if %hasBeenOpened%==true goto afterWriteBreak
 (
 @echo off
 type "sys.c2b"
@@ -77,6 +91,7 @@ echo.
 )>sys-2.c2b
 del "%~dp0/sys.c2b"
 ren "%~dp0/sys-2.c2b" "sys.c2b"
+:afterWriteBreak
 (
 @echo off
 type "sys.bat"
@@ -502,6 +517,7 @@ exit /b
 @echo off
 )|clip
 :: Renames the compiled file into the name the user entered
+if %hasBeenOpened%==true goto endOpen
 (
 @echo off
 type "sys.c2b"
@@ -540,3 +556,10 @@ cls
 call "compiled_%xt%.bat"
 cls
 goto ec
+
+:endOpen
+set new_location=%location:~0,-4%.bat"
+copy sys.bat %new_location%
+del sys.bat
+start explorer %new_location%
+exit
