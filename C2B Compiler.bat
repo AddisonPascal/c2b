@@ -1,7 +1,7 @@
 :: Made by Addison Djatschenko
 :: Version 0.3.0
-set version=03
 @echo off
+set version=03
 setlocal enabledelayedexpansion
 title c2b Compiler
 goto start
