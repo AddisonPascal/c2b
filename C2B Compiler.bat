@@ -47,6 +47,7 @@ if not exist "%xt%.c2b" goto er
 :: Copies the script and a new line to the clipboard
 (
 type "%~dp0%xt%.c2b"
+echo.
 )|clip
 cls
 :right_click
@@ -60,6 +61,7 @@ set hasBeenOpened=true
 set location=%1
 (
 type %location%
+echo.
 )|clip
 del %location:~0,-4%.bat"
 goto right_click
