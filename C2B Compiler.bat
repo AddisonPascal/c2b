@@ -149,6 +149,8 @@ exit /b
 
 :startWhile
 set cmdc=!cmd:~6,-2!
+set cmdc=!cmdc:^>= GTR !
+set cmdc=!cmdc:^<= LSS !
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
 if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
@@ -466,6 +468,8 @@ exit /b
 
 :if
 set cmdc=!cmd:~3,-3!
+set cmdc=!cmdc:^>= GTR !
+set cmdc=!cmdc:^<= LSS !
 (
 @echo off
 type "sys.bat"
