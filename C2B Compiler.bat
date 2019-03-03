@@ -4,6 +4,8 @@
 set version=03
 setlocal enabledelayedexpansion
 title c2b Compiler
+set whileCount=0
+set whileWrite=00
 goto start
 
 :start
@@ -141,6 +143,42 @@ if "!cmd:~0,9!"=="file.set[" call :openFile
 if "!cmd!"=="file.write[]:" call :startFileWrite
 if "!cmd!"=="end[write]" call :endFileWrite
 if "!cmd:~0,5!"=="play[" call :play
+if "!cmd:~0,6!"=="while[" call :startWhile
+if "!cmd!"=="break[]" call :endWhile
+exit /b
+
+:startWhile
+set cmdc=!cmd:~6,-2!
+set /a whileCount=%whileCount%+1
+set whileWriting=%whileCount%
+if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
+set whileWrite=%whileWrite%%whileWriting%
+(
+@echo off
+type "sys.bat"
+echo call :while%whileWriting%
+echo goto afterwhile%whileWriting%
+echo :while%whileWriting%
+echo if !cmdc! call :whiling%whileWriting%
+echo exit /b
+echo :whiling%whileWriting%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:endWhile
+set whileWriting=%whileWrite:~-2,2%
+set whileWrite=%whileWrite:~0,-2%
+(
+@echo off
+type "sys.bat"
+echo call :while%whileWriting%
+echo exit /b
+echo :afterwhile%whileWriting%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :play
