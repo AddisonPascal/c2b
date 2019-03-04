@@ -156,6 +156,7 @@ if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd!"=="break[]" call :endWhile
 if "!cmd:~0,5!"=="incr[" call :increment
+::if "!cmd:~0,7!"=="repeat[" call :repeat
 exit /b
 
 :increment
@@ -169,6 +170,28 @@ del "sys.bat"
 ren "sys2.bat" "sys.bat"
 exit /b
 
+:repeat
+set cmdc=!cmd:~7,-2!
+set /a whileCount=%whileCount%+1
+set whileWriting=%whileCount%
+if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
+set whileWrite=%whileWrite%%whileWriting%
+(
+@echo off
+type "sys.bat"
+echo set repeatCounting%whileWriting%=0
+echo call :while%whileWriting%
+echo goto afterwhile%whileWriting%
+echo :while%whileWriting%
+echo if %%repeatCounting%whileWriting%%% NEQ !cmdc! call :whiling%whileWriting%
+echo set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1
+echo goto afterwhile%whileWriting%
+echo exit /b
+echo :whiling%whileWriting%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
 
 :startWhile
 set cmdc=!cmd:~6,-2!
