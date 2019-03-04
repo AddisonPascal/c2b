@@ -106,6 +106,16 @@ ren "sys2.bat" "sys.bat"
 goto acb
 
 :convertCommand
+if "!cmd:~0,1!"==" " (
+set cmd=!cmd:~1!
+call :convertCommand
+exit /b
+)
+if "!cmd:~0,1!"=="	" (
+set cmd=!cmd:~1!
+call :convertCommand
+exit /b
+)
 set emptyPrint=false
 if "!cmd:~0,1!"=="#" call :comment
 if "!cmd:~0,7!"=="print[]" (
