@@ -1,5 +1,5 @@
 :: Made by Addison Djatschenko
-:: Version 0.3.0
+:: Version 0.3.1
 @echo off
 set version=03
 setlocal enabledelayedexpansion
