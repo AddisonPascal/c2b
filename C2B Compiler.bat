@@ -155,7 +155,20 @@ if "!cmd!"=="end[write]" call :endFileWrite
 if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd!"=="break[]" call :endWhile
+if "!cmd:~0,5!"=="incr[" call :increment
 exit /b
+
+:increment
+set cmdc=!cmd:~5,-1!
+(
+@echo off
+type sys.bat
+echo set /a !cmdc!=%%!cmdc!%%+1
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
 
 :startWhile
 set cmdc=!cmd:~6,-2!
