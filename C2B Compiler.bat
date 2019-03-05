@@ -680,6 +680,7 @@ cls
 goto ec
 
 :rp
+endlocal
 cls
 :: Runs program
 call "compiled_%xt%.bat"
@@ -692,6 +693,7 @@ copy sys.bat %new_location%
 del sys.bat
 del sys.c2b
 title 
+endlocal
 cls
 call %new_location%
 exit
