@@ -6,6 +6,7 @@ setlocal enabledelayedexpansion
 title c2b Compiler
 set whileCount=0
 set whileWrite=00
+set bracketString=
 goto start
 
 :start
@@ -127,12 +128,11 @@ if %emptyPrint%==false call :echo
 )
 if "!cmd:~0,5!"=="wait[" call :wait
 if "!cmd!"=="end[file]" call :exit
-if "!cmd!"=="end[function]" call :endFunction
 if "!cmd:~0,6!"=="export" call :compilend
 if "!cmd:~0,9!"=="disp[max]" call :dispmax
 if "!cmd:~0,5!"=="clear" call :cls
 if "!cmd:~0,3!"=="if[" call :if
-if "!cmd!"=="}" call :endif
+if "!cmd!"=="}" call :closeBracket
 if "!cmd:~0,4!"=="cmd[" call :batchcmd
 if "!cmd:~0,6!"=="title[" call :title
 if "!cmd:~0,16!"=="define.function[" call :startFunction
@@ -151,16 +151,23 @@ if "!cmd:~0,7!"=="mkfile[" call :mkfile
 if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
 if "!cmd:~0,9!"=="file.set[" call :openFile
 if "!cmd!"=="file.write[]:" call :startFileWrite
-if "!cmd!"=="end[write]" call :endFileWrite
 if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
-if "!cmd!"=="break[]" call :endWhile
 if "!cmd:~0,5!"=="incr[" call :increment
 if "!cmd:~0,7!"=="repeat[" call :repeat
 exit /b
 
+:closeBracket
+if "%bracketString:~-1,1%"=="I" call :endif
+if "%bracketString:~-1,1%"=="W" call :endWhile
+if "%bracketString:~-1,1%"=="F" call :endFunction
+if "%bracketString:~-1,1%"=="R" call :endFileWrite
+set bracketString=%bracketString:~0,-1%
+exit /b
+
 :repeat
-set cmdc=!cmd:~7,-2!
+set cmdc=!cmd:~7,-3!
+set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
 if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
@@ -195,9 +202,10 @@ exit /b
 
 
 :startWhile
-set cmdc=!cmd:~6,-2!
+set cmdc=!cmd:~6,-3!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
+set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
 if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
@@ -205,11 +213,12 @@ set whileWrite=%whileWrite%%whileWriting%
 (
 @echo off
 type "sys.bat"
-echo call :while%whileWriting%
-echo goto afterwhile%whileWriting%
 echo :while%whileWriting%
-echo if !cmdc! call :whiling%whileWriting%
-echo exit /b
+echo if !cmdc! (
+echo goto whiling%whileWriting%
+echo ^) else (
+echo goto afterwhile%whileWriting%
+echo ^)
 echo :whiling%whileWriting%
 )>sys2.bat
 del "sys.bat"
@@ -222,8 +231,7 @@ set whileWrite=%whileWrite:~0,-2%
 (
 @echo off
 type "sys.bat"
-echo call :while%whileWriting%
-echo exit /b
+echo goto while%whileWriting%
 echo :afterwhile%whileWriting%
 )>sys2.bat
 del "sys.bat"
@@ -252,6 +260,7 @@ ren "sys2.bat" "sys.bat"
 exit /b
 
 :startFileWrite
+set bracketString=%bracketString%R
 (
 @echo off
 type "sys.bat"
@@ -477,7 +486,8 @@ ren "sys2.bat" "sys.bat"
 exit /b
 
 :startFunction
-set cmdc=!cmd:~16,-2!
+set bracketString=%bracketString%F
+set cmdc=!cmd:~16,-3!
 (
 @echo off
 type "sys.bat"
@@ -517,6 +527,7 @@ exit /b
 set cmdc=!cmd:~3,-3!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
+set bracketString=%bracketString%I
 (
 @echo off
 type "sys.bat"
