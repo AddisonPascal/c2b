@@ -90,7 +90,7 @@ play[1000,1000]
 #											content
 #											}
 file.write[] {
-print[This will be in a file]
+	print[This will be in a file]
 }
 
 # Executes commands while a condition is true:	while[condition] {
