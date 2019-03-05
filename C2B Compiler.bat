@@ -150,7 +150,7 @@ if "!cmd:~0,4!"=="del[" call :delete
 if "!cmd:~0,7!"=="mkfile[" call :mkfile
 if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
 if "!cmd:~0,9!"=="file.set[" call :openFile
-if "!cmd!"=="file.write[]:" call :startFileWrite
+if "!cmd!"=="file.write[] {" call :startFileWrite
 if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd:~0,5!"=="incr[" call :increment
