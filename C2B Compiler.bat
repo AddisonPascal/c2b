@@ -155,6 +155,29 @@ if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd:~0,5!"=="incr[" call :increment
 if "!cmd:~0,7!"=="repeat[" call :repeat
+if "!cmd:~0,5!"=="break" call :break
+if "!cmd:~0,6!"=="return" call :return
+exit /b
+
+:return
+(
+@echo off
+type sys.bat
+echo exit /b
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:break
+set whileWriting=%whileWrite:~-2,2%
+(
+@echo off
+type sys.bat
+echo goto afterwhile%whileWriting%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :closeBracket
