@@ -1,4 +1,4 @@
-# Documenting most aspects of C2B [Compiles to Batch] programming language.
+# Documenting most aspects of c2b [Compiles to Batch] programming language.
 
 # A comment's syntax is a hashtag [#] at the start of a line. Only one line comments are available in C2B. 
 # A comment
@@ -15,8 +15,6 @@ wait[user]
 
 # Exits file:
 end[file]
-# Ends current function:
-end[function]
 
 # Maximises screen: disp[max]
 disp[max]
@@ -37,15 +35,15 @@ cmd[echo Hi]
 # Changes title: title[text]
 title[This is the title. ]
 
-# Makes a function:	define.function[name]:
+# Makes a function:	define.function[name] {
 #					content
-#					end[function]
-define.function[function]:
+#					}
+define.function[function] {
 	print[This is a function]
 	print[%arg1%]
 	print[%arg2%]
 	print[%arg3%]
-end[function]
+}
 
 # A place in the code which can be returned to later on with goto[]: place[name]
 place[place]
@@ -88,24 +86,21 @@ file.set[file]
 # Plays a note: play[frequency(hz), time(ms)]
 play[1000,1000]
 
-# Writes the output of commands to a file:	file.write[]:
+# Writes the output of commands to a file:	file.write[] {
 #											content
-#											end[write]
-file.write[]:
+#											}
+file.write[] {
 print[This will be in a file]
-end[write]
+}
 
-# Executes commands while a condition is true:	while[condition]:
+# Executes commands while a condition is true:	while[condition] {
 #												content
-#												break[]
+#												}
 define[a=0]
-while[%a%<10]:
+while[%a%<10] {
 	print[%a%]
 	incr[a]
-break[]
-
-# Breaks a loop: break[]
-break[]
+}
 
 # Increments a variable:
 incr[var]
@@ -113,9 +108,9 @@ incr[var]
 # Repeats commands:	repeat[number]:
 #					content
 #					break[]
-repeat[10]:
+repeat[10] {
 	print[Hello World!]
-break[]
+}
 
 # Ends compilation. All text past here is ignored: export[]
 export[]
