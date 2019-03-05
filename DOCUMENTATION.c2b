@@ -1,4 +1,4 @@
-# Documenting most aspects of C2B [Compiles to Batch] programming language.
+# Documenting most aspects of c2b [Compiles to Batch] programming language.
 
 # A comment's syntax is a hashtag [#] at the start of a line. Only one line comments are available in C2B. 
 # A comment
