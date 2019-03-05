@@ -7,6 +7,7 @@ title c2b Compiler
 set whileCount=0
 set whileWrite=00
 set bracketString=
+set functionNumber=0
 goto start
 
 :start
@@ -503,6 +504,7 @@ exit /b
 @echo off
 type "sys.bat"
 echo exit /b
+echo :endfunction%functionNumber%
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
@@ -510,10 +512,12 @@ exit /b
 
 :startFunction
 set bracketString=%bracketString%F
+set /a functionNumber=%functionNumber%+1
 set cmdc=!cmd:~16,-3!
 (
 @echo off
 type "sys.bat"
+echo goto endfunction%functionNumber%
 echo :!cmdc!
 echo set arg1=%%~1
 echo set arg2=%%~2
