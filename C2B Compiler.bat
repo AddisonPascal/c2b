@@ -159,6 +159,18 @@ if "!cmd:~0,7!"=="repeat[" call :repeat
 if "!cmd:~0,5!"=="break" call :break
 if "!cmd:~0,6!"=="return" call :return
 if "!cmd:~0,1!"=="[" call :setMathQuick
+if "!cmd:~0,5!"=="open[" call :open_cmd
+exit /b
+
+:open_cmd
+set cmdc=!cmd:~5,-1!
+(
+@echo off
+type sys.bat
+echo start "" !cmdc!
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :setMathQuick
