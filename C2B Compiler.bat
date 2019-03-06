@@ -158,7 +158,7 @@ if "!cmd:~0,5!"=="incr[" call :increment
 if "!cmd:~0,7!"=="repeat[" call :repeat
 if "!cmd:~0,5!"=="break" call :break
 if "!cmd:~0,6!"=="return" call :return
-if "!cmd:~0,1!"=="[" call :setMathQuick
+if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
 exit /b
 
@@ -173,12 +173,12 @@ del "sys.bat"
 ren "sys2.bat" "sys.bat"
 exit /b
 
-:setMathQuick
+:setQuick
 set cmdc=!cmd:~1,-1!
 (
 @echo off
 type sys.bat
-echo set /a !cmdc!
+echo set !cmdc!
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"

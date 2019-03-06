@@ -64,7 +64,6 @@ define.text[textVar2=This is also text]
 define.math[mathVar=1+1]
 define.prompt[userVar=Enter text here: ]
 [textVar3=This is text]
-[mathVar2=1+1]
 
 # Saves input to variable: prompt[var]
 prompt[userVar2]
