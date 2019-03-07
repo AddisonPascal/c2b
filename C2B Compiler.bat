@@ -673,6 +673,7 @@ type "sys.bat"
 echo echo Program finished. 
 echo echo Press any key to exit.
 echo pause^>nul
+echo exit
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
