@@ -150,8 +150,7 @@ if "!cmd:~0,4!"=="ren[" call :rename
 if "!cmd:~0,4!"=="del[" call :delete
 if "!cmd:~0,7!"=="mkfile[" call :mkfile
 if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
-if "!cmd:~0,9!"=="file.set[" call :openFile
-if "!cmd!"=="file.write[] {" call :startFileWrite
+if "!cmd:~0,11!"=="file.write[" call :startFileWrite
 if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd:~0,5!"=="incr[" call :increment
@@ -160,6 +159,19 @@ if "!cmd:~0,5!"=="break" call :break
 if "!cmd:~0,6!"=="return" call :return
 if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
+exit /b
+
+:startFileWrite
+set bracketString=%bracketString%R
+set cmdc=!cmd:~11,-3!
+(
+@echo off
+type "sys.bat"
+echo set opened_file=!cmdc!
+echo (
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :open_cmd
@@ -304,28 +316,6 @@ exit /b
 @echo off
 type "sys.bat"
 echo ^)^>%%opened_file%%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:startFileWrite
-set bracketString=%bracketString%R
-(
-@echo off
-type "sys.bat"
-echo (
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:openFile
-set cmdc=!cmd:~9,-1!
-(
-@echo off
-type "sys.bat"
-echo set opened_file=!cmdc!
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"

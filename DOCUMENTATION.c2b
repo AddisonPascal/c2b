@@ -83,16 +83,13 @@ mkfile[file]
 # Makes a new folder: mkfolder[name]
 mkfolder[folder]
 
-# Gets the file to write to: file.set[name]
-file.set[file]
-
 # Plays a note: play[frequency(hz), time(ms)]
 play[1000,1000]
 
-# Writes the output of commands to a file:	file.write[] {
+# Writes the output of commands to a file:	file.write[filename] {
 #											content
 #											}
-file.write[] {
+file.write[file.txt] {
 	print[This will be in a file]
 }
 
