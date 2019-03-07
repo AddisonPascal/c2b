@@ -253,6 +253,8 @@ exit /b
 set cmdc=!cmd:~6,-3!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
+set cmdc=!cmdc:True=1 EQU 1!
+set cmdc=!cmdc:true=1 EQU 1!
 set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
