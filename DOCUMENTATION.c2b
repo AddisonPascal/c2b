@@ -19,8 +19,8 @@ end[file]
 # Maximises screen: disp[max]
 disp[max]
 
-# Clears the screen: clear[]
-clear[]
+# Clears the screen: clear
+clear
 
 # If statement:	if[statement] {
 #				content
@@ -112,12 +112,11 @@ repeat[10] {
 	print[Hello World!]
 }
 
-# Breaks out of a loop:	break[]
-break[]
+# Breaks out of a loop:	break
+break
 
-# Returns from a function:	return[]
-return[]
+# Returns from a function:	return
+return
 
-# Ends compilation. All text past here is ignored: export[]
-export[]
- 
+# Ends compilation. All text past here is ignored: export
+export
