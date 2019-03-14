@@ -55,7 +55,12 @@ echo.
 cls
 :right_click
 echo Right-click to confirm:
-:: When the user right clicks, the script and a new line will be pasted and dealt with as if the user had written it himself - a rather neat concept I would say!
+set skey_id=%random%
+(
+echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
+echo WshShell.SendKeys "^(v)"
+)>"%temp%\%skey_id%.vbs"
+start "" "%temp%\%skey_id%.vbs"
 set fromFile=true
 goto compile
 
