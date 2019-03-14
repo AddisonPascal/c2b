@@ -54,7 +54,7 @@ echo.
 )|clip
 cls
 :right_click
-echo Right-click to confirm:
+echo Automatically compiling...
 set skey_id=%random%
 (
 echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
