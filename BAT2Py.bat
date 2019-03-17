@@ -21,8 +21,14 @@ type "%~dp0%fileName%.bat"
 echo. 
 echo ENDCOMP
 )|clip
-echo Right Click!
+echo Converting...
 :do
+set skey_id=%random%
+(
+echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
+echo WshShell.SendKeys "^(v)"
+)>"%temp%\%skey_id%.vbs"
+start "" "%temp%\%skey_id%.vbs"
 set /p do=""
 if "!do:~0,7!"=="ENDCOMP" goto endcomp
 echo file.write("\n"^);>>sys.py
