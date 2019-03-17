@@ -139,6 +139,7 @@ if "!cmd:~0,9!"=="disp[max]" call :dispmax
 if "!cmd:~0,5!"=="clear" call :cls
 if "!cmd:~0,3!"=="if[" call :if
 if "!cmd!"=="}" call :closeBracket
+if "!cmd!"=="} else {" call :else
 if "!cmd:~0,4!"=="cmd[" call :batchcmd
 if "!cmd:~0,6!"=="title[" call :title
 if "!cmd:~0,16!"=="define.function[" call :startFunction
@@ -165,6 +166,16 @@ if "!cmd:~0,6!"=="return" call :return
 if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
+exit /b
+
+:else
+(
+@echo off
+type "sys.bat"
+echo ^) else (
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :sendKey
