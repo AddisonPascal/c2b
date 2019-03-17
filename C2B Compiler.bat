@@ -157,6 +157,7 @@ if "!cmd:~0,4!"=="del[" call :delete
 if "!cmd:~0,7!"=="mkfile[" call :mkfile
 if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
 if "!cmd:~0,11!"=="file.write[" call :startFileWrite
+if "!cmd:~0,12!"=="file.append[" call :startFileAppend
 if "!cmd:~0,5!"=="play[" call :play
 if "!cmd:~0,6!"=="while[" call :startWhile
 if "!cmd:~0,5!"=="incr[" call :increment
@@ -189,6 +190,19 @@ echo echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)
 echo echo WshShell.SendKeys "!cmdc!"
 echo ^)^>"%%temp%%\%%skey_id%%.vbs"
 echo start "" "%%temp%%\%%skey_id%%.vbs"
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:startFileAppend
+set bracketString=%bracketString%A
+set cmdc=!cmd:~12,-3!
+(
+@echo off
+type "sys.bat"
+echo set opened_file=!cmdc!
+echo (
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
@@ -255,6 +269,7 @@ if "%bracketString:~-1,1%"=="I" call :endif
 if "%bracketString:~-1,1%"=="W" call :endWhile
 if "%bracketString:~-1,1%"=="F" call :endFunction
 if "%bracketString:~-1,1%"=="R" call :endFileWrite
+if "%bracketString:~-1,1%"=="A" call :endFileAppend
 set bracketString=%bracketString:~0,-1%
 exit /b
 
@@ -349,6 +364,16 @@ exit /b
 @echo off
 type "sys.bat"
 echo ^)^>%%opened_file%%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:endFileAppend
+(
+@echo off
+type "sys.bat"
+echo ^)^>^>%%opened_file%%
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
