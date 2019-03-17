@@ -93,6 +93,13 @@ file.write[file.txt] {
 	print[This will be in a file]
 }
 
+# Writes the output of commands to the end of a file:	file.append[filename] {
+#														content
+#														}
+file.append[file.txt] {
+	print[This will be at the bottom of a file]
+}
+
 # Executes commands while a condition is true:	while[condition] {
 #												content
 #												}
