@@ -121,6 +121,11 @@ return
 # Sends keys to the focused window:	skey[keys]
 skey[Hello{ENTER}World{!}]
 
+# Opens a file, application, or website:	open[filename/address]
+open[file.txt]
+open[notepad]
+open[http://google.com]
+
 # Else statement: if the previous if statement wasn't true: if[condition] {
 #															content
 #															} else {
