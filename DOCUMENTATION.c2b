@@ -32,6 +32,10 @@ if[%this%==%that%] {
 # Executes a Windows Batch / CMD command: cmd[command]
 cmd[echo Hi]
 
+# Executes a Windows PowerShell command:	ps[command]
+ps[echo("Hi!");]
+ps[[console]::Beep();]
+
 # Changes title: title[text]
 title[This is the title. ]
 
