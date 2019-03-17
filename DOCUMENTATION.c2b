@@ -118,5 +118,19 @@ break
 # Returns from a function:	return
 return
 
+# Sends keys to the focused window:	skey[keys]
+skey[Hello{ENTER}World{!}]
+
+# Else statement: if the previous if statement wasn't true: if[condition] {
+#															content
+#															} else {
+#															content
+#															}
+if[%this%==%that%] {
+	print[This is that.]
+} else {
+	print[This is not that]
+}
+
 # Ends compilation. All text past here is ignored: export
 export
