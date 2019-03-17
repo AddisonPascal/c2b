@@ -22,13 +22,13 @@ echo.
 echo ENDCOMP
 )|clip
 echo Converting...
-:do
 set skey_id=%random%
 (
 echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "^(v)"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
+:do
 set /p do=""
 if "!do:~0,7!"=="ENDCOMP" goto endcomp
 echo file.write("\n"^);>>sys.py
