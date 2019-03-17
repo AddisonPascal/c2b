@@ -37,6 +37,7 @@ echo file.write(r"""!do!"""^);>>sys.py
 goto do
 )
 echo file.write(r'''!do!'''^);>>sys.py
+set do=
 goto do
 :endcomp
 echo file.close(^);>>sys.py
