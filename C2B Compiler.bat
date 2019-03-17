@@ -167,6 +167,18 @@ if "!cmd:~0,6!"=="return" call :return
 if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
+if "!cmd:~0,3!"=="ps[" call :ps
+exit /b
+
+:ps
+set cmdc=!cmd:~3,-1!
+(
+@echo off
+type "sys.bat"
+echo powershell -Command !cmdc!
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :else
