@@ -148,5 +148,16 @@ if[%this%==%that%] {
 	print[This is not that]
 }
 
+# Elif statement: if the previous if statement wasn't true, execute another if statement:	if[condition] {
+#																							content
+#																							} elif[condition] {
+#																							content
+#																							}
+if[%this%==%that%] {
+	print[This is that.]
+} elif[%this%>%that%] {
+	print[This is not that, but this is better than that.]
+}
+
 # Ends compilation. All text past here is ignored: export
 export
