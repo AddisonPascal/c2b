@@ -169,6 +169,7 @@ if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
 if "!cmd:~0,3!"=="ps[" call :ps
+if "!cmd:~0,3!"=="js[" call :js
 exit /b
 
 :elif
@@ -177,6 +178,46 @@ set cmdc=!cmd:~7,-3!
 @echo off
 type sys.bat
 echo ^) else if !cmdc! (
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:js
+set cmdc=!cmd:~3,-1!
+(
+@echo off
+type "sys.bat"
+echo mshta javascript:!cmdc!;close(^);
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:jsOld
+set cmdc=!cmd:~3,-1!
+(
+@echo off
+type "sys.bat"
+echo set skey_id=%%random%%
+echo (
+echo echo var console = {
+echo echo     info: function (s^^^){
+echo echo        WSH.Echo(s^^^);
+echo echo     }
+echo echo }
+echo echo var document = {
+echo echo     write : function (s^^^){
+echo echo         WSH.Echo(s^^^);
+echo echo     }
+echo echo }
+echo echo var alert = function (s^^^){
+echo echo     WSH.Echo(s^^^);
+echo echo }
+echo echo.
+echo ^)^>"%%temp%%\%%skey_id%%.js"
+echo echo !cmdc! ^>^>"%%temp%%\%%skey_id%%.js"
+echo start "" "%%temp%%\%%skey_id%%.js"
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
