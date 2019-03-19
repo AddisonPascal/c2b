@@ -170,6 +170,18 @@ if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
 if "!cmd:~0,3!"=="ps[" call :ps
 if "!cmd:~0,3!"=="js[" call :js
+if "!cmd:~0,6!"=="alert[" call :alert
+exit /b
+
+:alert
+set cmdc=!cmd:~6,-1!
+(
+@echo off
+type sys.bat
+echo mshta javascript:alert("!cmdc!"^);close(^);
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :elif
