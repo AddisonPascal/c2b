@@ -162,5 +162,8 @@ if[%this%==%that%] {
 	print[This is not that, but this is better than that.]
 }
 
+# Alert: pops up a message box:	alert[text]
+alert[Hello!]
+
 # Ends compilation. All text past here is ignored: export
 export
