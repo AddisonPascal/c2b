@@ -36,6 +36,9 @@ cmd[echo Hi]
 ps[echo("Hi!");]
 ps[[console]::Beep();]
 
+# Executes a JavaScript command:	js[command]
+js[alert("Hello World!")]
+
 # Changes title: title[text]
 title[This is the title. ]
 
