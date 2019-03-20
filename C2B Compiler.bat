@@ -241,6 +241,7 @@ exit /b
 
 :ps
 set cmdc=!cmd:~3,-1!
+set cmdc=!cmdc:"='!
 (
 @echo off
 type "sys.bat"
