@@ -332,7 +332,6 @@ del "sys.bat"
 ren "sys2.bat" "sys.bat"
 exit /b
 
-
 :startWhile
 set cmdc=!cmd:~6,-3!
 set cmdc=!cmdc:^>= GTR !
