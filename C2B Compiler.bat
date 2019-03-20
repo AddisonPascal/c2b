@@ -16,6 +16,14 @@ goto start
 @echo off
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
+echo goto startOfFile
+echo :runJS
+echo mshta javascript:%%~1;close(^);
+echo exit/b
+echo :alertJS
+echo mshta javascript:alert("%%~1"^);close(^);
+echo exit/b
+echo :startOfFile
 )>sys.bat
 (
 @echo off
@@ -178,7 +186,7 @@ set cmdc=!cmd:~6,-1!
 (
 @echo off
 type sys.bat
-echo mshta javascript:alert("!cmdc!"^);close(^);
+echo call :alertJS "!cmdc!"
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
@@ -200,7 +208,7 @@ set cmdc=!cmd:~3,-1!
 (
 @echo off
 type "sys.bat"
-echo mshta javascript:!cmdc!;close(^);
+echo call :runJS "!cmdc!"
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
