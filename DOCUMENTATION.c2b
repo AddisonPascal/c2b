@@ -33,7 +33,8 @@ if[%this%==%that%] {
 cmd[echo Hi]
 
 # Executes a Windows PowerShell command:	ps[command]
-ps[echo("Hi!");]
+# NOTE: ONLY USE SINGLE QUOTES.
+ps[echo('Hi!');]
 ps[[console]::Beep();]
 
 # Changes title: title[text]
