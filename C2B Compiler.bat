@@ -17,9 +17,6 @@ goto start
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
 echo goto startOfFile
-echo :runJS
-echo mshta javascript:%%~1;close(^);
-echo exit/b
 echo :alertJS
 echo mshta javascript:alert("%%~1"^);close(^);
 echo exit/b
@@ -177,7 +174,6 @@ if "!cmd:~0,1!"=="[" call :setQuick
 if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
 if "!cmd:~0,3!"=="ps[" call :ps
-if "!cmd:~0,3!"=="js[" call :js
 if "!cmd:~0,6!"=="alert[" call :alert
 exit /b
 
