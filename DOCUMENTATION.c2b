@@ -8,6 +8,10 @@ print[This is a message. ]
 # Blank line:
 print[]
 
+# Changes the colour of the prompt:	color[hex] or colour[hex]
+color[0a]
+colour[0c]
+
 # Waits a certain amount of time: wait[seconds]
 wait[3]
 # Waits for the user to press any key: 
