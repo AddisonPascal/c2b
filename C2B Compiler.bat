@@ -269,7 +269,7 @@ set cmdc=!cmdc:"='!
 (
 @echo off
 type "sys.bat"
-echo powershell -Command !cmdc!
+echo powershell -Command "!cmdc!"
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
