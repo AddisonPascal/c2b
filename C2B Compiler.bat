@@ -235,6 +235,17 @@ if "!cmd:~0,3!"=="ps[" call :ps
 if "!cmd:~0,6!"=="alert[" call :alert
 if "!cmd:~0,6!"=="color[" call :mainColor
 if "!cmd:~0,7!"=="colour[" call :mainColour
+if "!cmd:~0,7!"=="restart" call :restartProgram
+exit /b
+
+:restartProgram
+(
+@echo off
+type sys.bat
+echo goto startOfFile
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :mainColour
