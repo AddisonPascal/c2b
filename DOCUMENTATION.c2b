@@ -7,6 +7,22 @@
 print[This is a message. ]
 # Blank line:
 print[]
+# Inline colours and styles are available in print[], however compatibility is limited in non-Win10 operating systems.
+# For more information, see Issue#1:	https://github.com/AddisonPascal/c2b/issues/1
+# Use @<colorcode> to change colour, where <colorcode> is the hex colour code.
+# Use #<colourcode> to change only text colour, not background.
+# Use @bold to make it bold.
+# Use @U or @Underline to underline.
+# Use @i or @inverse to inverse the colours.
+# Use @r or @reset to reset to default.
+# - Resets after every line.
+# - Combinations are possible!
+# Examples:
+print[#a Green Text!]
+print[@fa Green on White!]
+print[@bold Bold]
+print[@U Underlined]
+print[@fa@bold@u All 3!]
 
 # Changes the colour of the prompt:	color[hex] or colour[hex]
 color[0a]
