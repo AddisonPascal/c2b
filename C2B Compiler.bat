@@ -796,7 +796,6 @@ set cmdc=!cmdc:#d=%%esc%%[95m!
 set cmdc=!cmdc:#e=%%esc%%[93m!
 set cmdc=!cmdc:#f=%%esc%%[97m!
 set cmdc=!cmdc!%%esc%%[0m
-:savecho
 (
 @echo off
 type "sys.bat"
