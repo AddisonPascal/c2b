@@ -1,7 +1,7 @@
 :: Made by Addison Djatschenko
-:: Version 0.3.1
+:: Version 0.4.0
 @echo off
-set version=03.1
+set version=04.0
 setlocal enabledelayedexpansion
 title c2b Compiler
 set whileCount=0
