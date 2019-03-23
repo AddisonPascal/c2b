@@ -16,7 +16,42 @@ goto start
 @echo off
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
-echo set esc=
+echo set esc0m=[0m
+echo set esc1m=[1m
+echo set esc4m=[4m
+echo set esc7m=[7m
+echo set esc30m=[30m
+echo set esc31m=[31m
+echo set esc32m=[32m
+echo set esc33m=[33m
+echo set esc34m=[34m
+echo set esc35m=[35m
+echo set esc36m=[36m
+echo set esc37m=[37m
+echo set esc40m=[40m
+echo set esc41m=[41m
+echo set esc42m=[42m
+echo set esc43m=[43m
+echo set esc44m=[44m
+echo set esc45m=[45m
+echo set esc46m=[46m
+echo set esc47m=[47m
+echo set esc90m=[90m
+echo set esc91m=[91m
+echo set esc92m=[92m
+echo set esc93m=[93m
+echo set esc94m=[94m
+echo set esc95m=[95m
+echo set esc96m=[96m
+echo set esc97m=[97m
+echo set esc100m=[100m
+echo set esc101m=[101m
+echo set esc102m=[102m
+echo set esc103m=[103m
+echo set esc104m=[104m
+echo set esc105m=[105m
+echo set esc106m=[106m
+echo set esc107m=[107m
 echo goto startOfFile
 echo :alertJS
 echo mshta javascript:alert("%%~1"^);close(^);
@@ -756,46 +791,46 @@ exit /b
 
 :echo
 set cmdc=!cmd:~6,-1!
-set cmdc=!cmdc:@reset=%%esc%%[0m!
-set cmdc=!cmdc:@r=%%esc%%[0m!
-set cmdc=!cmdc:@bold=%%esc%%[1m!
-set cmdc=!cmdc:@underline=%%esc%%[4m!
-set cmdc=!cmdc:@u=%%esc%%[4m!
-set cmdc=!cmdc:@inverse=%%esc%%[7m!
-set cmdc=!cmdc:@i=%%esc%%[7m!
-set cmdc=!cmdc:@0=%%esc%%[40m#!
-set cmdc=!cmdc:@1=%%esc%%[44m#!
-set cmdc=!cmdc:@2=%%esc%%[42m#!
-set cmdc=!cmdc:@3=%%esc%%[46m#!
-set cmdc=!cmdc:@4=%%esc%%[41m#!
-set cmdc=!cmdc:@5=%%esc%%[45m#!
-set cmdc=!cmdc:@6=%%esc%%[43m#!
-set cmdc=!cmdc:@7=%%esc%%[47m#!
-set cmdc=!cmdc:@8=%%esc%%[100m#!
-set cmdc=!cmdc:@9=%%esc%%[104m#!
-set cmdc=!cmdc:@a=%%esc%%[102m#!
-set cmdc=!cmdc:@b=%%esc%%[106m#!
-set cmdc=!cmdc:@c=%%esc%%[101m#!
-set cmdc=!cmdc:@d=%%esc%%[105m#!
-set cmdc=!cmdc:@e=%%esc%%[103m#!
-set cmdc=!cmdc:@f=%%esc%%[107m#!
-set cmdc=!cmdc:#0=%%esc%%[30m!
-set cmdc=!cmdc:#1=%%esc%%[34m!
-set cmdc=!cmdc:#2=%%esc%%[32m!
-set cmdc=!cmdc:#3=%%esc%%[36m!
-set cmdc=!cmdc:#4=%%esc%%[31m!
-set cmdc=!cmdc:#5=%%esc%%[35m!
-set cmdc=!cmdc:#6=%%esc%%[33m!
-set cmdc=!cmdc:#7=%%esc%%[37m!
-set cmdc=!cmdc:#8=%%esc%%[90m!
-set cmdc=!cmdc:#9=%%esc%%[94m!
-set cmdc=!cmdc:#a=%%esc%%[92m!
-set cmdc=!cmdc:#b=%%esc%%[96m!
-set cmdc=!cmdc:#c=%%esc%%[91m!
-set cmdc=!cmdc:#d=%%esc%%[95m!
-set cmdc=!cmdc:#e=%%esc%%[93m!
-set cmdc=!cmdc:#f=%%esc%%[97m!
-set cmdc=!cmdc!%%esc%%[0m
+set cmdc=!cmdc:@reset=%%esc0m%%!
+set cmdc=!cmdc:@r=%%esc0m%%!
+set cmdc=!cmdc:@bold=%%esc1m%%!
+set cmdc=!cmdc:@underline=%%esc4m%%!
+set cmdc=!cmdc:@u=%%esc4m%%!
+set cmdc=!cmdc:@inverse=%%esc7m%%!
+set cmdc=!cmdc:@i=%%esc7m%%!
+set cmdc=!cmdc:@0=%%esc40m%%#!
+set cmdc=!cmdc:@1=%%esc44m%%#!
+set cmdc=!cmdc:@2=%%esc42m%%#!
+set cmdc=!cmdc:@3=%%esc46m%%#!
+set cmdc=!cmdc:@4=%%esc41m%%#!
+set cmdc=!cmdc:@5=%%esc45m%%#!
+set cmdc=!cmdc:@6=%%esc43m%%#!
+set cmdc=!cmdc:@7=%%esc47m%%#!
+set cmdc=!cmdc:@8=%%esc100m%%#!
+set cmdc=!cmdc:@9=%%esc104m%%#!
+set cmdc=!cmdc:@a=%%esc102m%%#!
+set cmdc=!cmdc:@b=%%esc106m%%#!
+set cmdc=!cmdc:@c=%%esc101m%%#!
+set cmdc=!cmdc:@d=%%esc105m%%#!
+set cmdc=!cmdc:@e=%%esc103m%%#!
+set cmdc=!cmdc:@f=%%esc107m%%#!
+set cmdc=!cmdc:#0=%%esc30m%%!
+set cmdc=!cmdc:#1=%%esc34m%%!
+set cmdc=!cmdc:#2=%%esc32m%%!
+set cmdc=!cmdc:#3=%%esc36m%%!
+set cmdc=!cmdc:#4=%%esc31m%%!
+set cmdc=!cmdc:#5=%%esc35m%%!
+set cmdc=!cmdc:#6=%%esc33m%%!
+set cmdc=!cmdc:#7=%%esc37m%%!
+set cmdc=!cmdc:#8=%%esc90m%%!
+set cmdc=!cmdc:#9=%%esc94m%%!
+set cmdc=!cmdc:#a=%%esc92m%%!
+set cmdc=!cmdc:#b=%%esc96m%%!
+set cmdc=!cmdc:#c=%%esc91m%%!
+set cmdc=!cmdc:#d=%%esc95m%%!
+set cmdc=!cmdc:#e=%%esc93m%%!
+set cmdc=!cmdc:#f=%%esc97m%%!
+set cmdc=!cmdc!%%esc0m%%
 (
 @echo off
 type "sys.bat"
