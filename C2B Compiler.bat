@@ -16,8 +16,8 @@ goto start
 @echo off
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
-echo ver ^| findstr "Version 10"
-echo if errorlevel 0 (
+echo ver ^| findstr /c:"Version 10"
+echo if errorlevel 1 goto noWin10
 echo set esc0m=[0m
 echo set esc1m=[1m
 echo set esc4m=[4m
@@ -54,7 +54,25 @@ echo set esc104m=[104m
 echo set esc105m=[105m
 echo set esc106m=[106m
 echo set esc107m=[107m
-echo ^)
+echo cls
+echo goto startOfFile
+echo :noWin10
+echo set esc30m=^^^>nul^^^&powershell write-host -fore Black 
+echo set esc34m=^^^>nul^^^&powershell write-host -fore Blue 
+echo set esc32m=^^^>nul^^^&powershell write-host -fore Green 
+echo set esc36m=^^^>nul^^^&powershell write-host -fore Cyan 
+echo set esc31m=^^^>nul^^^&powershell write-host -fore Red 
+echo set esc35m=^^^>nul^^^&powershell write-host -fore Magenta 
+echo set esc33m=^^^>nul^^^&powershell write-host -fore Yellow 
+echo set esc37m=^^^>nul^^^&powershell write-host -fore White 
+echo set esc90m=^^^>nul^^^&powershell write-host -fore Gray 
+echo set esc94m=^^^>nul^^^&powershell write-host -fore Blue 
+echo set esc92m=^^^>nul^^^&powershell write-host -fore Green 
+echo set esc96m=^^^>nul^^^&powershell write-host -fore Cyan 
+echo set esc91m=^^^>nul^^^&powershell write-host -fore Red 
+echo set esc95m=^^^>nul^^^&powershell write-host -fore Magenta 
+echo set esc93m=^^^>nul^^^&powershell write-host -fore Yellow 
+echo set esc97m=^^^>nul^^^&powershell write-host -fore White 
 echo cls
 echo goto startOfFile
 echo :alertJS
