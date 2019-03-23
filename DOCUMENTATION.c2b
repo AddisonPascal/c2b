@@ -12,6 +12,9 @@ print[]
 color[0a]
 colour[0c]
 
+# Restarts the program:	restart
+restart
+
 # Waits a certain amount of time: wait[seconds]
 wait[3]
 # Waits for the user to press any key: 
