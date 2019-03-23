@@ -16,6 +16,8 @@ goto start
 @echo off
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
+echo ver ^| findstr "Version 10"
+echo if errorlevel 0 (
 echo set esc0m=[0m
 echo set esc1m=[1m
 echo set esc4m=[4m
@@ -52,6 +54,8 @@ echo set esc104m=[104m
 echo set esc105m=[105m
 echo set esc106m=[106m
 echo set esc107m=[107m
+echo ^)
+echo cls
 echo goto startOfFile
 echo :alertJS
 echo mshta javascript:alert("%%~1"^);close(^);
