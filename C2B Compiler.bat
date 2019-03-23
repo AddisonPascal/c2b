@@ -16,6 +16,7 @@ goto start
 @echo off
 echo @echo off
 echo rem Compiled by the c2b Compiler from c2b v%version%. 
+echo set esc=
 echo goto startOfFile
 echo :alertJS
 echo mshta javascript:alert("%%~1"^);close(^);
@@ -755,6 +756,46 @@ exit /b
 
 :echo
 set cmdc=!cmd:~6,-1!
+set cmdc=!cmdc:@reset=%%esc%%[0m!
+set cmdc=!cmdc:@r=%%esc%%[0m!
+set cmdc=!cmdc:@bold=%%esc%%[1m!
+set cmdc=!cmdc:@underline=%%esc%%[4m!
+set cmdc=!cmdc:@u=%%esc%%[4m!
+set cmdc=!cmdc:@inverse=%%esc%%[7m!
+set cmdc=!cmdc:@i=%%esc%%[7m!
+set cmdc=!cmdc:@0=%%esc%%[40m#!
+set cmdc=!cmdc:@1=%%esc%%[44m#!
+set cmdc=!cmdc:@2=%%esc%%[42m#!
+set cmdc=!cmdc:@3=%%esc%%[46m#!
+set cmdc=!cmdc:@4=%%esc%%[41m#!
+set cmdc=!cmdc:@5=%%esc%%[45m#!
+set cmdc=!cmdc:@6=%%esc%%[43m#!
+set cmdc=!cmdc:@7=%%esc%%[47m#!
+set cmdc=!cmdc:@8=%%esc%%[100m#!
+set cmdc=!cmdc:@9=%%esc%%[104m#!
+set cmdc=!cmdc:@a=%%esc%%[102m#!
+set cmdc=!cmdc:@b=%%esc%%[106m#!
+set cmdc=!cmdc:@c=%%esc%%[101m#!
+set cmdc=!cmdc:@d=%%esc%%[105m#!
+set cmdc=!cmdc:@e=%%esc%%[103m#!
+set cmdc=!cmdc:@f=%%esc%%[107m#!
+set cmdc=!cmdc:#0=%%esc%%[30m!
+set cmdc=!cmdc:#1=%%esc%%[34m!
+set cmdc=!cmdc:#2=%%esc%%[32m!
+set cmdc=!cmdc:#3=%%esc%%[36m!
+set cmdc=!cmdc:#4=%%esc%%[31m!
+set cmdc=!cmdc:#5=%%esc%%[35m!
+set cmdc=!cmdc:#6=%%esc%%[33m!
+set cmdc=!cmdc:#7=%%esc%%[37m!
+set cmdc=!cmdc:#8=%%esc%%[90m!
+set cmdc=!cmdc:#9=%%esc%%[94m!
+set cmdc=!cmdc:#a=%%esc%%[92m!
+set cmdc=!cmdc:#b=%%esc%%[96m!
+set cmdc=!cmdc:#c=%%esc%%[91m!
+set cmdc=!cmdc:#d=%%esc%%[95m!
+set cmdc=!cmdc:#e=%%esc%%[93m!
+set cmdc=!cmdc:#f=%%esc%%[97m!
+set cmdc=!cmdc!%%esc%%[0m
 :savecho
 (
 @echo off
