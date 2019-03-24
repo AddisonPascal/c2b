@@ -242,10 +242,21 @@ exit /b
 
 :output
 set cmdc=!cmd:~4,-1!
+if "!cmdc!"==" " goto spaceOutput
 (
 @echo off
 type sys.bat
-echo powershell write-host -NoNewline "!cmdc!"
+echo echo ^| set /p ^^="!cmdc!"
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
+exit /b
+
+:spaceOutput
+(
+@echo off
+type sys.bat
+echo echo ^| set /p ^^="%%esc30m%%%%esc40m%%.%%esc0m%%"
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
