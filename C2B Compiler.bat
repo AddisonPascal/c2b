@@ -880,6 +880,10 @@ exit /b
 
 :echo
 set cmdc=!cmd:~6,-1!
+echo %bracketString% | findstr A
+if not errorlevel 1 goto echoRaw
+echo %bracketString% | findstr R
+if not errorlevel 1 goto echoRaw
 set cmdc=!cmdc:\n=^&echo(!
 set cmdc=!cmdc:@reset=%%esc0m%%!
 set cmdc=!cmdc:@r=%%esc0m%%!
@@ -921,6 +925,7 @@ set cmdc=!cmdc:#d=%%esc95m%%!
 set cmdc=!cmdc:#e=%%esc93m%%!
 set cmdc=!cmdc:#f=%%esc97m%%!
 set cmdc=!cmdc!%%esc0m%%
+:echoRaw
 (
 @echo off
 type "sys.bat"
