@@ -25,6 +25,10 @@ print[@bold Bold]
 print[@U Underlined]
 print[@fa@bold@u All 3!]
 
+# Prints text to the console without a newline:	out[text]
+out[Hello, ]
+out[World!]
+
 # Changes the colour of the prompt:	color[hex] or colour[hex]
 color[0a]
 colour[0c]
