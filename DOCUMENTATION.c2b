@@ -100,6 +100,10 @@ define.prompt[userVar=Enter text here: ]
 # Saves input to variable: prompt[var]
 prompt[userVar2]
 
+# Saves the character [from a list] the user entered without pressing enter to variable %choice%:	choice[range]
+choice[abc]
+print[You entered %choice%.]
+
 # Downloads a file from the internet (saved as 'download'): download[URL]
 download[http://raw.githubusercontent.com/AddisonPascal/c2b/master/C2B%20Compiler.bat]
 
