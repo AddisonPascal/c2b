@@ -237,6 +237,18 @@ if "!cmd:~0,6!"=="alert[" call :alert
 if "!cmd:~0,6!"=="color[" call :mainColor
 if "!cmd:~0,7!"=="colour[" call :mainColour
 if "!cmd:~0,7!"=="restart" call :restartProgram
+if "!cmd:~0,4!"=="out[" call :output
+exit /b
+
+:output
+set cmdc=!cmd:~4,-1!
+(
+@echo off
+type sys.bat
+echo powershell write-host -NoNewline "!cmdc!"
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :restartProgram
