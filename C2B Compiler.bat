@@ -241,6 +241,21 @@ if "!cmd:~0,7!"=="colour[" call :mainColour
 if "!cmd:~0,7!"=="restart" call :restartProgram
 if "!cmd:~0,4!"=="out[" call :output
 if "!cmd:~0,8!"=="rewrite[" call :rewrite
+if "!cmd:~0,7!"=="choice[" call :choice
+exit /b
+
+:choice
+set cmdc=!cmd:~7,-1!
+(
+@echo off
+type sys.bat
+echo set choices=!cmdc!
+echo choice /c !cmdc! ^>nul
+echo set /a choiceNum=%%errorlevel%%-1
+echo call set choice=%%%%choices:~%%choiceNum%%,1%%%%
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :rewrite
