@@ -54,6 +54,7 @@ echo set esc104m=[104m
 echo set esc105m=[105m
 echo set esc106m=[106m
 echo set esc107m=[107m
+echo set escRewrite=[F[0J
 echo cls
 echo goto startOfFile
 echo :noWin10
@@ -238,6 +239,18 @@ if "!cmd:~0,6!"=="color[" call :mainColor
 if "!cmd:~0,7!"=="colour[" call :mainColour
 if "!cmd:~0,7!"=="restart" call :restartProgram
 if "!cmd:~0,4!"=="out[" call :output
+if "!cmd:~0,8!"=="rewrite[" call :rewrite
+exit /b
+
+:rewrite
+set cmdc=!cmd:~8,-1!
+(
+@echo off
+type sys.bat
+echo echo %%escRewrite%%!cmdc!
+)>sys2.bat
+del "sys.bat"
+ren "sys2.bat" "sys.bat"
 exit /b
 
 :output
