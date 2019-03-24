@@ -57,22 +57,23 @@ echo set esc107m=[107m
 echo cls
 echo goto startOfFile
 echo :noWin10
-echo set esc30m=^^^>nul^^^&powershell write-host -fore Black 
-echo set esc34m=^^^>nul^^^&powershell write-host -fore Blue 
-echo set esc32m=^^^>nul^^^&powershell write-host -fore Green 
-echo set esc36m=^^^>nul^^^&powershell write-host -fore Cyan 
-echo set esc31m=^^^>nul^^^&powershell write-host -fore Red 
-echo set esc35m=^^^>nul^^^&powershell write-host -fore Magenta 
-echo set esc33m=^^^>nul^^^&powershell write-host -fore Yellow 
-echo set esc37m=^^^>nul^^^&powershell write-host -fore White 
-echo set esc90m=^^^>nul^^^&powershell write-host -fore Gray 
-echo set esc94m=^^^>nul^^^&powershell write-host -fore Blue 
-echo set esc92m=^^^>nul^^^&powershell write-host -fore Green 
-echo set esc96m=^^^>nul^^^&powershell write-host -fore Cyan 
-echo set esc91m=^^^>nul^^^&powershell write-host -fore Red 
-echo set esc95m=^^^>nul^^^&powershell write-host -fore Magenta 
-echo set esc93m=^^^>nul^^^&powershell write-host -fore Yellow 
-echo set esc97m=^^^>nul^^^&powershell write-host -fore White 
+echo set esc30m=^^^&powershell write-host -NoNewline -fore Black 
+echo set esc34m=^^^&powershell write-host -NoNewline -fore Blue 
+echo set esc32m=^^^&powershell write-host -NoNewline -fore Green 
+echo set esc36m=^^^&powershell write-host -NoNewline -fore Cyan 
+echo set esc31m=^^^&powershell write-host -NoNewline -fore Red 
+echo set esc35m=^^^&powershell write-host -NoNewline -fore Magenta 
+echo set esc33m=^^^&powershell write-host -NoNewline -fore Yellow 
+echo set esc37m=^^^&powershell write-host -NoNewline -fore White 
+echo set esc90m=^^^&powershell write-host -NoNewline -fore Gray 
+echo set esc94m=^^^&powershell write-host -NoNewline -fore Blue 
+echo set esc92m=^^^&powershell write-host -NoNewline -fore Green 
+echo set esc96m=^^^&powershell write-host -NoNewline -fore Cyan 
+echo set esc91m=^^^&powershell write-host -NoNewline -fore Red 
+echo set esc95m=^^^&powershell write-host -NoNewline -fore Magenta 
+echo set esc93m=^^^&powershell write-host -NoNewline -fore Yellow 
+echo set esc97m=^^^&powershell write-host -NoNewline -fore White 
+echo set esc0m=^^^&echo(
 echo cls
 echo goto startOfFile
 echo :alertJS
@@ -868,7 +869,7 @@ set cmdc=!cmdc!%%esc0m%%
 (
 @echo off
 type "sys.bat"
-echo echo !cmdc!
+echo echo(!cmdc!
 )>sys2.bat
 del "sys.bat"
 ren "sys2.bat" "sys.bat"
