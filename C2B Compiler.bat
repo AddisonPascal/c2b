@@ -285,6 +285,7 @@ exit /b
 
 :alert
 set cmdc=!cmd:~6,-1!
+set cmdc=!cmdc:"='!
 (
 @echo off
 type sys.bat
