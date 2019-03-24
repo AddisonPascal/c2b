@@ -55,6 +55,7 @@ echo set esc105m=[105m
 echo set esc106m=[106m
 echo set esc107m=[107m
 echo set escRewrite=[F[0J
+echo set esc=
 echo cls
 echo goto startOfFile
 echo :noWin10
