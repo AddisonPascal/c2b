@@ -824,6 +824,7 @@ exit /b
 
 :echo
 set cmdc=!cmd:~6,-1!
+set cmdc=!cmdc:\n=^&echo(!
 set cmdc=!cmdc:@reset=%%esc0m%%!
 set cmdc=!cmdc:@r=%%esc0m%%!
 set cmdc=!cmdc:@bold=%%esc1m%%!
