@@ -308,6 +308,8 @@ exit /b
 
 :elif
 set cmdc=!cmd:~7,-3!
+set cmdc=!cmdc:^>= GTR !
+set cmdc=!cmdc:^<= LSS !
 (
 @echo off
 type sys.bat
