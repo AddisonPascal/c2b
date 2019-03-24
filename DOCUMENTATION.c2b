@@ -5,6 +5,7 @@
 
 # To print a line to the console, use print[text]
 print[This is a message. ]
+print[Line 1 \n Line 2]
 # Blank line:
 print[]
 # Inline colours and styles are available in print[], however compatibility is limited in non-Win10 operating systems.
