@@ -13,7 +13,7 @@ print[]
 # Use @<colorcode> to change colour, where <colorcode> is the hex colour code.
 # Use #<colourcode> to change only text colour, not background.
 # Use @bold to make it bold.
-# Use @U or @Underline to underline.
+# Use @u or @underline to underline.
 # Use @i or @inverse to inverse the colours.
 # Use @r or @reset to reset to default.
 # - Resets after every line.
