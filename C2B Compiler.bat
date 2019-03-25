@@ -260,6 +260,52 @@ exit /b
 
 :rewrite
 set cmdc=!cmd:~8,-1!
+echo %bracketString% | findstr A
+if not errorlevel 1 goto rRaw
+echo %bracketString% | findstr R
+if not errorlevel 1 goto rRaw
+set cmdc=!cmdc:\n=^&echo(!
+set cmdc=!cmdc:@reset=%%esc0m%%!
+set cmdc=!cmdc:@r=%%esc0m%%!
+set cmdc=!cmdc:@bold=%%esc1m%%!
+set cmdc=!cmdc:@underline=%%esc4m%%!
+set cmdc=!cmdc:@u=%%esc4m%%!
+set cmdc=!cmdc:@inverse=%%esc7m%%!
+set cmdc=!cmdc:@i=%%esc7m%%!
+set cmdc=!cmdc:@0=%%esc40m%%#!
+set cmdc=!cmdc:@1=%%esc44m%%#!
+set cmdc=!cmdc:@2=%%esc42m%%#!
+set cmdc=!cmdc:@3=%%esc46m%%#!
+set cmdc=!cmdc:@4=%%esc41m%%#!
+set cmdc=!cmdc:@5=%%esc45m%%#!
+set cmdc=!cmdc:@6=%%esc43m%%#!
+set cmdc=!cmdc:@7=%%esc47m%%#!
+set cmdc=!cmdc:@8=%%esc100m%%#!
+set cmdc=!cmdc:@9=%%esc104m%%#!
+set cmdc=!cmdc:@a=%%esc102m%%#!
+set cmdc=!cmdc:@b=%%esc106m%%#!
+set cmdc=!cmdc:@c=%%esc101m%%#!
+set cmdc=!cmdc:@d=%%esc105m%%#!
+set cmdc=!cmdc:@e=%%esc103m%%#!
+set cmdc=!cmdc:@f=%%esc107m%%#!
+set cmdc=!cmdc:#0=%%esc30m%%!
+set cmdc=!cmdc:#1=%%esc34m%%!
+set cmdc=!cmdc:#2=%%esc32m%%!
+set cmdc=!cmdc:#3=%%esc36m%%!
+set cmdc=!cmdc:#4=%%esc31m%%!
+set cmdc=!cmdc:#5=%%esc35m%%!
+set cmdc=!cmdc:#6=%%esc33m%%!
+set cmdc=!cmdc:#7=%%esc37m%%!
+set cmdc=!cmdc:#8=%%esc90m%%!
+set cmdc=!cmdc:#9=%%esc94m%%!
+set cmdc=!cmdc:#a=%%esc92m%%!
+set cmdc=!cmdc:#b=%%esc96m%%!
+set cmdc=!cmdc:#c=%%esc91m%%!
+set cmdc=!cmdc:#d=%%esc95m%%!
+set cmdc=!cmdc:#e=%%esc93m%%!
+set cmdc=!cmdc:#f=%%esc97m%%!
+set cmdc=!cmdc!%%esc0m%%
+:rRaw
 (
 @echo off
 type sys.bat
@@ -271,6 +317,52 @@ exit /b
 
 :output
 set cmdc=!cmd:~4,-1!
+echo %bracketString% | findstr A
+if not errorlevel 1 goto oRaw
+echo %bracketString% | findstr R
+if not errorlevel 1 goto oRaw
+set cmdc=!cmdc:\n=^&echo(!
+set cmdc=!cmdc:@reset=%%esc0m%%!
+set cmdc=!cmdc:@r=%%esc0m%%!
+set cmdc=!cmdc:@bold=%%esc1m%%!
+set cmdc=!cmdc:@underline=%%esc4m%%!
+set cmdc=!cmdc:@u=%%esc4m%%!
+set cmdc=!cmdc:@inverse=%%esc7m%%!
+set cmdc=!cmdc:@i=%%esc7m%%!
+set cmdc=!cmdc:@0=%%esc40m%%#!
+set cmdc=!cmdc:@1=%%esc44m%%#!
+set cmdc=!cmdc:@2=%%esc42m%%#!
+set cmdc=!cmdc:@3=%%esc46m%%#!
+set cmdc=!cmdc:@4=%%esc41m%%#!
+set cmdc=!cmdc:@5=%%esc45m%%#!
+set cmdc=!cmdc:@6=%%esc43m%%#!
+set cmdc=!cmdc:@7=%%esc47m%%#!
+set cmdc=!cmdc:@8=%%esc100m%%#!
+set cmdc=!cmdc:@9=%%esc104m%%#!
+set cmdc=!cmdc:@a=%%esc102m%%#!
+set cmdc=!cmdc:@b=%%esc106m%%#!
+set cmdc=!cmdc:@c=%%esc101m%%#!
+set cmdc=!cmdc:@d=%%esc105m%%#!
+set cmdc=!cmdc:@e=%%esc103m%%#!
+set cmdc=!cmdc:@f=%%esc107m%%#!
+set cmdc=!cmdc:#0=%%esc30m%%!
+set cmdc=!cmdc:#1=%%esc34m%%!
+set cmdc=!cmdc:#2=%%esc32m%%!
+set cmdc=!cmdc:#3=%%esc36m%%!
+set cmdc=!cmdc:#4=%%esc31m%%!
+set cmdc=!cmdc:#5=%%esc35m%%!
+set cmdc=!cmdc:#6=%%esc33m%%!
+set cmdc=!cmdc:#7=%%esc37m%%!
+set cmdc=!cmdc:#8=%%esc90m%%!
+set cmdc=!cmdc:#9=%%esc94m%%!
+set cmdc=!cmdc:#a=%%esc92m%%!
+set cmdc=!cmdc:#b=%%esc96m%%!
+set cmdc=!cmdc:#c=%%esc91m%%!
+set cmdc=!cmdc:#d=%%esc95m%%!
+set cmdc=!cmdc:#e=%%esc93m%%!
+set cmdc=!cmdc:#f=%%esc97m%%!
+set cmdc=!cmdc!%%esc0m%%
+:oRaw
 if "!cmdc!"==" " goto spaceOutput
 (
 @echo off
