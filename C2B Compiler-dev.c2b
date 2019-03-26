@@ -272,4 +272,175 @@ define.function[break] {
 		print[goto afterwhile%whileWriting%]
 	}
 }
-define.function[closeBracket]
+define.function[closeBracket] {
+	if["%bracketString:~-1,1%"=="I"] {
+		$endIf
+	} elif["%bracketString%"=="W"] {
+		$endWhile
+	} elif["%bracketString%"=="F"] {
+		$endWrite
+	} elif["%bracketString%"=="A"] {
+		$endAppend
+	}
+	[bracketString=%bracketString:~0,-1%]
+}
+define.function[repeat] {
+	[cmdc=!cmdc:~0,-2!]
+	[bracketString=%bracketString%W]
+	incr[whileCount]
+	[whileWriting=%whileCount%]
+	if["%whileWriting:~1,1%==""] {
+		[whileWriting=0%whileWriting%]
+	}
+	[whileWrite=%whileWrite%%whileWriting%]
+	file.append[sys.bat] {
+		print[set repeatCounting%whileWriting%=-1]
+		print[call :while%whileWriting%]
+		print[goto afterwhile%whileWriting%]
+		print[:while%whileWriting%]
+		print[set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1]
+		print[if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%]
+		print[goto afterwhile%whileWriting%]
+		print[exit /b]
+		print[:whiling%whileWriting%]
+	}
+}
+define.function[incr] {
+	file.append[sys.bat] {
+		print[set /a !cmdc!=%%!cmdc!%%+1]
+	}
+}
+define.function[while] {
+	[cmdc=!cmdc:~0,-2!]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
+	[cmdc=!cmdc:true=1 EQU 1!]
+	[cmdc=!cmdc:True=1 EQU 1!]
+	[bracketString=%bracketString%W]
+	incr[whileCount]
+	[whileWriting=%whileCount%]
+	if["%whileWriting:~1,1%"==""] {
+		[whileWriting=0%whileWriting%]
+	}
+	[whileWrite=%whileWrite%%whileWriting%]
+	file.append[sys.bat] {
+		print[:while%whileWriting%]
+		print[if !cmdc! (]
+		print[goto whiling%whileWriting%]
+		print[^) else (]
+		print[goto afterwhile%whileWriting%]
+		print[^)]
+		print[:whiling%whileWriting%]
+	}
+}
+define.function[endWhile] {
+	[whileWriting=%whileWrite:~-2,2%]
+	[whileWrite=%whileWrite:~0,-2%]
+	file.append[sys.bat] {
+		print[goto while%whileWriting%]
+		print[:afterwhile%whileWriting%]
+	}
+}
+define.function[play] {
+	file.append[sys.bat] {
+		print[powershell [console]::Beep(!cmdc!^)]
+	}
+}
+define.function[endWrite] {
+	file.append[sys.bat] {
+		print[^)^>%%opened_file%%]
+	}
+}
+define.function[endAppend] {
+	file.append[sys.bat] {
+		print[^)^>^>%%opened_file%%]
+	}
+}
+define.function[mkfolder] {
+	file.append[sys.bat] {
+		print[md !cmdc!]
+	}
+}
+define.function[mkfile] {
+	file.append[sys.bat] {
+		print[echo.^>!cmdc!]
+	}
+}
+define.function[del] {
+	file.append[sys.bat] {
+		print[del !cmdc!]
+	}
+}
+
+define.function[ren] {
+	file.append[sys.bat] {
+		print[ren !cmdc!]
+	}
+}
+define.function[download] {
+	file.append[sys.bat] {
+		print[powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"]
+	}
+}
+define.function[prompt] {
+	file.append[sys.bat] {
+		print[set /p !cmdc!=""]
+	}
+}
+define.function[define] {
+	if["!cmdc:~0,4!"=="text"] {
+		$defineText
+	} elif["!cmdc:~0,6!"=="prompt"] {
+		$definePrompt
+	} elif["!cmdc:~0,4!"=="math"] {
+		$defineMath
+	} elif["!cmdc:~0,8!"=="function"] {
+		$defineFunction
+	} else {
+		$plainDefine
+	}
+}
+define.function[definePrompt] {
+	[cmdc=!cmd:~14,-1!]
+	file.append[sys.bat] {
+		print[set /p !cmdc!]
+	}
+}
+define.function[defineMath] {
+	[cmdc=!cmd:~12,-1!]
+	file.append[sys.bat] {
+		print[set /a !cmdc!]
+	}
+}
+define.function[defineText] {
+	[cmdc=!cmd:~12,-1!]
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[plainDefine] {
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[callFunction] {
+	[cmdc=!cmd:~1!]
+	file.append[sys.bat] {
+		print[call :!cmdc!]
+	}
+}
+define.function[goto] {
+	file.append[sys.bat] {
+		print[goto !cmdc!]
+	}
+}
+define.function[place] {
+	file.append[sys.bat] {
+		print[:!cmdc!]
+	}
+}
+define.function[title] {
+	file.append[sys.bat] {
+		print[title !cmdc!]
+	}
+}
