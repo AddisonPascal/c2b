@@ -1,6 +1,7 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.4.0-cdev.0.1.3
-[version=0.4.0-cdev.0.1.3]
+# Version 0.4.0-cdev.0.1.5
+wait[user]
+[version=0.4.0-cdev.0.1.5]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -495,8 +496,8 @@ define.function[endIf] {
 }
 define.function[if] {
 	[cmdc=!cmd:~3,-3!]
-	[cmdc=!cmdc:~^>= GTR !]
-	[cmdc=!cmdc:~^<= LSS !]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
 	[bracketString=%bracketString%I]
 	file.append[sys.bat] {
 		print[if !cmdc! ^(]
@@ -597,8 +598,7 @@ define.function[export] {
 		print[exit]
 	}
 	[newLocation=%location:~0,-4%.bat"]
-	cmd[copy sys.bat %new_location%]
-	del[sys.bat]
+	ren[sys.bat %new_location%]
 	del[sys.c2b]
 	title[ ]
 	cmd[endlocal]
