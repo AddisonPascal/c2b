@@ -1,0 +1,609 @@
+# c2b Compiler by Addison Djatschenko
+# Version 0.4.0-cdev.0.1.5
+wait[user]
+[version=0.4.0-cdev.0.1.5]
+cmd[setlocal enabledelayedexpansion]
+title[C2B Compiler v%version%]
+[whileCount=0]
+[whileWrite=00]
+[bracketString=]
+[functionNumber=0]
+file.write[sys.bat] {
+    print[@echo off]
+    print[rem Compiled by the c2b Compiler from c2b v%version%. ]
+    print[ver ^| findstr /c:"Version 10"]
+    print[if errorlevel 1 goto noWin10]
+    print[set esc0m=%esc%[0m]
+    print[set esc1m=%esc%[1m]
+    print[set esc4m=%esc%[4m]
+    print[set esc7m=%esc%[7m]
+    print[set esc30m=%esc%[30m]
+    print[set esc31m=%esc%[31m]
+    print[set esc32m=%esc%[32m]
+    print[set esc33m=%esc%[33m]
+    print[set esc34m=%esc%[34m]
+    print[set esc35m=%esc%[35m]
+    print[set esc36m=%esc%[36m]
+    print[set esc37m=%esc%[37m]
+    print[set esc40m=%esc%[40m]
+    print[set esc41m=%esc%[41m]
+    print[set esc42m=%esc%[42m]
+    print[set esc43m=%esc%[43m]
+    print[set esc44m=%esc%[44m]
+    print[set esc45m=%esc%[45m]
+    print[set esc46m=%esc%[46m]
+    print[set esc47m=%esc%[47m]
+    print[set esc90m=%esc%[90m]
+    print[set esc91m=%esc%[91m]
+    print[set esc92m=%esc%[92m]
+    print[set esc93m=%esc%[93m]
+    print[set esc94m=%esc%[94m]
+    print[set esc95m=%esc%[95m]
+    print[set esc96m=%esc%[96m]
+    print[set esc97m=%esc%[97m]
+    print[set esc100m=%esc%[100m]
+    print[set esc101m=%esc%[101m]
+    print[set esc102m=%esc%[102m]
+    print[set esc103m=%esc%[103m]
+    print[set esc104m=%esc%[104m]
+    print[set esc105m=%esc%[105m]
+    print[set esc106m=%esc%[106m]
+    print[set esc107m=%esc%[107m]
+    print[set escRewrite=%esc%[F%esc%[0J]
+    print[set esc=%esc%]
+    print[cls]
+    print[goto startOfFile]
+    print[:noWin10]
+    print[set esc30m=^^^&powershell write-host -NoNewline -fore Black ]
+    print[set esc34m=^^^&powershell write-host -NoNewline -fore Blue ]
+    print[set esc32m=^^^&powershell write-host -NoNewline -fore Green ]
+    print[set esc36m=^^^&powershell write-host -NoNewline -fore Cyan ]
+    print[set esc31m=^^^&powershell write-host -NoNewline -fore Red ]
+    print[set esc35m=^^^&powershell write-host -NoNewline -fore Magenta ]
+    print[set esc33m=^^^&powershell write-host -NoNewline -fore Yellow ]
+    print[set esc37m=^^^&powershell write-host -NoNewline -fore White ]
+    print[set esc90m=^^^&powershell write-host -NoNewline -fore Gray ]
+    print[set esc94m=^^^&powershell write-host -NoNewline -fore Blue ]
+    print[set esc92m=^^^&powershell write-host -NoNewline -fore Green ]
+    print[set esc96m=^^^&powershell write-host -NoNewline -fore Cyan ]
+    print[set esc91m=^^^&powershell write-host -NoNewline -fore Red ]
+    print[set esc95m=^^^&powershell write-host -NoNewline -fore Magenta ]
+    print[set esc93m=^^^&powershell write-host -NoNewline -fore Yellow ]
+    print[set esc97m=^^^&powershell write-host -NoNewline -fore White ]
+    print[set esc0m=^^^&echo(]
+    print[cls]
+    print[goto startOfFile]
+    print[:alertJS]
+    print[mshta javascript:alert("%%~1"^);close(^);]
+    print[exit/b]
+    print[:startOfFile]
+}
+mkfile[sys.c2b]
+if[%1.==.] {
+	print[#cUse c2b compiler by opening a c2b file with it]
+	wait[user]
+	del[sys.bat]
+	del[sys.c2b]
+	end[file]
+}
+clear
+[location=%1]
+cmd[(]
+cmd[type %location%]
+cmd[echo.]
+cmd[)|clip]
+del[%location:~0,-4%.bat"]
+print[Automatically compiling...]
+skey[^(v)]
+while[True] {
+	incr[line]
+	[cmd=~linebreak]
+	define.prompt[cmd="%line% | "]
+	if["!cmdc!"=="~linebreak"] {
+		$linebreak
+		goto[anotherLine]
+	}
+	$convertCommand
+	place[anotherLine]
+}
+define.function[linebreak] {
+	file.append[sys.bat] {
+		print[echo.]
+	}
+}
+define.function[cmd] {
+	define.math[arg1m=%arg1%+1]
+	if["!cmd:~0,%arg1%!"=="%arg2%"] {
+		[cmdc=!cmd:~%arg1m%,-1!]
+		$%arg3%
+	}
+}
+define.function[abs] {
+	if["!cmd!"=="%arg1%"] {
+		$%arg2%
+	}
+}
+define.function[convertCommand] {
+	while["!cmd:~0,1!"==" "] {
+		[cmd=!cmd:~1!]
+	}
+	$cmd 1 # comment
+	$cmd 5 print print
+	$cmd 4 wait wait
+	$cmd 3 end end
+	$cmd 6 export export
+	$cmd 4 disp disp
+	$cmd 5 clear clear
+	$cmd 2 if if
+	$abs } closeBracket
+	$abs "} else {" else
+	$cmd 6 "} elif" elif
+	$cmd 3 cmd batcmd
+	$cmd 5 title title
+	$cmd 6 define define
+	$cmd 5 place place
+	$cmd 4 goto goto
+	$cmd 1 $ callFunction
+	$cmd 6 prompt prompt
+	$cmd 8 download download
+	$cmd 3 ren ren
+	$cmd 3 del del
+	$cmd 6 mkfile mkfile
+	$cmd 8 mkfolder mkfolder
+	$cmd 4 file file
+	$cmd 4 play play
+	$cmd 5 while while
+	$cmd 4 incr incr
+	$cmd 6 repeat repeat
+	$cmd 5 break break
+	$cmd 6 return return
+	$cmd 4 open open
+	$cmd 4 skey skey
+	$cmd 2 ps ps
+	$cmd 5 alert alert
+	$cmd 5 color colour
+	$cmd 6 colour colour
+	$cmd 7 restart restart
+	$cmd 3 out out
+	$cmd 8 rewrite rewrite
+	$cmd 6 choice choice
+	$cmd 1 [ setQuick
+}
+define.function[choice] {
+	file.append[sys.bat] {
+		print[set choices=!cmdc!]
+		print[choice /c !cmdc! ^>nul]
+		print[set /a choiceNum=%%errorlevel%%-1]
+		print[call set choice=%%%%choices:~%%choiceNum%%,1%%%%]
+	}
+}
+define.function[rewrite] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			$sortColours
+		}
+	}
+	file.append[sys.bat] {
+		print[echo %%escRewrite%%!cmdc!]
+	}
+}
+define.function[out] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			$sortColours
+		}
+	}
+	file.append[sys.bat] {
+		print[echo ^| set /p ^^="!cmdc!"]
+	}
+}
+define.function[restart] {
+	file.append[sys.bat] {
+		print[goto startOfFile]
+	}
+}
+define.function[colour] {
+	file.append[sys.bat] {
+		print[color !cmdc!]
+	}
+}
+define.function[alert] {
+	[cmdc=!cmdc:"='!]
+	file.append[sys.bat] {
+		print[call :alertJS "!cmdc!"]
+	}
+}
+define.function[elif] {
+	[cmdc=!cmdc:~0,-2!]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
+	file.append[sys.bat] {
+		print[^) else if !cmdc! (]
+	}
+}
+define.function[ps] {
+	[cmdc=!cmdc:"='!]
+	file.append[sys.bat] {
+		print[powershell -Command "!cmdc!"]
+	}
+}
+define.function[else] {
+	file.append[sys.bat] {
+		print[^) else (]
+	}
+}
+define.function[skey] {
+	file.append[sys.bat] {
+		print[set skey_id=%%random%%]
+		print[(]
+		print[echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)]
+		print[echo WshShell.SendKeys "!cmdc!"]
+		print[^)^>"%%temp%%\%%skey_id%%.vbs"]
+		print[start "" "%%temp%%\%%skey_id%%.vbs"]
+	}
+}
+define.function[file] {
+	[cmd=!cmdc!]
+	$cmd 5 write write
+	$cmd 6 append append
+	[cmdc=!cmdc:~0,-2]
+	file.append[sys.bat] {
+		print[set opened_file=!cmdc!]
+		print[(]
+	}
+}
+define.function[append] {
+	[bracketString=%bracketString%A]
+}
+define.function[write] {
+	[bracketString=%bracketString%R]
+}
+define.function[open] {
+	file.append[sys.bat] {
+		print[start "" !cmdc!]
+	}
+}
+define.function[setQuick] {
+	[cmdc=!cmd:~1,1!!cmdc!]
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[return] {
+	file.append[sys.bat] {
+		print[exit /b]
+	}
+}
+define.function[break] {
+	[whileWriting=%whileWrite:~-2,2%]
+	file.append[sys.bat] {
+		print[goto afterwhile%whileWriting%]
+	}
+}
+define.function[closeBracket] {
+	if["%bracketString:~-1,1%"=="I"] {
+		$endIf
+	} elif["%bracketString%"=="W"] {
+		$endWhile
+	} elif["%bracketString%"=="F"] {
+		$endFunction
+	} elif["%bracketString%"=="R"] {
+		$endWrite
+	} elif["%bracketString%"=="A"] {
+		$endAppend
+	}
+	[bracketString=%bracketString:~0,-1%]
+}
+define.function[repeat] {
+	[cmdc=!cmdc:~0,-2!]
+	[bracketString=%bracketString%W]
+	incr[whileCount]
+	[whileWriting=%whileCount%]
+	if["%whileWriting:~1,1%==""] {
+		[whileWriting=0%whileWriting%]
+	}
+	[whileWrite=%whileWrite%%whileWriting%]
+	file.append[sys.bat] {
+		print[set repeatCounting%whileWriting%=-1]
+		print[call :while%whileWriting%]
+		print[goto afterwhile%whileWriting%]
+		print[:while%whileWriting%]
+		print[set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1]
+		print[if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%]
+		print[goto afterwhile%whileWriting%]
+		print[exit /b]
+		print[:whiling%whileWriting%]
+	}
+}
+define.function[incr] {
+	file.append[sys.bat] {
+		print[set /a !cmdc!=%%!cmdc!%%+1]
+	}
+}
+define.function[while] {
+	[cmdc=!cmdc:~0,-2!]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
+	[cmdc=!cmdc:true=1 EQU 1!]
+	[cmdc=!cmdc:True=1 EQU 1!]
+	[bracketString=%bracketString%W]
+	incr[whileCount]
+	[whileWriting=%whileCount%]
+	if["%whileWriting:~1,1%"==""] {
+		[whileWriting=0%whileWriting%]
+	}
+	[whileWrite=%whileWrite%%whileWriting%]
+	file.append[sys.bat] {
+		print[:while%whileWriting%]
+		print[if !cmdc! (]
+		print[goto whiling%whileWriting%]
+		print[^) else (]
+		print[goto afterwhile%whileWriting%]
+		print[^)]
+		print[:whiling%whileWriting%]
+	}
+}
+define.function[endWhile] {
+	[whileWriting=%whileWrite:~-2,2%]
+	[whileWrite=%whileWrite:~0,-2%]
+	file.append[sys.bat] {
+		print[goto while%whileWriting%]
+		print[:afterwhile%whileWriting%]
+	}
+}
+define.function[play] {
+	file.append[sys.bat] {
+		print[powershell [console]::Beep(!cmdc!^)]
+	}
+}
+define.function[endWrite] {
+	file.append[sys.bat] {
+		print[^)^>%%opened_file%%]
+	}
+}
+define.function[endAppend] {
+	file.append[sys.bat] {
+		print[^)^>^>%%opened_file%%]
+	}
+}
+define.function[mkfolder] {
+	file.append[sys.bat] {
+		print[md !cmdc!]
+	}
+}
+define.function[mkfile] {
+	file.append[sys.bat] {
+		print[echo.^>!cmdc!]
+	}
+}
+define.function[del] {
+	file.append[sys.bat] {
+		print[del !cmdc!]
+	}
+}
+
+define.function[ren] {
+	file.append[sys.bat] {
+		print[ren !cmdc!]
+	}
+}
+define.function[download] {
+	file.append[sys.bat] {
+		print[powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"]
+	}
+}
+define.function[prompt] {
+	file.append[sys.bat] {
+		print[set /p !cmdc!=""]
+	}
+}
+define.function[define] {
+	if["!cmdc:~0,4!"=="text"] {
+		$defineText
+	} elif["!cmdc:~0,6!"=="prompt"] {
+		$definePrompt
+	} elif["!cmdc:~0,4!"=="math"] {
+		$defineMath
+	} elif["!cmdc:~0,8!"=="function"] {
+		$defineFunction
+	} else {
+		$plainDefine
+	}
+}
+define.function[definePrompt] {
+	[cmdc=!cmd:~14,-1!]
+	file.append[sys.bat] {
+		print[set /p !cmdc!]
+	}
+}
+define.function[defineMath] {
+	[cmdc=!cmd:~12,-1!]
+	file.append[sys.bat] {
+		print[set /a !cmdc!]
+	}
+}
+define.function[defineText] {
+	[cmdc=!cmd:~12,-1!]
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[plainDefine] {
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[callFunction] {
+	[cmdc=!cmd:~1!]
+	file.append[sys.bat] {
+		print[call :!cmdc!]
+	}
+}
+define.function[goto] {
+	file.append[sys.bat] {
+		print[goto !cmdc!]
+	}
+}
+define.function[place] {
+	file.append[sys.bat] {
+		print[:!cmdc!]
+	}
+}
+define.function[title] {
+	file.append[sys.bat] {
+		print[title !cmdc!]
+	}
+}
+define.function[comment] {
+	[cmdc=!cmd:~1]
+	file.append[sys.bat] {
+		print[::!cmdc!]
+	}
+}
+define.function[endFunction] {
+	file.append[sys.bat] {
+		print[exit /b]
+		print[:endfunction%functionNumber%]
+	}
+}
+define.function[defineFunction] {
+	[bracketString=%bracketString%F]
+	incr[functionNumber]
+	[cmdc=!cmd:~16,-3!]
+	file.append[sys.bat] {
+		print[goto endfunction%functionNumber%]
+		print[:!cmdc!]
+		print[set arg1=%%~1]
+		print[set arg2=%%~2]
+		print[set arg3=%%~3]
+		print[set arg4=%%~4]
+		print[set arg5=%%~5]
+	}
+}
+define.function[batcmd] {
+	file.append[sys.bat] {
+		print[!cmdc!]
+	}
+}
+define.function[endIf] {
+	file.append[sys.bat] {
+		print[^)]
+	}
+}
+define.function[if] {
+	[cmdc=!cmd:~3,-3!]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
+	[bracketString=%bracketString%I]
+	file.append[sys.bat] {
+		print[if !cmdc! ^(]
+	}
+}
+define.function[disp] {
+	file.append[sys.bat] {
+		print[mode 1000]
+	}
+}
+define.function[sortColours] {
+	[cmdc=!cmdc:\n=^&echo(!]
+	[cmdc=!cmdc:@reset=%%esc0m%%!]
+	[cmdc=!cmdc:@r=%%esc0m%%!]
+	[cmdc=!cmdc:@bold=%%esc1m%%!]
+	[cmdc=!cmdc:@underline=%%esc4m%%!]
+	[cmdc=!cmdc:@u=%%esc4m%%!]
+	[cmdc=!cmdc:@inverse=%%esc7m%%!]
+	[cmdc=!cmdc:@i=%%esc7m%%!]
+	[cmdc=!cmdc:@0=%%esc40m%%#!]
+	[cmdc=!cmdc:@1=%%esc44m%%#!]
+	[cmdc=!cmdc:@2=%%esc42m%%#!]
+	[cmdc=!cmdc:@3=%%esc46m%%#!]
+	[cmdc=!cmdc:@4=%%esc41m%%#!]
+	[cmdc=!cmdc:@5=%%esc45m%%#!]
+	[cmdc=!cmdc:@6=%%esc43m%%#!]
+	[cmdc=!cmdc:@7=%%esc47m%%#!]
+	[cmdc=!cmdc:@8=%%esc100m%%#!]
+	[cmdc=!cmdc:@9=%%esc104m%%#!]
+	[cmdc=!cmdc:@a=%%esc102m%%#!]
+	[cmdc=!cmdc:@b=%%esc106m%%#!]
+	[cmdc=!cmdc:@c=%%esc101m%%#!]
+	[cmdc=!cmdc:@d=%%esc105m%%#!]
+	[cmdc=!cmdc:@e=%%esc103m%%#!]
+	[cmdc=!cmdc:@f=%%esc107m%%#!]
+	[cmdc=!cmdc:#0=%%esc30m%%!]
+	[cmdc=!cmdc:#1=%%esc34m%%!]
+	[cmdc=!cmdc:#2=%%esc32m%%!]
+	[cmdc=!cmdc:#3=%%esc36m%%!]
+	[cmdc=!cmdc:#4=%%esc31m%%!]
+	[cmdc=!cmdc:#5=%%esc35m%%!]
+	[cmdc=!cmdc:#6=%%esc33m%%!]
+	[cmdc=!cmdc:#7=%%esc37m%%!]
+	[cmdc=!cmdc:#8=%%esc90m%%!]
+	[cmdc=!cmdc:#9=%%esc94m%%!]
+	[cmdc=!cmdc:#a=%%esc92m%%!]
+	[cmdc=!cmdc:#b=%%esc96m%%!]
+	[cmdc=!cmdc:#c=%%esc91m%%!]
+	[cmdc=!cmdc:#d=%%esc95m%%!]
+	[cmdc=!cmdc:#e=%%esc93m%%!]
+	[cmdc=!cmdc:#f=%%esc97m%%!]
+	[cmdc=!cmdc!%%esc0m%%]
+}
+define.function[print] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			$sortColours
+		}
+	}
+	file.append[sys.bat] {
+		print[echo(!cmdc!]
+	}
+}
+define.function[end] {
+	file.append[sys.bat] {
+		print[exit]
+	}
+}
+define.function[wait] {
+	if["!cmdc!"=="user"] {
+		$waitUser
+	} else {
+		$waitTime
+	}
+}
+define.function[waitUser] {
+	file.append[sys.bat] {
+		print[pause^>nul]
+	}
+}
+define.function[waitTime] {
+	file.append[sys.bat] {
+		print[timeout /t !cmdc! /nobreak ^>nul]
+	}
+}
+define.function[clear] {
+	file.append[sys.bat] {
+		print[cls]
+	}
+}
+define.function[export] {
+	file.append[sys.bat] {
+		print[echo Program finished.]
+		print[echo Press any key to exit.]
+		print[pause^>nul]
+		print[exit]
+	}
+	[newLocation=%location:~0,-4%.bat"]
+	ren[sys.bat %new_location%]
+	del[sys.c2b]
+	title[ ]
+	cmd[endlocal]
+	clear
+	cmd[call %new_location%]
+	end[file]
+}
+export
