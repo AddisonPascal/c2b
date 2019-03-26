@@ -1,9 +1,6 @@
-print[c2b compiler in c2b - currently in development]
-export
-# Start of Program
 # c2b Compiler by Addison Djatschenko
 # Version 0.4.0-cdev.0.0.1
-[version=0.4.0-cdev.0.0.1]
+[version=0.4.0-cdev.0.1.0]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -278,6 +275,8 @@ define.function[closeBracket] {
 	} elif["%bracketString%"=="W"] {
 		$endWhile
 	} elif["%bracketString%"=="F"] {
+		$endFunction
+	} elif["%bracketString%"=="R"] {
 		$endWrite
 	} elif["%bracketString%"=="A"] {
 		$endAppend
@@ -444,3 +443,150 @@ define.function[title] {
 		print[title !cmdc!]
 	}
 }
+define.function[comment] {
+	[cmdc=!cmd:~1]
+	file.append[sys.bat] {
+		print[::!cmdc!]
+	}
+}
+define.function[endFunction] {
+	file.append[sys.bat] {
+		print[exit /b]
+		print[:endfunction%functionNumber%]
+	}
+}
+define.function[defineFunction] {
+	[bracketString=%bracketString%F]
+	incr[functionNumber]
+	[cmdc=!cmd:~16,-3!]
+	file.append[sys.bat] {
+		print[goto endfunction%functionNumber%]
+		print[:!cmdc!]
+		print[set arg1=%%~1]
+		print[set arg2=%%~2]
+		print[set arg3=%%~3]
+		print[set arg4=%%~4]
+		print[set arg5=%%~5]
+	}
+}
+define.function[cmd] {
+	file.append[sys.bat] {
+		print[!cmdc!]
+	}
+}
+define.function[endIf] {
+	file.append[sys.bat] {
+		print[^)]
+	}
+}
+define.function[if] {
+	[cmdc=!cmd:~3,-3!]
+	[cmdc=!cmdc:~^>= GTR !]
+	[cmdc=!cmdc:~^<= LSS !]
+	[bracketString=%bracketString%I]
+	file.append[sys.bat] {
+		print[if !cmdc! ^(]
+	}
+}
+define.function[disp] {
+	file.append[sys.bat] {
+		print[mode 1000]
+	}
+}
+define.function[print] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			[cmdc=!cmdc:\n=^&echo(!]
+			[cmdc=!cmdc:@reset=%%esc0m%%!]
+			[cmdc=!cmdc:@r=%%esc0m%%!]
+			[cmdc=!cmdc:@bold=%%esc1m%%!]
+			[cmdc=!cmdc:@underline=%%esc4m%%!]
+			[cmdc=!cmdc:@u=%%esc4m%%!]
+			[cmdc=!cmdc:@inverse=%%esc7m%%!]
+			[cmdc=!cmdc:@i=%%esc7m%%!]
+			[cmdc=!cmdc:@0=%%esc40m%%#!]
+			[cmdc=!cmdc:@1=%%esc44m%%#!]
+			[cmdc=!cmdc:@2=%%esc42m%%#!]
+			[cmdc=!cmdc:@3=%%esc46m%%#!]
+			[cmdc=!cmdc:@4=%%esc41m%%#!]
+			[cmdc=!cmdc:@5=%%esc45m%%#!]
+			[cmdc=!cmdc:@6=%%esc43m%%#!]
+			[cmdc=!cmdc:@7=%%esc47m%%#!]
+			[cmdc=!cmdc:@8=%%esc100m%%#!]
+			[cmdc=!cmdc:@9=%%esc104m%%#!]
+			[cmdc=!cmdc:@a=%%esc102m%%#!]
+			[cmdc=!cmdc:@b=%%esc106m%%#!]
+			[cmdc=!cmdc:@c=%%esc101m%%#!]
+			[cmdc=!cmdc:@d=%%esc105m%%#!]
+			[cmdc=!cmdc:@e=%%esc103m%%#!]
+			[cmdc=!cmdc:@f=%%esc107m%%#!]
+			[cmdc=!cmdc:#0=%%esc30m%%!]
+			[cmdc=!cmdc:#1=%%esc34m%%!]
+			[cmdc=!cmdc:#2=%%esc32m%%!]
+			[cmdc=!cmdc:#3=%%esc36m%%!]
+			[cmdc=!cmdc:#4=%%esc31m%%!]
+			[cmdc=!cmdc:#5=%%esc35m%%!]
+			[cmdc=!cmdc:#6=%%esc33m%%!]
+			[cmdc=!cmdc:#7=%%esc37m%%!]
+			[cmdc=!cmdc:#8=%%esc90m%%!]
+			[cmdc=!cmdc:#9=%%esc94m%%!]
+			[cmdc=!cmdc:#a=%%esc92m%%!]
+			[cmdc=!cmdc:#b=%%esc96m%%!]
+			[cmdc=!cmdc:#c=%%esc91m%%!]
+			[cmdc=!cmdc:#d=%%esc95m%%!]
+			[cmdc=!cmdc:#e=%%esc93m%%!]
+			[cmdc=!cmdc:#f=%%esc97m%%!]
+			[cmdc=!cmdc!%%esc0m%%]
+		}
+	}
+	file.append[sys.bat] {
+		print[echo(!cmdc!]
+	}
+}
+define.function[end] {
+	file.append[sys.bat] {
+		print[exit]
+	}
+}
+define.function[wait] {
+	if["!cmdc!"=="user"] {
+		$waitUser
+	} else {
+		$waitTime
+	}
+}
+define.function[waitUser] {
+	file.append[sys.bat] {
+		print[pause^>nul]
+	}
+}
+define.function[waitTime] {
+	file.append[sys.bat] {
+		print[timeout /t !cmdc! /nobreak ^>nul]
+	}
+}
+define.function[clear] {
+	file.append[sys.bat] {
+		print[cls]
+	}
+}
+define.function[compile] {
+	file.append[sys.bat] {
+		print[echo Program finished.]
+		print[echo Press any key to exit.]
+		print[pause^>nul]
+		print[exit]
+	}
+	[newLocation=%location:~0,-4%.bat"]
+	cmd[copy sys.bat %new_location%]
+	del[sys.bat]
+	del[sys.c2b]
+	title[ ]
+	cmd[endlocal]
+	clear
+	cmd[call %new_location%]
+	end[file]
+}
+export
