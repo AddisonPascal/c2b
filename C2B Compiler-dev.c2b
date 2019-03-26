@@ -397,8 +397,13 @@ define.function[skey] {
 }
 define.function[file] {
 	[cmd=!cmdc!]
-	$cmd 5 write write
-	$cmd 6 append append
+	if["!cmd:~0,5!"=="write"] ]{
+		[cmdc=!cmd:~6,-1!]
+		$write
+	} elif["!cmd:~0,6!"=="append"] {
+		[cmdc=!cmd:~7,-1!]
+		$append
+	}
 	[cmdc=!cmdc:~0,-2]
 	file.append[sys.bat] {
 		print[set opened_file=!cmdc!]
