@@ -92,6 +92,7 @@ clear
 [location=%1]
 cmd[(]
 cmd[type %location%]
+cmd[echo.]
 cmd[)|clip]
 del[%location:~0,-4%.bat"]
 print[Automatically compiling...]
@@ -116,9 +117,52 @@ define.function[cmd] {
 	if["!cmd:~0,%arg1%!"=="%arg2%"] {
 		$%arg3%
 	}
+define.function[abs] {
+	if["!cmd!"=="%arg1%"] {
+		$%arg2%
+	}
 define.function[convertCommand] {
 	while["!cmd:~0,1!"==" "] {
 		[cmd=!cmd:~1!]
 	}
 	$cmd 1 # comment
-	
+	$cmd 5 print print
+	$cmd 4 wait wait
+	$cmd 3 end end
+	$cmd 6 export export
+	$cmd 4 disp disp
+	$cmd 5 clear clear
+	$cmd 2 if if
+	$abs } closeBracket
+	$abs "} else {" else
+	$cmd 6 "} elif" elif
+	$cmd 3 cmd cmd
+	$cmd 5 title title
+	$cmd 6 define define
+	$cmd 5 place place
+	$cmd 4 goto goto
+	$cmd 1 $ callFunction
+	$cmd 6 prompt prompt
+	$cmd 8 download download
+	$cmd 3 ren ren
+	$cmd 3 del del
+	$cmd 6 mkfile mkfile
+	$cmd 8 mkfolder mkfolder
+	$cmd 4 file file
+	$cmd 4 play play
+	$cmd 5 while while
+	$cmd 4 incr incr
+	$cmd 6 repeat repeat
+	$cmd 5 break break
+	$cmd 6 return return
+	$cmd 4 open open
+	$cmd 4 skey skey
+	$cmd 2 ps ps
+	$cmd 5 alert alert
+	$cmd 5 color color
+	$cmd 6 colour colour
+	$cmd 7 restart restart
+	$cmd 3 out out
+	$cmd 8 rewrite rewrite
+	$cmd 6 choice choice
+}
