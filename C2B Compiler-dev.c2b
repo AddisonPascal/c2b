@@ -329,7 +329,7 @@ define.function[choice] {
 define.function[rewrite] {
 	cmd[echo %bracketString% | findstr A]
 	if[errorlevel 1] {
-		cmd[echo %bracketString% | findstr R]
+		cmd[echo %bracketString% ^| findstr R]
 		if[errorlevel 1] {
 			$sortColours
 		}
@@ -341,7 +341,7 @@ define.function[rewrite] {
 define.function[out] {
 	cmd[echo %bracketString% | findstr A]
 	if[errorlevel 1] {
-		cmd[echo %bracketString% | findstr R]
+		cmd[echo %bracketString% ^| findstr R]
 		if[errorlevel 1] {
 			$sortColours
 		}
@@ -708,7 +708,7 @@ define.function[sortColours] {
 define.function[print] {
 	cmd[echo %bracketString% | findstr A]
 	if[errorlevel 1] {
-		cmd[echo %bracketString% | findstr R]
+		cmd[echo %bracketString% ^| findstr R]
 		if[errorlevel 1] {
 			$sortColours
 		}
