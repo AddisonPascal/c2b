@@ -22,7 +22,7 @@ print[]
 print[#a Green Text!]
 print[@fa Green on White!]
 print[@bold Bold]
-print[@U Underlined]
+print[@u underlined]
 print[@fa@bold@u All 3!]
 
 # Prints text to the console without a newline:	out[text]
