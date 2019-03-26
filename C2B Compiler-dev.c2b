@@ -115,12 +115,16 @@ define.function[linebreak] {
 }
 define.function[cmd] {
 	if["!cmd:~0,%arg1%!"=="%arg2%"] {
+		incr[arg1]
+		[cmdc=!cmd:~%arg1%,-1!]
 		$%arg3%
 	}
+}
 define.function[abs] {
 	if["!cmd!"=="%arg1%"] {
 		$%arg2%
 	}
+}
 define.function[convertCommand] {
 	while["!cmd:~0,1!"==" "] {
 		[cmd=!cmd:~1!]
@@ -159,10 +163,113 @@ define.function[convertCommand] {
 	$cmd 4 skey skey
 	$cmd 2 ps ps
 	$cmd 5 alert alert
-	$cmd 5 color color
+	$cmd 5 color colour
 	$cmd 6 colour colour
 	$cmd 7 restart restart
 	$cmd 3 out out
 	$cmd 8 rewrite rewrite
 	$cmd 6 choice choice
+	$cmd 1 [ setQuick
 }
+define.function[choice] {
+	file.append[sys.bat] {
+		print[set choices=!cmdc!]
+		print[choice /c !cmdc! ^>nul]
+		print[set /a choiceNum=%%errorlevel%%-1]
+		print[call set choice=%%%%choices:~%%choiceNum%%,1%%%%]
+	}
+}
+define.function[rewrite] {
+	file.append[sys.bat] {
+		print[echo %%escRewrite%%!cmdc!]
+	}
+}
+define.function[out] {
+	file.append[sys.bat] {
+		print[echo ^| set /p ^^="!cmdc!"]
+	}
+}
+define.function[restart] {
+	file.append[sys.bat] {
+		print[goto startOfFile]
+	}
+}
+define.function[colour] {
+	file.append[sys.bat] {
+		print[color !cmdc!]
+	}
+}
+define.function[alert] {
+	[cmdc=!cmdc:"='!]
+	file.append[sys.bat] {
+		print[call :alertJS "!cmdc!"]
+	}
+}
+define.function[elif] {
+	[cmdc=!cmdc:~0,-2!]
+	[cmdc=!cmdc:^>= GTR !]
+	[cmdc=!cmdc:^<= LSS !]
+	file.append[sys.bat] {
+		print[^) else if !cmdc! (]
+	}
+}
+define.function[ps] {
+	[cmdc=!cmdc:"='!]
+	file.append[sys.bat] {
+		print[powershell -Command "!cmdc!"]
+	}
+}
+define.function[else] {
+	file.append[sys.bat] {
+		print[^) else (]
+	}
+}
+define.function[skey] {
+	file.append[sys.bat] {
+		print[set skey_id=%%random%%]
+		print[(]
+		print[echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)]
+		print[echo WshShell.SendKeys "!cmdc!"]
+		print[^)^>"%%temp%%\%%skey_id%%.vbs"]
+		print[start "" "%%temp%%\%%skey_id%%.vbs"]
+	}
+}
+define.function[file] {
+	[cmd=!cmdc!]
+	$cmd 5 write write
+	$cmd 6 append append
+	[cmdc=!cmdc:~0,-2]
+	file.append[sys.bat] {
+		print[set opened_file=!cmdc!]
+		print[(]
+	}
+}
+define.function[append] {
+	[bracketString=%bracketString%A]
+}
+define.function[write] {
+	[bracketString=%bracketString%R]
+}
+define.function[open] {
+	file.append[sys.bat] {
+		print[start "" !cmdc!]
+	}
+}
+define.function[setQuick] {
+	[cmdc=!cmd:~1,1!!cmdc!]
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[return] {
+	file.append[sys.bat] {
+		print[exit /b]
+	}
+}
+define.function[break] {
+	[whileWriting=%whileWrite:~-2,2%]
+	file.append[sys.bat] {
+		print[goto afterwhile%whileWriting%]
+	}
+}
+define.function[closeBracket]
