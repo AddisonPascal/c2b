@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.4.0-cdev.0.1.1
-[version=0.4.0-cdev.0.1.1]
+# Version 0.4.0-cdev.0.1.2
+[version=0.4.0-cdev.0.1.2]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -137,7 +137,7 @@ define.function[convertCommand] {
 	$abs } closeBracket
 	$abs "} else {" else
 	$cmd 6 "} elif" elif
-	$cmd 3 cmd cmd
+	$cmd 3 cmd batcmd
 	$cmd 5 title title
 	$cmd 6 define define
 	$cmd 5 place place
@@ -483,7 +483,7 @@ define.function[defineFunction] {
 		print[set arg5=%%~5]
 	}
 }
-define.function[cmd] {
+define.function[batcmd] {
 	file.append[sys.bat] {
 		print[!cmdc!]
 	}
