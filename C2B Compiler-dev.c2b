@@ -328,24 +328,30 @@ define.function[choice] {
 }
 define.function[rewrite] {
 	cmd[echo %bracketString% | findstr A]
-	if[errorlevel 1] {
-		cmd[echo %bracketString% ^| findstr R]
-		if[errorlevel 1] {
-			$sortColours
-		}
+	if[not errorlevel 1] {
+		goto[rawRewrite]
 	}
+	cmd[echo %bracketString% | findstr R]
+	if[not errorlevel 1] {
+		goto[rawRewrite]
+	}
+	$sortColours
+	place[rawRewrite]
 	file.append[sys.bat] {
 		print[echo %%escRewrite%%!cmdc!]
 	}
 }
 define.function[out] {
 	cmd[echo %bracketString% | findstr A]
-	if[errorlevel 1] {
-		cmd[echo %bracketString% ^| findstr R]
-		if[errorlevel 1] {
-			$sortColours
-		}
+	if[not errorlevel 1] {
+		goto[rawOut]
 	}
+	cmd[echo %bracketString% | findstr R]
+	if[not errorlevel 1] {
+		goto[rawOut]
+	}
+	$sortColours
+	place[rawOut]
 	file.append[sys.bat] {
 		print[echo ^| set /p ^^="!cmdc!"]
 	}
@@ -707,12 +713,15 @@ define.function[sortColours] {
 }
 define.function[print] {
 	cmd[echo %bracketString% | findstr A]
-	if[errorlevel 1] {
-		cmd[echo %bracketString% ^| findstr R]
-		if[errorlevel 1] {
-			$sortColours
-		}
+	if[not errorlevel 1] {
+		goto[rawPrint]
 	}
+	cmd[echo %bracketString% | findstr R]
+	if[not errorlevel 1] {
+		goto[rawPrint]
+	}
+	$sortColours
+	place[rawPrint]
 	file.append[sys.bat] {
 		print[echo(!cmdc!]
 	}
