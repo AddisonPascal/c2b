@@ -447,13 +447,13 @@ define.function[break] {
 define.function[closeBracket] {
 	if["%bracketString:~-1,1%"=="I"] {
 		$endIf
-	} elif["%bracketString%"=="W"] {
+	} elif["%bracketString:~-1,1%"=="W"] {
 		$endWhile
-	} elif["%bracketString%"=="F"] {
+	} elif["%bracketString:~-1,1%"=="F"] {
 		$endFunction
-	} elif["%bracketString%"=="R"] {
+	} elif["%bracketString:~-1,1%"=="R"] {
 		$endWrite
-	} elif["%bracketString%"=="A"] {
+	} elif["%bracketString:~-1,1%"=="A"] {
 		$endAppend
 	}
 	[bracketString=%bracketString:~0,-1%]
