@@ -111,13 +111,6 @@ define.function[linebreak] {
 		print[echo.]
 	}
 }
-define.function[cmd] {
-	define.math[arg1m=%arg1%+1]
-	if["!cmd:~0,%arg1%!"=="%arg2%"] {
-		[cmdc=!cmd:~%arg1m%,-1!]
-		$%arg3%
-	}
-}
 define.function[abs] {
 	if["!cmd!"=="%arg1%"] {
 		$%arg2%
@@ -127,47 +120,203 @@ define.function[convertCommand] {
 	while["!cmd:~0,1!"==" "] {
 		[cmd=!cmd:~1!]
 	}
-	$cmd 1 # comment
-	$cmd 5 print print
-	$cmd 4 wait wait
-	$cmd 3 end end
-	$cmd 6 export export
-	$cmd 4 disp disp
-	$cmd 5 clear clear
-	$cmd 2 if if
-	$abs } closeBracket
-	$abs "} else {" else
-	$cmd 6 "} elif" elif
-	$cmd 3 cmd batcmd
-	$cmd 5 title title
-	$cmd 6 define define
-	$cmd 5 place place
-	$cmd 4 goto goto
-	$cmd 1 $ callFunction
-	$cmd 6 prompt prompt
-	$cmd 8 download download
-	$cmd 3 ren ren
-	$cmd 3 del del
-	$cmd 6 mkfile mkfile
-	$cmd 8 mkfolder mkfolder
-	$cmd 4 file file
-	$cmd 4 play play
-	$cmd 5 while while
-	$cmd 4 incr incr
-	$cmd 6 repeat repeat
-	$cmd 5 break break
-	$cmd 6 return return
-	$cmd 4 open open
-	$cmd 4 skey skey
-	$cmd 2 ps ps
-	$cmd 5 alert alert
-	$cmd 5 color colour
-	$cmd 6 colour colour
-	$cmd 7 restart restart
-	$cmd 3 out out
-	$cmd 8 rewrite rewrite
-	$cmd 6 choice choice
-	$cmd 1 [ setQuick
+if["!cmd:~0,1!"=="#"] {
+[cmdc=!cmd:~1,-1!]
+$comment
+return
+}
+if["!cmd:~0,5!"=="print"] {
+[cmdc=!cmd:~6,-1!]
+$print
+return
+}
+if["!cmd:~0,4!"=="wait"] {
+[cmdc=!cmd:~5,-1!]
+$wait
+return
+}
+if["!cmd:~0,3!"=="end"] {
+[cmdc=!cmd:~4,-1!]
+$end
+return
+}
+if["!cmd:~0,6!"=="export"] {
+[cmdc=!cmd:~7,-1!]
+$export
+return
+}
+if["!cmd:~0,4!"=="disp"] {
+[cmdc=!cmd:~5,-1!]
+$disp
+return
+}
+if["!cmd:~0,5!"=="clear"] {
+[cmdc=!cmd:~6,-1!]
+$clear
+return
+}
+if["!cmd:~0,2!"=="if"] {
+[cmdc=!cmd:~3,-1!]
+$if
+return
+}
+if["!cmd:~0,6!"=="} elif"] {
+[cmdc=!cmd:~7,-1!]
+$elif
+return
+}
+if["!cmd:~0,3!"=="cmd"] {
+[cmdc=!cmd:~4,-1!]
+$batcmd
+return
+}
+if["!cmd:~0,5!"=="title"] {
+[cmdc=!cmd:~6,-1!]
+$title
+return
+}
+if["!cmd:~0,6!"=="define"] {
+[cmdc=!cmd:~7,-1!]
+$define
+return
+}
+if["!cmd:~0,5!"=="place"] {
+[cmdc=!cmd:~6,-1!]
+$place
+return
+}
+if["!cmd:~0,4!"=="goto"] {
+[cmdc=!cmd:~5,-1!]
+$goto
+return
+}
+if["!cmd:~0,1!"=="$"] {
+[cmdc=!cmd:~2,-1!]
+$callFunction
+return
+}
+if["!cmd:~0,6!"=="prompt"] {
+[cmdc=!cmd:~7,-1!]
+$prompt
+return
+}
+if["!cmd:~0,8!"=="download"] {
+[cmdc=!cmd:~9,-1!]
+$download
+return
+}
+if["!cmd:~0,3!"=="ren"] {
+[cmdc=!cmd:~4,-1!]
+$ren
+return
+}
+if["!cmd:~0,3!"=="del"] {
+[cmdc=!cmd:~4,-1!]
+$del
+return
+}
+if["!cmd:~0,6!"=="mkfile"] {
+[cmdc=!cmd:~7,-1!]
+$mkfile
+return
+}
+if["!cmd:~0,8!"=="mkfolder"] {
+[cmdc=!cmd:~9,-1!]
+$mkfolder
+return
+}
+if["!cmd:~0,4!"=="file"] {
+[cmdc=!cmd:~5,-1!]
+$file
+return
+}
+if["!cmd:~0,4!"=="play"] {
+[cmdc=!cmd:~5,-1!]
+$play
+return
+}
+if["!cmd:~0,5!"=="while"] {
+[cmdc=!cmd:~6,-1!]
+$while
+return
+}
+if["!cmd:~0,4!"=="incr"] {
+[cmdc=!cmd:~5,-1!]
+$incr
+return
+}
+if["!cmd:~0,6!"=="repeat"] {
+[cmdc=!cmd:~7,-1!]
+$repeat
+return
+}
+if["!cmd:~0,5!"=="break"] {
+[cmdc=!cmd:~6,-1!]
+$break
+return
+}
+if["!cmd:~0,6!"=="return"] {
+[cmdc=!cmd:~7,-1!]
+$return
+return
+}
+if["!cmd:~0,4!"=="open"] {
+[cmdc=!cmd:~5,-1!]
+$open
+return
+}
+if["!cmd:~0,4!"=="skey"] {
+[cmdc=!cmd:~5,-1!]
+$skey
+return
+}
+if["!cmd:~0,2!"=="ps"] {
+[cmdc=!cmd:~3,-1!]
+$ps
+return
+}
+if["!cmd:~0,5!"=="alert"] {
+[cmdc=!cmd:~6,-1!]
+$alert
+return
+}
+if["!cmd:~0,5!"=="color"] {
+[cmdc=!cmd:~6,-1!]
+$colour
+return
+}
+if["!cmd:~0,6!"=="colour"] {
+[cmdc=!cmd:~7,-1!]
+$colour
+return
+}
+if["!cmd:~0,7!"=="restart"] {
+[cmdc=!cmd:~8,-1!]
+$restart
+return
+}
+if["!cmd:~0,3!"=="out"] {
+[cmdc=!cmd:~4,-1!]
+$out
+return
+}
+if["!cmd:~0,8!"=="rewrite"] {
+[cmdc=!cmd:~9,-1!]
+$rewrite
+return
+}
+if["!cmd:~0,6!"=="choice"] {
+[cmdc=!cmd:~7,-1!]
+$choice
+return
+}
+if["!cmd:~0,1!"=="["] {
+[cmdc=!cmd:~2,-1!]
+$setQuick
+return
+}
+$abs } closeBracket
+$abs "} else {" else
 }
 define.function[choice] {
 	file.append[sys.bat] {
