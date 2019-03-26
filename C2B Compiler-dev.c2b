@@ -100,4 +100,25 @@ while[True] {
 	incr[line]
 	[cmd=~linebreak]
 	define.prompt[cmd="%line% | "]
+	if["!cmdc!"=="~linebreak"] {
+		$linebreak
+		goto[anotherLine]
+	}
+	$convertCommand
+	place[anotherLine]
+}
+define.function[linebreak] {
+	file.append[sys.bat] {
+		print[echo.]
+	}
+}
+define.function[cmd] {
+	if["!cmd:~0,%arg1%!"=="%arg2%"] {
+		$%arg3%
+	}
+define.function[convertCommand] {
+	while["!cmd:~0,1!"==" "] {
+		[cmd=!cmd:~1!]
+	}
+	$cmd 1 # comment
 	
