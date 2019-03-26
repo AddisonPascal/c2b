@@ -410,7 +410,7 @@ define.function[file] {
 		[cmdc=!cmd:~7,-1!]
 		$append
 	}
-	[cmdc=!cmdc:~0,-2]
+	[cmdc=!cmdc:~0,-2!]
 	file.append[sys.bat] {
 		print[set opened_file=!cmdc!]
 		print[(]
