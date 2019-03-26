@@ -111,9 +111,9 @@ define.function[linebreak] {
 	}
 }
 define.function[cmd] {
+	define.math[arg1m=%arg1%+1]
 	if["!cmd:~0,%arg1%!"=="%arg2%"] {
-		incr[arg1]
-		[cmdc=!cmd:~%arg1%,-1!]
+		[cmdc=!cmd:~%arg1m%,-1!]
 		$%arg3%
 	}
 }
