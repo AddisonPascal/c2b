@@ -403,7 +403,7 @@ define.function[skey] {
 }
 define.function[file] {
 	[cmd=!cmdc!]
-	if["!cmd:~0,5!"=="write"] ]{
+	if["!cmd:~0,5!"=="write"] {
 		[cmdc=!cmd:~6,-1!]
 		$write
 	} elif["!cmd:~0,6!"=="append"] {
