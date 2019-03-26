@@ -177,11 +177,25 @@ define.function[choice] {
 	}
 }
 define.function[rewrite] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			$sortColours
+		}
+	}
 	file.append[sys.bat] {
 		print[echo %%escRewrite%%!cmdc!]
 	}
 }
 define.function[out] {
+	cmd[echo %bracketString% | findstr A]
+	if[errorlevel 1] {
+		cmd[echo %bracketString% | findstr R]
+		if[errorlevel 1] {
+			$sortColours
+		}
+	}
 	file.append[sys.bat] {
 		print[echo ^| set /p ^^="!cmdc!"]
 	}
