@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.5.0. 
+rem Compiled by the c2b Compiler from c2b v0.5.1. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.5.1
-set version=0.5.1
+:: Version 0.5.3
+set version=0.5.3
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -146,7 +146,6 @@ echo(mshta javascript:alert("%%~1"^);close(^);
 echo(exit/b
 echo(:startOfFile
 )>%opened_file%
-echo.>sys.c2b
 if %1.==. (
 echo(%esc91m%Use c2b compiler by opening a c2b file with it%esc0m%
 pause>nul
@@ -195,7 +194,7 @@ set arg4=%~4
 set arg5=%~5
 set opened_file=sys.bat
 (
-echo(
+echo.
 )>>%opened_file%
 exit /b
 :endfunction1
@@ -875,7 +874,6 @@ echo(del !cmdc!
 )>>%opened_file%
 exit /b
 :endfunction31
- 
 goto endfunction32
 :ren
 set arg1=%~1
@@ -1321,7 +1319,6 @@ echo(exit
 )>>%opened_file%
 set new_location=%location:~0,-4%.bat"
 copy sys.bat %new_location%
-del sys.c2b
 del sys.bat
 title  
 endlocal
