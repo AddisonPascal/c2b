@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.5.1. 
+rem Compiled by the c2b Compiler from c2b v0.5.3. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -718,7 +718,7 @@ set cmdc=!cmdc:~0,-2!
 set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
-if "%whileWriting:~1,1%=="" (
+if "%whileWriting:~1,1%"=="" (
 set whileWriting=0%whileWriting%
 )
 set whileWrite=%whileWrite%%whileWriting%
