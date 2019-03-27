@@ -1,5 +1,6 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v04.0. 
+rem Compiled by the c2b Compiler from c2b v0.5.0. 
+set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
 set esc0m=[0m
@@ -39,7 +40,6 @@ set esc105m=[105m
 set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
-set esc=
 cls
 goto startOfFile
 :noWin10
@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.5.0
-set version=0.5.0
+:: Version 0.5.1
+set version=0.5.1
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -195,7 +195,7 @@ set arg4=%~4
 set arg5=%~5
 set opened_file=sys.bat
 (
-echo. 
+echo(
 )>>%opened_file%
 exit /b
 :endfunction1
@@ -875,7 +875,7 @@ echo(del !cmdc!
 )>>%opened_file%
 exit /b
 :endfunction31
-
+ 
 goto endfunction32
 :ren
 set arg1=%~1
@@ -1206,6 +1206,10 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
+if "!cmdc!"=="" (
+call :emptyPrint
+exit /b
+)
 echo %bracketString% | findstr A
 if not errorlevel 1 (
 goto rawPrint
@@ -1223,6 +1227,19 @@ echo(echo(!cmdc!
 exit /b
 :endfunction52
 goto endfunction53
+:emptyPrint
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
+(
+echo(echo.
+)>>%opened_file%
+exit /b
+:endfunction53
+goto endfunction54
 :end
 set arg1=%~1
 set arg2=%~2
@@ -1234,8 +1251,8 @@ set opened_file=sys.bat
 echo(exit
 )>>%opened_file%
 exit /b
-:endfunction53
-goto endfunction54
+:endfunction54
+goto endfunction55
 :wait
 set arg1=%~1
 set arg2=%~2
@@ -1248,8 +1265,8 @@ call :waitUser
 call :waitTime
 )
 exit /b
-:endfunction54
-goto endfunction55
+:endfunction55
+goto endfunction56
 :waitUser
 set arg1=%~1
 set arg2=%~2
@@ -1261,8 +1278,8 @@ set opened_file=sys.bat
 echo(pause^>nul
 )>>%opened_file%
 exit /b
-:endfunction55
-goto endfunction56
+:endfunction56
+goto endfunction57
 :waitTime
 set arg1=%~1
 set arg2=%~2
@@ -1274,8 +1291,8 @@ set opened_file=sys.bat
 echo(timeout /t !cmdc! /nobreak ^>nul
 )>>%opened_file%
 exit /b
-:endfunction56
-goto endfunction57
+:endfunction57
+goto endfunction58
 :clear
 set arg1=%~1
 set arg2=%~2
@@ -1287,8 +1304,8 @@ set opened_file=sys.bat
 echo(cls
 )>>%opened_file%
 exit /b
-:endfunction57
-goto endfunction58
+:endfunction58
+goto endfunction59
 :export
 set arg1=%~1
 set arg2=%~2
@@ -1312,8 +1329,8 @@ cls
 call %new_location%
 exit
 exit /b
-:endfunction58
-echo Program finished. 
+:endfunction59
+echo Program finished.
 echo Press any key to exit.
 pause>nul
 exit
