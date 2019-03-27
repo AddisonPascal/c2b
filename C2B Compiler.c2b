@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.5.2
-[version=0.5.2]
+# Version 0.5.3
+[version=0.5.3]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -77,7 +77,6 @@ file.write[sys.bat] {
     print[exit/b]
     print[:startOfFile]
 }
-mkfile[sys.c2b]
 if[%1.==.] {
 	print[#cUse c2b compiler by opening a c2b file with it]
 	wait[user]
@@ -769,7 +768,6 @@ define.function[export] {
 	}
 	[new_location=%location:~0,-4%.bat"]
 	cmd[copy sys.bat %new_location%]
-	del[sys.c2b]
 	del[sys.bat]
 	title[ ]
 	cmd[endlocal]
