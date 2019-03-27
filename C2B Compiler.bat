@@ -1,981 +1,1161 @@
-:: Made by Addison Djatschenko
-:: Version 0.4.0
 @echo off
-set version=04.0
+rem Compiled by the c2b Compiler from c2b v04.0. 
+ver | findstr /c:"Version 10"
+if errorlevel 1 goto noWin10
+set esc0m=[0m
+set esc1m=[1m
+set esc4m=[4m
+set esc7m=[7m
+set esc30m=[30m
+set esc31m=[31m
+set esc32m=[32m
+set esc33m=[33m
+set esc34m=[34m
+set esc35m=[35m
+set esc36m=[36m
+set esc37m=[37m
+set esc40m=[40m
+set esc41m=[41m
+set esc42m=[42m
+set esc43m=[43m
+set esc44m=[44m
+set esc45m=[45m
+set esc46m=[46m
+set esc47m=[47m
+set esc90m=[90m
+set esc91m=[91m
+set esc92m=[92m
+set esc93m=[93m
+set esc94m=[94m
+set esc95m=[95m
+set esc96m=[96m
+set esc97m=[97m
+set esc100m=[100m
+set esc101m=[101m
+set esc102m=[102m
+set esc103m=[103m
+set esc104m=[104m
+set esc105m=[105m
+set esc106m=[106m
+set esc107m=[107m
+set escRewrite=[F[0J
+set esc=
+cls
+goto startOfFile
+:noWin10
+set esc30m=^&powershell write-host -NoNewline -fore Black 
+set esc34m=^&powershell write-host -NoNewline -fore Blue 
+set esc32m=^&powershell write-host -NoNewline -fore Green 
+set esc36m=^&powershell write-host -NoNewline -fore Cyan 
+set esc31m=^&powershell write-host -NoNewline -fore Red 
+set esc35m=^&powershell write-host -NoNewline -fore Magenta 
+set esc33m=^&powershell write-host -NoNewline -fore Yellow 
+set esc37m=^&powershell write-host -NoNewline -fore White 
+set esc90m=^&powershell write-host -NoNewline -fore Gray 
+set esc94m=^&powershell write-host -NoNewline -fore Blue 
+set esc92m=^&powershell write-host -NoNewline -fore Green 
+set esc96m=^&powershell write-host -NoNewline -fore Cyan 
+set esc91m=^&powershell write-host -NoNewline -fore Red 
+set esc95m=^&powershell write-host -NoNewline -fore Magenta 
+set esc93m=^&powershell write-host -NoNewline -fore Yellow 
+set esc97m=^&powershell write-host -NoNewline -fore White 
+set esc0m=^&echo(
+cls
+goto startOfFile
+:alertJS
+mshta javascript:alert("%~1");close();
+exit/b
+:startOfFile
+:: c2b Compiler by Addison Djatschenko
+:: Version 0.5.0
+set version=0.5.0
 setlocal enabledelayedexpansion
-title c2b Compiler
+title C2B Compiler v%version%
 set whileCount=0
 set whileWrite=00
 set bracketString=
 set functionNumber=0
-goto start
-
-:start
-:: Starts making the compiled file
+set opened_file=sys.bat
 (
-@echo off
-echo @echo off
-echo rem Compiled by the c2b Compiler from c2b v%version%. 
-echo ver ^| findstr /c:"Version 10"
-echo if errorlevel 1 goto noWin10
-echo set esc0m=[0m
-echo set esc1m=[1m
-echo set esc4m=[4m
-echo set esc7m=[7m
-echo set esc30m=[30m
-echo set esc31m=[31m
-echo set esc32m=[32m
-echo set esc33m=[33m
-echo set esc34m=[34m
-echo set esc35m=[35m
-echo set esc36m=[36m
-echo set esc37m=[37m
-echo set esc40m=[40m
-echo set esc41m=[41m
-echo set esc42m=[42m
-echo set esc43m=[43m
-echo set esc44m=[44m
-echo set esc45m=[45m
-echo set esc46m=[46m
-echo set esc47m=[47m
-echo set esc90m=[90m
-echo set esc91m=[91m
-echo set esc92m=[92m
-echo set esc93m=[93m
-echo set esc94m=[94m
-echo set esc95m=[95m
-echo set esc96m=[96m
-echo set esc97m=[97m
-echo set esc100m=[100m
-echo set esc101m=[101m
-echo set esc102m=[102m
-echo set esc103m=[103m
-echo set esc104m=[104m
-echo set esc105m=[105m
-echo set esc106m=[106m
-echo set esc107m=[107m
-echo set escRewrite=[F[0J
-echo set esc=
-echo cls
-echo goto startOfFile
-echo :noWin10
-echo set esc30m=^^^&powershell write-host -NoNewline -fore Black 
-echo set esc34m=^^^&powershell write-host -NoNewline -fore Blue 
-echo set esc32m=^^^&powershell write-host -NoNewline -fore Green 
-echo set esc36m=^^^&powershell write-host -NoNewline -fore Cyan 
-echo set esc31m=^^^&powershell write-host -NoNewline -fore Red 
-echo set esc35m=^^^&powershell write-host -NoNewline -fore Magenta 
-echo set esc33m=^^^&powershell write-host -NoNewline -fore Yellow 
-echo set esc37m=^^^&powershell write-host -NoNewline -fore White 
-echo set esc90m=^^^&powershell write-host -NoNewline -fore Gray 
-echo set esc94m=^^^&powershell write-host -NoNewline -fore Blue 
-echo set esc92m=^^^&powershell write-host -NoNewline -fore Green 
-echo set esc96m=^^^&powershell write-host -NoNewline -fore Cyan 
-echo set esc91m=^^^&powershell write-host -NoNewline -fore Red 
-echo set esc95m=^^^&powershell write-host -NoNewline -fore Magenta 
-echo set esc93m=^^^&powershell write-host -NoNewline -fore Yellow 
-echo set esc97m=^^^&powershell write-host -NoNewline -fore White 
-echo set esc0m=^^^&echo(
-echo cls
-echo goto startOfFile
-echo :alertJS
-echo mshta javascript:alert("%%~1"^);close(^);
-echo exit/b
-echo :startOfFile
-)>sys.bat
-(
-@echo off
-)>sys.c2b
-set hasBeenOpened=false
-if %1. NEQ . goto opened
+echo(@echo off
+echo(rem Compiled by the c2b Compiler from c2b v%version%. 
+echo(set esc=%esc%
+echo(ver ^| findstr /c:"Version 10"
+echo(if errorlevel 1 goto noWin10
+echo(set esc0m=%esc%[0m
+echo(set esc1m=%esc%[1m
+echo(set esc4m=%esc%[4m
+echo(set esc7m=%esc%[7m
+echo(set esc30m=%esc%[30m
+echo(set esc31m=%esc%[31m
+echo(set esc32m=%esc%[32m
+echo(set esc33m=%esc%[33m
+echo(set esc34m=%esc%[34m
+echo(set esc35m=%esc%[35m
+echo(set esc36m=%esc%[36m
+echo(set esc37m=%esc%[37m
+echo(set esc40m=%esc%[40m
+echo(set esc41m=%esc%[41m
+echo(set esc42m=%esc%[42m
+echo(set esc43m=%esc%[43m
+echo(set esc44m=%esc%[44m
+echo(set esc45m=%esc%[45m
+echo(set esc46m=%esc%[46m
+echo(set esc47m=%esc%[47m
+echo(set esc90m=%esc%[90m
+echo(set esc91m=%esc%[91m
+echo(set esc92m=%esc%[92m
+echo(set esc93m=%esc%[93m
+echo(set esc94m=%esc%[94m
+echo(set esc95m=%esc%[95m
+echo(set esc96m=%esc%[96m
+echo(set esc97m=%esc%[97m
+echo(set esc100m=%esc%[100m
+echo(set esc101m=%esc%[101m
+echo(set esc102m=%esc%[102m
+echo(set esc103m=%esc%[103m
+echo(set esc104m=%esc%[104m
+echo(set esc105m=%esc%[105m
+echo(set esc106m=%esc%[106m
+echo(set esc107m=%esc%[107m
+echo(set escRewrite=%esc%[F%esc%[0J
+echo(cls
+echo(goto startOfFile
+echo(:noWin10
+echo(set esc30m=^^^&powershell write-host -NoNewline -fore Black 
+echo(set esc34m=^^^&powershell write-host -NoNewline -fore Blue 
+echo(set esc32m=^^^&powershell write-host -NoNewline -fore Green 
+echo(set esc36m=^^^&powershell write-host -NoNewline -fore Cyan 
+echo(set esc31m=^^^&powershell write-host -NoNewline -fore Red 
+echo(set esc35m=^^^&powershell write-host -NoNewline -fore Magenta 
+echo(set esc33m=^^^&powershell write-host -NoNewline -fore Yellow 
+echo(set esc37m=^^^&powershell write-host -NoNewline -fore White 
+echo(set esc90m=^^^&powershell write-host -NoNewline -fore Gray 
+echo(set esc94m=^^^&powershell write-host -NoNewline -fore Blue 
+echo(set esc92m=^^^&powershell write-host -NoNewline -fore Green 
+echo(set esc96m=^^^&powershell write-host -NoNewline -fore Cyan 
+echo(set esc91m=^^^&powershell write-host -NoNewline -fore Red 
+echo(set esc95m=^^^&powershell write-host -NoNewline -fore Magenta 
+echo(set esc93m=^^^&powershell write-host -NoNewline -fore Yellow 
+echo(set esc97m=^^^&powershell write-host -NoNewline -fore White 
+echo(set esc0m=^^^&echo(
+echo(cls
+echo(goto startOfFile
+echo(:alertJS
+echo(mshta javascript:alert("%%~1"^);close(^);
+echo(exit/b
+echo(:startOfFile
+)>%opened_file%
+echo.>sys.c2b
+if %1.==. (
+echo(%esc91m%Use c2b compiler by opening a c2b file with it%esc0m%
+pause>nul
+del sys.bat
+del sys.c2b
+exit
+)
 cls
-echo 1= Start new
-echo 2= Import from c2b
-echo 3= Exit
-set /p home= "-->"
-if %home%==2 goto importc2b
-if %home%==3 exit
-cls
-set fromFile=false
-set /p xt= "Script Name: "
-echo Type the program here:
-goto compile
-
-:er
-cls
-:: If the file is wrong
-echo Not existent!
-pause
-goto start
-
-:importc2b
-cls
-echo c2b Name (without .c2b):
-set /p xt= ""
-if not exist "%xt%.c2b" goto er
-:: Copies the script and a new line to the clipboard
-(
-type "%~dp0%xt%.c2b"
-echo.
-)|clip
-cls
-:right_click
-echo Automatically compiling...
-set skey_id=%random%
-(
-echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
-echo WshShell.SendKeys "^(v)"
-)>"%temp%\%skey_id%.vbs"
-start "" "%temp%\%skey_id%.vbs"
-set fromFile=true
-goto compile
-
-:opened
-set hasBeenOpened=true
 set location=%1
 (
 type %location%
 echo.
 )|clip
 del %location:~0,-4%.bat"
-goto right_click
-
-:compile
-:: From here on is the compiling system, it is fairly straightforward and adds comments to the compiled batch file. 
+echo(Automatically compiling...%esc0m%
+set skey_id=%random%
+(
+echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
+echo WshShell.SendKeys "^(v)"
+)>"%temp%\%skey_id%.vbs"
+start "" "%temp%\%skey_id%.vbs"
+:while01
+if 1 EQU 1 (
+goto whiling01
+) else (
+goto afterwhile01
+)
+:whiling01
 set /a line=%line%+1
 set cmd=~linebreak
-set /p cmd= "%line% | "
-if "!cmd!"=="~linebreak" goto linebreak
-if %hasBeenOpened%==true goto afterWrite
-(
-@echo off
-type "sys.c2b"
-echo !cmd!
-)>sys-2.c2b
-del "sys.c2b"
-ren "sys-2.c2b" "sys.c2b"
-:afterWrite
+set /p cmd="%line% | "
+if "!cmd!"=="~linebreak" (
+call :linebreak
+goto anotherLine
+)
 call :convertCommand
-:acb
-goto compile
-
+:anotherLine
+goto while01
+:afterwhile01
+goto endfunction1
 :linebreak
-if %hasBeenOpened%==true goto afterWriteBreak
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.c2b"
-echo.
-)>sys-2.c2b
-del "sys.c2b"
-ren "sys-2.c2b" "sys.c2b"
-:afterWriteBreak
-(
-@echo off
-type "sys.bat"
-echo.
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-goto acb
-
+echo. 
+)>>%opened_file%
+exit /b
+:endfunction1
+goto endfunction2
+:abs
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+if "!cmd!"=="%arg1%" (
+call :%arg2%
+)
+exit /b
+:endfunction2
+goto endfunction3
 :convertCommand
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+:while02
 if "!cmd:~0,1!"==" " (
+goto whiling02
+) else (
+goto afterwhile02
+)
+:whiling02
 set cmd=!cmd:~1!
-call :convertCommand
+goto while02
+:afterwhile02
+if "!cmd:~0,1!"=="#" (
+set cmdc=!cmd:~1,-1!
+call :comment
 exit /b
 )
-if "!cmd:~0,1!"=="	" (
-set cmd=!cmd:~1!
-call :convertCommand
+if "!cmd:~0,5!"=="print" (
+set cmdc=!cmd:~6,-1!
+call :print
 exit /b
 )
-set emptyPrint=false
-if "!cmd:~0,1!"=="#" call :comment
-if "!cmd:~0,7!"=="print[]" (
-set emptyPrint=true
-call :emptyPrint
+if "!cmd:~0,4!"=="wait" (
+set cmdc=!cmd:~5,-1!
+call :wait
+exit /b
 )
-if "!cmd:~0,6!"=="print[" (
-if %emptyPrint%==false call :echo
-)
-if "!cmd:~0,5!"=="wait[" call :wait
-if "!cmd!"=="end[file]" call :exit
-if "!cmd:~0,6!"=="export" call :compilend
-if "!cmd:~0,9!"=="disp[max]" call :dispmax
-if "!cmd:~0,5!"=="clear" call :cls
-if "!cmd:~0,3!"=="if[" call :if
-if "!cmd!"=="}" call :closeBracket
-if "!cmd!"=="} else {" call :else
-if "!cmd:~0,7!"=="} elif[" call :elif
-if "!cmd:~0,4!"=="cmd[" call :batchcmd
-if "!cmd:~0,6!"=="title[" call :title
-if "!cmd:~0,16!"=="define.function[" call :startFunction
-if "!cmd:~0,6!"=="place[" call :place
-if "!cmd:~0,5!"=="goto[" call :gotoPlace
-if "!cmd:~0,1!"=="$" call :callFunction
-if "!cmd:~0,12!"=="define.text[" call :defineText
-if "!cmd:~0,7!"=="define[" call :define
-if "!cmd:~0,14!"=="define.prompt[" call :setp
-if "!cmd:~0,7!"=="prompt[" call :prompt
-if "!cmd:~0,12!"=="define.math[" call :defineMath
-if "!cmd:~0,9!"=="download[" call :download
-if "!cmd:~0,4!"=="ren[" call :rename
-if "!cmd:~0,4!"=="del[" call :delete
-if "!cmd:~0,7!"=="mkfile[" call :mkfile
-if "!cmd:~0,9!"=="mkfolder[" call :mkfolder
-if "!cmd:~0,11!"=="file.write[" call :startFileWrite
-if "!cmd:~0,12!"=="file.append[" call :startFileAppend
-if "!cmd:~0,5!"=="play[" call :play
-if "!cmd:~0,6!"=="while[" call :startWhile
-if "!cmd:~0,5!"=="incr[" call :increment
-if "!cmd:~0,7!"=="repeat[" call :repeat
-if "!cmd:~0,5!"=="break" call :break
-if "!cmd:~0,6!"=="return" call :return
-if "!cmd:~0,1!"=="[" call :setQuick
-if "!cmd:~0,5!"=="open[" call :open_cmd
-if "!cmd:~0,5!"=="skey[" call :sendKey
-if "!cmd:~0,3!"=="ps[" call :ps
-if "!cmd:~0,6!"=="alert[" call :alert
-if "!cmd:~0,6!"=="color[" call :mainColor
-if "!cmd:~0,7!"=="colour[" call :mainColour
-if "!cmd:~0,7!"=="restart" call :restartProgram
-if "!cmd:~0,4!"=="out[" call :output
-if "!cmd:~0,8!"=="rewrite[" call :rewrite
-if "!cmd:~0,7!"=="choice[" call :choice
-exit /b
-
-:choice
-set cmdc=!cmd:~7,-1!
-(
-@echo off
-type sys.bat
-echo set choices=!cmdc!
-echo choice /c !cmdc! ^>nul
-echo set /a choiceNum=%%errorlevel%%-1
-echo call set choice=%%%%choices:~%%choiceNum%%,1%%%%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:rewrite
-set cmdc=!cmd:~8,-1!
-echo %bracketString% | findstr A
-if not errorlevel 1 goto rRaw
-echo %bracketString% | findstr R
-if not errorlevel 1 goto rRaw
-set cmdc=!cmdc:\n=^&echo(!
-set cmdc=!cmdc:@reset=%%esc0m%%!
-set cmdc=!cmdc:@r=%%esc0m%%!
-set cmdc=!cmdc:@bold=%%esc1m%%!
-set cmdc=!cmdc:@underline=%%esc4m%%!
-set cmdc=!cmdc:@u=%%esc4m%%!
-set cmdc=!cmdc:@inverse=%%esc7m%%!
-set cmdc=!cmdc:@i=%%esc7m%%!
-set cmdc=!cmdc:@0=%%esc40m%%#!
-set cmdc=!cmdc:@1=%%esc44m%%#!
-set cmdc=!cmdc:@2=%%esc42m%%#!
-set cmdc=!cmdc:@3=%%esc46m%%#!
-set cmdc=!cmdc:@4=%%esc41m%%#!
-set cmdc=!cmdc:@5=%%esc45m%%#!
-set cmdc=!cmdc:@6=%%esc43m%%#!
-set cmdc=!cmdc:@7=%%esc47m%%#!
-set cmdc=!cmdc:@8=%%esc100m%%#!
-set cmdc=!cmdc:@9=%%esc104m%%#!
-set cmdc=!cmdc:@a=%%esc102m%%#!
-set cmdc=!cmdc:@b=%%esc106m%%#!
-set cmdc=!cmdc:@c=%%esc101m%%#!
-set cmdc=!cmdc:@d=%%esc105m%%#!
-set cmdc=!cmdc:@e=%%esc103m%%#!
-set cmdc=!cmdc:@f=%%esc107m%%#!
-set cmdc=!cmdc:#0=%%esc30m%%!
-set cmdc=!cmdc:#1=%%esc34m%%!
-set cmdc=!cmdc:#2=%%esc32m%%!
-set cmdc=!cmdc:#3=%%esc36m%%!
-set cmdc=!cmdc:#4=%%esc31m%%!
-set cmdc=!cmdc:#5=%%esc35m%%!
-set cmdc=!cmdc:#6=%%esc33m%%!
-set cmdc=!cmdc:#7=%%esc37m%%!
-set cmdc=!cmdc:#8=%%esc90m%%!
-set cmdc=!cmdc:#9=%%esc94m%%!
-set cmdc=!cmdc:#a=%%esc92m%%!
-set cmdc=!cmdc:#b=%%esc96m%%!
-set cmdc=!cmdc:#c=%%esc91m%%!
-set cmdc=!cmdc:#d=%%esc95m%%!
-set cmdc=!cmdc:#e=%%esc93m%%!
-set cmdc=!cmdc:#f=%%esc97m%%!
-set cmdc=!cmdc!%%esc0m%%
-:rRaw
-(
-@echo off
-type sys.bat
-echo echo %%escRewrite%%!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:output
+if "!cmd:~0,3!"=="end" (
 set cmdc=!cmd:~4,-1!
-echo %bracketString% | findstr A
-if not errorlevel 1 goto oRaw
-echo %bracketString% | findstr R
-if not errorlevel 1 goto oRaw
-set cmdc=!cmdc:\n=^&echo(!
-set cmdc=!cmdc:@reset=%%esc0m%%!
-set cmdc=!cmdc:@r=%%esc0m%%!
-set cmdc=!cmdc:@bold=%%esc1m%%!
-set cmdc=!cmdc:@underline=%%esc4m%%!
-set cmdc=!cmdc:@u=%%esc4m%%!
-set cmdc=!cmdc:@inverse=%%esc7m%%!
-set cmdc=!cmdc:@i=%%esc7m%%!
-set cmdc=!cmdc:@0=%%esc40m%%#!
-set cmdc=!cmdc:@1=%%esc44m%%#!
-set cmdc=!cmdc:@2=%%esc42m%%#!
-set cmdc=!cmdc:@3=%%esc46m%%#!
-set cmdc=!cmdc:@4=%%esc41m%%#!
-set cmdc=!cmdc:@5=%%esc45m%%#!
-set cmdc=!cmdc:@6=%%esc43m%%#!
-set cmdc=!cmdc:@7=%%esc47m%%#!
-set cmdc=!cmdc:@8=%%esc100m%%#!
-set cmdc=!cmdc:@9=%%esc104m%%#!
-set cmdc=!cmdc:@a=%%esc102m%%#!
-set cmdc=!cmdc:@b=%%esc106m%%#!
-set cmdc=!cmdc:@c=%%esc101m%%#!
-set cmdc=!cmdc:@d=%%esc105m%%#!
-set cmdc=!cmdc:@e=%%esc103m%%#!
-set cmdc=!cmdc:@f=%%esc107m%%#!
-set cmdc=!cmdc:#0=%%esc30m%%!
-set cmdc=!cmdc:#1=%%esc34m%%!
-set cmdc=!cmdc:#2=%%esc32m%%!
-set cmdc=!cmdc:#3=%%esc36m%%!
-set cmdc=!cmdc:#4=%%esc31m%%!
-set cmdc=!cmdc:#5=%%esc35m%%!
-set cmdc=!cmdc:#6=%%esc33m%%!
-set cmdc=!cmdc:#7=%%esc37m%%!
-set cmdc=!cmdc:#8=%%esc90m%%!
-set cmdc=!cmdc:#9=%%esc94m%%!
-set cmdc=!cmdc:#a=%%esc92m%%!
-set cmdc=!cmdc:#b=%%esc96m%%!
-set cmdc=!cmdc:#c=%%esc91m%%!
-set cmdc=!cmdc:#d=%%esc95m%%!
-set cmdc=!cmdc:#e=%%esc93m%%!
-set cmdc=!cmdc:#f=%%esc97m%%!
-set cmdc=!cmdc!%%esc0m%%
-:oRaw
-if "!cmdc!"==" " goto spaceOutput
-(
-@echo off
-type sys.bat
-echo echo ^| set /p ^^="!cmdc!"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+call :end
 exit /b
-
-:spaceOutput
-(
-@echo off
-type sys.bat
-echo echo ^| set /p ^^="%%esc30m%%%%esc40m%%.%%esc0m%%"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:restartProgram
-(
-@echo off
-type sys.bat
-echo goto startOfFile
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:mainColour
+)
+if "!cmd:~0,6!"=="export" (
 set cmdc=!cmd:~7,-1!
-(
-@echo off
-type sys.bat
-echo color !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+call :export
 exit /b
-
-:mainColor
+)
+if "!cmd:~0,4!"=="disp" (
+set cmdc=!cmd:~5,-1!
+call :disp
+exit /b
+)
+if "!cmd:~0,5!"=="clear" (
 set cmdc=!cmd:~6,-1!
-(
-@echo off
-type sys.bat
-echo color !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+call :clear
 exit /b
-
+)
+if "!cmd:~0,2!"=="if" (
+set cmdc=!cmd:~3,-1!
+call :if
+exit /b
+)
+if "!cmd:~0,6!"=="} elif" (
+set cmdc=!cmd:~7,-1!
+call :elif
+exit /b
+)
+if "!cmd:~0,3!"=="cmd" (
+set cmdc=!cmd:~4,-1!
+call :batcmd
+exit /b
+)
+if "!cmd:~0,5!"=="title" (
+set cmdc=!cmd:~6,-1!
+call :title
+exit /b
+)
+if "!cmd:~0,6!"=="define" (
+set cmdc=!cmd:~7,-1!
+call :define
+exit /b
+)
+if "!cmd:~0,5!"=="place" (
+set cmdc=!cmd:~6,-1!
+call :place
+exit /b
+)
+if "!cmd:~0,4!"=="goto" (
+set cmdc=!cmd:~5,-1!
+call :goto
+exit /b
+)
+if "!cmd:~0,1!"=="$" (
+set cmdc=!cmd:~2,-1!
+call :callFunction
+exit /b
+)
+if "!cmd:~0,6!"=="prompt" (
+set cmdc=!cmd:~7,-1!
+call :prompt
+exit /b
+)
+if "!cmd:~0,8!"=="download" (
+set cmdc=!cmd:~9,-1!
+call :download
+exit /b
+)
+if "!cmd:~0,3!"=="ren" (
+set cmdc=!cmd:~4,-1!
+call :ren
+exit /b
+)
+if "!cmd:~0,3!"=="del" (
+set cmdc=!cmd:~4,-1!
+call :del
+exit /b
+)
+if "!cmd:~0,6!"=="mkfile" (
+set cmdc=!cmd:~7,-1!
+call :mkfile
+exit /b
+)
+if "!cmd:~0,8!"=="mkfolder" (
+set cmdc=!cmd:~9,-1!
+call :mkfolder
+exit /b
+)
+if "!cmd:~0,4!"=="file" (
+set cmdc=!cmd:~5,-1!
+call :file
+exit /b
+)
+if "!cmd:~0,4!"=="play" (
+set cmdc=!cmd:~5,-1!
+call :play
+exit /b
+)
+if "!cmd:~0,5!"=="while" (
+set cmdc=!cmd:~6,-1!
+call :while
+exit /b
+)
+if "!cmd:~0,4!"=="incr" (
+set cmdc=!cmd:~5,-1!
+call :incr
+exit /b
+)
+if "!cmd:~0,6!"=="repeat" (
+set cmdc=!cmd:~7,-1!
+call :repeat
+exit /b
+)
+if "!cmd:~0,5!"=="break" (
+set cmdc=!cmd:~6,-1!
+call :break
+exit /b
+)
+if "!cmd:~0,6!"=="return" (
+set cmdc=!cmd:~7,-1!
+call :return
+exit /b
+)
+if "!cmd:~0,4!"=="open" (
+set cmdc=!cmd:~5,-1!
+call :open
+exit /b
+)
+if "!cmd:~0,4!"=="skey" (
+set cmdc=!cmd:~5,-1!
+call :skey
+exit /b
+)
+if "!cmd:~0,2!"=="ps" (
+set cmdc=!cmd:~3,-1!
+call :ps
+exit /b
+)
+if "!cmd:~0,5!"=="alert" (
+set cmdc=!cmd:~6,-1!
+call :alert
+exit /b
+)
+if "!cmd:~0,5!"=="color" (
+set cmdc=!cmd:~6,-1!
+call :colour
+exit /b
+)
+if "!cmd:~0,6!"=="colour" (
+set cmdc=!cmd:~7,-1!
+call :colour
+exit /b
+)
+if "!cmd:~0,7!"=="restart" (
+set cmdc=!cmd:~8,-1!
+call :restart
+exit /b
+)
+if "!cmd:~0,3!"=="out" (
+set cmdc=!cmd:~4,-1!
+call :out
+exit /b
+)
+if "!cmd:~0,8!"=="rewrite" (
+set cmdc=!cmd:~9,-1!
+call :rewrite
+exit /b
+)
+if "!cmd:~0,6!"=="choice" (
+set cmdc=!cmd:~7,-1!
+call :choice
+exit /b
+)
+if "!cmd:~0,1!"=="[" (
+set cmdc=!cmd:~2,-1!
+call :setQuick
+exit /b
+)
+call :abs } closeBracket
+call :abs "} else {" else
+exit /b
+:endfunction3
+goto endfunction4
+:choice
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
+(
+echo(set choices=!cmdc!
+echo(choice /c !cmdc! ^>nul
+echo(set /a choiceNum=%%errorlevel%%-1
+echo(call set choice=%%%%choices:~%%choiceNum%%,1%%%%
+)>>%opened_file%
+exit /b
+:endfunction4
+goto endfunction5
+:rewrite
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo %bracketString% | findstr A
+if not errorlevel 1 (
+goto rawRewrite
+)
+echo %bracketString% | findstr R
+if not errorlevel 1 (
+goto rawRewrite
+)
+call :sortColours
+:rawRewrite
+set opened_file=sys.bat
+(
+echo(echo %%escRewrite%%!cmdc!
+)>>%opened_file%
+exit /b
+:endfunction5
+goto endfunction6
+:out
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo %bracketString% | findstr A
+if not errorlevel 1 (
+goto rawOut
+)
+echo %bracketString% | findstr R
+if not errorlevel 1 (
+goto rawOut
+)
+call :sortColours
+:rawOut
+set opened_file=sys.bat
+(
+echo(echo ^| set /p ^^="!cmdc!"
+)>>%opened_file%
+exit /b
+:endfunction6
+goto endfunction7
+:restart
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
+(
+echo(goto startOfFile
+)>>%opened_file%
+exit /b
+:endfunction7
+goto endfunction8
+:colour
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
+(
+echo(color !cmdc!
+)>>%opened_file%
+exit /b
+:endfunction8
+goto endfunction9
 :alert
-set cmdc=!cmd:~6,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmdc:"='!
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo call :alertJS "!cmdc!"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(call :alertJS "!cmdc!"
+)>>%opened_file%
 exit /b
-
+:endfunction9
+goto endfunction10
 :elif
-set cmdc=!cmd:~7,-3!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmdc:~0,-2!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo ^) else if !cmdc! (
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(^) else if !cmdc! (
+)>>%opened_file%
 exit /b
-
-:js
-set cmdc=!cmd:~3,-1!
-(
-@echo off
-type "sys.bat"
-echo call :runJS "!cmdc!"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:jsOld
-set cmdc=!cmd:~3,-1!
-(
-@echo off
-type "sys.bat"
-echo set skey_id=%%random%%
-echo (
-echo echo var console = {
-echo echo     info: function (s^^^){
-echo echo        WSH.Echo(s^^^);
-echo echo     }
-echo echo }
-echo echo var document = {
-echo echo     write : function (s^^^){
-echo echo         WSH.Echo(s^^^);
-echo echo     }
-echo echo }
-echo echo var alert = function (s^^^){
-echo echo     WSH.Echo(s^^^);
-echo echo }
-echo echo.
-echo ^)^>"%%temp%%\%%skey_id%%.js"
-echo echo !cmdc! ^>^>"%%temp%%\%%skey_id%%.js"
-echo start "" "%%temp%%\%%skey_id%%.js"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
+:endfunction10
+goto endfunction11
 :ps
-set cmdc=!cmd:~3,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmdc:"='!
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo powershell -Command "!cmdc!"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(powershell -Command "!cmdc!"
+)>>%opened_file%
 exit /b
-
+:endfunction11
+goto endfunction12
 :else
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ^) else (
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(^) else (
+)>>%opened_file%
 exit /b
-
-:sendKey
-set cmdc=!cmd:~5,-1!
+:endfunction12
+goto endfunction13
+:skey
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo set skey_id=%%random%%
-echo (
-echo echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)
-echo echo WshShell.SendKeys "!cmdc!"
-echo ^)^>"%%temp%%\%%skey_id%%.vbs"
-echo start "" "%%temp%%\%%skey_id%%.vbs"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set skey_id=%%random%%
+echo((
+echo(echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)
+echo(echo WshShell.SendKeys "!cmdc!"
+echo(^)^>"%%temp%%\%%skey_id%%.vbs"
+echo(start "" "%%temp%%\%%skey_id%%.vbs"
+)>>%opened_file%
 exit /b
-
-:startFileAppend
+:endfunction13
+goto endfunction14
+:file
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmd=!cmdc!
+if "!cmd:~0,5!"=="write" (
+set cmdc=!cmd:~6,-1!
+call :write
+) else if "!cmd:~0,6!"=="append" (
+set cmdc=!cmd:~7,-1!
+call :append
+)
+set cmdc=!cmdc:~0,-1!
+set opened_file=sys.bat
+(
+echo(set opened_file=!cmdc!
+echo((
+)>>%opened_file%
+exit /b
+:endfunction14
+goto endfunction15
+:append
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set bracketString=%bracketString%A
-set cmdc=!cmd:~12,-3!
-(
-@echo off
-type "sys.bat"
-echo set opened_file=!cmdc!
-echo (
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
 exit /b
-
-:startFileWrite
+:endfunction15
+goto endfunction16
+:write
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set bracketString=%bracketString%R
-set cmdc=!cmd:~11,-3!
-(
-@echo off
-type "sys.bat"
-echo set opened_file=!cmdc!
-echo (
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
 exit /b
-
-:open_cmd
-set cmdc=!cmd:~5,-1!
+:endfunction16
+goto endfunction17
+:open
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo start "" !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(start "" !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction17
+goto endfunction18
 :setQuick
-set cmdc=!cmd:~1,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmd:~1,1!!cmdc!
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo set !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction18
+goto endfunction19
 :return
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo exit /b
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(exit /b
+)>>%opened_file%
 exit /b
-
+:endfunction19
+goto endfunction20
 :break
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set whileWriting=%whileWrite:~-2,2%
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo goto afterwhile%whileWriting%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(goto afterwhile%whileWriting%
+)>>%opened_file%
 exit /b
-
+:endfunction20
+goto endfunction21
 :closeBracket
-if "%bracketString:~-1,1%"=="I" call :endif
-if "%bracketString:~-1,1%"=="W" call :endWhile
-if "%bracketString:~-1,1%"=="F" call :endFunction
-if "%bracketString:~-1,1%"=="R" call :endFileWrite
-if "%bracketString:~-1,1%"=="A" call :endFileAppend
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+if "%bracketString:~-1,1%"=="I" (
+call :endIf
+) else if "%bracketString:~-1,1%"=="W" (
+call :endWhile
+) else if "%bracketString:~-1,1%"=="F" (
+call :endFunction
+) else if "%bracketString:~-1,1%"=="R" (
+call :endWrite
+) else if "%bracketString:~-1,1%"=="A" (
+call :endAppend
+)
 set bracketString=%bracketString:~0,-1%
 exit /b
-
+:endfunction21
+goto endfunction22
 :repeat
-set cmdc=!cmd:~7,-3!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmdc:~0,-2!
 set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
-if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
+if "%whileWriting:~1,1%=="" (
+set whileWriting=0%whileWriting%
+)
 set whileWrite=%whileWrite%%whileWriting%
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo set repeatCounting%whileWriting%=-1
-echo call :while%whileWriting%
-echo goto afterwhile%whileWriting%
-echo :while%whileWriting%
-echo set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1
-echo if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%
-echo goto afterwhile%whileWriting%
-echo exit /b
-echo :whiling%whileWriting%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set repeatCounting%whileWriting%=-1
+echo(call :while%whileWriting%
+echo(goto afterwhile%whileWriting%
+echo(:while%whileWriting%
+echo(set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1
+echo(if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%
+echo(goto afterwhile%whileWriting%
+echo(exit /b
+echo(:whiling%whileWriting%
+)>>%opened_file%
 exit /b
-
-:increment
-set cmdc=!cmd:~5,-1!
+:endfunction22
+goto endfunction23
+:incr
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type sys.bat
-echo set /a !cmdc!=%%!cmdc!%%+1
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set /a !cmdc!=%%!cmdc!%%+1
+)>>%opened_file%
 exit /b
-
-:startWhile
-set cmdc=!cmd:~6,-3!
+:endfunction23
+goto endfunction24
+:while
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmdc:~0,-2!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
-set cmdc=!cmdc:True=1 EQU 1!
 set cmdc=!cmdc:true=1 EQU 1!
+set cmdc=!cmdc:True=1 EQU 1!
 set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
-if "%whileWriting:~1,1%"=="" set whileWriting=0%whileWriting%
+if "%whileWriting:~1,1%"=="" (
+set whileWriting=0%whileWriting%
+)
 set whileWrite=%whileWrite%%whileWriting%
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo :while%whileWriting%
-echo if !cmdc! (
-echo goto whiling%whileWriting%
-echo ^) else (
-echo goto afterwhile%whileWriting%
-echo ^)
-echo :whiling%whileWriting%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(:while%whileWriting%
+echo(if !cmdc! (
+echo(goto whiling%whileWriting%
+echo(^) else (
+echo(goto afterwhile%whileWriting%
+echo(^)
+echo(:whiling%whileWriting%
+)>>%opened_file%
 exit /b
-
+:endfunction24
+goto endfunction25
 :endWhile
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set whileWriting=%whileWrite:~-2,2%
 set whileWrite=%whileWrite:~0,-2%
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo goto while%whileWriting%
-echo :afterwhile%whileWriting%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(goto while%whileWriting%
+echo(:afterwhile%whileWriting%
+)>>%opened_file%
 exit /b
-
+:endfunction25
+goto endfunction26
 :play
-set cmdc=!cmd:~5,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo powershell [console]::Beep(!cmdc!^)
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(powershell [console]::Beep(!cmdc!^)
+)>>%opened_file%
 exit /b
-
-:endFileWrite
+:endfunction26
+goto endfunction27
+:endWrite
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ^)^>%%opened_file%%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(^)^>%%opened_file%%
+)>>%opened_file%
 exit /b
-
-:endFileAppend
+:endfunction27
+goto endfunction28
+:endAppend
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ^)^>^>%%opened_file%%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(^)^>^>%%opened_file%%
+)>>%opened_file%
 exit /b
-
+:endfunction28
+goto endfunction29
 :mkfolder
-set cmdc=!cmd:~9,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo md !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(md !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction29
+goto endfunction30
 :mkfile
-set cmdc=!cmd:~7,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo echo.^>!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(echo.^>!cmdc!
+)>>%opened_file%
 exit /b
-
-:delete
-set cmdc=!cmd:~4,-1!
+:endfunction30
+goto endfunction31
+:del
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo del !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(del !cmdc!
+)>>%opened_file%
 exit /b
+:endfunction31
 
-:rename
-set cmdc=!cmd:~4,-1!
+goto endfunction32
+:ren
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ren !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(ren !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction32
+goto endfunction33
 :download
-set cmdc=!cmd:~9,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
+)>>%opened_file%
 exit /b
-
+:endfunction33
+goto endfunction34
 :prompt
-set cmdc=!cmd:~7,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo set /p !cmdc!=""
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set /p !cmdc!=""
+)>>%opened_file%
 exit /b
-
-:setp
-set cmdc=!cmd:~14,-1!
-(
-@echo off
-type "sys.bat"
-echo set /p !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:defineMath
-set cmdc=!cmd:~12,-1!
-(
-@echo off
-type "sys.bat"
-echo set /a !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
-:defineText
-set cmdc=!cmd:~12,-1!
-(
-@echo off
-type "sys.bat"
-echo set !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-exit /b
-
+:endfunction34
+goto endfunction35
 :define
-set cmdc=!cmd:~7,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+if "!cmdc:~0,4!"=="text" (
+call :defineText
+) else if "!cmdc:~0,6!"=="prompt" (
+call :definePrompt
+) else if "!cmdc:~0,4!"=="math" (
+call :defineMath
+) else if "!cmdc:~0,8!"=="function" (
+call :defineFunction
+) else (
+call :plainDefine
+)
+exit /b
+:endfunction35
+goto endfunction36
+:definePrompt
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmd:~14,-1!
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo set !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(set /p !cmdc!
+)>>%opened_file%
 exit /b
-
-:parseGetColumn
-set /a parsingColumn=%parsingColumn%+1
-set parsedCharacter=.false.
-call set parsedCharacter=!!cmd:~%parsingColumn%,1!!
-if "!parsedCharacter!"=="!parsingLookFor!" (
-set parsingResult=true
+:endfunction36
+goto endfunction37
+:defineMath
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmd:~12,-1!
+set opened_file=sys.bat
+(
+echo(set /a !cmdc!
+)>>%opened_file%
 exit /b
-)
-if "!parsedCharacter!"==".false." (
-set parsingResult=false
+:endfunction37
+goto endfunction38
+:defineText
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmd:~12,-1!
+set opened_file=sys.bat
+(
+echo(set !cmdc!
+)>>%opened_file%
 exit /b
-)
-call :parseGetColumn
+:endfunction38
+goto endfunction39
+:plainDefine
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
+(
+echo(set !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction39
+goto endfunction40
 :callFunction
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmd:~1!
-::set cmdd=.false.
-::set parsingColumn=-1
-::set parsedCharacter=.false.
-::set parsingLookFor=,
-::set parsingResult=no
-::call :parseGetColumn
-::set /a parsingColumn=%parsingColumn%+1
-::if %parsingResult%==true (
-::call set cmdd=!!cmd:~%parsingColumn%!!
-::)
-::set /a parsingColumn=%parsingColumn%-2
-::call set cmdc=!!cmd:~1,%parsingColumn%!!
-
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-::echo set arg1=!cmdd!
-echo call :!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(call :!cmdc!
+)>>%opened_file%
 exit /b
-
-:gotoPlace
-set cmdc=!cmd:~5,-1!
+:endfunction40
+goto endfunction41
+:goto
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo goto !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(goto !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction41
+goto endfunction42
 :place
-set cmdc=!cmd:~6,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo :!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(:!cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction42
+goto endfunction43
 :title
-set cmdc=!cmd:~6,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo title !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(title !cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction43
+goto endfunction44
 :comment
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmd:~1!
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ::!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(::!cmdc!
+)>>%opened_file%
 exit /b
-
+:endfunction44
+goto endfunction45
 :endFunction
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo exit /b
-echo :endfunction%functionNumber%
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(exit /b
+echo(:endfunction%functionNumber%
+)>>%opened_file%
 exit /b
-
-:startFunction
+:endfunction45
+goto endfunction46
+:defineFunction
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set bracketString=%bracketString%F
 set /a functionNumber=%functionNumber%+1
 set cmdc=!cmd:~16,-3!
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo goto endfunction%functionNumber%
-echo :!cmdc!
-echo set arg1=%%~1
-echo set arg2=%%~2
-echo set arg3=%%~3
-echo set arg4=%%~4
-echo set arg5=%%~5
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(goto endfunction%functionNumber%
+echo(:!cmdc!
+echo(set arg1=%%~1
+echo(set arg2=%%~2
+echo(set arg3=%%~3
+echo(set arg4=%%~4
+echo(set arg5=%%~5
+)>>%opened_file%
 exit /b
-
-:batchcmd
-set cmdc=!cmd:~4,-1!
+:endfunction46
+goto endfunction47
+:batcmd
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo !cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(!cmdc!
+)>>%opened_file%
 exit /b
-
-:endif
+:endfunction47
+goto endfunction48
+:endIf
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo ^)
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(^)
+)>>%opened_file%
 exit /b
-
+:endfunction48
+goto endfunction49
 :if
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmd:~3,-3!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
 set bracketString=%bracketString%I
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo if !cmdc! ^(
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(if !cmdc! ^(
+)>>%opened_file%
 exit /b
-
-:dispmax
+:endfunction49
+goto endfunction50
+:disp
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo mode 1000
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(mode 1000
+)>>%opened_file%
 exit /b
-
-:echo
-set cmdc=!cmd:~6,-1!
-echo %bracketString% | findstr A
-if not errorlevel 1 goto echoRaw
-echo %bracketString% | findstr R
-if not errorlevel 1 goto echoRaw
+:endfunction50
+goto endfunction51
+:sortColours
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 set cmdc=!cmdc:\n=^&echo(!
 set cmdc=!cmdc:@reset=%%esc0m%%!
 set cmdc=!cmdc:@r=%%esc0m%%!
@@ -1017,134 +1197,123 @@ set cmdc=!cmdc:#d=%%esc95m%%!
 set cmdc=!cmdc:#e=%%esc93m%%!
 set cmdc=!cmdc:#f=%%esc97m%%!
 set cmdc=!cmdc!%%esc0m%%
-:echoRaw
-(
-@echo off
-type "sys.bat"
-echo echo(!cmdc!
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
 exit /b
-
-:emptyPrint
+:endfunction51
+goto endfunction52
+:print
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo %bracketString% | findstr A
+if not errorlevel 1 (
+goto rawPrint
+)
+echo %bracketString% | findstr R
+if not errorlevel 1 (
+goto rawPrint
+)
+call :sortColours
+:rawPrint
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo echo. 
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(echo(!cmdc!
+)>>%opened_file%
 exit /b
-
-:exit
+:endfunction52
+goto endfunction53
+:end
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-type "sys.bat"
-echo exit
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(exit
+)>>%opened_file%
 exit /b
-
+:endfunction53
+goto endfunction54
 :wait
-set cmdc=!cmd:~5,-1!
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
 if "!cmdc!"=="user" (
 call :waitUser
-exit /b
+) else (
+call :waitTime
 )
-(
-@echo off
-type "sys.bat"
-echo timeout /t !cmdc! /nobreak ^>nul
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
 exit /b
-
+:endfunction54
+goto endfunction55
 :waitUser
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo pause^>nul
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(pause^>nul
+)>>%opened_file%
 exit /b
-
-:cls
+:endfunction55
+goto endfunction56
+:waitTime
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-type "sys.bat"
-echo cls
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
+echo(timeout /t !cmdc! /nobreak ^>nul
+)>>%opened_file%
 exit /b
-
-:compilend
-:: End of compiling
+:endfunction56
+goto endfunction57
+:clear
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-type "sys.bat"
-echo echo Program finished. 
-echo echo Press any key to exit.
-echo pause^>nul
-echo exit
-)>sys2.bat
-del "sys.bat"
-ren "sys2.bat" "sys.bat"
-:: Clears the clipboard
+echo(cls
+)>>%opened_file%
+exit /b
+:endfunction57
+goto endfunction58
+:export
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set opened_file=sys.bat
 (
-@echo off
-)|clip
-:: Renames the compiled file into the name the user entered
-if %hasBeenOpened%==true goto endOpen
-(
-@echo off
-type "sys.c2b"
-)>sys-2.c2b
-del "sys.c2b"
-ren "sys-2.c2b" "sys.c2b"
-del "compiled_%xt%.bat"
-del "%xt%.c2b"
-ren "sys.bat" "compiled_%xt%.bat"
-ren "sys.c2b" "%xt%.c2b"
-echo. 
-cls
-:ec
-set ce=nul
-echo Compiled!
-echo. 
-echo. 
-:: Gives a few options. The user can edit in Notepad (or anything), a feature I added recently with the copy/paste idea. 
-echo 1= Run program
-echo 2= Open C2B in notepad
-echo 3= Exit
-set /p ce= "-->"
-if "%ce%"=="1" goto rp
-if "%ce%"=="3" exit
-if "%ce%"=="2" (
-start notepad "%~dp0%xt%.c2b"
-cls
-goto ec
-)
-cls
-goto ec
-
-:rp
-endlocal
-cls
-:: Runs program
-call "compiled_%xt%.bat"
-cls
-goto ec
-
-:endOpen
+echo(echo Program finished.
+echo(echo Press any key to exit.
+echo(pause^>nul
+echo(exit
+)>>%opened_file%
 set new_location=%location:~0,-4%.bat"
 copy sys.bat %new_location%
-del sys.bat
 del sys.c2b
-title 
+del sys.bat
+title  
 endlocal
 cls
 call %new_location%
+exit
+exit /b
+:endfunction58
+echo Program finished. 
+echo Press any key to exit.
+pause>nul
 exit
