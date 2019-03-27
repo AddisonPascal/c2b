@@ -1,5 +1,6 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v04.0. 
+rem Compiled by the c2b Compiler from c2b v0.5.3. 
+set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
 set esc0m=[0m
@@ -39,7 +40,6 @@ set esc105m=[105m
 set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
-set esc=
 cls
 goto startOfFile
 :noWin10
@@ -67,9 +67,7 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 echo(Hello, World!%esc0m%
-pause>nul
-exit
-echo Program finished. 
+echo Program finished.
 echo Press any key to exit.
 pause>nul
 exit
