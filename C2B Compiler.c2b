@@ -1,6 +1,5 @@
 # c2b Compiler by Addison Djatschenko
 # Version 0.5.0
-wait[user]
 [version=0.5.0]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
@@ -760,9 +759,10 @@ define.function[export] {
 		print[pause^>nul]
 		print[exit]
 	}
-	[newLocation=%location:~0,-4%.bat"]
-	ren[sys.bat %new_location%]
+	[new_location=%location:~0,-4%.bat"]
+	cmd[copy sys.bat %new_location%]
 	del[sys.c2b]
+	del[sys.bat]
 	title[ ]
 	cmd[endlocal]
 	clear
