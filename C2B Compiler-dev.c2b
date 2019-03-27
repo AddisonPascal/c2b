@@ -99,7 +99,7 @@ while[True] {
 	incr[line]
 	[cmd=~linebreak]
 	define.prompt[cmd="%line% | "]
-	if["!cmdc!"=="~linebreak"] {
+	if["!cmd!"=="~linebreak"] {
 		$linebreak
 		goto[anotherLine]
 	}
@@ -108,7 +108,7 @@ while[True] {
 }
 define.function[linebreak] {
 	file.append[sys.bat] {
-		print[echo.]
+		print[]
 	}
 }
 define.function[abs] {
