@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.5.1
-[version=0.5.1]
+# Version 0.5.2
+[version=0.5.2]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -544,7 +544,6 @@ define.function[del] {
 		print[del !cmdc!]
 	}
 }
-
 define.function[ren] {
 	file.append[sys.bat] {
 		print[ren !cmdc!]
