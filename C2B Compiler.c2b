@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.5.0
-[version=0.5.0]
+# Version 0.5.1
+[version=0.5.1]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -711,6 +711,10 @@ define.function[sortColours] {
 	[cmdc=!cmdc!%%esc0m%%]
 }
 define.function[print] {
+	if["!cmdc!"==""] {
+		$emptyPrint
+		return
+	}
 	cmd[echo %bracketString% | findstr A]
 	if[not errorlevel 1] {
 		goto[rawPrint]
@@ -723,6 +727,11 @@ define.function[print] {
 	place[rawPrint]
 	file.append[sys.bat] {
 		print[echo(!cmdc!]
+	}
+}
+define.function[emptyPrint] {
+	file.append[sys.bat] {
+		print[echo.]
 	}
 }
 define.function[end] {
