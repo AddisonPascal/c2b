@@ -169,6 +169,10 @@ open[file.txt]
 open[notepad]
 open[http://google.com]
 
+# Stops a process or application:	stop[app.exe] or close[app.exe]
+stop[notepad.exe]
+close[cmd.exe]
+
 # Else statement: if the previous if statement wasn't true: if[condition] {
 #															content
 #															} else {

@@ -308,6 +308,16 @@ if["!cmd:~0,6!"=="choice"] {
 $choice
 return
 }
+if["!cmd:~0,4!"=="stop"] {
+[cmdc=!cmd:~5,-1!]
+$stop
+return
+}
+if["!cmd:~0,5!"=="close"] {
+[cmdc=!cmd:~6,-1!]
+$stop
+return
+}
 if["!cmd:~0,1!"=="["] {
 [cmdc=!cmd:~2,-1!]
 $setQuick
@@ -315,6 +325,11 @@ return
 }
 $abs } closeBracket
 $abs "} else {" else
+}
+define.function[stop] {
+	file.append[sys.bat] {
+		print[taskkill /im !cmdc! /f]
+	}
 }
 define.function[choice] {
 	file.append[sys.bat] {
