@@ -472,11 +472,11 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-echo %bracketString% | findstr A
+echo %bracketString% | findstr A >nul
 if not errorlevel 1 (
 goto rawRewrite
 )
-echo %bracketString% | findstr R
+echo %bracketString% | findstr R >nul
 if not errorlevel 1 (
 goto rawRewrite
 )
@@ -495,11 +495,11 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-echo %bracketString% | findstr A
+echo %bracketString% | findstr A >nul
 if not errorlevel 1 (
 goto rawOut
 )
-echo %bracketString% | findstr R
+echo %bracketString% | findstr R >nul
 if not errorlevel 1 (
 goto rawOut
 )
@@ -1231,11 +1231,11 @@ if "!cmdc!"=="" (
 call :emptyPrint
 exit /b
 )
-echo %bracketString% | findstr A
+echo %bracketString% | findstr A >nul
 if not errorlevel 1 (
 goto rawPrint
 )
-echo %bracketString% | findstr R
+echo %bracketString% | findstr R >nul
 if not errorlevel 1 (
 goto rawPrint
 )

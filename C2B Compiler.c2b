@@ -340,11 +340,11 @@ define.function[choice] {
 	}
 }
 define.function[rewrite] {
-	cmd[echo %bracketString% | findstr A]
+	cmd[echo %bracketString% | findstr A >nul]
 	if[not errorlevel 1] {
 		goto[rawRewrite]
 	}
-	cmd[echo %bracketString% | findstr R]
+	cmd[echo %bracketString% | findstr R >nul]
 	if[not errorlevel 1] {
 		goto[rawRewrite]
 	}
@@ -355,11 +355,11 @@ define.function[rewrite] {
 	}
 }
 define.function[out] {
-	cmd[echo %bracketString% | findstr A]
+	cmd[echo %bracketString% | findstr A >nul]
 	if[not errorlevel 1] {
 		goto[rawOut]
 	}
-	cmd[echo %bracketString% | findstr R]
+	cmd[echo %bracketString% | findstr R >nul]
 	if[not errorlevel 1] {
 		goto[rawOut]
 	}
@@ -728,11 +728,11 @@ define.function[print] {
 		$emptyPrint
 		return
 	}
-	cmd[echo %bracketString% | findstr A]
+	cmd[echo %bracketString% | findstr A >nul]
 	if[not errorlevel 1] {
 		goto[rawPrint]
 	}
-	cmd[echo %bracketString% | findstr R]
+	cmd[echo %bracketString% | findstr R >nul]
 	if[not errorlevel 1] {
 		goto[rawPrint]
 	}
