@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.5.3
-[version=0.5.3]
+# Version 0.6.0
+[version=0.6.0]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]

@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.5.3
-set version=0.5.3
+:: Version 0.6.0
+set version=0.6.0
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
