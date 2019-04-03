@@ -110,7 +110,7 @@ define.function[linebreak] {
 	}
 }
 define.function[abs] {
-	if["!cmd!"=="%arg1%"] {
+	if[/i "!cmd!"=="%arg1%"] {
 		$%arg2%
 	}
 }
@@ -123,67 +123,67 @@ if["!cmd:~0,1!"=="#"] {
 $comment
 return
 }
-if["!cmd:~0,5!"=="print"] {
+if[/i "!cmd:~0,5!"=="print"] {
 [cmdc=!cmd:~6,-1!]
 $print
 return
 }
-if["!cmd:~0,4!"=="wait"] {
+if[/i "!cmd:~0,4!"=="wait"] {
 [cmdc=!cmd:~5,-1!]
 $wait
 return
 }
-if["!cmd:~0,3!"=="end"] {
+if[/i "!cmd:~0,3!"=="end"] {
 [cmdc=!cmd:~4,-1!]
 $end
 return
 }
-if["!cmd:~0,6!"=="export"] {
+if[/i "!cmd:~0,6!"=="export"] {
 [cmdc=!cmd:~7,-1!]
 $export
 return
 }
-if["!cmd:~0,4!"=="disp"] {
+if[/i "!cmd:~0,4!"=="disp"] {
 [cmdc=!cmd:~5,-1!]
 $disp
 return
 }
-if["!cmd:~0,5!"=="clear"] {
+if[/i "!cmd:~0,5!"=="clear"] {
 [cmdc=!cmd:~6,-1!]
 $clear
 return
 }
-if["!cmd:~0,2!"=="if"] {
+if[/i "!cmd:~0,2!"=="if"] {
 [cmdc=!cmd:~3,-1!]
 $if
 return
 }
-if["!cmd:~0,6!"=="} elif"] {
+if[/i "!cmd:~0,6!"=="} elif"] {
 [cmdc=!cmd:~7,-1!]
 $elif
 return
 }
-if["!cmd:~0,3!"=="cmd"] {
+if[/i "!cmd:~0,3!"=="cmd"] {
 [cmdc=!cmd:~4,-1!]
 $batcmd
 return
 }
-if["!cmd:~0,5!"=="title"] {
+if[/i "!cmd:~0,5!"=="title"] {
 [cmdc=!cmd:~6,-1!]
 $title
 return
 }
-if["!cmd:~0,6!"=="define"] {
+if[/i "!cmd:~0,6!"=="define"] {
 [cmdc=!cmd:~7,-1!]
 $define
 return
 }
-if["!cmd:~0,5!"=="place"] {
+if[/i "!cmd:~0,5!"=="place"] {
 [cmdc=!cmd:~6,-1!]
 $place
 return
 }
-if["!cmd:~0,4!"=="goto"] {
+if[/i "!cmd:~0,4!"=="goto"] {
 [cmdc=!cmd:~5,-1!]
 $goto
 return
@@ -193,127 +193,127 @@ if["!cmd:~0,1!"=="$"] {
 $callFunction
 return
 }
-if["!cmd:~0,6!"=="prompt"] {
+if[/i "!cmd:~0,6!"=="prompt"] {
 [cmdc=!cmd:~7,-1!]
 $prompt
 return
 }
-if["!cmd:~0,8!"=="download"] {
+if[/i "!cmd:~0,8!"=="download"] {
 [cmdc=!cmd:~9,-1!]
 $download
 return
 }
-if["!cmd:~0,3!"=="ren"] {
+if[/i "!cmd:~0,3!"=="ren"] {
 [cmdc=!cmd:~4,-1!]
 $ren
 return
 }
-if["!cmd:~0,3!"=="del"] {
+if[/i "!cmd:~0,3!"=="del"] {
 [cmdc=!cmd:~4,-1!]
 $del
 return
 }
-if["!cmd:~0,6!"=="mkfile"] {
+if[/i "!cmd:~0,6!"=="mkfile"] {
 [cmdc=!cmd:~7,-1!]
 $mkfile
 return
 }
-if["!cmd:~0,8!"=="mkfolder"] {
+if[/i "!cmd:~0,8!"=="mkfolder"] {
 [cmdc=!cmd:~9,-1!]
 $mkfolder
 return
 }
-if["!cmd:~0,4!"=="file"] {
+if[/i "!cmd:~0,4!"=="file"] {
 [cmdc=!cmd:~5,-1!]
 $file
 return
 }
-if["!cmd:~0,4!"=="play"] {
+if[/i "!cmd:~0,4!"=="play"] {
 [cmdc=!cmd:~5,-1!]
 $play
 return
 }
-if["!cmd:~0,5!"=="while"] {
+if[/i "!cmd:~0,5!"=="while"] {
 [cmdc=!cmd:~6,-1!]
 $while
 return
 }
-if["!cmd:~0,4!"=="incr"] {
+if[/i "!cmd:~0,4!"=="incr"] {
 [cmdc=!cmd:~5,-1!]
 $incr
 return
 }
-if["!cmd:~0,6!"=="repeat"] {
+if[/i "!cmd:~0,6!"=="repeat"] {
 [cmdc=!cmd:~7,-1!]
 $repeat
 return
 }
-if["!cmd:~0,5!"=="break"] {
+if[/i "!cmd:~0,5!"=="break"] {
 [cmdc=!cmd:~6,-1!]
 $break
 return
 }
-if["!cmd:~0,6!"=="return"] {
+if[/i "!cmd:~0,6!"=="return"] {
 [cmdc=!cmd:~7,-1!]
 $return
 return
 }
-if["!cmd:~0,4!"=="open"] {
+if[/i "!cmd:~0,4!"=="open"] {
 [cmdc=!cmd:~5,-1!]
 $open
 return
 }
-if["!cmd:~0,4!"=="skey"] {
+if[/i "!cmd:~0,4!"=="skey"] {
 [cmdc=!cmd:~5,-1!]
 $skey
 return
 }
-if["!cmd:~0,2!"=="ps"] {
+if[/i "!cmd:~0,2!"=="ps"] {
 [cmdc=!cmd:~3,-1!]
 $ps
 return
 }
-if["!cmd:~0,5!"=="alert"] {
+if[/i "!cmd:~0,5!"=="alert"] {
 [cmdc=!cmd:~6,-1!]
 $alert
 return
 }
-if["!cmd:~0,5!"=="color"] {
+if[/i "!cmd:~0,5!"=="color"] {
 [cmdc=!cmd:~6,-1!]
 $colour
 return
 }
-if["!cmd:~0,6!"=="colour"] {
+if[/i "!cmd:~0,6!"=="colour"] {
 [cmdc=!cmd:~7,-1!]
 $colour
 return
 }
-if["!cmd:~0,7!"=="restart"] {
+if[/i "!cmd:~0,7!"=="restart"] {
 [cmdc=!cmd:~8,-1!]
 $restart
 return
 }
-if["!cmd:~0,3!"=="out"] {
+if[/i "!cmd:~0,3!"=="out"] {
 [cmdc=!cmd:~4,-1!]
 $out
 return
 }
-if["!cmd:~0,8!"=="rewrite"] {
+if[/i "!cmd:~0,8!"=="rewrite"] {
 [cmdc=!cmd:~9,-1!]
 $rewrite
 return
 }
-if["!cmd:~0,6!"=="choice"] {
+if[/i "!cmd:~0,6!"=="choice"] {
 [cmdc=!cmd:~7,-1!]
 $choice
 return
 }
-if["!cmd:~0,4!"=="stop"] {
+if[/i "!cmd:~0,4!"=="stop"] {
 [cmdc=!cmd:~5,-1!]
 $stop
 return
 }
-if["!cmd:~0,5!"=="close"] {
+if[/i "!cmd:~0,5!"=="close"] {
 [cmdc=!cmd:~6,-1!]
 $stop
 return
