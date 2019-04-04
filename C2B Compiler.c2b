@@ -416,10 +416,10 @@ define.function[skey] {
 }
 define.function[file] {
 	[cmd=!cmdc!]
-	if["!cmd:~0,5!"=="write"] {
+	if[/i "!cmd:~0,5!"=="write"] {
 		[cmdc=!cmd:~6,-1!]
 		$write
-	} elif["!cmd:~0,6!"=="append"] {
+	} elif[/i "!cmd:~0,6!"=="append"] {
 		[cmdc=!cmd:~7,-1!]
 		$append
 	}
@@ -574,13 +574,13 @@ define.function[prompt] {
 	}
 }
 define.function[define] {
-	if["!cmdc:~0,4!"=="text"] {
+	if[/i "!cmdc:~0,4!"=="text"] {
 		$defineText
-	} elif["!cmdc:~0,6!"=="prompt"] {
+	} elif[/i "!cmdc:~0,6!"=="prompt"] {
 		$definePrompt
-	} elif["!cmdc:~0,4!"=="math"] {
+	} elif[/i "!cmdc:~0,4!"=="math"] {
 		$defineMath
-	} elif["!cmdc:~0,8!"=="function"] {
+	} elif[/i "!cmdc:~0,8!"=="function"] {
 		$defineFunction
 	} else {
 		$plainDefine
