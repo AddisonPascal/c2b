@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.5.3. 
+rem Compiled by the c2b Compiler from c2b v0.6.0. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.6.0
-set version=0.6.0
+:: Version 0.7.0
+set version=0.7.0
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -205,7 +205,7 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-if "!cmd!"=="%arg1%" (
+if /i "!cmd!"=="%arg1%" (
 call :%arg2%
 )
 exit /b
@@ -232,67 +232,67 @@ set cmdc=!cmd:~1,-1!
 call :comment
 exit /b
 )
-if "!cmd:~0,5!"=="print" (
+if /i "!cmd:~0,5!"=="print" (
 set cmdc=!cmd:~6,-1!
 call :print
 exit /b
 )
-if "!cmd:~0,4!"=="wait" (
+if /i "!cmd:~0,4!"=="wait" (
 set cmdc=!cmd:~5,-1!
 call :wait
 exit /b
 )
-if "!cmd:~0,3!"=="end" (
+if /i "!cmd:~0,3!"=="end" (
 set cmdc=!cmd:~4,-1!
 call :end
 exit /b
 )
-if "!cmd:~0,6!"=="export" (
+if /i "!cmd:~0,6!"=="export" (
 set cmdc=!cmd:~7,-1!
 call :export
 exit /b
 )
-if "!cmd:~0,4!"=="disp" (
+if /i "!cmd:~0,4!"=="disp" (
 set cmdc=!cmd:~5,-1!
 call :disp
 exit /b
 )
-if "!cmd:~0,5!"=="clear" (
+if /i "!cmd:~0,5!"=="clear" (
 set cmdc=!cmd:~6,-1!
 call :clear
 exit /b
 )
-if "!cmd:~0,2!"=="if" (
+if /i "!cmd:~0,2!"=="if" (
 set cmdc=!cmd:~3,-1!
 call :if
 exit /b
 )
-if "!cmd:~0,6!"=="} elif" (
+if /i "!cmd:~0,6!"=="} elif" (
 set cmdc=!cmd:~7,-1!
 call :elif
 exit /b
 )
-if "!cmd:~0,3!"=="cmd" (
+if /i "!cmd:~0,3!"=="cmd" (
 set cmdc=!cmd:~4,-1!
 call :batcmd
 exit /b
 )
-if "!cmd:~0,5!"=="title" (
+if /i "!cmd:~0,5!"=="title" (
 set cmdc=!cmd:~6,-1!
 call :title
 exit /b
 )
-if "!cmd:~0,6!"=="define" (
+if /i "!cmd:~0,6!"=="define" (
 set cmdc=!cmd:~7,-1!
 call :define
 exit /b
 )
-if "!cmd:~0,5!"=="place" (
+if /i "!cmd:~0,5!"=="place" (
 set cmdc=!cmd:~6,-1!
 call :place
 exit /b
 )
-if "!cmd:~0,4!"=="goto" (
+if /i "!cmd:~0,4!"=="goto" (
 set cmdc=!cmd:~5,-1!
 call :goto
 exit /b
@@ -302,127 +302,127 @@ set cmdc=!cmd:~2,-1!
 call :callFunction
 exit /b
 )
-if "!cmd:~0,6!"=="prompt" (
+if /i "!cmd:~0,6!"=="prompt" (
 set cmdc=!cmd:~7,-1!
 call :prompt
 exit /b
 )
-if "!cmd:~0,8!"=="download" (
+if /i "!cmd:~0,8!"=="download" (
 set cmdc=!cmd:~9,-1!
 call :download
 exit /b
 )
-if "!cmd:~0,3!"=="ren" (
+if /i "!cmd:~0,3!"=="ren" (
 set cmdc=!cmd:~4,-1!
 call :ren
 exit /b
 )
-if "!cmd:~0,3!"=="del" (
+if /i "!cmd:~0,3!"=="del" (
 set cmdc=!cmd:~4,-1!
 call :del
 exit /b
 )
-if "!cmd:~0,6!"=="mkfile" (
+if /i "!cmd:~0,6!"=="mkfile" (
 set cmdc=!cmd:~7,-1!
 call :mkfile
 exit /b
 )
-if "!cmd:~0,8!"=="mkfolder" (
+if /i "!cmd:~0,8!"=="mkfolder" (
 set cmdc=!cmd:~9,-1!
 call :mkfolder
 exit /b
 )
-if "!cmd:~0,4!"=="file" (
+if /i "!cmd:~0,4!"=="file" (
 set cmdc=!cmd:~5,-1!
 call :file
 exit /b
 )
-if "!cmd:~0,4!"=="play" (
+if /i "!cmd:~0,4!"=="play" (
 set cmdc=!cmd:~5,-1!
 call :play
 exit /b
 )
-if "!cmd:~0,5!"=="while" (
+if /i "!cmd:~0,5!"=="while" (
 set cmdc=!cmd:~6,-1!
 call :while
 exit /b
 )
-if "!cmd:~0,4!"=="incr" (
+if /i "!cmd:~0,4!"=="incr" (
 set cmdc=!cmd:~5,-1!
 call :incr
 exit /b
 )
-if "!cmd:~0,6!"=="repeat" (
+if /i "!cmd:~0,6!"=="repeat" (
 set cmdc=!cmd:~7,-1!
 call :repeat
 exit /b
 )
-if "!cmd:~0,5!"=="break" (
+if /i "!cmd:~0,5!"=="break" (
 set cmdc=!cmd:~6,-1!
 call :break
 exit /b
 )
-if "!cmd:~0,6!"=="return" (
+if /i "!cmd:~0,6!"=="return" (
 set cmdc=!cmd:~7,-1!
 call :return
 exit /b
 )
-if "!cmd:~0,4!"=="open" (
+if /i "!cmd:~0,4!"=="open" (
 set cmdc=!cmd:~5,-1!
 call :open
 exit /b
 )
-if "!cmd:~0,4!"=="skey" (
+if /i "!cmd:~0,4!"=="skey" (
 set cmdc=!cmd:~5,-1!
 call :skey
 exit /b
 )
-if "!cmd:~0,2!"=="ps" (
+if /i "!cmd:~0,2!"=="ps" (
 set cmdc=!cmd:~3,-1!
 call :ps
 exit /b
 )
-if "!cmd:~0,5!"=="alert" (
+if /i "!cmd:~0,5!"=="alert" (
 set cmdc=!cmd:~6,-1!
 call :alert
 exit /b
 )
-if "!cmd:~0,5!"=="color" (
+if /i "!cmd:~0,5!"=="color" (
 set cmdc=!cmd:~6,-1!
 call :colour
 exit /b
 )
-if "!cmd:~0,6!"=="colour" (
+if /i "!cmd:~0,6!"=="colour" (
 set cmdc=!cmd:~7,-1!
 call :colour
 exit /b
 )
-if "!cmd:~0,7!"=="restart" (
+if /i "!cmd:~0,7!"=="restart" (
 set cmdc=!cmd:~8,-1!
 call :restart
 exit /b
 )
-if "!cmd:~0,3!"=="out" (
+if /i "!cmd:~0,3!"=="out" (
 set cmdc=!cmd:~4,-1!
 call :out
 exit /b
 )
-if "!cmd:~0,8!"=="rewrite" (
+if /i "!cmd:~0,8!"=="rewrite" (
 set cmdc=!cmd:~9,-1!
 call :rewrite
 exit /b
 )
-if "!cmd:~0,6!"=="choice" (
+if /i "!cmd:~0,6!"=="choice" (
 set cmdc=!cmd:~7,-1!
 call :choice
 exit /b
 )
-if "!cmd:~0,4!"=="stop" (
+if /i "!cmd:~0,4!"=="stop" (
 set cmdc=!cmd:~5,-1!
 call :stop
 exit /b
 )
-if "!cmd:~0,5!"=="close" (
+if /i "!cmd:~0,5!"=="close" (
 set cmdc=!cmd:~6,-1!
 call :stop
 exit /b
@@ -620,10 +620,10 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmd=!cmdc!
-if "!cmd:~0,5!"=="write" (
+if /i "!cmd:~0,5!"=="write" (
 set cmdc=!cmd:~6,-1!
 call :write
-) else if "!cmd:~0,6!"=="append" (
+) else if /i "!cmd:~0,6!"=="append" (
 set cmdc=!cmd:~7,-1!
 call :append
 )
@@ -943,13 +943,13 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-if "!cmdc:~0,4!"=="text" (
+if /i "!cmdc:~0,4!"=="text" (
 call :defineText
-) else if "!cmdc:~0,6!"=="prompt" (
+) else if /i "!cmdc:~0,6!"=="prompt" (
 call :definePrompt
-) else if "!cmdc:~0,4!"=="math" (
+) else if /i "!cmdc:~0,4!"=="math" (
 call :defineMath
-) else if "!cmdc:~0,8!"=="function" (
+) else if /i "!cmdc:~0,8!"=="function" (
 call :defineFunction
 ) else (
 call :plainDefine
@@ -1280,7 +1280,7 @@ set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-if "!cmdc!"=="user" (
+if /i "!cmdc!"=="user" (
 call :waitUser
 ) else (
 call :waitTime
