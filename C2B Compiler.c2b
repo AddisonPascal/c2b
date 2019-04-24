@@ -671,6 +671,7 @@ define.function[if] {
 	[cmdc=!cmdc:^>= GTR !]
 	[cmdc=!cmdc:^<= LSS !]
 	[bracketString=%bracketString%I]
+	[cmdc=!cmdc:^&= if !]
 	file.append[sys.bat] {
 		print[if !cmdc! ^(]
 	}

@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.6.0. 
+rem Compiled by the c2b Compiler from c2b v0.7.0. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -1151,6 +1151,7 @@ set cmdc=!cmd:~3,-3!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
 set bracketString=%bracketString%I
+set cmdc=!cmdc:^&= if !
 set opened_file=sys.bat
 (
 echo(if !cmdc! ^(
