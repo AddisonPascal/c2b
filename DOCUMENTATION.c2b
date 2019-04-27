@@ -56,6 +56,10 @@ clear
 if[%this%==%that%] {
 	print[This is that]
 }
+# and operators are "&" which can be used in any conditional statement:
+if[%a%==%b% & %c%==%d% & %e%==%f%] {
+	print[AND it works!]
+}
 
 # Executes a Windows Batch / CMD command: cmd[command]
 cmd[echo Hi]
