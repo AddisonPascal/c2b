@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.0
-[version=0.7.0]
+# Version 0.7.1
+[version=0.7.1]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -389,6 +389,7 @@ define.function[elif] {
 	[cmdc=!cmdc:~0,-2!]
 	[cmdc=!cmdc:^>= GTR !]
 	[cmdc=!cmdc:^<= LSS !]
+	[cmdc=!cmdc:^&= if !]
 	file.append[sys.bat] {
 		print[^) else if !cmdc! (]
 	}
@@ -504,6 +505,7 @@ define.function[while] {
 	[cmdc=!cmdc:true=1 EQU 1!]
 	[cmdc=!cmdc:True=1 EQU 1!]
 	[bracketString=%bracketString%W]
+	[cmdc=!cmdc:^&= if !]
 	incr[whileCount]
 	[whileWriting=%whileCount%]
 	if["%whileWriting:~1,1%"==""] {

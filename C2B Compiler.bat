@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.7.0
-set version=0.7.0
+:: Version 0.7.1
+set version=0.7.1
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -561,6 +561,7 @@ set arg5=%~5
 set cmdc=!cmdc:~0,-2!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
+set cmdc=!cmdc:^&= if !
 set opened_file=sys.bat
 (
 echo(^) else if !cmdc! (
@@ -785,6 +786,7 @@ set cmdc=!cmdc:^<= LSS !
 set cmdc=!cmdc:true=1 EQU 1!
 set cmdc=!cmdc:True=1 EQU 1!
 set bracketString=%bracketString%W
+set cmdc=!cmdc:^&= if !
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
 if "%whileWriting:~1,1%"=="" (
