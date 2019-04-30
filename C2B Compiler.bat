@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.7.0. 
+rem Compiled by the c2b Compiler from c2b v0.7.1. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -67,8 +67,8 @@ mshta javascript:alert("%~1");close();
 exit/b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.7.1
-set version=0.7.1
+:: Version 0.7.2
+set version=0.7.2
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -144,6 +144,9 @@ echo(goto startOfFile
 echo(:alertJS
 echo(mshta javascript:alert("%%~1"^);close(^);
 echo(exit/b
+echo(:ifIn
+echo(echo %%~2 ^| findstr /c:"%%~1"
+echo(exit /b
 echo(:startOfFile
 )>%opened_file%
 if %1.==. (
@@ -260,6 +263,11 @@ exit /b
 if /i "!cmd:~0,5!"=="clear" (
 set cmdc=!cmd:~6,-1!
 call :clear
+exit /b
+)
+if /i "!cmd:~0,4!"=="ifin" (
+set cmdc=!cmd:~5,-1!
+call :ifin
 exit /b
 )
 if /i "!cmd:~0,2!"=="if" (
@@ -407,8 +415,8 @@ set cmdc=!cmd:~4,-1!
 call :out
 exit /b
 )
-if /i "!cmd:~0,8!"=="rewrite" (
-set cmdc=!cmd:~9,-1!
+if /i "!cmd:~0,7!"=="rewrite" (
+set cmdc=!cmd:~8,-1!
 call :rewrite
 exit /b
 )
