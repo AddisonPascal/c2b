@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.2
-[version=0.7.2]
+# Version 0.7.3
+[version=0.7.3]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -76,8 +76,8 @@ file.write[sys.bat] {
 	print[mshta javascript:alert("%%~1"^);close(^);]
 	print[exit/b]
 	print[:ifIn]
-	print[echo %%~2 ^| findstr /c:"%%~1"]
-	print[exit /b]
+	print[echo %%~2 ^| findstr /c:%%~1]
+	print[exit /b %errorlevel%]
 	print[:startOfFile]
 }
 if[%1.==.] {
@@ -157,7 +157,7 @@ $clear
 return
 }
 if[/i "!cmd:~0,4!"=="ifin"] {
-[cmdc=!cmd:~5,-1!]
+[cmdc=!cmd:~5,-3!]
 $ifin
 return
 }
@@ -333,6 +333,14 @@ return
 }
 $abs } closeBracket
 $abs "} else {" else
+}
+define.function[ifin] {
+	[cmdc=!cmdc:^,= ]
+	[bracketString=%bracketString%I]
+	file.append[sys.bat] {
+		print[call :ifIn !cmdc!]
+		print[if %errorlevel% NEQ 1 (]
+	}
 }
 define.function[stop] {
 	file.append[sys.bat] {

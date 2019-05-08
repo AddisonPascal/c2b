@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.7.1. 
+rem Compiled by the c2b Compiler from c2b v0.7.2. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -65,10 +65,13 @@ goto startOfFile
 :alertJS
 mshta javascript:alert("%~1");close();
 exit/b
+:ifIn
+echo %~2 | findstr /c:"%~1"
+exit /b
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.7.2
-set version=0.7.2
+:: Version 0.7.3
+set version=0.7.3
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -145,8 +148,8 @@ echo(:alertJS
 echo(mshta javascript:alert("%%~1"^);close(^);
 echo(exit/b
 echo(:ifIn
-echo(echo %%~2 ^| findstr /c:"%%~1"
-echo(exit /b
+echo(echo %%~2 ^| findstr /c:%%~1
+echo(exit /b %errorlevel%
 echo(:startOfFile
 )>%opened_file%
 if %1.==. (
@@ -266,7 +269,7 @@ call :clear
 exit /b
 )
 if /i "!cmd:~0,4!"=="ifin" (
-set cmdc=!cmd:~5,-1!
+set cmdc=!cmd:~5,-3!
 call :ifin
 exit /b
 )
@@ -445,6 +448,22 @@ call :abs "} else {" else
 exit /b
 :endfunction3
 goto endfunction4
+:ifin
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set cmdc=!cmdc:^,= 
+set bracketString=%bracketString%I
+set opened_file=sys.bat
+(
+echo(call :ifIn !cmdc!
+echo(if %errorlevel% NEQ 1 (
+)>>%opened_file%
+exit /b
+:endfunction4
+goto endfunction5
 :stop
 set arg1=%~1
 set arg2=%~2
@@ -456,8 +475,8 @@ set opened_file=sys.bat
 echo(taskkill /im !cmdc! /f
 )>>%opened_file%
 exit /b
-:endfunction4
-goto endfunction5
+:endfunction5
+goto endfunction6
 :choice
 set arg1=%~1
 set arg2=%~2
@@ -472,8 +491,8 @@ echo(set /a choiceNum=%%errorlevel%%-1
 echo(call set choice=%%%%choices:~%%choiceNum%%,1%%%%
 )>>%opened_file%
 exit /b
-:endfunction5
-goto endfunction6
+:endfunction6
+goto endfunction7
 :rewrite
 set arg1=%~1
 set arg2=%~2
@@ -495,8 +514,8 @@ set opened_file=sys.bat
 echo(echo %%escRewrite%%!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction6
-goto endfunction7
+:endfunction7
+goto endfunction8
 :out
 set arg1=%~1
 set arg2=%~2
@@ -518,8 +537,8 @@ set opened_file=sys.bat
 echo(echo ^| set /p ^^="!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction7
-goto endfunction8
+:endfunction8
+goto endfunction9
 :restart
 set arg1=%~1
 set arg2=%~2
@@ -531,8 +550,8 @@ set opened_file=sys.bat
 echo(goto startOfFile
 )>>%opened_file%
 exit /b
-:endfunction8
-goto endfunction9
+:endfunction9
+goto endfunction10
 :colour
 set arg1=%~1
 set arg2=%~2
@@ -544,8 +563,8 @@ set opened_file=sys.bat
 echo(color !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction9
-goto endfunction10
+:endfunction10
+goto endfunction11
 :alert
 set arg1=%~1
 set arg2=%~2
@@ -558,8 +577,8 @@ set opened_file=sys.bat
 echo(call :alertJS "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction10
-goto endfunction11
+:endfunction11
+goto endfunction12
 :elif
 set arg1=%~1
 set arg2=%~2
@@ -575,8 +594,8 @@ set opened_file=sys.bat
 echo(^) else if !cmdc! (
 )>>%opened_file%
 exit /b
-:endfunction11
-goto endfunction12
+:endfunction12
+goto endfunction13
 :ps
 set arg1=%~1
 set arg2=%~2
@@ -589,8 +608,8 @@ set opened_file=sys.bat
 echo(powershell -Command "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction12
-goto endfunction13
+:endfunction13
+goto endfunction14
 :else
 set arg1=%~1
 set arg2=%~2
@@ -602,8 +621,8 @@ set opened_file=sys.bat
 echo(^) else (
 )>>%opened_file%
 exit /b
-:endfunction13
-goto endfunction14
+:endfunction14
+goto endfunction15
 :skey
 set arg1=%~1
 set arg2=%~2
@@ -620,8 +639,8 @@ echo(^)^>"%%temp%%\%%skey_id%%.vbs"
 echo(start "" "%%temp%%\%%skey_id%%.vbs"
 )>>%opened_file%
 exit /b
-:endfunction14
-goto endfunction15
+:endfunction15
+goto endfunction16
 :file
 set arg1=%~1
 set arg2=%~2
@@ -643,8 +662,8 @@ echo(set opened_file=!cmdc!
 echo((
 )>>%opened_file%
 exit /b
-:endfunction15
-goto endfunction16
+:endfunction16
+goto endfunction17
 :append
 set arg1=%~1
 set arg2=%~2
@@ -653,8 +672,8 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%A
 exit /b
-:endfunction16
-goto endfunction17
+:endfunction17
+goto endfunction18
 :write
 set arg1=%~1
 set arg2=%~2
@@ -663,8 +682,8 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%R
 exit /b
-:endfunction17
-goto endfunction18
+:endfunction18
+goto endfunction19
 :open
 set arg1=%~1
 set arg2=%~2
@@ -676,8 +695,8 @@ set opened_file=sys.bat
 echo(start "" !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction18
-goto endfunction19
+:endfunction19
+goto endfunction20
 :setQuick
 set arg1=%~1
 set arg2=%~2
@@ -690,8 +709,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction19
-goto endfunction20
+:endfunction20
+goto endfunction21
 :return
 set arg1=%~1
 set arg2=%~2
@@ -703,8 +722,8 @@ set opened_file=sys.bat
 echo(exit /b
 )>>%opened_file%
 exit /b
-:endfunction20
-goto endfunction21
+:endfunction21
+goto endfunction22
 :break
 set arg1=%~1
 set arg2=%~2
@@ -717,8 +736,8 @@ set opened_file=sys.bat
 echo(goto afterwhile%whileWriting%
 )>>%opened_file%
 exit /b
-:endfunction21
-goto endfunction22
+:endfunction22
+goto endfunction23
 :closeBracket
 set arg1=%~1
 set arg2=%~2
@@ -738,8 +757,8 @@ call :endAppend
 )
 set bracketString=%bracketString:~0,-1%
 exit /b
-:endfunction22
-goto endfunction23
+:endfunction23
+goto endfunction24
 :repeat
 set arg1=%~1
 set arg2=%~2
@@ -767,8 +786,8 @@ echo(exit /b
 echo(:whiling%whileWriting%
 )>>%opened_file%
 exit /b
-:endfunction23
-goto endfunction24
+:endfunction24
+goto endfunction25
 :incr
 set arg1=%~1
 set arg2=%~2
@@ -780,8 +799,8 @@ set opened_file=sys.bat
 echo(set /a !cmdc!=%%!cmdc!%%+1
 )>>%opened_file%
 exit /b
-:endfunction24
-goto endfunction25
+:endfunction25
+goto endfunction26
 :while
 set arg1=%~1
 set arg2=%~2
@@ -812,8 +831,8 @@ echo(^)
 echo(:whiling%whileWriting%
 )>>%opened_file%
 exit /b
-:endfunction25
-goto endfunction26
+:endfunction26
+goto endfunction27
 :endWhile
 set arg1=%~1
 set arg2=%~2
@@ -828,8 +847,8 @@ echo(goto while%whileWriting%
 echo(:afterwhile%whileWriting%
 )>>%opened_file%
 exit /b
-:endfunction26
-goto endfunction27
+:endfunction27
+goto endfunction28
 :play
 set arg1=%~1
 set arg2=%~2
@@ -841,8 +860,8 @@ set opened_file=sys.bat
 echo(powershell [console]::Beep(!cmdc!^)
 )>>%opened_file%
 exit /b
-:endfunction27
-goto endfunction28
+:endfunction28
+goto endfunction29
 :endWrite
 set arg1=%~1
 set arg2=%~2
@@ -854,8 +873,8 @@ set opened_file=sys.bat
 echo(^)^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction28
-goto endfunction29
+:endfunction29
+goto endfunction30
 :endAppend
 set arg1=%~1
 set arg2=%~2
@@ -867,8 +886,8 @@ set opened_file=sys.bat
 echo(^)^>^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction29
-goto endfunction30
+:endfunction30
+goto endfunction31
 :mkfolder
 set arg1=%~1
 set arg2=%~2
@@ -880,8 +899,8 @@ set opened_file=sys.bat
 echo(md !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction30
-goto endfunction31
+:endfunction31
+goto endfunction32
 :mkfile
 set arg1=%~1
 set arg2=%~2
@@ -893,8 +912,8 @@ set opened_file=sys.bat
 echo(echo.^>!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction31
-goto endfunction32
+:endfunction32
+goto endfunction33
 :del
 set arg1=%~1
 set arg2=%~2
@@ -906,8 +925,8 @@ set opened_file=sys.bat
 echo(del !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction32
-goto endfunction33
+:endfunction33
+goto endfunction34
 :ren
 set arg1=%~1
 set arg2=%~2
@@ -919,8 +938,8 @@ set opened_file=sys.bat
 echo(ren !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction33
-goto endfunction34
+:endfunction34
+goto endfunction35
 :download
 set arg1=%~1
 set arg2=%~2
@@ -932,8 +951,8 @@ set opened_file=sys.bat
 echo(powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
 )>>%opened_file%
 exit /b
-:endfunction34
-goto endfunction35
+:endfunction35
+goto endfunction36
 :prompt
 set arg1=%~1
 set arg2=%~2
@@ -945,8 +964,8 @@ set opened_file=sys.bat
 echo(set /p !cmdc!=""
 )>>%opened_file%
 exit /b
-:endfunction35
-goto endfunction36
+:endfunction36
+goto endfunction37
 :define
 set arg1=%~1
 set arg2=%~2
@@ -965,8 +984,8 @@ call :defineFunction
 call :plainDefine
 )
 exit /b
-:endfunction36
-goto endfunction37
+:endfunction37
+goto endfunction38
 :definePrompt
 set arg1=%~1
 set arg2=%~2
@@ -979,8 +998,8 @@ set opened_file=sys.bat
 echo(set /p !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction37
-goto endfunction38
+:endfunction38
+goto endfunction39
 :defineMath
 set arg1=%~1
 set arg2=%~2
@@ -993,8 +1012,8 @@ set opened_file=sys.bat
 echo(set /a !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction38
-goto endfunction39
+:endfunction39
+goto endfunction40
 :defineText
 set arg1=%~1
 set arg2=%~2
@@ -1007,8 +1026,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction39
-goto endfunction40
+:endfunction40
+goto endfunction41
 :plainDefine
 set arg1=%~1
 set arg2=%~2
@@ -1020,8 +1039,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction40
-goto endfunction41
+:endfunction41
+goto endfunction42
 :callFunction
 set arg1=%~1
 set arg2=%~2
@@ -1034,8 +1053,8 @@ set opened_file=sys.bat
 echo(call :!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction41
-goto endfunction42
+:endfunction42
+goto endfunction43
 :goto
 set arg1=%~1
 set arg2=%~2
@@ -1047,8 +1066,8 @@ set opened_file=sys.bat
 echo(goto !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction42
-goto endfunction43
+:endfunction43
+goto endfunction44
 :place
 set arg1=%~1
 set arg2=%~2
@@ -1060,8 +1079,8 @@ set opened_file=sys.bat
 echo(:!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction43
-goto endfunction44
+:endfunction44
+goto endfunction45
 :title
 set arg1=%~1
 set arg2=%~2
@@ -1073,8 +1092,8 @@ set opened_file=sys.bat
 echo(title !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction44
-goto endfunction45
+:endfunction45
+goto endfunction46
 :comment
 set arg1=%~1
 set arg2=%~2
@@ -1087,8 +1106,8 @@ set opened_file=sys.bat
 echo(::!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction45
-goto endfunction46
+:endfunction46
+goto endfunction47
 :endFunction
 set arg1=%~1
 set arg2=%~2
@@ -1101,8 +1120,8 @@ echo(exit /b
 echo(:endfunction%functionNumber%
 )>>%opened_file%
 exit /b
-:endfunction46
-goto endfunction47
+:endfunction47
+goto endfunction48
 :defineFunction
 set arg1=%~1
 set arg2=%~2
@@ -1123,8 +1142,8 @@ echo(set arg4=%%~4
 echo(set arg5=%%~5
 )>>%opened_file%
 exit /b
-:endfunction47
-goto endfunction48
+:endfunction48
+goto endfunction49
 :batcmd
 set arg1=%~1
 set arg2=%~2
@@ -1136,8 +1155,8 @@ set opened_file=sys.bat
 echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction48
-goto endfunction49
+:endfunction49
+goto endfunction50
 :endIf
 set arg1=%~1
 set arg2=%~2
@@ -1149,8 +1168,8 @@ set opened_file=sys.bat
 echo(^)
 )>>%opened_file%
 exit /b
-:endfunction49
-goto endfunction50
+:endfunction50
+goto endfunction51
 :if
 set arg1=%~1
 set arg2=%~2
@@ -1167,8 +1186,8 @@ set opened_file=sys.bat
 echo(if !cmdc! ^(
 )>>%opened_file%
 exit /b
-:endfunction50
-goto endfunction51
+:endfunction51
+goto endfunction52
 :disp
 set arg1=%~1
 set arg2=%~2
@@ -1180,8 +1199,8 @@ set opened_file=sys.bat
 echo(mode 1000
 )>>%opened_file%
 exit /b
-:endfunction51
-goto endfunction52
+:endfunction52
+goto endfunction53
 :sortColours
 set arg1=%~1
 set arg2=%~2
@@ -1230,8 +1249,8 @@ set cmdc=!cmdc:#e=%%esc93m%%!
 set cmdc=!cmdc:#f=%%esc97m%%!
 set cmdc=!cmdc!%%esc0m%%
 exit /b
-:endfunction52
-goto endfunction53
+:endfunction53
+goto endfunction54
 :print
 set arg1=%~1
 set arg2=%~2
@@ -1257,8 +1276,8 @@ set opened_file=sys.bat
 echo(echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction53
-goto endfunction54
+:endfunction54
+goto endfunction55
 :emptyPrint
 set arg1=%~1
 set arg2=%~2
@@ -1270,8 +1289,8 @@ set opened_file=sys.bat
 echo(echo.
 )>>%opened_file%
 exit /b
-:endfunction54
-goto endfunction55
+:endfunction55
+goto endfunction56
 :end
 set arg1=%~1
 set arg2=%~2
@@ -1283,8 +1302,8 @@ set opened_file=sys.bat
 echo(exit
 )>>%opened_file%
 exit /b
-:endfunction55
-goto endfunction56
+:endfunction56
+goto endfunction57
 :wait
 set arg1=%~1
 set arg2=%~2
@@ -1297,8 +1316,8 @@ call :waitUser
 call :waitTime
 )
 exit /b
-:endfunction56
-goto endfunction57
+:endfunction57
+goto endfunction58
 :waitUser
 set arg1=%~1
 set arg2=%~2
@@ -1310,8 +1329,8 @@ set opened_file=sys.bat
 echo(pause^>nul
 )>>%opened_file%
 exit /b
-:endfunction57
-goto endfunction58
+:endfunction58
+goto endfunction59
 :waitTime
 set arg1=%~1
 set arg2=%~2
@@ -1323,8 +1342,8 @@ set opened_file=sys.bat
 echo(timeout /t !cmdc! /nobreak ^>nul
 )>>%opened_file%
 exit /b
-:endfunction58
-goto endfunction59
+:endfunction59
+goto endfunction60
 :clear
 set arg1=%~1
 set arg2=%~2
@@ -1336,8 +1355,8 @@ set opened_file=sys.bat
 echo(cls
 )>>%opened_file%
 exit /b
-:endfunction59
-goto endfunction60
+:endfunction60
+goto endfunction61
 :export
 set arg1=%~1
 set arg2=%~2
@@ -1360,7 +1379,7 @@ cls
 call %new_location%
 exit
 exit /b
-:endfunction60
+:endfunction61
 echo Program finished.
 echo Press any key to exit.
 pause>nul
