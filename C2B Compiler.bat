@@ -1,5 +1,5 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.7.2. 
+rem Compiled by the c2b Compiler from c2b v0.7.3. 
 set esc=
 ver | findstr /c:"Version 10"
 if errorlevel 1 goto noWin10
@@ -66,25 +66,27 @@ goto startOfFile
 mshta javascript:alert("%~1");close();
 exit/b
 :ifIn
-echo %~2 | findstr /c:"%~1"
-exit /b
+echo %~2 | findstr /c:%~1
+exit /b 0
 :startOfFile
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.7.3
-set version=0.7.3
+:: Version 0.7.4
+set version=0.7.4
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
 set whileWrite=00
 set bracketString=
 set functionNumber=0
+set moduleID=%random%%random%
 set opened_file=sys.bat
 (
 echo(@echo off
 echo(rem Compiled by the c2b Compiler from c2b v%version%. 
+echo(rem Module ID: %moduleID%
 echo(set esc=%esc%
 echo(ver ^| findstr /c:"Version 10"
-echo(if errorlevel 1 goto noWin10
+echo(if errorlevel 1 goto noWin10%moduleID%
 echo(set esc0m=%esc%[0m
 echo(set esc1m=%esc%[1m
 echo(set esc4m=%esc%[4m
@@ -123,8 +125,8 @@ echo(set esc106m=%esc%[106m
 echo(set esc107m=%esc%[107m
 echo(set escRewrite=%esc%[F%esc%[0J
 echo(cls
-echo(goto startOfFile
-echo(:noWin10
+echo(goto startOfFile%moduleID%
+echo(:noWin10%moduleID%
 echo(set esc30m=^^^&powershell write-host -NoNewline -fore Black 
 echo(set esc34m=^^^&powershell write-host -NoNewline -fore Blue 
 echo(set esc32m=^^^&powershell write-host -NoNewline -fore Green 
@@ -143,14 +145,14 @@ echo(set esc93m=^^^&powershell write-host -NoNewline -fore Yellow
 echo(set esc97m=^^^&powershell write-host -NoNewline -fore White 
 echo(set esc0m=^^^&echo(
 echo(cls
-echo(goto startOfFile
-echo(:alertJS
+echo(goto startOfFile%moduleID%
+echo(:alertJS%moduleID%
 echo(mshta javascript:alert("%%~1"^);close(^);
 echo(exit/b
-echo(:ifIn
+echo(:ifIn%moduleID%
 echo(echo %%~2 ^| findstr /c:%%~1
 echo(exit /b %errorlevel%
-echo(:startOfFile
+echo(:startOfFile%moduleID%
 )>%opened_file%
 if %1.==. (
 echo(%esc91m%Use c2b compiler by opening a c2b file with it%esc0m%
@@ -458,7 +460,7 @@ set cmdc=!cmdc:^,=
 set bracketString=%bracketString%I
 set opened_file=sys.bat
 (
-echo(call :ifIn !cmdc!
+echo(call :ifIn%moduleID% !cmdc!
 echo(if %errorlevel% NEQ 1 (
 )>>%opened_file%
 exit /b
@@ -574,7 +576,7 @@ set arg5=%~5
 set cmdc=!cmdc:"='!
 set opened_file=sys.bat
 (
-echo(call :alertJS "!cmdc!"
+echo(call :alertJS%moduleID% "!cmdc!"
 )>>%opened_file%
 exit /b
 :endfunction11
@@ -733,7 +735,7 @@ set arg5=%~5
 set whileWriting=%whileWrite:~-2,2%
 set opened_file=sys.bat
 (
-echo(goto afterwhile%whileWriting%
+echo(goto afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
 :endfunction22
@@ -776,14 +778,14 @@ set whileWrite=%whileWrite%%whileWriting%
 set opened_file=sys.bat
 (
 echo(set repeatCounting%whileWriting%=-1
-echo(call :while%whileWriting%
-echo(goto afterwhile%whileWriting%
-echo(:while%whileWriting%
+echo(call :while%whileWriting%%moduleID%
+echo(goto afterwhile%whileWriting%%moduleID%
+echo(:while%whileWriting%%moduleID%
 echo(set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1
-echo(if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%
-echo(goto afterwhile%whileWriting%
+echo(if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%%moduleID%
+echo(goto afterwhile%whileWriting%%moduleID%
 echo(exit /b
-echo(:whiling%whileWriting%
+echo(:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
 :endfunction24
@@ -822,13 +824,13 @@ set whileWriting=0%whileWriting%
 set whileWrite=%whileWrite%%whileWriting%
 set opened_file=sys.bat
 (
-echo(:while%whileWriting%
+echo(:while%whileWriting%%moduleID%
 echo(if !cmdc! (
-echo(goto whiling%whileWriting%
+echo(goto whiling%whileWriting%%moduleID%
 echo(^) else (
-echo(goto afterwhile%whileWriting%
+echo(goto afterwhile%whileWriting%%moduleID%
 echo(^)
-echo(:whiling%whileWriting%
+echo(:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
 :endfunction26
@@ -843,8 +845,8 @@ set whileWriting=%whileWrite:~-2,2%
 set whileWrite=%whileWrite:~0,-2%
 set opened_file=sys.bat
 (
-echo(goto while%whileWriting%
-echo(:afterwhile%whileWriting%
+echo(goto while%whileWriting%%moduleID%
+echo(:afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
 :endfunction27
@@ -1117,7 +1119,7 @@ set arg5=%~5
 set opened_file=sys.bat
 (
 echo(exit /b
-echo(:endfunction%functionNumber%
+echo(:endfunction%functionNumber%%moduleID%
 )>>%opened_file%
 exit /b
 :endfunction47
@@ -1133,7 +1135,7 @@ set /a functionNumber=%functionNumber%+1
 set cmdc=!cmd:~16,-3!
 set opened_file=sys.bat
 (
-echo(goto endfunction%functionNumber%
+echo(goto endfunction%functionNumber%%moduleID%
 echo(:!cmdc!
 echo(set arg1=%%~1
 echo(set arg2=%%~2
