@@ -1,18 +1,20 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.3
-[version=0.7.3]
+# Version 0.7.4
+[version=0.7.4]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
 [whileWrite=00]
 [bracketString=]
 [functionNumber=0]
+[moduleID=%random%%random%]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
+	print[rem Module ID: %moduleID%]
 	print[set esc=%esc%]
 	print[ver ^| findstr /c:"Version 10"]
-	print[if errorlevel 1 goto noWin10]
+	print[if errorlevel 1 goto noWin10%moduleID%]
 	print[set esc0m=%esc%[0m]
 	print[set esc1m=%esc%[1m]
 	print[set esc4m=%esc%[4m]
@@ -51,8 +53,8 @@ file.write[sys.bat] {
 	print[set esc107m=%esc%[107m]
 	print[set escRewrite=%esc%[F%esc%[0J]
 	print[cls]
-	print[goto startOfFile]
-	print[:noWin10]
+	print[goto startOfFile%moduleID%]
+	print[:noWin10%moduleID%]
 	print[set esc30m=^^^&powershell write-host -NoNewline -fore Black ]
 	print[set esc34m=^^^&powershell write-host -NoNewline -fore Blue ]
 	print[set esc32m=^^^&powershell write-host -NoNewline -fore Green ]
@@ -71,14 +73,14 @@ file.write[sys.bat] {
 	print[set esc97m=^^^&powershell write-host -NoNewline -fore White ]
 	print[set esc0m=^^^&echo(]
 	print[cls]
-	print[goto startOfFile]
-	print[:alertJS]
+	print[goto startOfFile%moduleID%]
+	print[:alertJS%moduleID%]
 	print[mshta javascript:alert("%%~1"^);close(^);]
 	print[exit/b]
-	print[:ifIn]
+	print[:ifIn%moduleID%]
 	print[echo %%~2 ^| findstr /c:%%~1]
 	print[exit /b %errorlevel%]
-	print[:startOfFile]
+	print[:startOfFile%moduleID%]
 }
 if[%1.==.] {
 	print[#cUse c2b compiler by opening a c2b file with it]
@@ -338,7 +340,7 @@ define.function[ifin] {
 	[cmdc=!cmdc:^,= ]
 	[bracketString=%bracketString%I]
 	file.append[sys.bat] {
-		print[call :ifIn !cmdc!]
+		print[call :ifIn%moduleID% !cmdc!]
 		print[if %errorlevel% NEQ 1 (]
 	}
 }
@@ -398,7 +400,7 @@ define.function[colour] {
 define.function[alert] {
 	[cmdc=!cmdc:"='!]
 	file.append[sys.bat] {
-		print[call :alertJS "!cmdc!"]
+		print[call :alertJS%moduleID% "!cmdc!"]
 	}
 }
 define.function[elif] {
@@ -471,7 +473,7 @@ define.function[return] {
 define.function[break] {
 	[whileWriting=%whileWrite:~-2,2%]
 	file.append[sys.bat] {
-		print[goto afterwhile%whileWriting%]
+		print[goto afterwhile%whileWriting%%moduleID%]
 	}
 }
 define.function[closeBracket] {
@@ -499,14 +501,14 @@ define.function[repeat] {
 	[whileWrite=%whileWrite%%whileWriting%]
 	file.append[sys.bat] {
 		print[set repeatCounting%whileWriting%=-1]
-		print[call :while%whileWriting%]
-		print[goto afterwhile%whileWriting%]
-		print[:while%whileWriting%]
+		print[call :while%whileWriting%%moduleID%]
+		print[goto afterwhile%whileWriting%%moduleID%]
+		print[:while%whileWriting%%moduleID%]
 		print[set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1]
-		print[if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%]
-		print[goto afterwhile%whileWriting%]
+		print[if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%%moduleID%]
+		print[goto afterwhile%whileWriting%%moduleID%]
 		print[exit /b]
-		print[:whiling%whileWriting%]
+		print[:whiling%whileWriting%%moduleID%]
 	}
 }
 define.function[incr] {
@@ -529,21 +531,21 @@ define.function[while] {
 	}
 	[whileWrite=%whileWrite%%whileWriting%]
 	file.append[sys.bat] {
-		print[:while%whileWriting%]
+		print[:while%whileWriting%%moduleID%]
 		print[if !cmdc! (]
-		print[goto whiling%whileWriting%]
+		print[goto whiling%whileWriting%%moduleID%]
 		print[^) else (]
-		print[goto afterwhile%whileWriting%]
+		print[goto afterwhile%whileWriting%%moduleID%]
 		print[^)]
-		print[:whiling%whileWriting%]
+		print[:whiling%whileWriting%%moduleID%]
 	}
 }
 define.function[endWhile] {
 	[whileWriting=%whileWrite:~-2,2%]
 	[whileWrite=%whileWrite:~0,-2%]
 	file.append[sys.bat] {
-		print[goto while%whileWriting%]
-		print[:afterwhile%whileWriting%]
+		print[goto while%whileWriting%%moduleID%]
+		print[:afterwhile%whileWriting%%moduleID%]
 	}
 }
 define.function[play] {
@@ -657,7 +659,7 @@ define.function[comment] {
 define.function[endFunction] {
 	file.append[sys.bat] {
 		print[exit /b]
-		print[:endfunction%functionNumber%]
+		print[:endfunction%functionNumber%%moduleID%]
 	}
 }
 define.function[defineFunction] {
@@ -665,7 +667,7 @@ define.function[defineFunction] {
 	incr[functionNumber]
 	[cmdc=!cmd:~16,-3!]
 	file.append[sys.bat] {
-		print[goto endfunction%functionNumber%]
+		print[goto endfunction%functionNumber%%moduleID%]
 		print[:!cmdc!]
 		print[set arg1=%%~1]
 		print[set arg2=%%~2]
