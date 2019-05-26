@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.6
-[version=0.7.6]
+# Version 0.7.7
+[version=0.7.7]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -802,14 +802,17 @@ define.function[clear] {
 }
 define.function[import] {
 	if["!cmdc:~0,4!"=="net:"] {
+		[cmdc=!cmdc:~4!]
 		$import_net
 		return
 	}
 	if["!cmdc:~0,6!"=="local:"] {
+		[cmdc=!cmdc:~6!]
 		$import_local
 		return
 	}
 	if["!cmdc:~0,8!"=="inbuilt:"] {
+		[cmdc=!cmdc:~8!]
 		$import_inbuilt
 		return
 	}
