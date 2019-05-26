@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.5
-[version=0.7.5]
+# Version 0.7.6
+[version=0.7.6]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -327,6 +327,11 @@ if[/i "!cmd:~0,5!"=="close"] {
 [cmdc=!cmd:~6,-1!]
 $stop
 return
+}
+if[/i "!cmd:~0,6!"=="import"] {
+	[cmdc=!cmd:~7!]
+	$import
+	return
 }
 if["!cmd:~0,1!"=="["] {
 [cmdc=!cmd:~2,-1!]
@@ -795,13 +800,64 @@ define.function[clear] {
 		print[cls]
 	}
 }
-define.function[export] {
-	file.append[sys.bat] {
-		print[echo Program finished.]
-		print[echo Press any key to exit.]
-		print[pause^>nul]
-		print[exit]
+define.function[import] {
+	if["!cmdc:~0,4!"=="net:"] {
+		$import_net
+		return
 	}
+	if["!cmdc:~0,6!"=="local:"] {
+		$import_local
+		return
+	}
+	if["!cmdc:~0,8!"=="inbuilt:"] {
+		$import_inbuilt
+		return
+	}
+	if[exist "!cmdc!.bat"] {
+		$import_local
+		return
+	}
+	if[exist "%~dp0modules\!cmdc!.bat"] {
+		$import_inbuilt
+		return
+	}
+	$import_net
+}
+define.function[import_net] {
+	del[download]
+	download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/modules/!cmdc!.bat]
+	if[not exist download] {
+		print[Could not find module!]
+		return
+	}
+	file.append[sys.bat] {
+		cmd[type download]
+		print[]
+	}
+	cmd[copy download "%~dp0modules\!cmdc!.bat"]
+	del[download]
+}
+define.function[import_local] {
+	if[not exist "!cmdc!.bat"] {
+		print[Could not find module!]
+		return
+	}
+	file.append[sys.bat] {
+		cmd[type "!cmdc!.bat"]
+		print[]
+	}
+}
+define.function[import_inbuilt] {
+	if[not exist "%~dp0modules\!cmdc!.bat"] {
+		print[Could not find module!]
+		return
+	}
+	file.append[sys.bat] {
+		cmd[type "%~dp0modules\!cmdc!.bat"]
+		print[]
+	}
+}
+define.function[export] {
 	[new_location=%location:~0,-4%.bat"]
 	cmd[copy sys.bat %new_location%]
 	del[sys.bat]
