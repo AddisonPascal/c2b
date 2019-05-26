@@ -33,6 +33,18 @@ out[World!]
 color[0a]
 colour[0c]
 
+# Imports another module:	import moduleName
+#						or:	import net:moduleName
+#						or:	import inbuilt:moduleName
+#						or:	import local:moduleName
+import test
+import net:test
+import inbuilt:test
+import local:test
+
+# Raise an exception:	raise Exception
+raise ExampleException
+
 # Waits a certain amount of time: wait[seconds]
 wait[3]
 # Waits for the user to press any key: 

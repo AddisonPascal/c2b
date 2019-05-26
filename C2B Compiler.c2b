@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.8
-[version=0.7.8]
+# Version 0.8.0
+[version=0.8.0]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -811,7 +811,7 @@ define.function[raise] {
 		print[color 0c]
 		print[echo Exception: !cmdc!]
 		print[echo Error occured in module %moduleID%, line %line%:]
-		print[echo %line% ^^^| !cmd!]
+		print[echo !cmd!]
 		print[echo Nest: %bracketString%]
 		print[pause]
 		print[exit]
