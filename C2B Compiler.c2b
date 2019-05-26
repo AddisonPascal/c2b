@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.7.7
-[version=0.7.7]
+# Version 0.7.8
+[version=0.7.8]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -331,6 +331,11 @@ return
 if[/i "!cmd:~0,6!"=="import"] {
 	[cmdc=!cmd:~7!]
 	$import
+	return
+}
+if[/i "!cmd:~0,5!"=="raise"] {
+	[cmdc=!cmd:~5!]
+	$raise
 	return
 }
 if["!cmd:~0,1!"=="["] {
@@ -798,6 +803,18 @@ define.function[waitTime] {
 define.function[clear] {
 	file.append[sys.bat] {
 		print[cls]
+	}
+}
+define.function[raise] {
+	file.append[sys.bat] {
+		print[echo. ]
+		print[color 0c]
+		print[echo Exception: !cmdc!]
+		print[echo Error occured in module %moduleID%, line %line%:]
+		print[echo %line% ^^^| !cmd!]
+		print[echo Nest: %bracketString%]
+		print[pause]
+		print[exit]
 	}
 }
 define.function[import] {
