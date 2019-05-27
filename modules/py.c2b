@@ -1,0 +1,5 @@
+define.function[py] {
+	[python_args=%*]
+	cmd[py -c "%python_args:"='''%"]
+}
+export
