@@ -1,9 +1,9 @@
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.0. 
-rem Module ID: 3159026336
+rem Module ID: 131124622
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin103159026336
+if errorlevel 1 goto noWin10131124622
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -42,8 +42,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile3159026336
-:noWin103159026336
+goto startOfFile131124622
+:noWin10131124622
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -62,15 +62,15 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile3159026336
-:alertJS3159026336
+goto startOfFile131124622
+:alertJS131124622
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn3159026336
+:ifIn131124622
 echo %~2 | findstr /c:%~1
 exit /b 0
-:startOfFile3159026336
-goto endfunction13159026336
+:startOfFile131124622
+goto endfunction1131124622
 :raise
 set arg1=%~1
 set arg2=%~2
@@ -79,11 +79,11 @@ set arg4=%~4
 set arg5=%~5
 echo. 
 color 0c
-echo Exception: [%*]
-echo Error occured in module 3159026336, line 2:
-echo raise[%*]
+echo Exception:  %*
+echo Error occured in module 131124622, line 2:
+echo raise %*
 echo Nest: F
 pause
 exit
 exit /b
-:endfunction13159026336
+:endfunction1131124622
