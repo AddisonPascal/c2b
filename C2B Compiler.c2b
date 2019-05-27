@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.1
-[version=0.8.1]
+# Version 0.8.2
+[version=0.8.2]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -83,11 +83,8 @@ file.write[sys.bat] {
 	print[:startOfFile%moduleID%]
 }
 if[%1.==.] {
-	print[#cUse c2b compiler by opening a c2b file with it]
-	wait[user]
 	del[sys.bat]
-	del[sys.c2b]
-	end[file]
+	raise Error: Use c2b compiler by opening a c2b file with it.
 }
 clear
 [location=%1]
@@ -847,8 +844,7 @@ define.function[import_net] {
 	del[download]
 	download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/modules/!cmdc!.bat]
 	if[not exist download] {
-		print[Could not find module!]
-		return
+		raise Error: Cannot find online module.
 	}
 	file.append[sys.bat] {
 		cmd[type download]
@@ -858,8 +854,7 @@ define.function[import_net] {
 }
 define.function[import_local] {
 	if[not exist "!cmdc!.bat"] {
-		print[Could not find module!]
-		return
+		raise Error: Cannot find local module.
 	}
 	file.append[sys.bat] {
 		cmd[type "!cmdc!.bat"]
@@ -868,8 +863,7 @@ define.function[import_local] {
 }
 define.function[import_inbuilt] {
 	if[not exist "%~dp0modules\!cmdc!.bat"] {
-		print[Could not find module!]
-		return
+		raise Error: Cannot find inbuilt module
 	}
 	file.append[sys.bat] {
 		cmd[type "%~dp0modules\!cmdc!.bat"]
