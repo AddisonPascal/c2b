@@ -1,0 +1,4 @@
+define.function[title] {
+	title[%*]
+}
+export

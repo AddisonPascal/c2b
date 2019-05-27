@@ -1,0 +1,8 @@
+define.function[wait] {
+	if[%~1==user] {
+		wait[user]
+	} else {
+		wait[%~1]
+	}
+}
+export

@@ -1,0 +1,4 @@
+define.function[rewrite] {
+	rewrite[%*]
+}
+export

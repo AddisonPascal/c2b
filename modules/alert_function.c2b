@@ -1,0 +1,4 @@
+define.function[alert] {
+	alert[%*]
+}
+export

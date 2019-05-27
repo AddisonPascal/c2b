@@ -1,0 +1,4 @@
+define.function[define.math] {
+	define.math[%*]
+}
+export

@@ -1,0 +1,4 @@
+define.function[prompt] {
+	prompt[%*]
+}
+export

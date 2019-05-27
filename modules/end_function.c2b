@@ -1,0 +1,4 @@
+define.function[end] {
+	end[file]
+}
+export

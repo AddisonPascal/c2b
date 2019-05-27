@@ -1,0 +1,4 @@
+define.function[disp] {
+	disp[max]
+}
+export

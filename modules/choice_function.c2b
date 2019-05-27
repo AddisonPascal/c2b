@@ -1,0 +1,4 @@
+define.function[choice] {
+	choice[%*]
+}
+export
