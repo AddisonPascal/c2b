@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.4
-[version=0.8.4]
+# Version 0.8.5
+[version=0.8.5]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -9,10 +9,13 @@ title[C2B Compiler v%version%]
 [functionNumber=0]
 [moduleID=%random%%random%]
 [functionName=[module]]
+[tracing_back=0]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
 	print[rem Module ID: %moduleID%]
+	print[if "%%alreadyStarted%%"=="" set traceback_callNum=0]
+	print[set alreadyStarted=true]
 	print[set esc=%esc%]
 	print[ver ^| findstr /c:"Version 10"]
 	print[if errorlevel 1 goto noWin10%moduleID%]
@@ -480,6 +483,7 @@ define.function[setQuick] {
 }
 define.function[return] {
 	file.append[sys.bat] {
+		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 		print[exit /b]
 	}
 }
@@ -645,6 +649,12 @@ define.function[plainDefine] {
 define.function[callFunction] {
 	[cmdc=!cmd:~1!]
 	file.append[sys.bat] {
+		print[set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[set traceback_function_%%traceback_callNum%%=%functionName%]
 		print[call :!cmdc!]
 	}
 }
@@ -672,6 +682,7 @@ define.function[comment] {
 define.function[endFunction] {
 	[functionName=[module]]
 	file.append[sys.bat] {
+		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 		print[exit /b]
 		print[:endfunction%functionNumber%%moduleID%]
 	}
@@ -811,13 +822,25 @@ define.function[clear] {
 	}
 }
 define.function[raise] {
+	incr[tracing_back]
 	file.append[sys.bat] {
 		print[echo. ]
 		print[color 0c]
 		print[echo Exception: !cmdc!]
+		print[echo.]
+		print[echo Traceback [most recent call last]:]
+		print[echo.]
+		print[set tracing_back=0]
+		print[:tracing_back_%tracing_back%_%moduleID%]
+		print[if %%tracing_back%%==%%traceback_callNum%% goto end_tracing_back_%tracing_back%_%moduleID%]
+		print[set /a tracing_back=%%tracing_back%%+1]
+		print[call echo %%%%traceback_module_%%tracing_back%%%%%% [module ID %%%%traceback_moduleID_%%tracing_back%%%%%%], line %%%%traceback_linenum_%%tracing_back%%%%%%, in %%%%traceback_function_%%tracing_back%%%%%%:]
+		print[call echo %%%%traceback_line_%%tracing_back%%%%%%]
+		print[goto tracing_back_%tracing_back%_%moduleID%]
+		print[:end_tracing_back_%tracing_back%_%moduleID%]
 		print[echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:]
 		print[echo !cmd!]
-		print[echo Nest: %bracketString%]
+		print[echo.]
 		print[pause]
 		print[exit]
 	}

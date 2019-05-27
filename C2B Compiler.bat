@@ -1,9 +1,9 @@
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.4. 
-rem Module ID: 142913388
+rem Module ID: 231012909
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10142913388
+if errorlevel 1 goto noWin10231012909
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -42,8 +42,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile142913388
-:noWin10142913388
+goto startOfFile231012909
+:noWin10231012909
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -62,17 +62,17 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile142913388
-:alertJS142913388
+goto startOfFile231012909
+:alertJS231012909
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn142913388
+:ifIn231012909
 echo %~2 | findstr /c:%~1
 exit /b 0
-:startOfFile142913388
+:startOfFile231012909
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.8.4
-set version=0.8.4
+:: Version 0.8.5
+set version=0.8.5
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -81,11 +81,14 @@ set bracketString=
 set functionNumber=0
 set moduleID=%random%%random%
 set functionName=[module]
+set tracing_back=0
 set opened_file=sys.bat
 (
 echo(@echo off
 echo(rem Compiled by the c2b Compiler from c2b v%version%. 
 echo(rem Module ID: %moduleID%
+echo(if "%%alreadyStarted%%"=="" set traceback_callNum=0
+echo(set alreadyStarted=true
 echo(set esc=%esc%
 echo(ver ^| findstr /c:"Version 10"
 echo(if errorlevel 1 goto noWin10%moduleID%
@@ -161,13 +164,13 @@ del sys.bat
 echo. 
 color 0c
 echo Exception:  Error: Use c2b compiler by opening a c2b file with it.
-echo C2B Compiler [module ID 142913388], line 88, in [module]:
+echo C2B Compiler [module ID 231012909], line 91, in [module]:
 echo raise Error: Use c2b compiler by opening a c2b file with it.
 echo Nest: I
 pause
 exit
 )
-goto endfunction1142913388
+goto endfunction1231012909
 :getFilename
 set arg1=%~1
 set arg2=%~2
@@ -176,7 +179,7 @@ set arg4=%~4
 set arg5=%~5
 set fileName=%~nx1
 exit /b
-:endfunction1142913388
+:endfunction1231012909
 call :getFilename %1
 set moduleName=%fileName:~0,-4%
 cls
@@ -193,13 +196,13 @@ echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "^(v)"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
-:while01142913388
+:while01231012909
 if 1 EQU 1 (
-goto whiling01142913388
+goto whiling01231012909
 ) else (
-goto afterwhile01142913388
+goto afterwhile01231012909
 )
-:whiling01142913388
+:whiling01231012909
 set /a line=%line%+1
 set cmd=~linebreak
 set /p cmd="%line% | "
@@ -209,9 +212,9 @@ goto anotherLine
 )
 call :convertCommand
 :anotherLine
-goto while01142913388
-:afterwhile01142913388
-goto endfunction2142913388
+goto while01231012909
+:afterwhile01231012909
+goto endfunction2231012909
 :linebreak
 set arg1=%~1
 set arg2=%~2
@@ -223,8 +226,8 @@ set opened_file=sys.bat
 echo.
 )>>%opened_file%
 exit /b
-:endfunction2142913388
-goto endfunction3142913388
+:endfunction2231012909
+goto endfunction3231012909
 :abs
 set arg1=%~1
 set arg2=%~2
@@ -235,24 +238,24 @@ if /i "!cmd!"=="%arg1%" (
 call :%arg2%
 )
 exit /b
-:endfunction3142913388
-goto endfunction4142913388
+:endfunction3231012909
+goto endfunction4231012909
 :convertCommand
 set arg1=%~1
 set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-:while02142913388
+:while02231012909
 if "!cmd:~0,1!"==" " (
-goto whiling02142913388
+goto whiling02231012909
 ) else (
-goto afterwhile02142913388
+goto afterwhile02231012909
 )
-:whiling02142913388
+:whiling02231012909
 set cmd=!cmd:~1!
-goto while02142913388
-:afterwhile02142913388
+goto while02231012909
+:afterwhile02231012909
 if "!cmd:~0,1!"=="#" (
 set cmdc=!cmd:~1,-1!
 call :comment
@@ -476,8 +479,8 @@ exit /b
 call :abs } closeBracket
 call :abs "} else {" else
 exit /b
-:endfunction4142913388
-goto endfunction5142913388
+:endfunction4231012909
+goto endfunction5231012909
 :ifin
 set arg1=%~1
 set arg2=%~2
@@ -492,8 +495,8 @@ echo(call :ifIn%moduleID% !cmdc!
 echo(if %errorlevel% NEQ 1 (
 )>>%opened_file%
 exit /b
-:endfunction5142913388
-goto endfunction6142913388
+:endfunction5231012909
+goto endfunction6231012909
 :stop
 set arg1=%~1
 set arg2=%~2
@@ -505,8 +508,8 @@ set opened_file=sys.bat
 echo(taskkill /im !cmdc! /f
 )>>%opened_file%
 exit /b
-:endfunction6142913388
-goto endfunction7142913388
+:endfunction6231012909
+goto endfunction7231012909
 :choice
 set arg1=%~1
 set arg2=%~2
@@ -521,8 +524,8 @@ echo(set /a choiceNum=%%errorlevel%%-1
 echo(call set choice=%%%%choices:~%%choiceNum%%,1%%%%
 )>>%opened_file%
 exit /b
-:endfunction7142913388
-goto endfunction8142913388
+:endfunction7231012909
+goto endfunction8231012909
 :rewrite
 set arg1=%~1
 set arg2=%~2
@@ -544,8 +547,8 @@ set opened_file=sys.bat
 echo(echo %%escRewrite%%!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction8142913388
-goto endfunction9142913388
+:endfunction8231012909
+goto endfunction9231012909
 :out
 set arg1=%~1
 set arg2=%~2
@@ -567,8 +570,8 @@ set opened_file=sys.bat
 echo(echo ^| set /p ^^="!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction9142913388
-goto endfunction10142913388
+:endfunction9231012909
+goto endfunction10231012909
 :restart
 set arg1=%~1
 set arg2=%~2
@@ -580,8 +583,8 @@ set opened_file=sys.bat
 echo(goto startOfFile%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction10142913388
-goto endfunction11142913388
+:endfunction10231012909
+goto endfunction11231012909
 :colour
 set arg1=%~1
 set arg2=%~2
@@ -593,8 +596,8 @@ set opened_file=sys.bat
 echo(color !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction11142913388
-goto endfunction12142913388
+:endfunction11231012909
+goto endfunction12231012909
 :alert
 set arg1=%~1
 set arg2=%~2
@@ -607,8 +610,8 @@ set opened_file=sys.bat
 echo(call :alertJS%moduleID% "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction12142913388
-goto endfunction13142913388
+:endfunction12231012909
+goto endfunction13231012909
 :elif
 set arg1=%~1
 set arg2=%~2
@@ -624,8 +627,8 @@ set opened_file=sys.bat
 echo(^) else if !cmdc! (
 )>>%opened_file%
 exit /b
-:endfunction13142913388
-goto endfunction14142913388
+:endfunction13231012909
+goto endfunction14231012909
 :ps
 set arg1=%~1
 set arg2=%~2
@@ -638,8 +641,8 @@ set opened_file=sys.bat
 echo(powershell -Command "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction14142913388
-goto endfunction15142913388
+:endfunction14231012909
+goto endfunction15231012909
 :else
 set arg1=%~1
 set arg2=%~2
@@ -651,8 +654,8 @@ set opened_file=sys.bat
 echo(^) else (
 )>>%opened_file%
 exit /b
-:endfunction15142913388
-goto endfunction16142913388
+:endfunction15231012909
+goto endfunction16231012909
 :skey
 set arg1=%~1
 set arg2=%~2
@@ -669,8 +672,8 @@ echo(^)^>"%%temp%%\%%skey_id%%.vbs"
 echo(start "" "%%temp%%\%%skey_id%%.vbs"
 )>>%opened_file%
 exit /b
-:endfunction16142913388
-goto endfunction17142913388
+:endfunction16231012909
+goto endfunction17231012909
 :file
 set arg1=%~1
 set arg2=%~2
@@ -692,8 +695,8 @@ echo(set opened_file=!cmdc!
 echo((
 )>>%opened_file%
 exit /b
-:endfunction17142913388
-goto endfunction18142913388
+:endfunction17231012909
+goto endfunction18231012909
 :append
 set arg1=%~1
 set arg2=%~2
@@ -702,8 +705,8 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%A
 exit /b
-:endfunction18142913388
-goto endfunction19142913388
+:endfunction18231012909
+goto endfunction19231012909
 :write
 set arg1=%~1
 set arg2=%~2
@@ -712,8 +715,8 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%R
 exit /b
-:endfunction19142913388
-goto endfunction20142913388
+:endfunction19231012909
+goto endfunction20231012909
 :open
 set arg1=%~1
 set arg2=%~2
@@ -725,8 +728,8 @@ set opened_file=sys.bat
 echo(start "" !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction20142913388
-goto endfunction21142913388
+:endfunction20231012909
+goto endfunction21231012909
 :setQuick
 set arg1=%~1
 set arg2=%~2
@@ -739,8 +742,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction21142913388
-goto endfunction22142913388
+:endfunction21231012909
+goto endfunction22231012909
 :return
 set arg1=%~1
 set arg2=%~2
@@ -749,11 +752,12 @@ set arg4=%~4
 set arg5=%~5
 set opened_file=sys.bat
 (
+echo(set /a traceback_callNum=%%traceback_callNum%%-1
 echo(exit /b
 )>>%opened_file%
 exit /b
-:endfunction22142913388
-goto endfunction23142913388
+:endfunction22231012909
+goto endfunction23231012909
 :break
 set arg1=%~1
 set arg2=%~2
@@ -766,8 +770,8 @@ set opened_file=sys.bat
 echo(goto afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction23142913388
-goto endfunction24142913388
+:endfunction23231012909
+goto endfunction24231012909
 :closeBracket
 set arg1=%~1
 set arg2=%~2
@@ -787,8 +791,8 @@ call :endAppend
 )
 set bracketString=%bracketString:~0,-1%
 exit /b
-:endfunction24142913388
-goto endfunction25142913388
+:endfunction24231012909
+goto endfunction25231012909
 :repeat
 set arg1=%~1
 set arg2=%~2
@@ -816,8 +820,8 @@ echo(exit /b
 echo(:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction25142913388
-goto endfunction26142913388
+:endfunction25231012909
+goto endfunction26231012909
 :incr
 set arg1=%~1
 set arg2=%~2
@@ -829,8 +833,8 @@ set opened_file=sys.bat
 echo(set /a !cmdc!=%%!cmdc!%%+1
 )>>%opened_file%
 exit /b
-:endfunction26142913388
-goto endfunction27142913388
+:endfunction26231012909
+goto endfunction27231012909
 :while
 set arg1=%~1
 set arg2=%~2
@@ -861,8 +865,8 @@ echo(^)
 echo(:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction27142913388
-goto endfunction28142913388
+:endfunction27231012909
+goto endfunction28231012909
 :endWhile
 set arg1=%~1
 set arg2=%~2
@@ -877,8 +881,8 @@ echo(goto while%whileWriting%%moduleID%
 echo(:afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction28142913388
-goto endfunction29142913388
+:endfunction28231012909
+goto endfunction29231012909
 :play
 set arg1=%~1
 set arg2=%~2
@@ -890,8 +894,8 @@ set opened_file=sys.bat
 echo(powershell [console]::Beep(!cmdc!^)
 )>>%opened_file%
 exit /b
-:endfunction29142913388
-goto endfunction30142913388
+:endfunction29231012909
+goto endfunction30231012909
 :endWrite
 set arg1=%~1
 set arg2=%~2
@@ -903,8 +907,8 @@ set opened_file=sys.bat
 echo(^)^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction30142913388
-goto endfunction31142913388
+:endfunction30231012909
+goto endfunction31231012909
 :endAppend
 set arg1=%~1
 set arg2=%~2
@@ -916,8 +920,8 @@ set opened_file=sys.bat
 echo(^)^>^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction31142913388
-goto endfunction32142913388
+:endfunction31231012909
+goto endfunction32231012909
 :mkfolder
 set arg1=%~1
 set arg2=%~2
@@ -929,8 +933,8 @@ set opened_file=sys.bat
 echo(md !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction32142913388
-goto endfunction33142913388
+:endfunction32231012909
+goto endfunction33231012909
 :mkfile
 set arg1=%~1
 set arg2=%~2
@@ -942,8 +946,8 @@ set opened_file=sys.bat
 echo(echo.^>!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction33142913388
-goto endfunction34142913388
+:endfunction33231012909
+goto endfunction34231012909
 :del
 set arg1=%~1
 set arg2=%~2
@@ -955,8 +959,8 @@ set opened_file=sys.bat
 echo(del !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction34142913388
-goto endfunction35142913388
+:endfunction34231012909
+goto endfunction35231012909
 :ren
 set arg1=%~1
 set arg2=%~2
@@ -968,8 +972,8 @@ set opened_file=sys.bat
 echo(ren !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction35142913388
-goto endfunction36142913388
+:endfunction35231012909
+goto endfunction36231012909
 :download
 set arg1=%~1
 set arg2=%~2
@@ -981,8 +985,8 @@ set opened_file=sys.bat
 echo(powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
 )>>%opened_file%
 exit /b
-:endfunction36142913388
-goto endfunction37142913388
+:endfunction36231012909
+goto endfunction37231012909
 :prompt
 set arg1=%~1
 set arg2=%~2
@@ -994,8 +998,8 @@ set opened_file=sys.bat
 echo(set /p !cmdc!=""
 )>>%opened_file%
 exit /b
-:endfunction37142913388
-goto endfunction38142913388
+:endfunction37231012909
+goto endfunction38231012909
 :define
 set arg1=%~1
 set arg2=%~2
@@ -1014,8 +1018,8 @@ call :defineFunction
 call :plainDefine
 )
 exit /b
-:endfunction38142913388
-goto endfunction39142913388
+:endfunction38231012909
+goto endfunction39231012909
 :definePrompt
 set arg1=%~1
 set arg2=%~2
@@ -1028,8 +1032,8 @@ set opened_file=sys.bat
 echo(set /p !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction39142913388
-goto endfunction40142913388
+:endfunction39231012909
+goto endfunction40231012909
 :defineMath
 set arg1=%~1
 set arg2=%~2
@@ -1042,8 +1046,8 @@ set opened_file=sys.bat
 echo(set /a !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction40142913388
-goto endfunction41142913388
+:endfunction40231012909
+goto endfunction41231012909
 :defineText
 set arg1=%~1
 set arg2=%~2
@@ -1056,8 +1060,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction41142913388
-goto endfunction42142913388
+:endfunction41231012909
+goto endfunction42231012909
 :plainDefine
 set arg1=%~1
 set arg2=%~2
@@ -1069,8 +1073,8 @@ set opened_file=sys.bat
 echo(set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction42142913388
-goto endfunction43142913388
+:endfunction42231012909
+goto endfunction43231012909
 :callFunction
 set arg1=%~1
 set arg2=%~2
@@ -1080,11 +1084,17 @@ set arg5=%~5
 set cmdc=!cmd:~1!
 set opened_file=sys.bat
 (
+echo(set /a traceback_callNum=%%traceback_callNum%%+1
+echo(set traceback_line_%%traceback_callNum%%=!cmd!
+echo(set traceback_linenum_%%traceback_callNum%%=%line%
+echo(set traceback_module_%%traceback_callNum%%=%moduleName%
+echo(set traceback_moduleID_%%traceback_callNum%%=%moduleID%
+echo(set traceback_function_%%traceback_callNum%%=%functionName%
 echo(call :!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction43142913388
-goto endfunction44142913388
+:endfunction43231012909
+goto endfunction44231012909
 :goto
 set arg1=%~1
 set arg2=%~2
@@ -1096,8 +1106,8 @@ set opened_file=sys.bat
 echo(goto !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction44142913388
-goto endfunction45142913388
+:endfunction44231012909
+goto endfunction45231012909
 :place
 set arg1=%~1
 set arg2=%~2
@@ -1109,8 +1119,8 @@ set opened_file=sys.bat
 echo(:!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction45142913388
-goto endfunction46142913388
+:endfunction45231012909
+goto endfunction46231012909
 :title
 set arg1=%~1
 set arg2=%~2
@@ -1122,8 +1132,8 @@ set opened_file=sys.bat
 echo(title !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction46142913388
-goto endfunction47142913388
+:endfunction46231012909
+goto endfunction47231012909
 :comment
 set arg1=%~1
 set arg2=%~2
@@ -1136,8 +1146,8 @@ set opened_file=sys.bat
 echo(::!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction47142913388
-goto endfunction48142913388
+:endfunction47231012909
+goto endfunction48231012909
 :endFunction
 set arg1=%~1
 set arg2=%~2
@@ -1147,12 +1157,13 @@ set arg5=%~5
 set functionName=[module]
 set opened_file=sys.bat
 (
+echo(set /a traceback_callNum=%%traceback_callNum%%-1
 echo(exit /b
 echo(:endfunction%functionNumber%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction48142913388
-goto endfunction49142913388
+:endfunction48231012909
+goto endfunction49231012909
 :defineFunction
 set arg1=%~1
 set arg2=%~2
@@ -1174,8 +1185,8 @@ echo(set arg4=%%~4
 echo(set arg5=%%~5
 )>>%opened_file%
 exit /b
-:endfunction49142913388
-goto endfunction50142913388
+:endfunction49231012909
+goto endfunction50231012909
 :batcmd
 set arg1=%~1
 set arg2=%~2
@@ -1187,8 +1198,8 @@ set opened_file=sys.bat
 echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction50142913388
-goto endfunction51142913388
+:endfunction50231012909
+goto endfunction51231012909
 :endIf
 set arg1=%~1
 set arg2=%~2
@@ -1200,8 +1211,8 @@ set opened_file=sys.bat
 echo(^)
 )>>%opened_file%
 exit /b
-:endfunction51142913388
-goto endfunction52142913388
+:endfunction51231012909
+goto endfunction52231012909
 :if
 set arg1=%~1
 set arg2=%~2
@@ -1218,8 +1229,8 @@ set opened_file=sys.bat
 echo(if !cmdc! ^(
 )>>%opened_file%
 exit /b
-:endfunction52142913388
-goto endfunction53142913388
+:endfunction52231012909
+goto endfunction53231012909
 :disp
 set arg1=%~1
 set arg2=%~2
@@ -1231,8 +1242,8 @@ set opened_file=sys.bat
 echo(mode 1000
 )>>%opened_file%
 exit /b
-:endfunction53142913388
-goto endfunction54142913388
+:endfunction53231012909
+goto endfunction54231012909
 :sortColours
 set arg1=%~1
 set arg2=%~2
@@ -1281,8 +1292,8 @@ set cmdc=!cmdc:#e=%%esc93m%%!
 set cmdc=!cmdc:#f=%%esc97m%%!
 set cmdc=!cmdc!%%esc0m%%
 exit /b
-:endfunction54142913388
-goto endfunction55142913388
+:endfunction54231012909
+goto endfunction55231012909
 :print
 set arg1=%~1
 set arg2=%~2
@@ -1308,8 +1319,8 @@ set opened_file=sys.bat
 echo(echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction55142913388
-goto endfunction56142913388
+:endfunction55231012909
+goto endfunction56231012909
 :emptyPrint
 set arg1=%~1
 set arg2=%~2
@@ -1321,8 +1332,8 @@ set opened_file=sys.bat
 echo(echo.
 )>>%opened_file%
 exit /b
-:endfunction56142913388
-goto endfunction57142913388
+:endfunction56231012909
+goto endfunction57231012909
 :end
 set arg1=%~1
 set arg2=%~2
@@ -1334,8 +1345,8 @@ set opened_file=sys.bat
 echo(exit
 )>>%opened_file%
 exit /b
-:endfunction57142913388
-goto endfunction58142913388
+:endfunction57231012909
+goto endfunction58231012909
 :wait
 set arg1=%~1
 set arg2=%~2
@@ -1348,8 +1359,8 @@ call :waitUser
 call :waitTime
 )
 exit /b
-:endfunction58142913388
-goto endfunction59142913388
+:endfunction58231012909
+goto endfunction59231012909
 :waitUser
 set arg1=%~1
 set arg2=%~2
@@ -1361,8 +1372,8 @@ set opened_file=sys.bat
 echo(pause^>nul
 )>>%opened_file%
 exit /b
-:endfunction59142913388
-goto endfunction60142913388
+:endfunction59231012909
+goto endfunction60231012909
 :waitTime
 set arg1=%~1
 set arg2=%~2
@@ -1374,8 +1385,8 @@ set opened_file=sys.bat
 echo(timeout /t !cmdc! /nobreak ^>nul
 )>>%opened_file%
 exit /b
-:endfunction60142913388
-goto endfunction61142913388
+:endfunction60231012909
+goto endfunction61231012909
 :clear
 set arg1=%~1
 set arg2=%~2
@@ -1387,28 +1398,40 @@ set opened_file=sys.bat
 echo(cls
 )>>%opened_file%
 exit /b
-:endfunction61142913388
-goto endfunction62142913388
+:endfunction61231012909
+goto endfunction62231012909
 :raise
 set arg1=%~1
 set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
+set /a tracing_back=%tracing_back%+1
 set opened_file=sys.bat
 (
 echo(echo. 
 echo(color 0c
 echo(echo Exception: !cmdc!
+echo(echo.
+echo(echo Traceback [most recent call last]:
+echo(echo.
+echo(set tracing_back=0
+echo(:tracing_back_%tracing_back%_%moduleID%
+echo(if %%tracing_back%%==%%traceback_callNum%% goto end_tracing_back_%tracing_back%_%moduleID%
+echo(set /a tracing_back=%%tracing_back%%+1
+echo(call echo %%%%traceback_module_%%tracing_back%%%%%% [module ID %%%%traceback_moduleID_%%tracing_back%%%%%%], line %%%%traceback_linenum_%%tracing_back%%%%%%, in %%%%traceback_function_%%tracing_back%%%%%%:
+echo(call echo %%%%traceback_line_%%tracing_back%%%%%%
+echo(goto tracing_back_%tracing_back%_%moduleID%
+echo(:end_tracing_back_%tracing_back%_%moduleID%
 echo(echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:
 echo(echo !cmd!
-echo(echo Nest: %bracketString%
+echo(echo.
 echo(pause
 echo(exit
 )>>%opened_file%
 exit /b
-:endfunction62142913388
-goto endfunction63142913388
+:endfunction62231012909
+goto endfunction63231012909
 :import
 set arg1=%~1
 set arg2=%~2
@@ -1440,8 +1463,8 @@ exit /b
 )
 call :import_net
 exit /b
-:endfunction63142913388
-goto endfunction64142913388
+:endfunction63231012909
+goto endfunction64231012909
 :import_net
 set arg1=%~1
 set arg2=%~2
@@ -1454,7 +1477,7 @@ if not exist download (
 echo. 
 color 0c
 echo Exception:  Error: Cannot find online module.
-echo C2B Compiler [module ID 142913388], line 855, in import_net:
+echo C2B Compiler [module ID 231012909], line 878, in import_net:
 echo raise Error: Cannot find online module.
 echo Nest: FI
 pause
@@ -1467,8 +1490,8 @@ echo.
 )>>%opened_file%
 del download
 exit /b
-:endfunction64142913388
-goto endfunction65142913388
+:endfunction64231012909
+goto endfunction65231012909
 :import_local
 set arg1=%~1
 set arg2=%~2
@@ -1479,7 +1502,7 @@ if not exist "!cmdc!.bat" (
 echo. 
 color 0c
 echo Exception:  Error: Cannot find local module.
-echo C2B Compiler [module ID 142913388], line 865, in import_local:
+echo C2B Compiler [module ID 231012909], line 888, in import_local:
 echo raise Error: Cannot find local module.
 echo Nest: FI
 pause
@@ -1491,8 +1514,8 @@ type "!cmdc!.bat"
 echo.
 )>>%opened_file%
 exit /b
-:endfunction65142913388
-goto endfunction66142913388
+:endfunction65231012909
+goto endfunction66231012909
 :import_inbuilt
 set arg1=%~1
 set arg2=%~2
@@ -1503,7 +1526,7 @@ if not exist "%~dp0modules\!cmdc!.bat" (
 echo. 
 color 0c
 echo Exception:  Error: Cannot find inbuilt module
-echo C2B Compiler [module ID 142913388], line 874, in import_inbuilt:
+echo C2B Compiler [module ID 231012909], line 897, in import_inbuilt:
 echo raise Error: Cannot find inbuilt module
 echo Nest: FI
 pause
@@ -1515,8 +1538,8 @@ type "%~dp0modules\!cmdc!.bat"
 echo.
 )>>%opened_file%
 exit /b
-:endfunction66142913388
-goto endfunction67142913388
+:endfunction66231012909
+goto endfunction67231012909
 :export
 set arg1=%~1
 set arg2=%~2
@@ -1532,4 +1555,4 @@ cls
 call %new_location%
 exit
 exit /b
-:endfunction67142913388
+:endfunction67231012909
