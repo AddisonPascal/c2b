@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.2
-[version=0.8.2]
+# Version 0.8.3
+[version=0.8.3]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -86,6 +86,11 @@ if[%1.==.] {
 	del[sys.bat]
 	raise Error: Use c2b compiler by opening a c2b file with it.
 }
+define.function[getFilename] {
+	[fileName=%~nx1]
+}
+$getFilename %1
+[moduleName=%fileName:~0,-4%]
 clear
 [location=%1]
 cmd[(]
@@ -807,7 +812,7 @@ define.function[raise] {
 		print[echo. ]
 		print[color 0c]
 		print[echo Exception: !cmdc!]
-		print[echo Error occured in module %moduleID%, line %line%:]
+		print[echo Error occured in module %moduleName% [module ID %moduleID%] in line %line%:]
 		print[echo !cmd!]
 		print[echo Nest: %bracketString%]
 		print[pause]
