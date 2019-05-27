@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.3
-[version=0.8.3]
+# Version 0.8.4
+[version=0.8.4]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -8,6 +8,7 @@ title[C2B Compiler v%version%]
 [bracketString=]
 [functionNumber=0]
 [moduleID=%random%%random%]
+[functionName=[module]]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
@@ -669,6 +670,7 @@ define.function[comment] {
 	}
 }
 define.function[endFunction] {
+	[functionName=[module]]
 	file.append[sys.bat] {
 		print[exit /b]
 		print[:endfunction%functionNumber%%moduleID%]
@@ -678,6 +680,7 @@ define.function[defineFunction] {
 	[bracketString=%bracketString%F]
 	incr[functionNumber]
 	[cmdc=!cmd:~16,-3!]
+	[functionName=!cmdc!]
 	file.append[sys.bat] {
 		print[goto endfunction%functionNumber%%moduleID%]
 		print[:!cmdc!]
@@ -812,7 +815,7 @@ define.function[raise] {
 		print[echo. ]
 		print[color 0c]
 		print[echo Exception: !cmdc!]
-		print[echo Error occured in module %moduleName% [module ID %moduleID%] in line %line%:]
+		print[echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:]
 		print[echo !cmd!]
 		print[echo Nest: %bracketString%]
 		print[pause]
