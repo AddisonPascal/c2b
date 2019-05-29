@@ -1,4 +1,43 @@
 define.function[print] {
 	print[%*]
 }
+define.function[print[bold]] {
+	print[@bold%*]
+}
+define.function[print[underline]] {
+	print[@u%*]
+}
+define.function[print[inverse]] {
+	print[@i%*]
+}
+define.function[print[black]] {
+	print[#0%*]
+}
+define.function[print[blue]] {
+	print[#1%*]
+}
+define.function[print[green]] {
+	print[#2%*]
+}
+define.function[print[aqua]] {
+	print[#3%*]
+}
+define.function[print[red]] {
+	print[#4%*]
+}
+define.function[print[purple]] {
+	print[#5%*]
+}
+define.function[print[yellow]] {
+	print[#6%*]
+}
+define.function[print[white]] {
+	print[#7%*]
+}
+define.function[print[gray]] {
+	print[#8%*]
+}
+define.function[print[grey]] {
+	print[#8%*]
+}
 export

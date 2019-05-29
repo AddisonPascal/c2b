@@ -1,11 +1,11 @@
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.7. 
-rem Module ID: 667815787
+rem Module ID: 1149820723
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10667815787
+if errorlevel 1 goto noWin101149820723
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile667815787
-:noWin10667815787
+goto startOfFile1149820723
+:noWin101149820723
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,22 +64,22 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile667815787
-:alertJS667815787
+goto startOfFile1149820723
+:alertJS1149820723
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn667815787
+:ifIn1149820723
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_667815787
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_667815787
+:tracing_back_1149820723
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_1149820723
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_667815787
-:end_tracing_back_667815787
+goto tracing_back_1149820723
+:end_tracing_back_1149820723
 exit /b
-:startOfFile667815787
+:startOfFile1149820723
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.7. 
 rem Module ID: 62277067
@@ -2153,12 +2153,12 @@ exit /b
 
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.7. 
-rem Module ID: 653712358
+rem Module ID: 1144923337
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10653712358
+if errorlevel 1 goto noWin101144923337
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -2197,8 +2197,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile653712358
-:noWin10653712358
+goto startOfFile1144923337
+:noWin101144923337
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -2217,23 +2217,23 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile653712358
-:alertJS653712358
+goto startOfFile1144923337
+:alertJS1144923337
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn653712358
+:ifIn1144923337
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_653712358
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_653712358
+:tracing_back_1144923337
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_1144923337
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_653712358
-:end_tracing_back_653712358
+goto tracing_back_1144923337
+:end_tracing_back_1144923337
 exit /b
-:startOfFile653712358
-goto endfunction1653712358
+:startOfFile1144923337
+goto endfunction11144923337
 :print
 set arg1=%~1
 set arg2=%~2
@@ -2243,7 +2243,150 @@ set arg5=%~5
 echo(%*%esc0m%
 set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction1653712358
+:endfunction11144923337
+goto endfunction21144923337
+:print[bold]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc1m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction21144923337
+goto endfunction31144923337
+:print[underline]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc4m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction31144923337
+goto endfunction41144923337
+:print[inverse]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc7m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction41144923337
+goto endfunction51144923337
+:print[black]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc30m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction51144923337
+goto endfunction61144923337
+:print[blue]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc34m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction61144923337
+goto endfunction71144923337
+:print[green]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc32m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction71144923337
+goto endfunction81144923337
+:print[aqua]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc36m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction81144923337
+goto endfunction91144923337
+:print[red]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc31m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction91144923337
+goto endfunction101144923337
+:print[purple]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc35m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction101144923337
+goto endfunction111144923337
+:print[yellow]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc33m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction111144923337
+goto endfunction121144923337
+:print[white]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc37m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction121144923337
+goto endfunction131144923337
+:print[gray]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc90m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction131144923337
+goto endfunction141144923337
+:print[grey]
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+echo(%esc90m%%*%esc0m%
+set /a traceback_callNum=%traceback_callNum%-1
+exit /b
+:endfunction141144923337
 
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.8.7. 
