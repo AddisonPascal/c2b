@@ -81,8 +81,8 @@ goto tracing_back_82211478
 exit /b
 :startOfFile82211478
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.8.6
-set version=0.8.6
+:: Version 0.8.7
+set version=0.8.7
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -1951,7 +1951,7 @@ echo(echo.
 echo(echo Traceback [most recent call last]:
 echo(echo.
 echo(set tracing_back=0
-echo(:call tracing_back_%moduleID%
+echo(call :tracing_back_%moduleID%
 echo(echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:
 echo(echo !cmd!
 echo(echo.

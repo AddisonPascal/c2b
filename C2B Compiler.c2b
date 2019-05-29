@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.6
-[version=0.8.6]
+# Version 0.8.7
+[version=0.8.7]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -837,7 +837,7 @@ define.function[raise] {
 		print[echo Traceback [most recent call last]:]
 		print[echo.]
 		print[set tracing_back=0]
-		print[:call tracing_back_%moduleID%]
+		print[call :tracing_back_%moduleID%]
 		print[echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:]
 		print[echo !cmd!]
 		print[echo.]
