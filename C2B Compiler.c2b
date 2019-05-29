@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.5
-[version=0.8.5]
+# Version 0.8.6
+[version=0.8.6]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -9,7 +9,6 @@ title[C2B Compiler v%version%]
 [functionNumber=0]
 [moduleID=%random%%random%]
 [functionName=[module]]
-[tracing_back=0]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
@@ -84,6 +83,14 @@ file.write[sys.bat] {
 	print[:ifIn%moduleID%]
 	print[echo %%~2 ^| findstr /c:%%~1]
 	print[exit /b %errorlevel%]
+	print[:tracing_back_%moduleID%]
+	print[if %%tracing_back%%==%%traceback_callNum%% goto end_tracing_back_%moduleID%]
+	print[set /a tracing_back=%%tracing_back%%+1]
+	print[call echo %%%%traceback_module_%%tracing_back%%%%%% [module ID %%%%traceback_moduleID_%%tracing_back%%%%%%], line %%%%traceback_linenum_%%tracing_back%%%%%%, in %%%%traceback_function_%%tracing_back%%%%%%:]
+	print[call echo %%%%traceback_line_%%tracing_back%%%%%%]
+	print[goto tracing_back_%moduleID%]
+	print[:end_tracing_back_%moduleID%]
+	print[exit /b]
 	print[:startOfFile%moduleID%]
 }
 if[%1.==.] {
@@ -340,7 +347,7 @@ if[/i "!cmd:~0,6!"=="import"] {
 	return
 }
 if[/i "!cmd:~0,5!"=="raise"] {
-	[cmdc=!cmd:~5!]
+	[cmdc=!cmd:~6!]
 	$raise
 	return
 }
@@ -822,7 +829,6 @@ define.function[clear] {
 	}
 }
 define.function[raise] {
-	incr[tracing_back]
 	file.append[sys.bat] {
 		print[echo. ]
 		print[color 0c]
@@ -831,13 +837,7 @@ define.function[raise] {
 		print[echo Traceback [most recent call last]:]
 		print[echo.]
 		print[set tracing_back=0]
-		print[:tracing_back_%tracing_back%_%moduleID%]
-		print[if %%tracing_back%%==%%traceback_callNum%% goto end_tracing_back_%tracing_back%_%moduleID%]
-		print[set /a tracing_back=%%tracing_back%%+1]
-		print[call echo %%%%traceback_module_%%tracing_back%%%%%% [module ID %%%%traceback_moduleID_%%tracing_back%%%%%%], line %%%%traceback_linenum_%%tracing_back%%%%%%, in %%%%traceback_function_%%tracing_back%%%%%%:]
-		print[call echo %%%%traceback_line_%%tracing_back%%%%%%]
-		print[goto tracing_back_%tracing_back%_%moduleID%]
-		print[:end_tracing_back_%tracing_back%_%moduleID%]
+		print[:call tracing_back_%moduleID%]
 		print[echo %moduleName% [module ID %moduleID%], line %line%, in %functionName%:]
 		print[echo !cmd!]
 		print[echo.]
@@ -907,6 +907,7 @@ define.function[export] {
 	del[sys.bat]
 	title[ ]
 	cmd[endlocal]
+	[traceback_callNum=0]
 	clear
 	cmd[call %new_location%]
 	end[file]
