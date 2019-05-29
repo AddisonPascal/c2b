@@ -1,11 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.8.7. 
-rem Module ID: 625327518
+rem Compiled by the c2b Compiler from c2b v0.8.8. 
+rem Module ID: 1530678
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10625327518
+if errorlevel 1 goto noWin101530678
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile625327518
-:noWin10625327518
+goto startOfFile1530678
+:noWin101530678
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,23 +64,23 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile625327518
-:alertJS625327518
+goto startOfFile1530678
+:alertJS1530678
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn625327518
+:ifIn1530678
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_625327518
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_625327518
+:tracing_back_1530678
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_1530678
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_625327518
-:end_tracing_back_625327518
+goto tracing_back_1530678
+:end_tracing_back_1530678
 exit /b
-:startOfFile625327518
-goto endfunction1625327518
+:startOfFile1530678
+goto endfunction11530678
 :clear
 set arg1=%~1
 set arg2=%~2
@@ -88,6 +88,5 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 cls
-set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction1625327518
+:endfunction11530678

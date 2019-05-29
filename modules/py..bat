@@ -1,11 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.8.7. 
-rem Module ID: 657610267
+rem Compiled by the c2b Compiler from c2b v0.8.8. 
+rem Module ID: 19291263
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10657610267
+if errorlevel 1 goto noWin1019291263
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile657610267
-:noWin10657610267
+goto startOfFile19291263
+:noWin1019291263
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,23 +64,23 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile657610267
-:alertJS657610267
+goto startOfFile19291263
+:alertJS19291263
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn657610267
+:ifIn19291263
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_657610267
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_657610267
+:tracing_back_19291263
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_19291263
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_657610267
-:end_tracing_back_657610267
+goto tracing_back_19291263
+:end_tracing_back_19291263
 exit /b
-:startOfFile657610267
-goto endfunction1657610267
+:startOfFile19291263
+goto endfunction119291263
 :py
 set arg1=%~1
 set arg2=%~2
@@ -89,6 +89,5 @@ set arg4=%~4
 set arg5=%~5
 set python_args=%*
 py -c "%python_args:"='''%"
-set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction1657610267
+:endfunction119291263

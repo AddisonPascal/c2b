@@ -1,11 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.8.7. 
-rem Module ID: 662918401
+rem Compiled by the c2b Compiler from c2b v0.8.8. 
+rem Module ID: 198830894
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10662918401
+if errorlevel 1 goto noWin10198830894
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile662918401
-:noWin10662918401
+goto startOfFile198830894
+:noWin10198830894
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,23 +64,23 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile662918401
-:alertJS662918401
+goto startOfFile198830894
+:alertJS198830894
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn662918401
+:ifIn198830894
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_662918401
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_662918401
+:tracing_back_198830894
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_198830894
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_662918401
-:end_tracing_back_662918401
+goto tracing_back_198830894
+:end_tracing_back_198830894
 exit /b
-:startOfFile662918401
-goto endfunction1662918401
+:startOfFile198830894
+goto endfunction1198830894
 :skey
 set arg1=%~1
 set arg2=%~2
@@ -93,6 +93,5 @@ echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "%*"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
-set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction1662918401
+:endfunction1198830894
