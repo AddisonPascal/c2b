@@ -1,9 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.8.0. 
-rem Module ID: 316232749
+rem Compiled by the c2b Compiler from c2b v0.8.7. 
+rem Module ID: 662918401
+if "%alreadyStarted%"=="" set traceback_callNum=0
+set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10316232749
+if errorlevel 1 goto noWin10662918401
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -42,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile316232749
-:noWin10316232749
+goto startOfFile662918401
+:noWin10662918401
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -62,15 +64,23 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile316232749
-:alertJS316232749
+goto startOfFile662918401
+:alertJS662918401
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn316232749
+:ifIn662918401
 echo %~2 | findstr /c:%~1
 exit /b 0
-:startOfFile316232749
-goto endfunction1316232749
+:tracing_back_662918401
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_662918401
+set /a tracing_back=%tracing_back%+1
+call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
+call echo %%traceback_line_%tracing_back%%%
+goto tracing_back_662918401
+:end_tracing_back_662918401
+exit /b
+:startOfFile662918401
+goto endfunction1662918401
 :skey
 set arg1=%~1
 set arg2=%~2
@@ -83,5 +93,6 @@ echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "%*"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
+set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction1316232749
+:endfunction1662918401
