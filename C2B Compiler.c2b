@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.7
-[version=0.8.7]
+# Version 0.8.8
+[version=0.8.8]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -490,7 +490,6 @@ define.function[setQuick] {
 }
 define.function[return] {
 	file.append[sys.bat] {
-		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 		print[exit /b]
 	}
 }
@@ -663,6 +662,7 @@ define.function[callFunction] {
 		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
 		print[set traceback_function_%%traceback_callNum%%=%functionName%]
 		print[call :!cmdc!]
+		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
 define.function[goto] {
@@ -689,7 +689,6 @@ define.function[comment] {
 define.function[endFunction] {
 	[functionName=[module]]
 	file.append[sys.bat] {
-		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 		print[exit /b]
 		print[:endfunction%functionNumber%%moduleID%]
 	}
