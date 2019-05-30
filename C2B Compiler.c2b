@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.8
-[version=0.8.8]
+# Version 0.8.9
+[version=0.8.9]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -9,6 +9,7 @@ title[C2B Compiler v%version%]
 [functionNumber=0]
 [moduleID=%random%%random%]
 [functionName=[module]]
+[returnID=0]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
@@ -484,12 +485,55 @@ define.function[open] {
 }
 define.function[setQuick] {
 	[cmdc=!cmd:~1,1!!cmdc!]
+	$functionToVar
 	file.append[sys.bat] {
-		print[set !cmdc!]
+		print[set /a tbcn1=%%traceback_callNum%%+1]
+		print[call set !cmdc!]
 	}
 }
+define.function[functionToVar] {
+	incr[returnID]
+	[curChar=0]
+	cmd[echo !cmdc! | findstr /c:"$" >nul]
+	if[not errorlevel 1] {
+		goto[looking1]
+	} else {
+		return
+	}
+	place[looking1]
+	if["!cmdc:~%curChar%,1!"=="$"] {
+		goto[found1]
+	}
+	incr[curChar]
+	goto[looking1]
+	place[found1]
+	[func=]
+	place[looking2]
+	incr[curChar]
+	if["!cmdc:~%curChar%,1!"=="$"] {
+		goto[found2]
+	}
+	[func=!func!!cmdc:~%curChar%,1!]
+	goto[looking2]
+	place[found2]
+	file.append[sys.bat] {
+		print[set returnID=%returnID%]
+		print[set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[set traceback_function_%%traceback_callNum%%=%functionName%]
+		print[call :!func!]
+		print[set /a traceback_callNum=%%traceback_callNum%%-1]
+	}
+	[cmdc=!cmdc:$%func%$=%%%%toReturn_%returnID%_%%tbcn1%%%%%%!]
+	$functionToVar
+	return
+}	
 define.function[return] {
 	file.append[sys.bat] {
+		print[set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!]
 		print[exit /b]
 	}
 }
