@@ -1,0 +1,7 @@
+import statements_as_functions.
+define.function[exec] {
+	define[toExec=%*]
+	define[toExec=%toExec:[= %]
+	$%toExec:]= %
+}
+export
