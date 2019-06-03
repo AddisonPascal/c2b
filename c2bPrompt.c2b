@@ -1,0 +1,11 @@
+title[c2b Prompt - Loading modules...]
+import exec.
+color[0c]
+title[c2b Prompt]
+print[c2b Prompt for c2b v0.8.9]
+print[]
+while[True] {
+	define.prompt[toExec=c2b %~dp0^> ]
+	$exec %toExec%
+}
+export
