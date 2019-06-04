@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.8.9
-[version=0.8.9]
+# Version 0.9.0
+[version=0.9.0]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -142,6 +142,11 @@ if["!cmd:~0,1!"=="#"] {
 $comment
 return
 }
+if[/i "!cmd:~0,6!"=="printf"] {
+[cmdc=!cmd:~7,-1!]
+$printf
+return
+}
 if[/i "!cmd:~0,5!"=="print"] {
 [cmdc=!cmd:~6,-1!]
 $print
@@ -277,6 +282,11 @@ if[/i "!cmd:~0,5!"=="break"] {
 $break
 return
 }
+if[/i "!cmd:~0,7!"=="returnf"] {
+	[cmdc=!cmd:~8!]
+	$returnf
+	return
+}
 if[/i "!cmd:~0,6!"=="return"] {
 [cmdc=!cmd:~7,-1!]
 $return
@@ -351,6 +361,21 @@ if[/i "!cmd:~0,5!"=="raise"] {
 	[cmdc=!cmd:~6!]
 	$raise
 	return
+}
+if[/i "!cmd:~0,2!"=="f$"] {
+	[cmdc=!cmd:~2!]
+	$callf
+	return
+}
+if["!cmd:~0,4!"=="setf"] {
+[cmdc=!cmd:~5,-1!]
+$setf
+return
+}
+if["!cmd:~0,5!"=="mathf"] {
+[cmdc=!cmd:~6,-1!]
+$mathf
+return
 }
 if["!cmd:~0,1!"=="["] {
 [cmdc=!cmd:~2,-1!]
@@ -485,10 +510,22 @@ define.function[open] {
 }
 define.function[setQuick] {
 	[cmdc=!cmd:~1,1!!cmdc!]
+	file.append[sys.bat] {
+		print[set !cmdc!]
+	}
+}
+define.function[setf] {
 	$functionToVar
 	file.append[sys.bat] {
 		print[set /a tbcn1=%%traceback_callNum%%+1]
 		print[call set !cmdc!]
+	}
+}
+define.function[mathf] {
+	$functionToVar
+	file.append[sys.bat] {
+		print[set /a tbcn1=%%traceback_callNum%%+1]
+		print[call set /a !cmdc!]
 	}
 }
 define.function[functionToVar] {
@@ -534,6 +571,15 @@ define.function[functionToVar] {
 define.function[return] {
 	file.append[sys.bat] {
 		print[set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!]
+		print[exit /b]
+	}
+}
+define.function[returnf] {
+	[cmdc=!cmd:~7!]
+	$functionToVar
+	file.append[sys.bat] {
+		print[set /a tbcn1=%%traceback_callNum%%+1]
+		print[call set toReturn_%%returnID%%_%%traceback_callNum%%=!cmdc!]
 		print[exit /b]
 	}
 }
@@ -709,6 +755,21 @@ define.function[callFunction] {
 		print[set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
+define.function[callf] {
+	[cmdc=!cmd:~2!]
+	$functionToVar
+	file.append[sys.bat] {
+		print[set /a tbcn1=%%traceback_callNum%%+1]
+		print[set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[set traceback_function_%%traceback_callNum%%=%functionName%]
+		print[call call :!cmdc!]
+		print[set /a traceback_callNum=%%traceback_callNum%%-1]
+	}
+}
 define.function[goto] {
 	file.append[sys.bat] {
 		print[goto !cmdc!]
@@ -837,6 +898,14 @@ define.function[print] {
 	place[rawPrint]
 	file.append[sys.bat] {
 		print[echo(!cmdc!]
+	}
+}
+define.function[printf] {
+	$sortColours
+	$functionToVar
+	file.append[sys.bat] {
+		print[set /a tbcn1=%%traceback_callNum%%+1]
+		print[call echo !cmdc!]
 	}
 }
 define.function[emptyPrint] {

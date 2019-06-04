@@ -174,8 +174,15 @@ repeat[10] {
 # Breaks out of a loop:	break
 break
 
-# Returns from a function:	return
-return
+# Returns from a function:	return <value>
+return 10
+# Functions can be called with the setf, printf, f$, and returnf statements:
+# Note that the syntax is similar to a variable, but with $ instead of %:
+setf[result=$function args$]
+printf[Result: $function args$]
+f$run $function args$
+returnf $function args$
+# However, recursion is not yet possible. 
 
 # Sends keys to the focused window:	skey[keys]
 skey[Hello{ENTER}World{!}]
