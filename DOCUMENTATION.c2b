@@ -76,6 +76,13 @@ if[%a%==%b% & %c%==%d% & %e%==%f%] {
 	print[AND it works!]
 }
 
+# Tests if an event is on:	if.event[eventName] {
+#							content
+#							}
+if.event[testEvent] {
+	print[Event is on]
+}
+
 # Executes a Windows Batch / CMD command: cmd[command]
 cmd[echo Hi]
 
@@ -223,6 +230,30 @@ if[%this%==%that%] {
 
 # Alert: pops up a message box:	alert[text]
 alert[Hello!]
+
+# Creates a new process:	process.start[processName] {
+#							content
+#							}
+process.start[testProcess] {
+	while[true] {
+		if.event[testEvent] {
+			event.stop[testEvent]
+			mkfolder[testFolder]
+		}
+	}
+}
+
+# Stops a process:	process.stop[processName]
+process.stop[testProcess]
+
+# Starts an event:	event.start[eventName]
+event.start[testEvent]
+
+# Stops an event:	event.stop[eventName]
+event.stop[testEvent]
+
+# Waits for an event to start:	event.wait[eventName]
+event.wait[eventName]
 
 # Ends compilation. All text past here is ignored: export
 export
