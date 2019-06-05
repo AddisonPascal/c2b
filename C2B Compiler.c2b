@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.9.1
-[version=0.9.1]
+# Version 0.9.2
+[version=0.9.2]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -911,7 +911,7 @@ define.function[batcmd] {
 }
 define.function[endIf] {
 	file.append[sys.bat] {
-		print[^)]
+		print[!pps!!pes!^)]
 	}
 }
 define.function[if] {

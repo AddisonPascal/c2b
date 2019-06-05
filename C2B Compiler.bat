@@ -88,8 +88,8 @@ if not exist "%temp%\Event-%*" goto eventWait304331046 %*
 exit /b
 :startOfFile304331046
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.9.1
-set version=0.9.1
+:: Version 0.9.2
+set version=0.9.2
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
@@ -2177,7 +2177,7 @@ set arg4=%~4
 set arg5=%~5
 set opened_file=sys.bat
 (
-echo(^)
+echo(!pps!!pes!^)
 )>>%opened_file%
 exit /b
 :endfunction65304331046
