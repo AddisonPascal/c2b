@@ -29,6 +29,9 @@ print[@fa@bold@u All 3!]
 out[Hello, ]
 out[World!]
 
+# Rewrites the previous line:	rewrite[text]
+rewrite[Goodbye World]
+
 # Changes the colour of the prompt:	color[hex] or colour[hex]
 color[0a]
 colour[0c]
