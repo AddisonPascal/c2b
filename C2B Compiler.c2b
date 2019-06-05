@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.9.0
-[version=0.9.0]
+# Version 0.9.1
+[version=0.9.1]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -10,6 +10,8 @@ title[C2B Compiler v%version%]
 [moduleID=%random%%random%]
 [functionName=[module]]
 [returnID=0]
+[pps=]
+[pes=]
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
@@ -91,6 +93,13 @@ file.write[sys.bat] {
 	print[call echo %%%%traceback_line_%%tracing_back%%%%%%]
 	print[goto tracing_back_%moduleID%]
 	print[:end_tracing_back_%moduleID%]
+	print[exit /b]
+	print[:forceDelete%moduleID%]
+	print[del %%*]
+	print[if exist %%* call :forceDelete%moduleID% %%*]
+	print[exit /b]
+	print[:eventWait%moduleID%]
+	print[if not exist "%%temp%%\Event-%%*" goto eventWait%moduleID% %%*]
 	print[exit /b]
 	print[:startOfFile%moduleID%]
 }
@@ -181,6 +190,10 @@ if[/i "!cmd:~0,4!"=="ifin"] {
 [cmdc=!cmd:~5,-3!]
 $ifin
 return
+}
+if[/i "!cmd:~0,8!"=="if.event"] {
+	$ifevent
+	return
 }
 if[/i "!cmd:~0,2!"=="if"] {
 [cmdc=!cmd:~3,-1!]
@@ -367,6 +380,14 @@ if[/i "!cmd:~0,2!"=="f$"] {
 	$callf
 	return
 }
+if[/i "!cmd:~0,7!"=="process"] {
+	$process
+	return
+}
+if[/i "!cmd:~0,5!"=="event"] {
+	$event
+	return
+}
 if["!cmd:~0,4!"=="setf"] {
 [cmdc=!cmd:~5,-1!]
 $setf
@@ -389,13 +410,81 @@ define.function[ifin] {
 	[cmdc=!cmdc:^,= ]
 	[bracketString=%bracketString%I]
 	file.append[sys.bat] {
-		print[call :ifIn%moduleID% !cmdc!]
-		print[if %errorlevel% NEQ 1 (]
+		print[!pps!call :ifIn%moduleID% !cmdc!]
+		print[!pps!if %errorlevel% NEQ 1 (]
+	}
+}
+define.function[process] {
+	[cmdc=!cmd:~8!]
+	if["!cmdc:~0,5!"=="start"] {
+		$processStart
+	} elif["!cmdc:~0,4!"=="stop"] {
+		$processStop
+	}
+}
+define.function[processStart] {
+	[cmdc=!cmdc:~6,-3!]
+	[bracketString=%bracketString%P]
+	file.append[sys.bat] {
+		print[!pps!set pnm="%%temp%%\Process-!cmdc!.bat"]
+		print[!pps!(]
+	}
+	[pps=!pps!echo ]
+	[pes=!pes!^^^^]
+}
+define.function[endProcessStart] {
+	[pps=!pps:~0,-5!]
+	[pes=!pes:~0,-4!]
+	file.append[sys.bat] {
+		print[!pps!!pes!^)!pes!^>%%pnm%%]
+		print[!pps!echo CreateObject("Wscript.Shell"!pes!^^^^^).Run """" !pes!^^^^^& WScript.Arguments(0!pes!^^^^^) !pes!^^^^^& """", 0, False!pes!^>"%%temp%%\bkgd.vbs"]
+		print[!pps!"%%temp%%\bkgd.vbs" %%pnm%%]
+	}
+}
+define.function[processStop] {
+	[cmdc=!cmdc:~5,-1!]
+	file.append[sys.bat] {
+		print[!pps!call :forceDelete%moduleID% "%%temp%%\Process-!cmdc!.bat"]
+	}
+}
+define.function[event] {
+	[cmdc=!cmd:~6!]
+	if["!cmdc:~0,5!"=="start"] {
+		$eventStart
+	} elif["!cmdc:~0,4!"=="stop"] {
+		$eventStop
+	} elif["!cmdc:~0,4!"=="wait"] {
+		$eventWait
+	}
+}
+define.function[eventStart] {
+	[cmdc=!cmdc:~6,-1!]
+	file.append[sys.bat] {
+		print[!pps!echo.!pes!^> "%%temp%%\Event-!cmdc!"]
+	}
+}
+define.function[eventStop] {
+	[cmdc=!cmdc:~5,-1!]
+	file.append[sys.bat] {
+		print[!pps!call :forceDelete%moduleID% "%%temp%%\Event-!cmdc!"]
+	}
+}
+define.function[eventWait] {
+	[cmdc=!cmdc:~5,-1!]
+	file.append[sys.bat] {
+		print[!pps!call :eventWait%moduleID% !cmdc!]
+	}
+}
+define.function[ifevent] {
+	[cmdc=!cmd:~9,-3!]
+	[bracketString=%bracketString%I]
+	file.append[sys.bat] {
+		print[!pps!if exist "%%temp%%\Event-!cmdc!" (]
 	}
 }
 define.function[stop] {
 	file.append[sys.bat] {
-		print[taskkill /im !cmdc! /f]
+		print[!pps!taskkill /im !cmdc! /f]
 	}
 }
 define.function[choice] {
@@ -458,28 +547,28 @@ define.function[elif] {
 	[cmdc=!cmdc:^<= LSS !]
 	[cmdc=!cmdc:^&= if !]
 	file.append[sys.bat] {
-		print[^) else if !cmdc! (]
+		print[!pps!!pes!^) else if !cmdc! (]
 	}
 }
 define.function[ps] {
 	[cmdc=!cmdc:"='!]
 	file.append[sys.bat] {
-		print[powershell -Command "!cmdc!"]
+		print[!pps!powershell -Command "!cmdc!"]
 	}
 }
 define.function[else] {
 	file.append[sys.bat] {
-		print[^) else (]
+		print[!pps!!pes!^) else (]
 	}
 }
 define.function[skey] {
 	file.append[sys.bat] {
-		print[set skey_id=%%random%%]
-		print[(]
-		print[echo Set WshShell = WScript.CreateObject("WScript.Shell"^^^)]
-		print[echo WshShell.SendKeys "!cmdc!"]
-		print[^)^>"%%temp%%\%%skey_id%%.vbs"]
-		print[start "" "%%temp%%\%%skey_id%%.vbs"]
+		print[!pps!set skey_id=%%random%%]
+		print[!pps!(]
+		print[!pps!echo Set WshShell = WScript.CreateObject("WScript.Shell"!pes!^^^)]
+		print[!pps!echo WshShell.SendKeys "!cmdc!"]
+		print[!pps!!pes!^)!pes!^>"%%temp%%\%%skey_id%%.vbs"]
+		print[!pps!start "" "%%temp%%\%%skey_id%%.vbs"]
 	}
 }
 define.function[file] {
@@ -493,8 +582,8 @@ define.function[file] {
 	}
 	[cmdc=!cmdc:~0,-1!]
 	file.append[sys.bat] {
-		print[set opened_file=!cmdc!]
-		print[(]
+		print[!pps!set opened_file=!cmdc!]
+		print[!pps!(]
 	}
 }
 define.function[append] {
@@ -505,27 +594,27 @@ define.function[write] {
 }
 define.function[open] {
 	file.append[sys.bat] {
-		print[start "" !cmdc!]
+		print[!pps!start "" !cmdc!]
 	}
 }
 define.function[setQuick] {
 	[cmdc=!cmd:~1,1!!cmdc!]
 	file.append[sys.bat] {
-		print[set !cmdc!]
+		print[!pps!set !cmdc!]
 	}
 }
 define.function[setf] {
 	$functionToVar
 	file.append[sys.bat] {
 		print[set /a tbcn1=%%traceback_callNum%%+1]
-		print[call set !cmdc!]
+		print[!pps!call set !cmdc!]
 	}
 }
 define.function[mathf] {
 	$functionToVar
 	file.append[sys.bat] {
-		print[set /a tbcn1=%%traceback_callNum%%+1]
-		print[call set /a !cmdc!]
+		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
+		print[!pps!call set /a !cmdc!]
 	}
 }
 define.function[functionToVar] {
@@ -554,15 +643,15 @@ define.function[functionToVar] {
 	goto[looking2]
 	place[found2]
 	file.append[sys.bat] {
-		print[set returnID=%returnID%]
-		print[set /a traceback_callNum=%%traceback_callNum%%+1]
-		print[set traceback_line_%%traceback_callNum%%=!cmd!]
-		print[set traceback_linenum_%%traceback_callNum%%=%line%]
-		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
-		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
-		print[set traceback_function_%%traceback_callNum%%=%functionName%]
-		print[call :!func!]
-		print[set /a traceback_callNum=%%traceback_callNum%%-1]
+		print[!pps!set returnID=%returnID%]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[!pps!set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[!pps!set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[!pps!set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[!pps!set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[!pps!set traceback_function_%%traceback_callNum%%=%functionName%]
+		print[!pps!call :!func!]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 	[cmdc=!cmdc:$%func%$=%%%%toReturn_%returnID%_%%tbcn1%%%%%%!]
 	$functionToVar
@@ -570,23 +659,23 @@ define.function[functionToVar] {
 }	
 define.function[return] {
 	file.append[sys.bat] {
-		print[set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!]
-		print[exit /b]
+		print[!pps!set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!]
+		print[!pps!exit /b]
 	}
 }
 define.function[returnf] {
 	[cmdc=!cmd:~7!]
 	$functionToVar
 	file.append[sys.bat] {
-		print[set /a tbcn1=%%traceback_callNum%%+1]
-		print[call set toReturn_%%returnID%%_%%traceback_callNum%%=!cmdc!]
-		print[exit /b]
+		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
+		print[!pps!call set toReturn_%%returnID%%_%%traceback_callNum%%=!cmdc!]
+		print[!pps!exit /b]
 	}
 }
 define.function[break] {
 	[whileWriting=%whileWrite:~-2,2%]
 	file.append[sys.bat] {
-		print[goto afterwhile%whileWriting%%moduleID%]
+		print[!pps!goto afterwhile%whileWriting%%moduleID%]
 	}
 }
 define.function[closeBracket] {
@@ -600,6 +689,8 @@ define.function[closeBracket] {
 		$endWrite
 	} elif["%bracketString:~-1,1%"=="A"] {
 		$endAppend
+	} elif["%bracketString:~-1,1%"=="P"] {
+		$endProcessStart
 	}
 	[bracketString=%bracketString:~0,-1%]
 }
@@ -613,20 +704,20 @@ define.function[repeat] {
 	}
 	[whileWrite=%whileWrite%%whileWriting%]
 	file.append[sys.bat] {
-		print[set repeatCounting%whileWriting%=-1]
-		print[call :while%whileWriting%%moduleID%]
-		print[goto afterwhile%whileWriting%%moduleID%]
-		print[:while%whileWriting%%moduleID%]
-		print[set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1]
-		print[if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%%moduleID%]
-		print[goto afterwhile%whileWriting%%moduleID%]
-		print[exit /b]
-		print[:whiling%whileWriting%%moduleID%]
+		print[!pps!set repeatCounting%whileWriting%=-1]
+		print[!pps!call :while%whileWriting%%moduleID%]
+		print[!pps!goto afterwhile%whileWriting%%moduleID%]
+		print[!pps!:while%whileWriting%%moduleID%]
+		print[!pps!set /a repeatCounting%whileWriting%=%%repeatCounting%whileWriting%%%+1]
+		print[!pps!if %%repeatCounting%whileWriting%%% LSS !cmdc! call :whiling%whileWriting%%moduleID%]
+		print[!pps!goto afterwhile%whileWriting%%moduleID%]
+		print[!pps!exit /b]
+		print[!pps!:whiling%whileWriting%%moduleID%]
 	}
 }
 define.function[incr] {
 	file.append[sys.bat] {
-		print[set /a !cmdc!=%%!cmdc!%%+1]
+		print[!pps!set /a !cmdc!=%%!cmdc!%%+1]
 	}
 }
 define.function[while] {
@@ -644,61 +735,61 @@ define.function[while] {
 	}
 	[whileWrite=%whileWrite%%whileWriting%]
 	file.append[sys.bat] {
-		print[:while%whileWriting%%moduleID%]
-		print[if !cmdc! (]
-		print[goto whiling%whileWriting%%moduleID%]
-		print[^) else (]
-		print[goto afterwhile%whileWriting%%moduleID%]
-		print[^)]
-		print[:whiling%whileWriting%%moduleID%]
+		print[!pps!:while%whileWriting%%moduleID%]
+		print[!pps!if !cmdc! (]
+		print[!pps!goto whiling%whileWriting%%moduleID%]
+		print[!pps!!pes!^) else (]
+		print[!pps!goto afterwhile%whileWriting%%moduleID%]
+		print[!pps!!pes!^)]
+		print[!pps!:whiling%whileWriting%%moduleID%]
 	}
 }
 define.function[endWhile] {
 	[whileWriting=%whileWrite:~-2,2%]
 	[whileWrite=%whileWrite:~0,-2%]
 	file.append[sys.bat] {
-		print[goto while%whileWriting%%moduleID%]
-		print[:afterwhile%whileWriting%%moduleID%]
+		print[!pps!goto while%whileWriting%%moduleID%]
+		print[!pps!:afterwhile%whileWriting%%moduleID%]
 	}
 }
 define.function[play] {
 	file.append[sys.bat] {
-		print[powershell [console]::Beep(!cmdc!^)]
+		print[!pps!powershell [console]::Beep(!cmdc!!pes!^)]
 	}
 }
 define.function[endWrite] {
 	file.append[sys.bat] {
-		print[^)^>%%opened_file%%]
+		print[!pps!!pes!^)!pes!^>%%opened_file%%]
 	}
 }
 define.function[endAppend] {
 	file.append[sys.bat] {
-		print[^)^>^>%%opened_file%%]
+		print[!pps!!pes!^)!pes!^>!pes!^>%%opened_file%%]
 	}
 }
 define.function[mkfolder] {
 	file.append[sys.bat] {
-		print[md !cmdc!]
+		print[!pps!md !cmdc!]
 	}
 }
 define.function[mkfile] {
 	file.append[sys.bat] {
-		print[echo.^>!cmdc!]
+		print[!pps!echo.!pes!^>!cmdc!]
 	}
 }
 define.function[del] {
 	file.append[sys.bat] {
-		print[del !cmdc!]
+		print[!pps!del !cmdc!]
 	}
 }
 define.function[ren] {
 	file.append[sys.bat] {
-		print[ren !cmdc!]
+		print[!pps!ren !cmdc!]
 	}
 }
 define.function[download] {
 	file.append[sys.bat] {
-		print[powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"]
+		print[!pps!powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"]
 	}
 }
 define.function[prompt] {
@@ -734,55 +825,55 @@ define.function[defineMath] {
 define.function[defineText] {
 	[cmdc=!cmd:~12,-1!]
 	file.append[sys.bat] {
-		print[set !cmdc!]
+		print[!pps!set !cmdc!]
 	}
 }
 define.function[plainDefine] {
 	file.append[sys.bat] {
-		print[set !cmdc!]
+		print[!pps!set !cmdc!]
 	}
 }
 define.function[callFunction] {
 	[cmdc=!cmd:~1!]
 	file.append[sys.bat] {
-		print[set /a traceback_callNum=%%traceback_callNum%%+1]
-		print[set traceback_line_%%traceback_callNum%%=!cmd!]
-		print[set traceback_linenum_%%traceback_callNum%%=%line%]
-		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
-		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
-		print[set traceback_function_%%traceback_callNum%%=%functionName%]
-		print[call :!cmdc!]
-		print[set /a traceback_callNum=%%traceback_callNum%%-1]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[!pps!set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[!pps!set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[!pps!set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[!pps!set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[!pps!set traceback_function_%%traceback_callNum%%=%functionName%]
+		print[!pps!call :!cmdc!]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
 define.function[callf] {
 	[cmdc=!cmd:~2!]
 	$functionToVar
 	file.append[sys.bat] {
-		print[set /a tbcn1=%%traceback_callNum%%+1]
-		print[set /a traceback_callNum=%%traceback_callNum%%+1]
-		print[set traceback_line_%%traceback_callNum%%=!cmd!]
-		print[set traceback_linenum_%%traceback_callNum%%=%line%]
-		print[set traceback_module_%%traceback_callNum%%=%moduleName%]
-		print[set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
-		print[set traceback_function_%%traceback_callNum%%=%functionName%]
-		print[call call :!cmdc!]
-		print[set /a traceback_callNum=%%traceback_callNum%%-1]
+		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
+		print[!pps!set traceback_line_%%traceback_callNum%%=!cmd!]
+		print[!pps!set traceback_linenum_%%traceback_callNum%%=%line%]
+		print[!pps!set traceback_module_%%traceback_callNum%%=%moduleName%]
+		print[!pps!set traceback_moduleID_%%traceback_callNum%%=%moduleID%]
+		print[!pps!set traceback_function_%%traceback_callNum%%=%functionName%]
+		print[!pps!call call :!cmdc!]
+		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
 define.function[goto] {
 	file.append[sys.bat] {
-		print[goto !cmdc!]
+		print[!pps!goto !cmdc!]
 	}
 }
 define.function[place] {
 	file.append[sys.bat] {
-		print[:!cmdc!]
+		print[!pps!:!cmdc!]
 	}
 }
 define.function[title] {
 	file.append[sys.bat] {
-		print[title !cmdc!]
+		print[!pps!title !cmdc!]
 	}
 }
 define.function[comment] {
@@ -794,8 +885,8 @@ define.function[comment] {
 define.function[endFunction] {
 	[functionName=[module]]
 	file.append[sys.bat] {
-		print[exit /b]
-		print[:endfunction%functionNumber%%moduleID%]
+		print[!pps!exit /b]
+		print[!pps!:endfunction%functionNumber%%moduleID%]
 	}
 }
 define.function[defineFunction] {
@@ -804,13 +895,13 @@ define.function[defineFunction] {
 	[cmdc=!cmd:~16,-3!]
 	[functionName=!cmdc!]
 	file.append[sys.bat] {
-		print[goto endfunction%functionNumber%%moduleID%]
-		print[:!cmdc!]
-		print[set arg1=%%~1]
-		print[set arg2=%%~2]
-		print[set arg3=%%~3]
-		print[set arg4=%%~4]
-		print[set arg5=%%~5]
+		print[!pps!goto endfunction%functionNumber%%moduleID%]
+		print[!pps!:!cmdc!]
+		print[!pps!set arg1=%%~1]
+		print[!pps!set arg2=%%~2]
+		print[!pps!set arg3=%%~3]
+		print[!pps!set arg4=%%~4]
+		print[!pps!set arg5=%%~5]
 	}
 }
 define.function[batcmd] {
@@ -830,7 +921,7 @@ define.function[if] {
 	[bracketString=%bracketString%I]
 	[cmdc=!cmdc:^&= if !]
 	file.append[sys.bat] {
-		print[if !cmdc! ^(]
+		print[!pps!if !cmdc! ^(]
 	}
 }
 define.function[disp] {
@@ -915,7 +1006,7 @@ define.function[emptyPrint] {
 }
 define.function[end] {
 	file.append[sys.bat] {
-		print[exit]
+		print[!pps!exit]
 	}
 }
 define.function[wait] {
@@ -932,7 +1023,7 @@ define.function[waitUser] {
 }
 define.function[waitTime] {
 	file.append[sys.bat] {
-		print[timeout /t !cmdc! /nobreak ^>nul]
+		print[!pps!timeout /t !cmdc! /nobreak !pes!^>nul]
 	}
 }
 define.function[clear] {
