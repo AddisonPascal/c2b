@@ -1,4 +1,8 @@
 define.function[prompt] {
 	prompt[%*]
 }
+define.function[promptf] {
+	define.prompt[toReturn=%*]
+	return %toReturn%
+}
 export

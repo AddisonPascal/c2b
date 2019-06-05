@@ -1,11 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.8.8. 
-rem Module ID: 189314103
+rem Compiled by the c2b Compiler from c2b v0.9.2. 
+rem Module ID: 43241323
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10189314103
+if errorlevel 1 goto noWin1043241323
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile189314103
-:noWin10189314103
+goto startOfFile43241323
+:noWin1043241323
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,23 +64,30 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile189314103
-:alertJS189314103
+goto startOfFile43241323
+:alertJS43241323
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn189314103
+:ifIn43241323
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_189314103
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_189314103
+:tracing_back_43241323
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_43241323
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_189314103
-:end_tracing_back_189314103
+goto tracing_back_43241323
+:end_tracing_back_43241323
 exit /b
-:startOfFile189314103
-goto endfunction1189314103
+:forceDelete43241323
+del %*
+if exist %* call :forceDelete43241323 %*
+exit /b
+:eventWait43241323
+if not exist "%temp%\Event-%*" goto eventWait43241323 %*
+exit /b
+:startOfFile43241323
+goto endfunction143241323
 :prompt
 set arg1=%~1
 set arg2=%~2
@@ -89,4 +96,16 @@ set arg4=%~4
 set arg5=%~5
 set /p %*=""
 exit /b
-:endfunction1189314103
+:endfunction143241323
+goto endfunction243241323
+:promptf
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+set /p toReturn=%*
+set toReturn_%returnID%_%traceback_callNum%=%toReturn%
+exit /b
+exit /b
+:endfunction243241323
