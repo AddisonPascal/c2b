@@ -238,7 +238,7 @@ del %location:~0,-4%.bat"
 echo(Automatically compiling...%esc0m%
 set skey_id=%random%
 (
-echo Set WshShell = WScript.CreateObject("WScript.Shell")
+echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "^(v)"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
