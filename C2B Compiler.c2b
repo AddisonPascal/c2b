@@ -1,6 +1,6 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.9.3
-[version=0.9.3]
+# Version 0.9.4
+[version=0.9.4]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]
@@ -565,7 +565,7 @@ define.function[skey] {
 	file.append[sys.bat] {
 		print[!pps!set skey_id=%%random%%]
 		print[!pps!(]
-		print[!pps!echo Set WshShell = WScript.CreateObject("WScript.Shell"!pes!^^^)]
+		print[!pps!echo Set WshShell = WScript.CreateObject("WScript.Shell"!pes!^^^^^)]
 		print[!pps!echo WshShell.SendKeys "!cmdc!"]
 		print[!pps!!pes!^)!pes!^>"%%temp%%\%%skey_id%%.vbs"]
 		print[!pps!start "" "%%temp%%\%%skey_id%%.vbs"]
