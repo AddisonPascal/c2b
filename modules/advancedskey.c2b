@@ -1,0 +1,5 @@
+define.function[advancedskey.init] {
+	[GUI=^^({ESC}^)]
+	[WINDOWS=^^({ESC}^)]
+}
+export
