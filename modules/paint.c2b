@@ -13,6 +13,8 @@
 #	[init__setY=0]
 #	out[%init__setX%x]
 #}
+download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/paintData.bat]
+ren[download paintData.bat]
 cmd[call paintData.bat]
 [paint__x=0]
 [paint__y=0]
