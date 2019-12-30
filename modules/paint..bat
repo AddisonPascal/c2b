@@ -289,6 +289,6 @@ set setPixel__escCode=%esc103m%
 if %setPixel__colour%==f (
 set setPixel__escCode=%esc107m%
 )
-set x%setPixel__setX%y%setPixel__setY%=%setPixel__escCode%.%esc0m%
+set x%setPixel__setX%y%setPixel__setY%=%setPixel__escCode% %esc0m%
 exit /b
 :endfunction41601714911

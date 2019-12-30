@@ -165,6 +165,6 @@ define.function[paint.setPixel] {
 	if[%setPixel__colour%==f] {
 		[setPixel__escCode=%esc107m%]
 	}
-	[x%setPixel__setX%y%setPixel__setY%=%setPixel__escCode%.%esc0m%]
+	[x%setPixel__setX%y%setPixel__setY%=%setPixel__escCode% %esc0m%]
 }
 export
