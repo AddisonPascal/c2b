@@ -102,7 +102,7 @@ set paint__show=False
 ::[init__setY=0]
 ::out[%init__setX%x]
 ::}
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/AddisonPascal/c2b/master/paintData.bat', 'download')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/AddisonPascal/c2b/master/modules/paintData.bat', 'download')"
 ren download paintData.bat
 call paintData.bat
 set paint__x=0
