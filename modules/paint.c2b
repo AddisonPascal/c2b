@@ -18,6 +18,22 @@ ren[download paintData.bat]
 cmd[call paintData.bat]
 [paint__x=0]
 [paint__y=0]
+define.function[paint.fill] {
+	[minx=%~1]
+	[miny=%~2]
+	[maxx=%~3]
+	[maxy=%~4]
+	[colourToSet=%~5]
+	[oy=%miny%]
+	while[%minx% LSS %maxx%] {
+		while[%miny% LSS %maxy%] {
+			$paint.setPixel %minx% %miny% %colourToSet%
+			incr[miny]
+		}
+		incr[minx]
+		[miny=%oy%]
+	}
+}
 define.function[paint.update] {
 	if[%paint__show%==False] {
 		return
