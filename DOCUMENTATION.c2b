@@ -186,9 +186,10 @@ break
 
 # Returns from a function:	return <value>
 return 10
-# Functions can be called with the setf, printf, f$, and returnf statements:
+# Functions can be called with the setf, mathf, printf, f$, and returnf statements:
 # Note that the syntax is similar to a variable, but with $ instead of %:
 setf[result=$function args$]
+mathf[result=3+$function args$]
 printf[Result: $function args$]
 f$run $function args$
 returnf $function args$
