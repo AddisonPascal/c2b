@@ -7,7 +7,7 @@ def incr_(l):
     l=l[5:-1]
     return l+"+=1"
 def raise_(l):
-    l=l[6:-1]
+    l=l[5:]
     return "raise Exception('"+l.replace("'",'"')+"')"
 def print_(l):
     l=l[6:-1]
