@@ -1,6 +1,7 @@
 # c2b Compiler by Addison Djatschenko
-# Version 0.9.4
-[version=0.9.4]
+# https://github.com/AddisonPascal/c2b
+# Version 0.9.5
+[version=0.9.5]
 cmd[setlocal enabledelayedexpansion]
 title[C2B Compiler v%version%]
 [whileCount=0]

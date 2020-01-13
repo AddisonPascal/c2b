@@ -88,8 +88,9 @@ if not exist "%temp%\Event-%*" goto eventWait2738110260 %*
 exit /b
 :startOfFile2738110260
 :: c2b Compiler by Addison Djatschenko
-:: Version 0.9.4
-set version=0.9.4
+:: https://github.com/AddisonPascal/c2b
+:: Version 0.9.5
+set version=0.9.5
 setlocal enabledelayedexpansion
 title C2B Compiler v%version%
 set whileCount=0
