@@ -10,11 +10,14 @@ def compile_string(fileToCompile):
             fileCompiled += compile_string(line)
         return fileCompiled
     else:
+        line = fileToCompile[0]
         if line.startswith(" "):
             return compile_string(line[1:])
         elif line.startswith("\t"):
             return compile_string(line[1:])
         elif line.startswith("#"):
+            return comment_(line[1:])
+        elif line.startswith("printf"):
             return printf_(line)
         elif line.startswith("print"):
             return print_(line)
