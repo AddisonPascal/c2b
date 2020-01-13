@@ -1,6 +1,6 @@
 # c2b compiler in python (work in progress)
 def comment_(l):
-    return l
+    return '#'+l
 def goto_(l):
     raise TypeError('"goto" statement is not supported in c2b to Python')
 def incr_(l):
@@ -12,6 +12,8 @@ def raise_(l):
 def print_(l):
     l=l[6:-1]
     return 'print("'+l.replace('"',"'")+'")'
+def export_(l):
+    return 'exit()'
 def compile_string(fileToCompile):
     fileCompiled = ''
     fileToCompile = fileToCompile.split('\n')
@@ -37,8 +39,8 @@ def compile_string(fileToCompile):
         #    return wait_(line)
         #elif line.lower().startswith("end"):
         #    return end_(line)
-        #elif line.lower().startswith("export"):
-        #    return export_(line)
+        elif line.lower().startswith("export"):
+            return export_(line)
         #elif line.lower().startswith("disp"):
         #    return disp_(line)
         #elif line.lower().startswith("clear"):
@@ -137,3 +139,4 @@ def compile_string(fileToCompile):
         #    return else_(line)
         else:
             return ""
+#print(compile_string(input()))
