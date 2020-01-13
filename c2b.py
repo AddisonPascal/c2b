@@ -1,5 +1,8 @@
 # c2b compiler in python (work in progress)
-
+def comment_(l):
+    return l
+def goto_(l):
+    raise TypeError('"goto" statement is not supported in c2b to Python')
 def compile_string(fileToCompile):
     fileCompiled = ''
     fileToCompile = fileToCompile.split('\n')
@@ -11,113 +14,113 @@ def compile_string(fileToCompile):
         return fileCompiled
     else:
         line = fileToCompile[0]
-        if line.startswith(" "):
+        if line.lower().startswith(" "):
             return compile_string(line[1:])
-        elif line.startswith("\t"):
+        elif line.lower().startswith("\t"):
             return compile_string(line[1:])
-        #elif line.startswith("#"):
-        #    return comment_(line[1:])
-        #elif line.startswith("printf"):
+        elif line.lower().startswith("#"):
+            return comment_(line[1:])
+        #elif line.lower().startswith("printf"):
         #    return printf_(line)
-        #elif line.startswith("print"):
+        #elif line.lower().startswith("print"):
         #    return print_(line)
-        #elif line.startswith("wait"):
+        #elif line.lower().startswith("wait"):
         #    return wait_(line)
-        #elif line.startswith("end"):
+        #elif line.lower().startswith("end"):
         #    return end_(line)
-        #elif line.startswith("export"):
+        #elif line.lower().startswith("export"):
         #    return export_(line)
-        #elif line.startswith("disp"):
+        #elif line.lower().startswith("disp"):
         #    return disp_(line)
-        #elif line.startswith("clear"):
+        #elif line.lower().startswith("clear"):
         #    return clear_(line)
-        #elif line.startswith("ifin"):
+        #elif line.lower().startswith("ifin"):
         #    return ifin_(line)
-        #elif line.startswith("if.event"):
+        #elif line.lower().startswith("if.event"):
         #    return ifevent_(line)
-        #elif line.startswith("if"):
+        #elif line.lower().startswith("if"):
         #    return if_(line)
-        #elif line.startswith("} elif"):
+        #elif line.lower().startswith("} elif"):
         #    return elif_(line)
-        #elif line.startswith("cmd"):
+        #elif line.lower().startswith("cmd"):
         #    return cmd_(line)
-        #elif line.startswith("title"):
+        #elif line.lower().startswith("title"):
         #    return title_(line)
-        #elif line.startswith("define"):
+        #elif line.lower().startswith("define"):
         #    return define_(line)
-        #elif line.startswith("place"):
+        #elif line.lower().startswith("place"):
         #    return place_(line)
-        #elif line.startswith("goto"):
-        #    return goto_(line)
-        #elif line.startswith("$"):
+        elif line.lower().startswith("goto"):
+            return goto_(line)
+        #elif line.lower().startswith("$"):
         #    return callFunction_(line)
-        #elif line.startswith("prompt"):
+        #elif line.lower().startswith("prompt"):
         #    return prompt_(line)
-        #elif line.startswith("download"):
+        #elif line.lower().startswith("download"):
         #    return download_(line)
-        #elif line.startswith("ren"):
+        #elif line.lower().startswith("ren"):
         #    return ren_(line)
-        #elif line.startswith("del"):
+        #elif line.lower().startswith("del"):
         #    return del_(line)
-        #elif line.startswith("mkfile"):
+        #elif line.lower().startswith("mkfile"):
         #    return mkfile_(line)
-        #elif line.startswith("mkfolder"):
+        #elif line.lower().startswith("mkfolder"):
         #    return mkfolder_(line)
-        #elif line.startswith("file"):
+        #elif line.lower().startswith("file"):
         #    return file_(line)
-        #elif line.startswith("play"):
+        #elif line.lower().startswith("play"):
         #    return play_(line)
-        #elif line.startswith("while"):
+        #elif line.lower().startswith("while"):
         #    return while_(line)
-        #elif line.startswith("incr"):
+        #elif line.lower().startswith("incr"):
         #    return incr_(line)
-        #elif line.startswith("repeat"):
+        #elif line.lower().startswith("repeat"):
         #    return repeat_(line)
-        #elif line.startswith("break"):
+        #elif line.lower().startswith("break"):
         #    return break_(line)
-        #elif line.startswith("returnf"):
+        #elif line.lower().startswith("returnf"):
         #    return returnf_(line)
-        #elif line.startswith("return"):
+        #elif line.lower().startswith("return"):
         #    return return_(line)
-        #elif line.startswith("open"):
+        #elif line.lower().startswith("open"):
         #    return open_(line)
-        #elif line.startswith("skey"):
+        #elif line.lower().startswith("skey"):
         #    return skey_(line)
-        #elif line.startswith("ps"):
+        #elif line.lower().startswith("ps"):
         #    return ps_(line)
-        #elif line.startswith("alert"):
+        #elif line.lower().startswith("alert"):
         #    return alert_(line)
-        #elif line.startswith("color"):
+        #elif line.lower().startswith("color"):
         #    return color_(line)
-        #elif line.startswith("colour"):
+        #elif line.lower().startswith("colour"):
         #    return colour_(line)
-        #elif line.startswith("restart"):
+        #elif line.lower().startswith("restart"):
         #    return restart_(line)
-        #elif line.startswith("out"):
+        #elif line.lower().startswith("out"):
         #    return out_(line)
-        #elif line.startswith("rewrite"):
+        #elif line.lower().startswith("rewrite"):
         #    return rewrite_(line)
-        #elif line.startswith("choice"):
+        #elif line.lower().startswith("choice"):
         #    return choice_(line)
-        #elif line.startswith("stop"):
+        #elif line.lower().startswith("stop"):
         #    return stop_(line)
-        #elif line.startswith("close"):
+        #elif line.lower().startswith("close"):
         #    return close_(line)
-        #elif line.startswith("import"):
+        #elif line.lower().startswith("import"):
         #    return import_(line)
-        #elif line.startswith("raise"):
+        #elif line.lower().startswith("raise"):
         #    return raise_(line)
-        #elif line.startswith("f$"):
+        #elif line.lower().startswith("f$"):
         #    return callf_(line)
-        #elif line.startswith("process"):
+        #elif line.lower().startswith("process"):
         #    return process_(line)
-        #elif line.startswith("event"):
+        #elif line.lower().startswith("event"):
         #    return event_(line)
-        #elif line.startswith("setf"):
+        #elif line.lower().startswith("setf"):
         #    return setf_(line)
-        #elif line.startswith("mathf"):
+        #elif line.lower().startswith("mathf"):
         #    return mathf_(line)
-        #elif line.startswith("["):
+        #elif line.lower().startswith("["):
         #    return setQuick_(line)
         #elif line=="}":
         #    return closeBracket_(line)
