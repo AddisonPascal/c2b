@@ -3,6 +3,15 @@ def comment_(l):
     return l
 def goto_(l):
     raise TypeError('"goto" statement is not supported in c2b to Python')
+def incr_(l):
+    l=l[5:-1]
+    return l+"+=1"
+def raise_(l):
+    l=l[6:-1]
+    return "raise Exception('"+l.replace("'",'"')+"')"
+def print_(l):
+    l=l[6:-1]
+    return 'print("'+l.replace('"',"'")+'")'
 def compile_string(fileToCompile):
     fileCompiled = ''
     fileToCompile = fileToCompile.split('\n')
@@ -22,8 +31,8 @@ def compile_string(fileToCompile):
             return comment_(line[1:])
         #elif line.lower().startswith("printf"):
         #    return printf_(line)
-        #elif line.lower().startswith("print"):
-        #    return print_(line)
+        elif line.lower().startswith("print"):
+            return print_(line)
         #elif line.lower().startswith("wait"):
         #    return wait_(line)
         #elif line.lower().startswith("end"):
@@ -72,8 +81,8 @@ def compile_string(fileToCompile):
         #    return play_(line)
         #elif line.lower().startswith("while"):
         #    return while_(line)
-        #elif line.lower().startswith("incr"):
-        #    return incr_(line)
+        elif line.lower().startswith("incr"):
+            return incr_(line)
         #elif line.lower().startswith("repeat"):
         #    return repeat_(line)
         #elif line.lower().startswith("break"):
@@ -108,8 +117,8 @@ def compile_string(fileToCompile):
         #    return close_(line)
         #elif line.lower().startswith("import"):
         #    return import_(line)
-        #elif line.lower().startswith("raise"):
-        #    return raise_(line)
+        elif line.lower().startswith("raise"):
+            return raise_(line)
         #elif line.lower().startswith("f$"):
         #    return callf_(line)
         #elif line.lower().startswith("process"):
