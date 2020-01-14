@@ -1,0 +1,69 @@
+title[BAT2Py]
+cmd[setlocal enabledelayedexpansion]
+
+file.write[sys.py] {
+	print[# Converted from Batch]
+	print[import os]
+	print[import random]
+	print[os.system("attrib -h FILE*.bat"^);]
+	print[os.system("del FILE*.bat"^);]
+    print[task_id=str(random.randint(1,10000^)^)]
+    print[os.system("echo. >FILE" + task_id + ".bat"^);]
+    print[file = open("FILE" + task_id + ".bat","w"^);]
+}
+
+place[home]
+print[File?]
+prompt[fileName]
+if[not exist "%~dp0%fileName%.bat"] {
+	goto[home]
+}
+cmd[(]
+cmd[@echo off]
+cmd[type "%~dp0%fileName%.bat"]
+cmd[echo. ]
+cmd[echo ENDCOMP]
+cmd[)|clip]
+print[Converting...]
+[skey_id=%random%]
+skey[^(v)]
+
+place[do]
+prompt[do]
+if["!do:~0,7!"=="ENDCOMP"] {
+	goto[endcomp]
+}
+file.append[sys.py] {
+	print[file.write("\n"^);]
+}
+if["!do:~-1,1!"=="'"] {
+	file.append[sys.py] {
+		print[file.write(r"""!do!"""^);]
+	}
+	goto[do]
+}
+file.append[sys.py] {
+	print[file.write(r'''!do!'''^);]
+}
+[do=]
+goto[do]
+
+place[endcomp]
+file.append[sys.py] {
+	print[file.close(^);]
+    print[os.system("attrib +h FILE" + task_id + ".bat"^);]
+    print[os.system("cls"^);]
+    print[os.system("call FILE" + task_id + ".bat"^);]
+    print[os.system("attrib -h FILE*.bat"^);]
+    print[os.system("del FILE*.bat"^);]
+}
+if[exist "%fileName%.py"] {
+	del["%fileName%.py"]
+}
+ren[sys.py "%fileName%.py"]
+clear
+print[Done!]
+wait[user]
+end[file]
+
+export
