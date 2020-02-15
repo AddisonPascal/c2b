@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>C2B Programming Language</title>
+<description>RSS feed for c2b although noone uses rss any more rip</description>
+<link>http://c2b.life</link>
+<lastBuildDate>Sat, 15 Feb 2020 10:11:00 +0000</lastBuildDate>
+<pubDate>Sat, 15 Feb 2020 10:11:00 +0000</pubDate>
+<ttl>0</ttl>
+<item><title> C2B has a website </title><description>http://c2b.life</description><link>http://c2b.life</link><pubDate>Sat, 15 Feb 2020 10:12:00 +0000</pubDate></item>
+<item><title> c2birthday </title><description>it has been exactly a year since the first release of c2b</description><pubDate>Sat, 15 Feb 2020 10:14:00 +0000</pubDate></item></channel>
+</rss>
