@@ -240,12 +240,12 @@ if[%this%==%that%] {<br>
 	print[This is not that, but this is better than that.]<br>
 }<br></code>
 <br>
-# Alert: pops up a message box:	alert[text]<br>
-alert[Hello!]<br>
+Alert: pops up a message box:	<code>alert[text]<br>
+alert[Hello!]<br></code>
 <br>
-# Creates a new process:	process.start[processName] {<br>
-#							content<br>
-#							}<br>
+Creates a new process:	<code>process.start[processName] {<br>
+							content<br>
+							}<br>
 process.start[testProcess] {<br>
 	while[true] {<br>
 		if.event[testEvent] {<br>
@@ -254,21 +254,21 @@ process.start[testProcess] {<br>
 		}<br>
 	}<br>
 }<br>
-<br>
-# Stops a process:	process.stop[processName]<br>
+<br></code>
+Stops a process:	<code>process.stop[processName]<br>
 process.stop[testProcess]<br>
-<br>
-# Starts an event:	event.start[eventName]<br>
+<br></code>
+Starts an event:	<code>event.start[eventName]<br>
 event.start[testEvent]<br>
+<br></code>
+Stops an event:	<code>event.stop[eventName]<br>
+event.stop[testEvent]<br></code>
 <br>
-# Stops an event:	event.stop[eventName]<br>
-event.stop[testEvent]<br>
-<br>
-# Waits for an event to start:	event.wait[eventName]<br>
+Waits for an event to start:	<code>event.wait[eventName]<br>
 event.wait[eventName]<br>
-<br>
-# Ends compilation. All text past here is ignored: export<br>
-export<br>
+<br></code>
+Ends compilation. All text past here is ignored: <code>export<br>
+export<br></code>
 <br>
  </body>
 </html>
