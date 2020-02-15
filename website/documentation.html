@@ -3,7 +3,273 @@
 <html>
 <head>
 <title> Documentation - c2b programming language </title>
-<meta http-equiv="refresh" content="0; url=https://github.com/AddisonPascal/c2b/blob/master/DOCUMENTATION.c2b"/>
+<!--<meta http-equiv="refresh" content="0; url=https://github.com/AddisonPascal/c2b/blob/master/DOCUMENTATION.c2b"/>-->
 </head>
-<body> C2B Documentation </body>
+<body>
+
+<h1> C2B Documentation </h1>
+<h2> work in progress </h2>
+<br>
+# Documenting most aspects of c2b [Compiles to Batch] programming language.<br>
+<br>
+# A comment's syntax is a hashtag [#] at the start of a line. Only one line comments are available in C2B. <br>
+# A comment<br>
+<br>
+# To print a line to the console, use print[text]<br>
+print[This is a message. ]<br>
+print[Line 1 \n Line 2]<br>
+# Blank line:<br>
+print[]<br>
+# Inline colours and styles are available in print[], out[], and rewrite[], however compatibility is limited in non-Win10 operating systems.<br>
+# For more information, see Issue #1:	https://github.com/AddisonPascal/c2b/issues/1<br>
+# Use @<colourcode> to change colour, where <colourcode> is the hex colour code.<br>
+# Use #<colourcode> to change only text colour, not background.<br>
+# Use @bold to make it bold.<br>
+# Use @u or @underline to underline.<br>
+# Use @i or @inverse to inverse the colours.<br>
+# Use @r or @reset to reset to default.<br>
+# - Resets after every line.<br>
+# - Combinations are possible!<br>
+# Examples:<br>
+print[#a Green Text!]<br>
+print[@fa Green on White!]<br>
+print[@bold Bold]<br>
+print[@u underlined]<br>
+print[@fa@bold@u All 3!]<br>
+<br>
+# Prints text to the console without a newline:	out[text]<br>
+out[Hello, ]<br>
+out[World!]<br>
+<br>
+# Rewrites the previous line:	rewrite[text]<br>
+rewrite[Goodbye World]<br>
+<br>
+# Changes the colour of the prompt:	color[hex] or colour[hex]<br>
+color[0a]<br>
+colour[0c]<br>
+<br>
+# Imports another module:	import moduleName<br>
+#						or:	import net:moduleName<br>
+#						or:	import inbuilt:moduleName<br>
+#						or:	import local:moduleName<br>
+import test<br>
+import net:test<br>
+import inbuilt:test<br>
+import local:test<br>
+<br>
+# Raise an exception:	raise Exception<br>
+raise ExampleException<br>
+<br>
+# Waits a certain amount of time: wait[seconds]<br>
+wait[3]<br>
+# Waits for the user to press any key: <br>
+wait[user]<br>
+<br>
+# Restarts the program:	restart<br>
+restart<br>
+<br>
+# Exits file:<br>
+end[file]<br>
+<br>
+# Maximises screen: disp[max]<br>
+disp[max]<br>
+<br>
+# Clears the screen: clear<br>
+clear<br>
+<br>
+# If statement:	if[statement] {<br>
+#				content<br>
+#				}<br>
+if[%this%==%that%] {<br>
+	print[This is that]<br>
+}<br>
+# and operators are "&" which can be used in any conditional statement:<br>
+if[%a%==%b% & %c%==%d% & %e%==%f%] {<br>
+	print[AND it works!]<br>
+}<br>
+<br>
+# Tests if an event is on:	if.event[eventName] {<br>
+#							content<br>
+#							}<br>
+if.event[testEvent] {<br>
+	print[Event is on]<br>
+}<br>
+<br>
+# Executes a Windows Batch / CMD command: cmd[command]<br>
+cmd[echo Hi]<br>
+<br>
+# Executes a Windows PowerShell command:	ps[command]<br>
+ps[echo("Hi!");]<br>
+ps[[console]::Beep();]<br>
+<br>
+# Changes title: title[text]<br>
+title[This is the title. ]<br>
+<br>
+# Makes a function:	define.function[name] {<br>
+#					content<br>
+#					}<br>
+define.function[function] {<br>
+	print[This is a function]<br>
+	print[%arg1%]<br>
+	print[%arg2%]<br>
+	print[%arg3%]<br>
+}<br>
+<br>
+# A place in the code which can be returned to later on with goto[]: place[name]<br>
+place[place]<br>
+<br>
+# Goes to a specified place[] in the code: goto[place]<br>
+goto[place]<br>
+<br>
+# Executes a function: $function arg1 arg2 arg3...<br>
+$function "Argument 1" "Argument 2" "Argument 3"<br>
+<br>
+# Defines a variable:	define[var=text] OR define.text[var=text]<br>
+#						define.math[var=expression]<br>
+#						define.prompt[var=prompt]<br>
+#						[var=content]<br>
+#						[var=expression]<br>
+define[textVar=This is text]<br>
+define.text[textVar2=This is also text]<br>
+define.math[mathVar=1+1]<br>
+define.prompt[userVar=Enter text here: ]<br>
+[textVar3=This is text]<br>
+<br>
+# Saves input to variable: prompt[var]<br>
+prompt[userVar2]<br>
+<br>
+# Saves the character [from a list] the user entered without pressing enter to variable %choice%:	choice[range]<br>
+choice[abc]<br>
+print[You entered %choice%.]<br>
+<br>
+# Downloads a file from the internet (saved as 'download'): download[URL]<br>
+download[http://raw.githubusercontent.com/AddisonPascal/c2b/master/C2B%20Compiler.bat]<br>
+<br>
+# Renames a file: ren[originalname newname]<br>
+ren[filename newfilename]<br>
+<br>
+# Deletes a file: del[file]<br>
+del[file]<br>
+<br>
+# Makes a new file: mkfile[name]<br>
+mkfile[file]<br>
+<br>
+# Makes a new folder: mkfolder[name]<br>
+mkfolder[folder]<br>
+<br>
+# Plays a note: play[frequency(hz), time(ms)]<br>
+play[1000,1000]<br>
+<br>
+# Writes the output of commands to a file:	file.write[filename] {<br>
+#											content<br>
+#											}<br>
+file.write[file.txt] {<br>
+	print[This will be in a file]<br>
+}<br>
+<br>
+# Writes the output of commands to the end of a file:	file.append[filename] {<br>
+#														content<br>
+#														}<br>
+file.append[file.txt] {<br>
+	print[This will be at the bottom of a file]<br>
+}<br>
+<br>
+# Executes commands while a condition is true:	while[condition] {<br>
+#												content<br>
+#												}<br>
+define[a=0]<br>
+while[%a%<10] {<br>
+	print[%a%]<br>
+	incr[a]<br>
+}<br>
+<br>
+# Increments a variable:<br>
+incr[var]<br>
+<br>
+# Repeats commands:	repeat[number]:<br>
+#					content<br>
+#					break[]<br>
+repeat[10] {<br>
+	print[Hello World!]<br>
+}<br>
+<br>
+# Breaks out of a loop:	break<br>
+break<br>
+<br>
+# Returns from a function:	return &ltvalue&rt<br>
+return 10<br>
+# Functions can be called with the setf, mathf, printf, f$, and returnf statements:<br>
+# Note that the syntax is similar to a variable, but with $ instead of %:<br>
+setf[result=$function args$]<br>
+mathf[result=3+$function args$]<br>
+printf[Result: $function args$]<br>
+f$run $function args$<br>
+returnf $function args$<br>
+# However, recursion is not yet possible. <br>
+<br>
+# Sends keys to the focused window:	skey[keys]<br>
+skey[Hello{ENTER}World{!}]<br>
+<br>
+# Opens a file, application, or website:	open[filename/address]<br>
+open[file.txt]<br>
+open[notepad]<br>
+open[http://google.com]<br>
+<br>
+# Stops a process or application:	stop[app.exe] or close[app.exe]<br>
+stop[notepad.exe]<br>
+close[cmd.exe]<br>
+<br>
+# Else statement: if the previous if statement wasn't true: if[condition] {<br>
+#															content<br>
+#															} else {<br>
+#															content<br>
+#															}<br>
+if[%this%==%that%] {<br>
+	print[This is that.]<br>
+} else {<br>
+	print[This is not that]<br>
+}<br>
+<br>
+# Elif statement: if the previous if statement wasn't true, execute another if statement:	if[condition] {<br>
+#																							content<br>
+#																							} elif[condition] {<br>
+#																							content<br>
+#																							}<br>
+if[%this%==%that%] {<br>
+	print[This is that.]<br>
+} elif[%this%>%that%] {<br>
+	print[This is not that, but this is better than that.]<br>
+}<br>
+<br>
+# Alert: pops up a message box:	alert[text]<br>
+alert[Hello!]<br>
+<br>
+# Creates a new process:	process.start[processName] {<br>
+#							content<br>
+#							}<br>
+process.start[testProcess] {<br>
+	while[true] {<br>
+		if.event[testEvent] {<br>
+			event.stop[testEvent]<br>
+			mkfolder[testFolder]<br>
+		}<br>
+	}<br>
+}<br>
+<br>
+# Stops a process:	process.stop[processName]<br>
+process.stop[testProcess]<br>
+<br>
+# Starts an event:	event.start[eventName]<br>
+event.start[testEvent]<br>
+<br>
+# Stops an event:	event.stop[eventName]<br>
+event.stop[testEvent]<br>
+<br>
+# Waits for an event to start:	event.wait[eventName]<br>
+event.wait[eventName]<br>
+<br>
+# Ends compilation. All text past here is ignored: export<br>
+export<br>
+<br>
+ </body>
 </html>
