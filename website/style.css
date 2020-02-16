@@ -1,6 +1,20 @@
 body {
   background-color: #000000;
   color: #CCCCCC;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+a:link {
+  color: #88FF88;
+}
+
+a:visited {
+  color: #55AA55;
+}
+
+code {
+  font-family: "Lucida Console", monospace;
+  color: #FFAAAA;
 }
 
 h1 {
