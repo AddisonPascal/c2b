@@ -3,3 +3,11 @@ body {
     color: #FFFFFF;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
+
+a:link {
+    color: #FFFFFF;
+}
+
+a:visited {
+    color: #CCCCCC;
+}
