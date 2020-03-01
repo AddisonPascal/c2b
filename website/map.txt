@@ -1,7 +1,7 @@
 https://c2b.life/documentation.html
 https://c2b.life/downloads.html
 https://c2b.life/github.html
-https://c2b.life/Home.html
+https://c2b.life/
 https://c2b.life/menubar.css
 https://c2b.life/menubar.html
 https://c2b.life/rss.xml
