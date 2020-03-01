@@ -6,4 +6,5 @@ https://c2b.life/menubar.css
 https://c2b.life/menubar.html
 https://c2b.life/rss.xml
 https://c2b.life/style.css
-https://c2b.life/map.txt
+https://c2b.life/full_sitemap.txt
+https://c2b.life/sitemap.html
