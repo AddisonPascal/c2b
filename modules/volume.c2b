@@ -17,5 +17,4 @@ define.function[volume.set] {
 		$volume.up
 	}
 }
-$volume.set 50
 export
