@@ -1,0 +1,21 @@
+define.function[volume.toggleMute] {
+	skey["+chr(^&hAD^)^+"]
+}
+define.function[volume.up] {
+	skey["+chr(^&hAF^)^+"]
+}
+define.function[volume.down] {
+	skey["+chr(^&hAE^)^+"]
+}
+define.function[volume.mute] {
+	skey["+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+chr(^&hAE^)^+"]
+}
+define.function[volume.set] {
+	$volume.mute
+	define.math[upAmount=%~1/2]
+	repeat[%upAmount%] {
+		$volume.up
+	}
+}
+$volume.set 50
+export
