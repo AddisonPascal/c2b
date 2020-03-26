@@ -1,0 +1,6 @@
+# Volume Info module for c2b
+define.function[volinfo.name] {
+	cmd[for /f "tokens=6" %%t in ('vol %arg1%:') do @set volid=%%t]
+	return %volid%
+}
+export
