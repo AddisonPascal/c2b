@@ -15,4 +15,4 @@ How to Use:
 Either clone/download the repository for the development version, or click "Releases" and download the ZIP for the latest release.
 Although there are releases, c2b is still before v1, so bugs may be and are present. To submit a bug report, create an issue and select a template. 
 See http://docs.c2b.life and begin a program.
-Open the program with C2B Compiler.bat and wait for it to compile and run!
+Open the program with C2B Compiler..bat and wait for it to compile and run!
