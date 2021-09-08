@@ -1,8 +1,10 @@
 # c2b Compiler by Addison Djatschenko
 # https://github.com/AddisonPascal/c2b
 # Version 0.9.5
+
 [version=0.9.5]
 cmd[setlocal enabledelayedexpansion]
+
 title[C2B Compiler v%version%]
 [whileCount=0]
 [whileWrite=00]
@@ -13,6 +15,7 @@ title[C2B Compiler v%version%]
 [returnID=0]
 [pps=]
 [pes=]
+
 file.write[sys.bat] {
 	print[@echo off]
 	print[rem Compiled by the c2b Compiler from c2b v%version%. ]
@@ -104,352 +107,428 @@ file.write[sys.bat] {
 	print[exit /b]
 	print[:startOfFile%moduleID%]
 }
+
 if[%1.==.] {
 	del[sys.bat]
 	raise Error: Use c2b compiler by opening a c2b file with it.
 }
+
 define.function[getFilename] {
 	[fileName=%~nx1]
 }
 $getFilename %1
 [moduleName=%fileName:~0,-4%]
 clear
+
 [location=%1]
 cmd[(]
 cmd[type %location%]
 cmd[echo.]
 cmd[)|clip]
 del[%location:~0,-4%.bat"]
+
 print[Automatically compiling...]
 skey[^(v)]
+
 while[True] {
 	incr[line]
 	[cmd=~linebreak]
 	define.prompt[cmd="%line% | "]
+	
 	if["!cmd!"=="~linebreak"] {
 		$linebreak
 		goto[anotherLine]
 	}
+	
 	$convertCommand
 	place[anotherLine]
 }
+
 define.function[linebreak] {
 	file.append[sys.bat] {
 		print[]
 	}
 }
+
 define.function[abs] {
 	if[/i "!cmd!"=="%arg1%"] {
 		$%arg2%
 	}
 }
+
 define.function[convertCommand] {
 	while["!cmd:~0,1!"==" "] {
 		[cmd=!cmd:~1!]
 	}
-if["!cmd:~0,1!"=="#"] {
-[cmdc=!cmd:~1,-1!]
-$comment
-return
+	
+	if["!cmd:~0,1!"=="#"] {
+		[cmdc=!cmd:~1,-1!]
+		$comment
+		return
+	}
+
+	if[/i "!cmd:~0,6!"=="printf"] {
+		[cmdc=!cmd:~7,-1!]
+		$printf
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="print"] {
+		[cmdc=!cmd:~6,-1!]
+		$print
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="wait"] {
+		[cmdc=!cmd:~5,-1!]
+		$wait
+		return
+	}
+	
+	if[/i "!cmd:~0,3!"=="end"] {
+		[cmdc=!cmd:~4,-1!]
+		$end
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="export"] {
+		[cmdc=!cmd:~7,-1!]
+		$export
+		return
+	}
+
+	if[/i "!cmd:~0,4!"=="disp"] {
+		[cmdc=!cmd:~5,-1!]
+		$disp
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="clear"] {
+		[cmdc=!cmd:~6,-1!]
+		$clear
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="ifin"] {
+		[cmdc=!cmd:~5,-3!]
+		$ifin
+		return
+	}
+	
+	if[/i "!cmd:~0,8!"=="if.event"] {
+		$ifevent
+		return
+	}
+	
+	if[/i "!cmd:~0,2!"=="if"] {
+		[cmdc=!cmd:~3,-1!]
+		$if
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="} elif"] {
+		[cmdc=!cmd:~7,-1!]
+		$elif
+		return
+	}
+	
+	if[/i "!cmd:~0,3!"=="cmd"] {
+		[cmdc=!cmd:~4,-1!]
+		$batcmd
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="title"] {
+		[cmdc=!cmd:~6,-1!]
+		$title
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="define"] {
+		[cmdc=!cmd:~7,-1!]
+		$define
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="place"] {
+		[cmdc=!cmd:~6,-1!]
+		$place
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="goto"] {
+		[cmdc=!cmd:~5,-1!]
+		$goto
+		return
+	}
+	
+	if["!cmd:~0,1!"=="$"] {
+		[cmdc=!cmd:~2,-1!]
+		$callFunction
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="prompt"] {
+		[cmdc=!cmd:~7,-1!]
+		$prompt
+		return
+	}
+	
+	if[/i "!cmd:~0,8!"=="download"] {
+		[cmdc=!cmd:~9,-1!]
+		$download
+		return
+	}
+	
+	if[/i "!cmd:~0,3!"=="ren"] {
+		[cmdc=!cmd:~4,-1!]
+		$ren
+		return
+	}
+	
+	if[/i "!cmd:~0,3!"=="del"] {
+		[cmdc=!cmd:~4,-1!]
+		$del
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="mkfile"] {
+		[cmdc=!cmd:~7,-1!]
+		$mkfile
+		return
+	}
+	
+	if[/i "!cmd:~0,8!"=="mkfolder"] {
+		[cmdc=!cmd:~9,-1!]
+		$mkfolder
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="file"] {
+		[cmdc=!cmd:~5,-1!]
+		$file
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="play"] {
+		[cmdc=!cmd:~5,-1!]
+		$play
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="while"] {
+		[cmdc=!cmd:~6,-1!]
+		$while
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="incr"] {
+		[cmdc=!cmd:~5,-1!]
+		$incr
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="repeat"] {
+		[cmdc=!cmd:~7,-1!]
+		$repeat
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="break"] {
+		[cmdc=!cmd:~6,-1!]
+		$break
+		return
+	}
+	
+	if[/i "!cmd:~0,7!"=="returnf"] {
+		[cmdc=!cmd:~8!]
+		$returnf
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="return"] {
+		[cmdc=!cmd:~7,-1!]
+		$return
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="open"] {
+		[cmdc=!cmd:~5,-1!]
+		$open
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="skey"] {
+		[cmdc=!cmd:~5,-1!]
+		$skey
+		return
+	}
+	
+	if[/i "!cmd:~0,2!"=="ps"] {
+		[cmdc=!cmd:~3,-1!]
+		$ps
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="alert"] {
+		[cmdc=!cmd:~6,-1!]
+		$alert
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="color"] {
+		[cmdc=!cmd:~6,-1!]
+		$colour
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="colour"] {
+		[cmdc=!cmd:~7,-1!]
+		$colour
+		return
+	}
+	
+	if[/i "!cmd:~0,7!"=="restart"] {
+		[cmdc=!cmd:~8,-1!]
+		$restart
+		return
+	}
+	
+	if[/i "!cmd:~0,3!"=="out"] {
+		[cmdc=!cmd:~4,-1!]
+		$out
+		return
+	}
+	
+	if[/i "!cmd:~0,7!"=="rewrite"] {
+		[cmdc=!cmd:~8,-1!]
+		$rewrite
+		return
+	}
+	
+	if[/i "!cmd:~0,6!"=="choice"] {
+		[cmdc=!cmd:~7,-1!]
+		$choice
+		return
+	}
+	
+	if[/i "!cmd:~0,4!"=="stop"] {
+		[cmdc=!cmd:~5,-1!]
+		$stop
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="close"] {
+		[cmdc=!cmd:~6,-1!]
+		$stop
+		return
+	}
+
+	if[/i "!cmd:~0,6!"=="import"] {
+		[cmdc=!cmd:~7!]
+		$import
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="raise"] {
+		[cmdc=!cmd:~6!]
+		$raise
+		return
+	}
+	
+	if[/i "!cmd:~0,2!"=="f$"] {
+		[cmdc=!cmd:~2!]
+		$callf
+		return
+	}
+	
+	if[/i "!cmd:~0,7!"=="process"] {
+		$process
+		return
+	}
+	
+	if[/i "!cmd:~0,5!"=="event"] {
+		$event
+		return
+	}
+	
+	if["!cmd:~0,4!"=="setf"] {
+		[cmdc=!cmd:~5,-1!]
+		$setf
+		return
+	}
+	
+	if["!cmd:~0,5!"=="mathf"] {
+		[cmdc=!cmd:~6,-1!]
+		$mathf
+		return
+	}
+	
+	if["!cmd:~0,1!"=="["] {
+		[cmdc=!cmd:~2,-1!]
+		$setQuick
+		return
+	}
+	
+	$abs } closeBracket
+	$abs "} else {" else
 }
-if[/i "!cmd:~0,6!"=="printf"] {
-[cmdc=!cmd:~7,-1!]
-$printf
-return
-}
-if[/i "!cmd:~0,5!"=="print"] {
-[cmdc=!cmd:~6,-1!]
-$print
-return
-}
-if[/i "!cmd:~0,4!"=="wait"] {
-[cmdc=!cmd:~5,-1!]
-$wait
-return
-}
-if[/i "!cmd:~0,3!"=="end"] {
-[cmdc=!cmd:~4,-1!]
-$end
-return
-}
-if[/i "!cmd:~0,6!"=="export"] {
-[cmdc=!cmd:~7,-1!]
-$export
-return
-}
-if[/i "!cmd:~0,4!"=="disp"] {
-[cmdc=!cmd:~5,-1!]
-$disp
-return
-}
-if[/i "!cmd:~0,5!"=="clear"] {
-[cmdc=!cmd:~6,-1!]
-$clear
-return
-}
-if[/i "!cmd:~0,4!"=="ifin"] {
-[cmdc=!cmd:~5,-3!]
-$ifin
-return
-}
-if[/i "!cmd:~0,8!"=="if.event"] {
-	$ifevent
-	return
-}
-if[/i "!cmd:~0,2!"=="if"] {
-[cmdc=!cmd:~3,-1!]
-$if
-return
-}
-if[/i "!cmd:~0,6!"=="} elif"] {
-[cmdc=!cmd:~7,-1!]
-$elif
-return
-}
-if[/i "!cmd:~0,3!"=="cmd"] {
-[cmdc=!cmd:~4,-1!]
-$batcmd
-return
-}
-if[/i "!cmd:~0,5!"=="title"] {
-[cmdc=!cmd:~6,-1!]
-$title
-return
-}
-if[/i "!cmd:~0,6!"=="define"] {
-[cmdc=!cmd:~7,-1!]
-$define
-return
-}
-if[/i "!cmd:~0,5!"=="place"] {
-[cmdc=!cmd:~6,-1!]
-$place
-return
-}
-if[/i "!cmd:~0,4!"=="goto"] {
-[cmdc=!cmd:~5,-1!]
-$goto
-return
-}
-if["!cmd:~0,1!"=="$"] {
-[cmdc=!cmd:~2,-1!]
-$callFunction
-return
-}
-if[/i "!cmd:~0,6!"=="prompt"] {
-[cmdc=!cmd:~7,-1!]
-$prompt
-return
-}
-if[/i "!cmd:~0,8!"=="download"] {
-[cmdc=!cmd:~9,-1!]
-$download
-return
-}
-if[/i "!cmd:~0,3!"=="ren"] {
-[cmdc=!cmd:~4,-1!]
-$ren
-return
-}
-if[/i "!cmd:~0,3!"=="del"] {
-[cmdc=!cmd:~4,-1!]
-$del
-return
-}
-if[/i "!cmd:~0,6!"=="mkfile"] {
-[cmdc=!cmd:~7,-1!]
-$mkfile
-return
-}
-if[/i "!cmd:~0,8!"=="mkfolder"] {
-[cmdc=!cmd:~9,-1!]
-$mkfolder
-return
-}
-if[/i "!cmd:~0,4!"=="file"] {
-[cmdc=!cmd:~5,-1!]
-$file
-return
-}
-if[/i "!cmd:~0,4!"=="play"] {
-[cmdc=!cmd:~5,-1!]
-$play
-return
-}
-if[/i "!cmd:~0,5!"=="while"] {
-[cmdc=!cmd:~6,-1!]
-$while
-return
-}
-if[/i "!cmd:~0,4!"=="incr"] {
-[cmdc=!cmd:~5,-1!]
-$incr
-return
-}
-if[/i "!cmd:~0,6!"=="repeat"] {
-[cmdc=!cmd:~7,-1!]
-$repeat
-return
-}
-if[/i "!cmd:~0,5!"=="break"] {
-[cmdc=!cmd:~6,-1!]
-$break
-return
-}
-if[/i "!cmd:~0,7!"=="returnf"] {
-	[cmdc=!cmd:~8!]
-	$returnf
-	return
-}
-if[/i "!cmd:~0,6!"=="return"] {
-[cmdc=!cmd:~7,-1!]
-$return
-return
-}
-if[/i "!cmd:~0,4!"=="open"] {
-[cmdc=!cmd:~5,-1!]
-$open
-return
-}
-if[/i "!cmd:~0,4!"=="skey"] {
-[cmdc=!cmd:~5,-1!]
-$skey
-return
-}
-if[/i "!cmd:~0,2!"=="ps"] {
-[cmdc=!cmd:~3,-1!]
-$ps
-return
-}
-if[/i "!cmd:~0,5!"=="alert"] {
-[cmdc=!cmd:~6,-1!]
-$alert
-return
-}
-if[/i "!cmd:~0,5!"=="color"] {
-[cmdc=!cmd:~6,-1!]
-$colour
-return
-}
-if[/i "!cmd:~0,6!"=="colour"] {
-[cmdc=!cmd:~7,-1!]
-$colour
-return
-}
-if[/i "!cmd:~0,7!"=="restart"] {
-[cmdc=!cmd:~8,-1!]
-$restart
-return
-}
-if[/i "!cmd:~0,3!"=="out"] {
-[cmdc=!cmd:~4,-1!]
-$out
-return
-}
-if[/i "!cmd:~0,7!"=="rewrite"] {
-[cmdc=!cmd:~8,-1!]
-$rewrite
-return
-}
-if[/i "!cmd:~0,6!"=="choice"] {
-[cmdc=!cmd:~7,-1!]
-$choice
-return
-}
-if[/i "!cmd:~0,4!"=="stop"] {
-[cmdc=!cmd:~5,-1!]
-$stop
-return
-}
-if[/i "!cmd:~0,5!"=="close"] {
-[cmdc=!cmd:~6,-1!]
-$stop
-return
-}
-if[/i "!cmd:~0,6!"=="import"] {
-	[cmdc=!cmd:~7!]
-	$import
-	return
-}
-if[/i "!cmd:~0,5!"=="raise"] {
-	[cmdc=!cmd:~6!]
-	$raise
-	return
-}
-if[/i "!cmd:~0,2!"=="f$"] {
-	[cmdc=!cmd:~2!]
-	$callf
-	return
-}
-if[/i "!cmd:~0,7!"=="process"] {
-	$process
-	return
-}
-if[/i "!cmd:~0,5!"=="event"] {
-	$event
-	return
-}
-if["!cmd:~0,4!"=="setf"] {
-[cmdc=!cmd:~5,-1!]
-$setf
-return
-}
-if["!cmd:~0,5!"=="mathf"] {
-[cmdc=!cmd:~6,-1!]
-$mathf
-return
-}
-if["!cmd:~0,1!"=="["] {
-[cmdc=!cmd:~2,-1!]
-$setQuick
-return
-}
-$abs } closeBracket
-$abs "} else {" else
-}
+
 define.function[ifin] {
 	[cmdc=!cmdc:^,= ]
 	[bracketString=%bracketString%I]
+	
 	file.append[sys.bat] {
 		print[!pps!call :ifIn%moduleID% !cmdc!]
 		print[!pps!if %errorlevel% NEQ 1 (]
 	}
 }
+
 define.function[process] {
 	[cmdc=!cmd:~8!]
+	
 	if["!cmdc:~0,5!"=="start"] {
 		$processStart
 	} elif["!cmdc:~0,4!"=="stop"] {
 		$processStop
 	}
 }
+
 define.function[processStart] {
 	[cmdc=!cmdc:~6,-3!]
 	[bracketString=%bracketString%P]
+	
 	file.append[sys.bat] {
 		print[!pps!set pnm="%%temp%%\Process-!cmdc!.bat"]
 		print[!pps!(]
 	}
+	
 	[pps=!pps!echo ]
 	[pes=!pes!^^^^]
 }
+
 define.function[endProcessStart] {
 	[pps=!pps:~0,-5!]
 	[pes=!pes:~0,-4!]
+	
 	file.append[sys.bat] {
 		print[!pps!!pes!^)!pes!^>%%pnm%%]
 		print[!pps!echo CreateObject("Wscript.Shell"!pes!^^^^^).Run """" !pes!^^^^^& WScript.Arguments(0!pes!^^^^^) !pes!^^^^^& """", 0, False!pes!^>"%%temp%%\bkgd.vbs"]
 		print[!pps!"%%temp%%\bkgd.vbs" %%pnm%%]
 	}
 }
+
 define.function[processStop] {
 	[cmdc=!cmdc:~5,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!call :forceDelete%moduleID% "%%temp%%\Process-!cmdc!.bat"]
 	}
 }
+
 define.function[event] {
 	[cmdc=!cmd:~6!]
+	
 	if["!cmdc:~0,5!"=="start"] {
 		$eventStart
 	} elif["!cmdc:~0,4!"=="stop"] {
@@ -458,36 +537,46 @@ define.function[event] {
 		$eventWait
 	}
 }
+
 define.function[eventStart] {
 	[cmdc=!cmdc:~6,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!echo.!pes!^> "%%temp%%\Event-!cmdc!"]
 	}
 }
+
 define.function[eventStop] {
 	[cmdc=!cmdc:~5,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!call :forceDelete%moduleID% "%%temp%%\Event-!cmdc!"]
 	}
 }
+
 define.function[eventWait] {
 	[cmdc=!cmdc:~5,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!call :eventWait%moduleID% !cmdc!]
 	}
 }
+
 define.function[ifevent] {
 	[cmdc=!cmd:~9,-3!]
 	[bracketString=%bracketString%I]
+	
 	file.append[sys.bat] {
 		print[!pps!if exist "%%temp%%\Event-!cmdc!" (]
 	}
 }
+
 define.function[stop] {
 	file.append[sys.bat] {
 		print[!pps!taskkill /im !cmdc! /f]
 	}
 }
+
 define.function[choice] {
 	file.append[sys.bat] {
 		print[set choices=!cmdc!]
@@ -496,72 +585,94 @@ define.function[choice] {
 		print[call set choice=%%%%choices:~%%choiceNum%%,1%%%%]
 	}
 }
+
 define.function[rewrite] {
 	cmd[echo %bracketString% | findstr A >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawRewrite]
 	}
+	
 	cmd[echo %bracketString% | findstr R >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawRewrite]
 	}
+	
 	$sortColours
 	place[rawRewrite]
+	
 	file.append[sys.bat] {
 		print[echo %%escRewrite%%!cmdc!]
 	}
 }
+
 define.function[out] {
 	cmd[echo %bracketString% | findstr A >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawOut]
 	}
+	
 	cmd[echo %bracketString% | findstr R >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawOut]
 	}
+	
 	$sortColours
 	place[rawOut]
+	
 	file.append[sys.bat] {
 		print[echo ^| set /p ^^="!cmdc!"]
 	}
 }
+
 define.function[restart] {
 	file.append[sys.bat] {
 		print[goto startOfFile%moduleID%]
 	}
 }
+
 define.function[colour] {
 	file.append[sys.bat] {
 		print[color !cmdc!]
 	}
 }
+
 define.function[alert] {
 	[cmdc=!cmdc:"='!]
+	
 	file.append[sys.bat] {
 		print[call :alertJS%moduleID% "!cmdc!"]
 	}
 }
+
 define.function[elif] {
 	[cmdc=!cmdc:~0,-2!]
 	[cmdc=!cmdc:^>= GTR !]
 	[cmdc=!cmdc:^<= LSS !]
 	[cmdc=!cmdc:^&= if !]
+	
 	file.append[sys.bat] {
 		print[!pps!!pes!^) else if !cmdc! (]
 	}
 }
+
 define.function[ps] {
 	[cmdc=!cmdc:"='!]
+	
 	file.append[sys.bat] {
 		print[!pps!powershell -Command "!cmdc!"]
 	}
 }
+
 define.function[else] {
 	file.append[sys.bat] {
 		print[!pps!!pes!^) else (]
 	}
 }
+
 define.function[skey] {
 	file.append[sys.bat] {
 		print[!pps!set skey_id=%%random%%]
@@ -572,8 +683,10 @@ define.function[skey] {
 		print[!pps!start "" "%%temp%%\%%skey_id%%.vbs"]
 	}
 }
+
 define.function[file] {
 	[cmd=!cmdc!]
+	
 	if[/i "!cmd:~0,5!"=="write"] {
 		[cmdc=!cmd:~6,-1!]
 		$write
@@ -581,68 +694,87 @@ define.function[file] {
 		[cmdc=!cmd:~7,-1!]
 		$append
 	}
+	
 	[cmdc=!cmdc:~0,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!set opened_file=!cmdc!]
 		print[!pps!(]
 	}
 }
+
 define.function[append] {
 	[bracketString=%bracketString%A]
 }
+
 define.function[write] {
 	[bracketString=%bracketString%R]
 }
+
 define.function[open] {
 	file.append[sys.bat] {
 		print[!pps!start "" !cmdc!]
 	}
 }
+
 define.function[setQuick] {
 	[cmdc=!cmd:~1,1!!cmdc!]
+	
 	file.append[sys.bat] {
 		print[!pps!set !cmdc!]
 	}
 }
+
 define.function[setf] {
 	$functionToVar
+	
 	file.append[sys.bat] {
 		print[set /a tbcn1=%%traceback_callNum%%+1]
 		print[!pps!call set !cmdc!]
 	}
 }
+
 define.function[mathf] {
 	$functionToVar
+	
 	file.append[sys.bat] {
 		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
 		print[!pps!call set /a !cmdc!]
 	}
 }
+
 define.function[functionToVar] {
 	incr[returnID]
 	[curChar=0]
 	cmd[echo !cmdc! | findstr /c:"$" >nul]
+	
 	if[not errorlevel 1] {
 		goto[looking1]
 	} else {
 		return
 	}
+	
 	place[looking1]
+	
 	if["!cmdc:~%curChar%,1!"=="$"] {
 		goto[found1]
 	}
+	
 	incr[curChar]
 	goto[looking1]
 	place[found1]
 	[func=]
 	place[looking2]
 	incr[curChar]
+	
 	if["!cmdc:~%curChar%,1!"=="$"] {
 		goto[found2]
 	}
+	
 	[func=!func!!cmdc:~%curChar%,1!]
 	goto[looking2]
 	place[found2]
+	
 	file.append[sys.bat] {
 		print[!pps!set returnID=%returnID%]
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
@@ -654,31 +786,38 @@ define.function[functionToVar] {
 		print[!pps!call :!func!]
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
+	
 	[cmdc=!cmdc:$%func%$=%%%%toReturn_%returnID%_%%tbcn1%%%%%%!]
 	$functionToVar
 	return
-}	
+}
+
 define.function[return] {
 	file.append[sys.bat] {
 		print[!pps!set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!]
 		print[!pps!exit /b]
 	}
 }
+
 define.function[returnf] {
 	[cmdc=!cmd:~7!]
 	$functionToVar
+	
 	file.append[sys.bat] {
 		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
 		print[!pps!call set toReturn_%%returnID%%_%%traceback_callNum%%=!cmdc!]
 		print[!pps!exit /b]
 	}
 }
+
 define.function[break] {
 	[whileWriting=%whileWrite:~-2,2%]
+	
 	file.append[sys.bat] {
 		print[!pps!goto afterwhile%whileWriting%%moduleID%]
 	}
 }
+
 define.function[closeBracket] {
 	if["%bracketString:~-1,1%"=="I"] {
 		$endIf
@@ -693,17 +832,22 @@ define.function[closeBracket] {
 	} elif["%bracketString:~-1,1%"=="P"] {
 		$endProcessStart
 	}
+	
 	[bracketString=%bracketString:~0,-1%]
 }
+
 define.function[repeat] {
 	[cmdc=!cmdc:~0,-2!]
 	[bracketString=%bracketString%W]
 	incr[whileCount]
 	[whileWriting=%whileCount%]
+	
 	if["%whileWriting:~1,1%"==""] {
 		[whileWriting=0%whileWriting%]
 	}
+	
 	[whileWrite=%whileWrite%%whileWriting%]
+	
 	file.append[sys.bat] {
 		print[!pps!set repeatCounting%whileWriting%=-1]
 		print[!pps!call :while%whileWriting%%moduleID%]
@@ -716,11 +860,13 @@ define.function[repeat] {
 		print[!pps!:whiling%whileWriting%%moduleID%]
 	}
 }
+
 define.function[incr] {
 	file.append[sys.bat] {
 		print[!pps!set /a !cmdc!=%%!cmdc!%%+1]
 	}
 }
+
 define.function[while] {
 	[cmdc=!cmdc:~0,-2!]
 	[cmdc=!cmdc:^>= GTR !]
@@ -731,10 +877,13 @@ define.function[while] {
 	[cmdc=!cmdc:^&= if !]
 	incr[whileCount]
 	[whileWriting=%whileCount%]
+	
 	if["%whileWriting:~1,1%"==""] {
 		[whileWriting=0%whileWriting%]
 	}
+	
 	[whileWrite=%whileWrite%%whileWriting%]
+	
 	file.append[sys.bat] {
 		print[!pps!:while%whileWriting%%moduleID%]
 		print[!pps!if !cmdc! (]
@@ -745,59 +894,71 @@ define.function[while] {
 		print[!pps!:whiling%whileWriting%%moduleID%]
 	}
 }
+
 define.function[endWhile] {
 	[whileWriting=%whileWrite:~-2,2%]
 	[whileWrite=%whileWrite:~0,-2%]
+	
 	file.append[sys.bat] {
 		print[!pps!goto while%whileWriting%%moduleID%]
 		print[!pps!:afterwhile%whileWriting%%moduleID%]
 	}
 }
+
 define.function[play] {
 	file.append[sys.bat] {
 		print[!pps!powershell [console]::Beep(!cmdc!!pes!^)]
 	}
 }
+
 define.function[endWrite] {
 	file.append[sys.bat] {
 		print[!pps!!pes!^)!pes!^>%%opened_file%%]
 	}
 }
+
 define.function[endAppend] {
 	file.append[sys.bat] {
 		print[!pps!!pes!^)!pes!^>!pes!^>%%opened_file%%]
 	}
 }
+
 define.function[mkfolder] {
 	file.append[sys.bat] {
 		print[!pps!md !cmdc!]
 	}
 }
+
 define.function[mkfile] {
 	file.append[sys.bat] {
 		print[!pps!echo.!pes!^>!cmdc!]
 	}
 }
+
 define.function[del] {
 	file.append[sys.bat] {
 		print[!pps!del !cmdc!]
 	}
 }
+
 define.function[ren] {
 	file.append[sys.bat] {
 		print[!pps!ren !cmdc!]
 	}
 }
+
 define.function[download] {
 	file.append[sys.bat] {
 		print[!pps!powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"]
 	}
 }
+
 define.function[prompt] {
 	file.append[sys.bat] {
 		print[set /p !cmdc!=""]
 	}
 }
+
 define.function[define] {
 	if[/i "!cmdc:~0,4!"=="text"] {
 		$defineText
@@ -811,31 +972,40 @@ define.function[define] {
 		$plainDefine
 	}
 }
+
 define.function[definePrompt] {
 	[cmdc=!cmd:~14,-1!]
+	
 	file.append[sys.bat] {
 		print[set /p !cmdc!]
 	}
 }
+
 define.function[defineMath] {
 	[cmdc=!cmd:~12,-1!]
+	
 	file.append[sys.bat] {
 		print[set /a !cmdc!]
 	}
 }
+
 define.function[defineText] {
 	[cmdc=!cmd:~12,-1!]
+	
 	file.append[sys.bat] {
 		print[!pps!set !cmdc!]
 	}
 }
+
 define.function[plainDefine] {
 	file.append[sys.bat] {
 		print[!pps!set !cmdc!]
 	}
 }
+
 define.function[callFunction] {
 	[cmdc=!cmd:~1!]
+	
 	file.append[sys.bat] {
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
 		print[!pps!set traceback_line_%%traceback_callNum%%=!cmd!]
@@ -847,9 +1017,11 @@ define.function[callFunction] {
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
+
 define.function[callf] {
 	[cmdc=!cmd:~2!]
 	$functionToVar
+	
 	file.append[sys.bat] {
 		print[!pps!set /a tbcn1=%%traceback_callNum%%+1]
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%+1]
@@ -862,39 +1034,48 @@ define.function[callf] {
 		print[!pps!set /a traceback_callNum=%%traceback_callNum%%-1]
 	}
 }
+
 define.function[goto] {
 	file.append[sys.bat] {
 		print[!pps!goto !cmdc!]
 	}
 }
+
 define.function[place] {
 	file.append[sys.bat] {
 		print[!pps!:!cmdc!]
 	}
 }
+
 define.function[title] {
 	file.append[sys.bat] {
 		print[!pps!title !cmdc!]
 	}
 }
+
 define.function[comment] {
 	[cmdc=!cmd:~1!]
+	
 	file.append[sys.bat] {
 		print[::!cmdc!]
 	}
 }
+
 define.function[endFunction] {
 	[functionName=[module]]
+	
 	file.append[sys.bat] {
 		print[!pps!exit /b]
 		print[!pps!:endfunction%functionNumber%%moduleID%]
 	}
 }
+
 define.function[defineFunction] {
 	[bracketString=%bracketString%F]
 	incr[functionNumber]
 	[cmdc=!cmd:~16,-3!]
 	[functionName=!cmdc!]
+	
 	file.append[sys.bat] {
 		print[!pps!goto endfunction%functionNumber%%moduleID%]
 		print[!pps!:!cmdc!]
@@ -905,31 +1086,37 @@ define.function[defineFunction] {
 		print[!pps!set arg5=%%~5]
 	}
 }
+
 define.function[batcmd] {
 	file.append[sys.bat] {
 		print[!cmdc!]
 	}
 }
+
 define.function[endIf] {
 	file.append[sys.bat] {
 		print[!pps!!pes!^)]
 	}
 }
+
 define.function[if] {
 	[cmdc=!cmd:~3,-3!]
 	[cmdc=!cmdc:^>= GTR !]
 	[cmdc=!cmdc:^<= LSS !]
 	[bracketString=%bracketString%I]
 	[cmdc=!cmdc:^&= if !]
+	
 	file.append[sys.bat] {
 		print[!pps!if !cmdc! ^(]
 	}
 }
+
 define.function[disp] {
 	file.append[sys.bat] {
 		print[mode 1000]
 	}
 }
+
 define.function[sortColours] {
 	[cmdc=!cmdc:\n=^&echo(!]
 	[cmdc=!cmdc:@reset=%%esc0m%%!]
@@ -973,43 +1160,55 @@ define.function[sortColours] {
 	[cmdc=!cmdc:#f=%%esc97m%%!]
 	[cmdc=!cmdc!%%esc0m%%]
 }
+
 define.function[print] {
 	if["!cmdc!"==""] {
 		$emptyPrint
 		return
 	}
+	
 	cmd[echo %bracketString% | findstr A >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawPrint]
 	}
+	
 	cmd[echo %bracketString% | findstr R >nul]
+	
 	if[not errorlevel 1] {
 		goto[rawPrint]
 	}
+	
 	$sortColours
 	place[rawPrint]
+	
 	file.append[sys.bat] {
 		print[echo(!cmdc!]
 	}
 }
+
 define.function[printf] {
 	$sortColours
 	$functionToVar
+	
 	file.append[sys.bat] {
 		print[set /a tbcn1=%%traceback_callNum%%+1]
 		print[call echo !cmdc!]
 	}
 }
+
 define.function[emptyPrint] {
 	file.append[sys.bat] {
 		print[echo.]
 	}
 }
+
 define.function[end] {
 	file.append[sys.bat] {
 		print[!pps!exit]
 	}
 }
+
 define.function[wait] {
 	if[/i "!cmdc!"=="user"] {
 		$waitUser
@@ -1017,21 +1216,25 @@ define.function[wait] {
 		$waitTime
 	}
 }
+
 define.function[waitUser] {
 	file.append[sys.bat] {
 		print[pause^>nul]
 	}
 }
+
 define.function[waitTime] {
 	file.append[sys.bat] {
 		print[!pps!timeout /t !cmdc! /nobreak !pes!^>nul]
 	}
 }
+
 define.function[clear] {
 	file.append[sys.bat] {
 		print[cls]
 	}
 }
+
 define.function[raise] {
 	file.append[sys.bat] {
 		print[echo. ]
@@ -1049,63 +1252,78 @@ define.function[raise] {
 		print[exit]
 	}
 }
+
 define.function[import] {
 	if["!cmdc:~0,4!"=="net:"] {
 		[cmdc=!cmdc:~4!]
 		$import_net
 		return
 	}
+	
 	if["!cmdc:~0,6!"=="local:"] {
 		[cmdc=!cmdc:~6!]
 		$import_local
 		return
 	}
+	
 	if["!cmdc:~0,8!"=="inbuilt:"] {
 		[cmdc=!cmdc:~8!]
 		$import_inbuilt
 		return
 	}
+	
 	if[exist "!cmdc!.bat"] {
 		$import_local
 		return
 	}
+	
 	if[exist "%~dp0modules\!cmdc!.bat"] {
 		$import_inbuilt
 		return
 	}
+	
 	$import_net
 }
+
 define.function[import_net] {
 	del[download]
 	download[https://raw.githubusercontent.com/AddisonPascal/c2b/master/modules/!cmdc!.bat]
+	
 	if[not exist download] {
 		raise Error: Cannot find online module.
 	}
+	
 	file.append[sys.bat] {
 		cmd[type download]
 		print[]
 	}
+	
 	cmd[copy download "%~dp0modules\!cmdc!.bat" >nul]
 	del[download]
 }
+
 define.function[import_local] {
 	if[not exist "!cmdc!.bat"] {
 		raise Error: Cannot find local module.
 	}
+	
 	file.append[sys.bat] {
 		cmd[type "!cmdc!.bat"]
 		print[]
 	}
 }
+
 define.function[import_inbuilt] {
 	if[not exist "%~dp0modules\!cmdc!.bat"] {
 		raise Error: Cannot find inbuilt module
 	}
+	
 	file.append[sys.bat] {
 		cmd[type "%~dp0modules\!cmdc!.bat"]
 		print[]
 	}
 }
+
 define.function[export] {
 	[new_location=%location:~0,-4%.bat"]
 	cmd[copy sys.bat %new_location%]
@@ -1117,4 +1335,5 @@ define.function[export] {
 	cmd[call %new_location%]
 	end[file]
 }
+
 export
