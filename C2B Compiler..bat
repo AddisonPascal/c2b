@@ -1,11 +1,11 @@
 @echo off
-rem Compiled by the c2b Compiler from c2b v0.9.3. 
-rem Module ID: 2738110260
+rem Compiled by the c2b Compiler from c2b v0.9.5. 
+rem Module ID: 152432947
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin102738110260
+if errorlevel 1 goto noWin10152432947
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile2738110260
-:noWin102738110260
+goto startOfFile152432947
+:noWin10152432947
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,34 +64,36 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile2738110260
-:alertJS2738110260
+goto startOfFile152432947
+:alertJS152432947
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn2738110260
+:ifIn152432947
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_2738110260
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_2738110260
+:tracing_back_152432947
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_152432947
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_2738110260
-:end_tracing_back_2738110260
+goto tracing_back_152432947
+:end_tracing_back_152432947
 exit /b
-:forceDelete2738110260
+:forceDelete152432947
 del %*
-if exist %* call :forceDelete2738110260 %*
+if exist %* call :forceDelete152432947 %*
 exit /b
-:eventWait2738110260
-if not exist "%temp%\Event-%*" goto eventWait2738110260 %*
+:eventWait152432947
+if not exist "%temp%\Event-%*" goto eventWait152432947 %*
 exit /b
-:startOfFile2738110260
+:startOfFile152432947
 :: c2b Compiler by Addison Djatschenko
 :: https://github.com/AddisonPascal/c2b
-:: Version 0.9.5
-set version=0.9.5
+:: Version 0.9.6
+
+set version=0.9.6
 setlocal enabledelayedexpansion
+
 title C2B Compiler v%version%
 set whileCount=0
 set whileWrite=00
@@ -102,6 +104,7 @@ set functionName=[module]
 set returnID=0
 set pps=
 set pes=
+
 set opened_file=sys.bat
 (
 echo(@echo off
@@ -194,6 +197,7 @@ echo(if not exist "%%temp%%\Event-%%*" goto eventWait%moduleID% %%*
 echo(exit /b
 echo(:startOfFile%moduleID%
 )>%opened_file%
+
 if %1.==. (
 del sys.bat
 echo. 
@@ -203,14 +207,15 @@ echo.
 echo Traceback [most recent call last]:
 echo.
 set tracing_back=0
-call :tracing_back_2738110260
-echo C2B Compiler [module ID 2738110260], line 108, in [module]:
+call :tracing_back_152432947
+echo C2B Compiler [module ID 152432947], line 113, in [module]:
 echo raise Error: Use c2b compiler by opening a c2b file with it.
 echo.
 pause
 exit
 )
-goto endfunction12738110260
+
+goto endfunction1152432947
 :getFilename
 set arg1=%~1
 set arg2=%~2
@@ -219,23 +224,25 @@ set arg4=%~4
 set arg5=%~5
 set fileName=%~nx1
 exit /b
-:endfunction12738110260
+:endfunction1152432947
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$getFilename %1
-set traceback_linenum_%traceback_callNum%=113
+set traceback_linenum_%traceback_callNum%=119
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=[module]
 call :getFilename %1
 set /a traceback_callNum=%traceback_callNum%-1
 set moduleName=%fileName:~0,-4%
 cls
+
 set location=%1
 (
 type %location%
 echo.
 )|clip
 del %location:~0,-4%.bat"
+
 echo(Automatically compiling...%esc0m%
 set skey_id=%random%
 (
@@ -243,39 +250,43 @@ echo Set WshShell = WScript.CreateObject("WScript.Shell"^)
 echo WshShell.SendKeys "^(v)"
 )>"%temp%\%skey_id%.vbs"
 start "" "%temp%\%skey_id%.vbs"
-:while012738110260
+
+:while01152432947
 if 1 EQU 1 (
-goto whiling012738110260
+goto whiling01152432947
 ) else (
-goto afterwhile012738110260
+goto afterwhile01152432947
 )
-:whiling012738110260
+:whiling01152432947
 set /a line=%line%+1
 set cmd=~linebreak
 set /p cmd="%line% | "
+
 if "!cmd!"=="~linebreak" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$linebreak
-set traceback_linenum_%traceback_callNum%=129
+set traceback_linenum_%traceback_callNum%=139
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=[module]
 call :linebreak
 set /a traceback_callNum=%traceback_callNum%-1
 goto anotherLine
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$convertCommand
-set traceback_linenum_%traceback_callNum%=132
+set traceback_linenum_%traceback_callNum%=143
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=[module]
 call :convertCommand
 set /a traceback_callNum=%traceback_callNum%-1
 :anotherLine
-goto while012738110260
-:afterwhile012738110260
-goto endfunction22738110260
+goto while01152432947
+:afterwhile01152432947
+
+goto endfunction2152432947
 :linebreak
 set arg1=%~1
 set arg2=%~2
@@ -287,8 +298,9 @@ set opened_file=sys.bat
 echo.
 )>>%opened_file%
 exit /b
-:endfunction22738110260
-goto endfunction32738110260
+:endfunction2152432947
+
+goto endfunction3152432947
 :abs
 set arg1=%~1
 set arg2=%~2
@@ -298,724 +310,779 @@ set arg5=%~5
 if /i "!cmd!"=="%arg1%" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$%arg2%
-set traceback_linenum_%traceback_callNum%=142
+set traceback_linenum_%traceback_callNum%=155
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=abs
 call :%arg2%
 set /a traceback_callNum=%traceback_callNum%-1
 )
 exit /b
-:endfunction32738110260
-goto endfunction42738110260
+:endfunction3152432947
+
+goto endfunction4152432947
 :convertCommand
 set arg1=%~1
 set arg2=%~2
 set arg3=%~3
 set arg4=%~4
 set arg5=%~5
-:while022738110260
+:while02152432947
 if "!cmd:~0,1!"==" " (
-goto whiling022738110260
+goto whiling02152432947
 ) else (
-goto afterwhile022738110260
+goto afterwhile02152432947
 )
-:whiling022738110260
+:whiling02152432947
 set cmd=!cmd:~1!
-goto while022738110260
-:afterwhile022738110260
+goto while02152432947
+:afterwhile02152432947
+
 if "!cmd:~0,1!"=="#" (
 set cmdc=!cmd:~1,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$comment
-set traceback_linenum_%traceback_callNum%=151
+set traceback_linenum_%traceback_callNum%=166
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :comment
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="printf" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$printf
-set traceback_linenum_%traceback_callNum%=156
+set traceback_linenum_%traceback_callNum%=172
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :printf
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="print" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$print
-set traceback_linenum_%traceback_callNum%=161
+set traceback_linenum_%traceback_callNum%=178
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :print
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="wait" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$wait
-set traceback_linenum_%traceback_callNum%=166
+set traceback_linenum_%traceback_callNum%=184
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :wait
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,3!"=="end" (
 set cmdc=!cmd:~4,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$end
-set traceback_linenum_%traceback_callNum%=171
+set traceback_linenum_%traceback_callNum%=190
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :end
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="export" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$export
-set traceback_linenum_%traceback_callNum%=176
+set traceback_linenum_%traceback_callNum%=196
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :export
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="disp" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$disp
-set traceback_linenum_%traceback_callNum%=181
+set traceback_linenum_%traceback_callNum%=202
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :disp
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="clear" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$clear
-set traceback_linenum_%traceback_callNum%=186
+set traceback_linenum_%traceback_callNum%=208
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :clear
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="ifin" (
 set cmdc=!cmd:~5,-3!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$ifin
-set traceback_linenum_%traceback_callNum%=191
+set traceback_linenum_%traceback_callNum%=214
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :ifin
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,8!"=="if.event" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$ifevent
-set traceback_linenum_%traceback_callNum%=195
+set traceback_linenum_%traceback_callNum%=219
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :ifevent
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,2!"=="if" (
 set cmdc=!cmd:~3,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$if
-set traceback_linenum_%traceback_callNum%=200
+set traceback_linenum_%traceback_callNum%=225
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :if
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="} elif" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$elif
-set traceback_linenum_%traceback_callNum%=205
+set traceback_linenum_%traceback_callNum%=231
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :elif
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,3!"=="cmd" (
 set cmdc=!cmd:~4,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$batcmd
-set traceback_linenum_%traceback_callNum%=210
+set traceback_linenum_%traceback_callNum%=237
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :batcmd
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="title" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$title
-set traceback_linenum_%traceback_callNum%=215
+set traceback_linenum_%traceback_callNum%=243
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :title
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="define" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$define
-set traceback_linenum_%traceback_callNum%=220
+set traceback_linenum_%traceback_callNum%=249
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :define
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="place" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$place
-set traceback_linenum_%traceback_callNum%=225
+set traceback_linenum_%traceback_callNum%=255
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :place
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="goto" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$goto
-set traceback_linenum_%traceback_callNum%=230
+set traceback_linenum_%traceback_callNum%=261
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :goto
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmd:~0,1!"=="$" (
 set cmdc=!cmd:~2,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$callFunction
-set traceback_linenum_%traceback_callNum%=235
+set traceback_linenum_%traceback_callNum%=267
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :callFunction
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="prompt" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$prompt
-set traceback_linenum_%traceback_callNum%=240
+set traceback_linenum_%traceback_callNum%=273
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :prompt
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,8!"=="download" (
 set cmdc=!cmd:~9,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$download
-set traceback_linenum_%traceback_callNum%=245
+set traceback_linenum_%traceback_callNum%=279
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :download
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,3!"=="ren" (
 set cmdc=!cmd:~4,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$ren
-set traceback_linenum_%traceback_callNum%=250
+set traceback_linenum_%traceback_callNum%=285
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :ren
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,3!"=="del" (
 set cmdc=!cmd:~4,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$del
-set traceback_linenum_%traceback_callNum%=255
+set traceback_linenum_%traceback_callNum%=291
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :del
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="mkfile" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$mkfile
-set traceback_linenum_%traceback_callNum%=260
+set traceback_linenum_%traceback_callNum%=297
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :mkfile
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,8!"=="mkfolder" (
 set cmdc=!cmd:~9,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$mkfolder
-set traceback_linenum_%traceback_callNum%=265
+set traceback_linenum_%traceback_callNum%=303
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :mkfolder
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="file" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$file
-set traceback_linenum_%traceback_callNum%=270
+set traceback_linenum_%traceback_callNum%=309
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :file
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="play" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$play
-set traceback_linenum_%traceback_callNum%=275
+set traceback_linenum_%traceback_callNum%=315
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :play
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="while" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$while
-set traceback_linenum_%traceback_callNum%=280
+set traceback_linenum_%traceback_callNum%=321
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :while
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="incr" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$incr
-set traceback_linenum_%traceback_callNum%=285
+set traceback_linenum_%traceback_callNum%=327
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :incr
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="repeat" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$repeat
-set traceback_linenum_%traceback_callNum%=290
+set traceback_linenum_%traceback_callNum%=333
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :repeat
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="break" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$break
-set traceback_linenum_%traceback_callNum%=295
+set traceback_linenum_%traceback_callNum%=339
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :break
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,7!"=="returnf" (
 set cmdc=!cmd:~8!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$returnf
-set traceback_linenum_%traceback_callNum%=300
+set traceback_linenum_%traceback_callNum%=345
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :returnf
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="return" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$return
-set traceback_linenum_%traceback_callNum%=305
+set traceback_linenum_%traceback_callNum%=351
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :return
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="open" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$open
-set traceback_linenum_%traceback_callNum%=310
+set traceback_linenum_%traceback_callNum%=357
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :open
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="skey" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$skey
-set traceback_linenum_%traceback_callNum%=315
+set traceback_linenum_%traceback_callNum%=363
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :skey
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,2!"=="ps" (
 set cmdc=!cmd:~3,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$ps
-set traceback_linenum_%traceback_callNum%=320
+set traceback_linenum_%traceback_callNum%=369
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :ps
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="alert" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$alert
-set traceback_linenum_%traceback_callNum%=325
+set traceback_linenum_%traceback_callNum%=375
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :alert
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="color" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$colour
-set traceback_linenum_%traceback_callNum%=330
+set traceback_linenum_%traceback_callNum%=381
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :colour
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="colour" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$colour
-set traceback_linenum_%traceback_callNum%=335
+set traceback_linenum_%traceback_callNum%=387
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :colour
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,7!"=="restart" (
 set cmdc=!cmd:~8,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$restart
-set traceback_linenum_%traceback_callNum%=340
+set traceback_linenum_%traceback_callNum%=393
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :restart
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,3!"=="out" (
 set cmdc=!cmd:~4,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$out
-set traceback_linenum_%traceback_callNum%=345
+set traceback_linenum_%traceback_callNum%=399
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :out
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,7!"=="rewrite" (
 set cmdc=!cmd:~8,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$rewrite
-set traceback_linenum_%traceback_callNum%=350
+set traceback_linenum_%traceback_callNum%=405
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :rewrite
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="choice" (
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$choice
-set traceback_linenum_%traceback_callNum%=355
+set traceback_linenum_%traceback_callNum%=411
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :choice
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,4!"=="stop" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$stop
-set traceback_linenum_%traceback_callNum%=360
+set traceback_linenum_%traceback_callNum%=417
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :stop
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="close" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$stop
-set traceback_linenum_%traceback_callNum%=365
+set traceback_linenum_%traceback_callNum%=423
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :stop
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,6!"=="import" (
 set cmdc=!cmd:~7!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import
-set traceback_linenum_%traceback_callNum%=370
+set traceback_linenum_%traceback_callNum%=429
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :import
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="raise" (
 set cmdc=!cmd:~6!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$raise
-set traceback_linenum_%traceback_callNum%=375
+set traceback_linenum_%traceback_callNum%=435
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :raise
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,2!"=="f$" (
 set cmdc=!cmd:~2!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$callf
-set traceback_linenum_%traceback_callNum%=380
+set traceback_linenum_%traceback_callNum%=441
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :callf
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,7!"=="process" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$process
-set traceback_linenum_%traceback_callNum%=384
+set traceback_linenum_%traceback_callNum%=446
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :process
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if /i "!cmd:~0,5!"=="event" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$event
-set traceback_linenum_%traceback_callNum%=388
+set traceback_linenum_%traceback_callNum%=451
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :event
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmd:~0,4!"=="setf" (
 set cmdc=!cmd:~5,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$setf
-set traceback_linenum_%traceback_callNum%=393
+set traceback_linenum_%traceback_callNum%=457
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :setf
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmd:~0,5!"=="mathf" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$mathf
-set traceback_linenum_%traceback_callNum%=398
+set traceback_linenum_%traceback_callNum%=463
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :mathf
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmd:~0,1!"=="[" (
 set cmdc=!cmd:~2,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$setQuick
-set traceback_linenum_%traceback_callNum%=403
+set traceback_linenum_%traceback_callNum%=469
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :setQuick
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$abs } closeBracket
-set traceback_linenum_%traceback_callNum%=406
+set traceback_linenum_%traceback_callNum%=473
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :abs } closeBracket
 set /a traceback_callNum=%traceback_callNum%-1
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$abs "} else {" else
-set traceback_linenum_%traceback_callNum%=407
+set traceback_linenum_%traceback_callNum%=474
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=convertCommand
 call :abs "} else {" else
 set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction42738110260
-goto endfunction52738110260
+:endfunction4152432947
+
+goto endfunction5152432947
 :ifin
 set arg1=%~1
 set arg2=%~2
@@ -1024,14 +1091,16 @@ set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:^,= 
 set bracketString=%bracketString%I
+
 set opened_file=sys.bat
 (
 echo(!pps!call :ifIn%moduleID% !cmdc!
 echo(!pps!if %errorlevel% NEQ 1 (
 )>>%opened_file%
 exit /b
-:endfunction52738110260
-goto endfunction62738110260
+:endfunction5152432947
+
+goto endfunction6152432947
 :process
 set arg1=%~1
 set arg2=%~2
@@ -1039,28 +1108,30 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~8!
+
 if "!cmdc:~0,5!"=="start" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$processStart
-set traceback_linenum_%traceback_callNum%=420
+set traceback_linenum_%traceback_callNum%=491
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=process
 call :processStart
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "!cmdc:~0,4!"=="stop" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$processStop
-set traceback_linenum_%traceback_callNum%=422
+set traceback_linenum_%traceback_callNum%=493
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=process
 call :processStop
 set /a traceback_callNum=%traceback_callNum%-1
 )
 exit /b
-:endfunction62738110260
-goto endfunction72738110260
+:endfunction6152432947
+
+goto endfunction7152432947
 :processStart
 set arg1=%~1
 set arg2=%~2
@@ -1069,16 +1140,19 @@ set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:~6,-3!
 set bracketString=%bracketString%P
+
 set opened_file=sys.bat
 (
 echo(!pps!set pnm="%%temp%%\Process-!cmdc!.bat"
 echo(!pps!(
 )>>%opened_file%
+
 set pps=!pps!echo 
 set pes=!pes!^^^^
 exit /b
-:endfunction72738110260
-goto endfunction82738110260
+:endfunction7152432947
+
+goto endfunction8152432947
 :endProcessStart
 set arg1=%~1
 set arg2=%~2
@@ -1087,6 +1161,7 @@ set arg4=%~4
 set arg5=%~5
 set pps=!pps:~0,-5!
 set pes=!pes:~0,-4!
+
 set opened_file=sys.bat
 (
 echo(!pps!!pes!^)!pes!^>%%pnm%%
@@ -1094,8 +1169,9 @@ echo(!pps!echo CreateObject("Wscript.Shell"!pes!^^^^^).Run """" !pes!^^^^^& WScr
 echo(!pps!"%%temp%%\bkgd.vbs" %%pnm%%
 )>>%opened_file%
 exit /b
-:endfunction82738110260
-goto endfunction92738110260
+:endfunction8152432947
+
+goto endfunction9152432947
 :processStop
 set arg1=%~1
 set arg2=%~2
@@ -1103,13 +1179,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:~5,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!call :forceDelete%moduleID% "%%temp%%\Process-!cmdc!.bat"
 )>>%opened_file%
 exit /b
-:endfunction92738110260
-goto endfunction102738110260
+:endfunction9152432947
+
+goto endfunction10152432947
 :event
 set arg1=%~1
 set arg2=%~2
@@ -1117,37 +1195,39 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~6!
+
 if "!cmdc:~0,5!"=="start" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$eventStart
-set traceback_linenum_%traceback_callNum%=453
+set traceback_linenum_%traceback_callNum%=533
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=event
 call :eventStart
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "!cmdc:~0,4!"=="stop" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$eventStop
-set traceback_linenum_%traceback_callNum%=455
+set traceback_linenum_%traceback_callNum%=535
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=event
 call :eventStop
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "!cmdc:~0,4!"=="wait" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$eventWait
-set traceback_linenum_%traceback_callNum%=457
+set traceback_linenum_%traceback_callNum%=537
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=event
 call :eventWait
 set /a traceback_callNum=%traceback_callNum%-1
 )
 exit /b
-:endfunction102738110260
-goto endfunction112738110260
+:endfunction10152432947
+
+goto endfunction11152432947
 :eventStart
 set arg1=%~1
 set arg2=%~2
@@ -1155,13 +1235,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:~6,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!echo.!pes!^> "%%temp%%\Event-!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction112738110260
-goto endfunction122738110260
+:endfunction11152432947
+
+goto endfunction12152432947
 :eventStop
 set arg1=%~1
 set arg2=%~2
@@ -1169,13 +1251,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:~5,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!call :forceDelete%moduleID% "%%temp%%\Event-!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction122738110260
-goto endfunction132738110260
+:endfunction12152432947
+
+goto endfunction13152432947
 :eventWait
 set arg1=%~1
 set arg2=%~2
@@ -1183,13 +1267,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:~5,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!call :eventWait%moduleID% !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction132738110260
-goto endfunction142738110260
+:endfunction13152432947
+
+goto endfunction14152432947
 :ifevent
 set arg1=%~1
 set arg2=%~2
@@ -1198,13 +1284,15 @@ set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~9,-3!
 set bracketString=%bracketString%I
+
 set opened_file=sys.bat
 (
 echo(!pps!if exist "%%temp%%\Event-!cmdc!" (
 )>>%opened_file%
 exit /b
-:endfunction142738110260
-goto endfunction152738110260
+:endfunction14152432947
+
+goto endfunction15152432947
 :stop
 set arg1=%~1
 set arg2=%~2
@@ -1216,8 +1304,9 @@ set opened_file=sys.bat
 echo(!pps!taskkill /im !cmdc! /f
 )>>%opened_file%
 exit /b
-:endfunction152738110260
-goto endfunction162738110260
+:endfunction15152432947
+
+goto endfunction16152432947
 :choice
 set arg1=%~1
 set arg2=%~2
@@ -1232,8 +1321,9 @@ echo(set /a choiceNum=%%errorlevel%%-1
 echo(call set choice=%%%%choices:~%%choiceNum%%,1%%%%
 )>>%opened_file%
 exit /b
-:endfunction162738110260
-goto endfunction172738110260
+:endfunction16152432947
+
+goto endfunction17152432947
 :rewrite
 set arg1=%~1
 set arg2=%~2
@@ -1241,29 +1331,35 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 echo %bracketString% | findstr A >nul
+
 if not errorlevel 1 (
 goto rawRewrite
 )
+
 echo %bracketString% | findstr R >nul
+
 if not errorlevel 1 (
 goto rawRewrite
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$sortColours
-set traceback_linenum_%traceback_callNum%=507
+set traceback_linenum_%traceback_callNum%=602
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=rewrite
 call :sortColours
 set /a traceback_callNum=%traceback_callNum%-1
 :rawRewrite
+
 set opened_file=sys.bat
 (
 echo(echo %%escRewrite%%!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction172738110260
-goto endfunction182738110260
+:endfunction17152432947
+
+goto endfunction18152432947
 :out
 set arg1=%~1
 set arg2=%~2
@@ -1271,29 +1367,35 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 echo %bracketString% | findstr A >nul
+
 if not errorlevel 1 (
 goto rawOut
 )
+
 echo %bracketString% | findstr R >nul
+
 if not errorlevel 1 (
 goto rawOut
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$sortColours
-set traceback_linenum_%traceback_callNum%=522
+set traceback_linenum_%traceback_callNum%=623
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=out
 call :sortColours
 set /a traceback_callNum=%traceback_callNum%-1
 :rawOut
+
 set opened_file=sys.bat
 (
 echo(echo ^| set /p ^^="!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction182738110260
-goto endfunction192738110260
+:endfunction18152432947
+
+goto endfunction19152432947
 :restart
 set arg1=%~1
 set arg2=%~2
@@ -1305,8 +1407,9 @@ set opened_file=sys.bat
 echo(goto startOfFile%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction192738110260
-goto endfunction202738110260
+:endfunction19152432947
+
+goto endfunction20152432947
 :colour
 set arg1=%~1
 set arg2=%~2
@@ -1318,8 +1421,9 @@ set opened_file=sys.bat
 echo(color !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction202738110260
-goto endfunction212738110260
+:endfunction20152432947
+
+goto endfunction21152432947
 :alert
 set arg1=%~1
 set arg2=%~2
@@ -1327,13 +1431,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:"='!
+
 set opened_file=sys.bat
 (
 echo(call :alertJS%moduleID% "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction212738110260
-goto endfunction222738110260
+:endfunction21152432947
+
+goto endfunction22152432947
 :elif
 set arg1=%~1
 set arg2=%~2
@@ -1344,13 +1450,15 @@ set cmdc=!cmdc:~0,-2!
 set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
 set cmdc=!cmdc:^&= if !
+
 set opened_file=sys.bat
 (
 echo(!pps!!pes!^) else if !cmdc! (
 )>>%opened_file%
 exit /b
-:endfunction222738110260
-goto endfunction232738110260
+:endfunction22152432947
+
+goto endfunction23152432947
 :ps
 set arg1=%~1
 set arg2=%~2
@@ -1358,13 +1466,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmdc:"='!
+
 set opened_file=sys.bat
 (
 echo(!pps!powershell -Command "!cmdc!"
 )>>%opened_file%
 exit /b
-:endfunction232738110260
-goto endfunction242738110260
+:endfunction23152432947
+
+goto endfunction24152432947
 :else
 set arg1=%~1
 set arg2=%~2
@@ -1376,8 +1486,9 @@ set opened_file=sys.bat
 echo(!pps!!pes!^) else (
 )>>%opened_file%
 exit /b
-:endfunction242738110260
-goto endfunction252738110260
+:endfunction24152432947
+
+goto endfunction25152432947
 :skey
 set arg1=%~1
 set arg2=%~2
@@ -1394,8 +1505,9 @@ echo(!pps!!pes!^)!pes!^>"%%temp%%\%%skey_id%%.vbs"
 echo(!pps!start "" "%%temp%%\%%skey_id%%.vbs"
 )>>%opened_file%
 exit /b
-:endfunction252738110260
-goto endfunction262738110260
+:endfunction25152432947
+
+goto endfunction26152432947
 :file
 set arg1=%~1
 set arg2=%~2
@@ -1403,13 +1515,14 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmd=!cmdc!
+
 if /i "!cmd:~0,5!"=="write" (
 set cmdc=!cmd:~6,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$write
-set traceback_linenum_%traceback_callNum%=578
+set traceback_linenum_%traceback_callNum%=692
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=file
 call :write
 set /a traceback_callNum=%traceback_callNum%-1
@@ -1417,22 +1530,25 @@ set /a traceback_callNum=%traceback_callNum%-1
 set cmdc=!cmd:~7,-1!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$append
-set traceback_linenum_%traceback_callNum%=581
+set traceback_linenum_%traceback_callNum%=695
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=file
 call :append
 set /a traceback_callNum=%traceback_callNum%-1
 )
+
 set cmdc=!cmdc:~0,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!set opened_file=!cmdc!
 echo(!pps!(
 )>>%opened_file%
 exit /b
-:endfunction262738110260
-goto endfunction272738110260
+:endfunction26152432947
+
+goto endfunction27152432947
 :append
 set arg1=%~1
 set arg2=%~2
@@ -1441,8 +1557,9 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%A
 exit /b
-:endfunction272738110260
-goto endfunction282738110260
+:endfunction27152432947
+
+goto endfunction28152432947
 :write
 set arg1=%~1
 set arg2=%~2
@@ -1451,8 +1568,9 @@ set arg4=%~4
 set arg5=%~5
 set bracketString=%bracketString%R
 exit /b
-:endfunction282738110260
-goto endfunction292738110260
+:endfunction28152432947
+
+goto endfunction29152432947
 :open
 set arg1=%~1
 set arg2=%~2
@@ -1464,8 +1582,9 @@ set opened_file=sys.bat
 echo(!pps!start "" !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction292738110260
-goto endfunction302738110260
+:endfunction29152432947
+
+goto endfunction30152432947
 :setQuick
 set arg1=%~1
 set arg2=%~2
@@ -1473,13 +1592,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~1,1!!cmdc!
+
 set opened_file=sys.bat
 (
 echo(!pps!set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction302738110260
-goto endfunction312738110260
+:endfunction30152432947
+
+goto endfunction31152432947
 :setf
 set arg1=%~1
 set arg2=%~2
@@ -1488,20 +1609,22 @@ set arg4=%~4
 set arg5=%~5
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=607
+set traceback_linenum_%traceback_callNum%=729
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=setf
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
+
 set opened_file=sys.bat
 (
 echo(set /a tbcn1=%%traceback_callNum%%+1
 echo(!pps!call set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction312738110260
-goto endfunction322738110260
+:endfunction31152432947
+
+goto endfunction32152432947
 :mathf
 set arg1=%~1
 set arg2=%~2
@@ -1510,20 +1633,22 @@ set arg4=%~4
 set arg5=%~5
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=614
+set traceback_linenum_%traceback_callNum%=738
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=mathf
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
+
 set opened_file=sys.bat
 (
 echo(!pps!set /a tbcn1=%%traceback_callNum%%+1
 echo(!pps!call set /a !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction322738110260
-goto endfunction332738110260
+:endfunction32152432947
+
+goto endfunction33152432947
 :functionToVar
 set arg1=%~1
 set arg2=%~2
@@ -1533,28 +1658,35 @@ set arg5=%~5
 set /a returnID=%returnID%+1
 set curChar=0
 echo !cmdc! | findstr /c:"$" >nul
+
 if not errorlevel 1 (
 goto looking1
 ) else (
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 :looking1
+
 if "!cmdc:~%curChar%,1!"=="$" (
 goto found1
 )
+
 set /a curChar=%curChar%+1
 goto looking1
 :found1
 set func=
 :looking2
 set /a curChar=%curChar%+1
+
 if "!cmdc:~%curChar%,1!"=="$" (
 goto found2
 )
+
 set func=!func!!cmdc:~%curChar%,1!
 goto looking2
 :found2
+
 set opened_file=sys.bat
 (
 echo(!pps!set returnID=%returnID%
@@ -1567,20 +1699,22 @@ echo(!pps!set traceback_function_%%traceback_callNum%%=%functionName%
 echo(!pps!call :!func!
 echo(!pps!set /a traceback_callNum=%%traceback_callNum%%-1
 )>>%opened_file%
+
 set cmdc=!cmdc:$%func%$=%%%%toReturn_%returnID%_%%tbcn1%%%%%%!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=657
+set traceback_linenum_%traceback_callNum%=791
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=functionToVar
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 exit /b
-:endfunction332738110260
-goto endfunction342738110260
+:endfunction33152432947
+
+goto endfunction34152432947
 :return
 set arg1=%~1
 set arg2=%~2
@@ -1593,8 +1727,9 @@ echo(!pps!set toReturn_%%returnID%%_%%traceback_callNum%%=!cmd:~7!
 echo(!pps!exit /b
 )>>%opened_file%
 exit /b
-:endfunction342738110260
-goto endfunction352738110260
+:endfunction34152432947
+
+goto endfunction35152432947
 :returnf
 set arg1=%~1
 set arg2=%~2
@@ -1604,12 +1739,13 @@ set arg5=%~5
 set cmdc=!cmd:~7!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=668
+set traceback_linenum_%traceback_callNum%=804
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=returnf
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
+
 set opened_file=sys.bat
 (
 echo(!pps!set /a tbcn1=%%traceback_callNum%%+1
@@ -1617,8 +1753,9 @@ echo(!pps!call set toReturn_%%returnID%%_%%traceback_callNum%%=!cmdc!
 echo(!pps!exit /b
 )>>%opened_file%
 exit /b
-:endfunction352738110260
-goto endfunction362738110260
+:endfunction35152432947
+
+goto endfunction36152432947
 :break
 set arg1=%~1
 set arg2=%~2
@@ -1626,13 +1763,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set whileWriting=%whileWrite:~-2,2%
+
 set opened_file=sys.bat
 (
 echo(!pps!goto afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction362738110260
-goto endfunction372738110260
+:endfunction36152432947
+
+goto endfunction37152432947
 :closeBracket
 set arg1=%~1
 set arg2=%~2
@@ -1642,62 +1781,64 @@ set arg5=%~5
 if "%bracketString:~-1,1%"=="I" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endIf
-set traceback_linenum_%traceback_callNum%=683
+set traceback_linenum_%traceback_callNum%=823
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endIf
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "%bracketString:~-1,1%"=="W" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endWhile
-set traceback_linenum_%traceback_callNum%=685
+set traceback_linenum_%traceback_callNum%=825
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endWhile
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "%bracketString:~-1,1%"=="F" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endFunction
-set traceback_linenum_%traceback_callNum%=687
+set traceback_linenum_%traceback_callNum%=827
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endFunction
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "%bracketString:~-1,1%"=="R" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endWrite
-set traceback_linenum_%traceback_callNum%=689
+set traceback_linenum_%traceback_callNum%=829
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endWrite
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "%bracketString:~-1,1%"=="A" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endAppend
-set traceback_linenum_%traceback_callNum%=691
+set traceback_linenum_%traceback_callNum%=831
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endAppend
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if "%bracketString:~-1,1%"=="P" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$endProcessStart
-set traceback_linenum_%traceback_callNum%=693
+set traceback_linenum_%traceback_callNum%=833
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=closeBracket
 call :endProcessStart
 set /a traceback_callNum=%traceback_callNum%-1
 )
+
 set bracketString=%bracketString:~0,-1%
 exit /b
-:endfunction372738110260
-goto endfunction382738110260
+:endfunction37152432947
+
+goto endfunction38152432947
 :repeat
 set arg1=%~1
 set arg2=%~2
@@ -1708,10 +1849,13 @@ set cmdc=!cmdc:~0,-2!
 set bracketString=%bracketString%W
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
+
 if "%whileWriting:~1,1%"=="" (
 set whileWriting=0%whileWriting%
 )
+
 set whileWrite=%whileWrite%%whileWriting%
+
 set opened_file=sys.bat
 (
 echo(!pps!set repeatCounting%whileWriting%=-1
@@ -1725,8 +1869,9 @@ echo(!pps!exit /b
 echo(!pps!:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction382738110260
-goto endfunction392738110260
+:endfunction38152432947
+
+goto endfunction39152432947
 :incr
 set arg1=%~1
 set arg2=%~2
@@ -1738,8 +1883,9 @@ set opened_file=sys.bat
 echo(!pps!set /a !cmdc!=%%!cmdc!%%+1
 )>>%opened_file%
 exit /b
-:endfunction392738110260
-goto endfunction402738110260
+:endfunction39152432947
+
+goto endfunction40152432947
 :while
 set arg1=%~1
 set arg2=%~2
@@ -1755,10 +1901,13 @@ set bracketString=%bracketString%W
 set cmdc=!cmdc:^&= if !
 set /a whileCount=%whileCount%+1
 set whileWriting=%whileCount%
+
 if "%whileWriting:~1,1%"=="" (
 set whileWriting=0%whileWriting%
 )
+
 set whileWrite=%whileWrite%%whileWriting%
+
 set opened_file=sys.bat
 (
 echo(!pps!:while%whileWriting%%moduleID%
@@ -1770,8 +1919,9 @@ echo(!pps!!pes!^)
 echo(!pps!:whiling%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction402738110260
-goto endfunction412738110260
+:endfunction40152432947
+
+goto endfunction41152432947
 :endWhile
 set arg1=%~1
 set arg2=%~2
@@ -1780,14 +1930,16 @@ set arg4=%~4
 set arg5=%~5
 set whileWriting=%whileWrite:~-2,2%
 set whileWrite=%whileWrite:~0,-2%
+
 set opened_file=sys.bat
 (
 echo(!pps!goto while%whileWriting%%moduleID%
 echo(!pps!:afterwhile%whileWriting%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction412738110260
-goto endfunction422738110260
+:endfunction41152432947
+
+goto endfunction42152432947
 :play
 set arg1=%~1
 set arg2=%~2
@@ -1799,8 +1951,9 @@ set opened_file=sys.bat
 echo(!pps!powershell [console]::Beep(!cmdc!!pes!^)
 )>>%opened_file%
 exit /b
-:endfunction422738110260
-goto endfunction432738110260
+:endfunction42152432947
+
+goto endfunction43152432947
 :endWrite
 set arg1=%~1
 set arg2=%~2
@@ -1812,8 +1965,9 @@ set opened_file=sys.bat
 echo(!pps!!pes!^)!pes!^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction432738110260
-goto endfunction442738110260
+:endfunction43152432947
+
+goto endfunction44152432947
 :endAppend
 set arg1=%~1
 set arg2=%~2
@@ -1825,8 +1979,9 @@ set opened_file=sys.bat
 echo(!pps!!pes!^)!pes!^>!pes!^>%%opened_file%%
 )>>%opened_file%
 exit /b
-:endfunction442738110260
-goto endfunction452738110260
+:endfunction44152432947
+
+goto endfunction45152432947
 :mkfolder
 set arg1=%~1
 set arg2=%~2
@@ -1838,8 +1993,9 @@ set opened_file=sys.bat
 echo(!pps!md !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction452738110260
-goto endfunction462738110260
+:endfunction45152432947
+
+goto endfunction46152432947
 :mkfile
 set arg1=%~1
 set arg2=%~2
@@ -1851,8 +2007,9 @@ set opened_file=sys.bat
 echo(!pps!echo.!pes!^>!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction462738110260
-goto endfunction472738110260
+:endfunction46152432947
+
+goto endfunction47152432947
 :del
 set arg1=%~1
 set arg2=%~2
@@ -1864,8 +2021,9 @@ set opened_file=sys.bat
 echo(!pps!del !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction472738110260
-goto endfunction482738110260
+:endfunction47152432947
+
+goto endfunction48152432947
 :ren
 set arg1=%~1
 set arg2=%~2
@@ -1877,8 +2035,9 @@ set opened_file=sys.bat
 echo(!pps!ren !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction482738110260
-goto endfunction492738110260
+:endfunction48152432947
+
+goto endfunction49152432947
 :download
 set arg1=%~1
 set arg2=%~2
@@ -1890,8 +2049,9 @@ set opened_file=sys.bat
 echo(!pps!powershell -Command "(New-Object Net.WebClient).DownloadFile('!cmdc!', 'download')"
 )>>%opened_file%
 exit /b
-:endfunction492738110260
-goto endfunction502738110260
+:endfunction49152432947
+
+goto endfunction50152432947
 :prompt
 set arg1=%~1
 set arg2=%~2
@@ -1903,8 +2063,9 @@ set opened_file=sys.bat
 echo(set /p !cmdc!=""
 )>>%opened_file%
 exit /b
-:endfunction502738110260
-goto endfunction512738110260
+:endfunction50152432947
+
+goto endfunction51152432947
 :define
 set arg1=%~1
 set arg2=%~2
@@ -1914,52 +2075,53 @@ set arg5=%~5
 if /i "!cmdc:~0,4!"=="text" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$defineText
-set traceback_linenum_%traceback_callNum%=802
+set traceback_linenum_%traceback_callNum%=964
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=define
 call :defineText
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if /i "!cmdc:~0,6!"=="prompt" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$definePrompt
-set traceback_linenum_%traceback_callNum%=804
+set traceback_linenum_%traceback_callNum%=966
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=define
 call :definePrompt
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if /i "!cmdc:~0,4!"=="math" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$defineMath
-set traceback_linenum_%traceback_callNum%=806
+set traceback_linenum_%traceback_callNum%=968
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=define
 call :defineMath
 set /a traceback_callNum=%traceback_callNum%-1
 ) else if /i "!cmdc:~0,8!"=="function" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$defineFunction
-set traceback_linenum_%traceback_callNum%=808
+set traceback_linenum_%traceback_callNum%=970
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=define
 call :defineFunction
 set /a traceback_callNum=%traceback_callNum%-1
 ) else (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$plainDefine
-set traceback_linenum_%traceback_callNum%=810
+set traceback_linenum_%traceback_callNum%=972
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=define
 call :plainDefine
 set /a traceback_callNum=%traceback_callNum%-1
 )
 exit /b
-:endfunction512738110260
-goto endfunction522738110260
+:endfunction51152432947
+
+goto endfunction52152432947
 :definePrompt
 set arg1=%~1
 set arg2=%~2
@@ -1967,13 +2129,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~14,-1!
+
 set opened_file=sys.bat
 (
 echo(set /p !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction522738110260
-goto endfunction532738110260
+:endfunction52152432947
+
+goto endfunction53152432947
 :defineMath
 set arg1=%~1
 set arg2=%~2
@@ -1981,13 +2145,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~12,-1!
+
 set opened_file=sys.bat
 (
 echo(set /a !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction532738110260
-goto endfunction542738110260
+:endfunction53152432947
+
+goto endfunction54152432947
 :defineText
 set arg1=%~1
 set arg2=%~2
@@ -1995,13 +2161,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~12,-1!
+
 set opened_file=sys.bat
 (
 echo(!pps!set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction542738110260
-goto endfunction552738110260
+:endfunction54152432947
+
+goto endfunction55152432947
 :plainDefine
 set arg1=%~1
 set arg2=%~2
@@ -2013,8 +2181,9 @@ set opened_file=sys.bat
 echo(!pps!set !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction552738110260
-goto endfunction562738110260
+:endfunction55152432947
+
+goto endfunction56152432947
 :callFunction
 set arg1=%~1
 set arg2=%~2
@@ -2022,6 +2191,7 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~1!
+
 set opened_file=sys.bat
 (
 echo(!pps!set /a traceback_callNum=%%traceback_callNum%%+1
@@ -2034,8 +2204,9 @@ echo(!pps!call :!cmdc!
 echo(!pps!set /a traceback_callNum=%%traceback_callNum%%-1
 )>>%opened_file%
 exit /b
-:endfunction562738110260
-goto endfunction572738110260
+:endfunction56152432947
+
+goto endfunction57152432947
 :callf
 set arg1=%~1
 set arg2=%~2
@@ -2045,12 +2216,13 @@ set arg5=%~5
 set cmdc=!cmd:~2!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=851
+set traceback_linenum_%traceback_callNum%=1023
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=callf
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
+
 set opened_file=sys.bat
 (
 echo(!pps!set /a tbcn1=%%traceback_callNum%%+1
@@ -2064,8 +2236,9 @@ echo(!pps!call call :!cmdc!
 echo(!pps!set /a traceback_callNum=%%traceback_callNum%%-1
 )>>%opened_file%
 exit /b
-:endfunction572738110260
-goto endfunction582738110260
+:endfunction57152432947
+
+goto endfunction58152432947
 :goto
 set arg1=%~1
 set arg2=%~2
@@ -2077,8 +2250,9 @@ set opened_file=sys.bat
 echo(!pps!goto !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction582738110260
-goto endfunction592738110260
+:endfunction58152432947
+
+goto endfunction59152432947
 :place
 set arg1=%~1
 set arg2=%~2
@@ -2090,8 +2264,9 @@ set opened_file=sys.bat
 echo(!pps!:!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction592738110260
-goto endfunction602738110260
+:endfunction59152432947
+
+goto endfunction60152432947
 :title
 set arg1=%~1
 set arg2=%~2
@@ -2103,8 +2278,9 @@ set opened_file=sys.bat
 echo(!pps!title !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction602738110260
-goto endfunction612738110260
+:endfunction60152432947
+
+goto endfunction61152432947
 :comment
 set arg1=%~1
 set arg2=%~2
@@ -2112,13 +2288,15 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set cmdc=!cmd:~1!
+
 set opened_file=sys.bat
 (
 echo(::!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction612738110260
-goto endfunction622738110260
+:endfunction61152432947
+
+goto endfunction62152432947
 :endFunction
 set arg1=%~1
 set arg2=%~2
@@ -2126,14 +2304,16 @@ set arg3=%~3
 set arg4=%~4
 set arg5=%~5
 set functionName=[module]
+
 set opened_file=sys.bat
 (
 echo(!pps!exit /b
 echo(!pps!:endfunction%functionNumber%%moduleID%
 )>>%opened_file%
 exit /b
-:endfunction622738110260
-goto endfunction632738110260
+:endfunction62152432947
+
+goto endfunction63152432947
 :defineFunction
 set arg1=%~1
 set arg2=%~2
@@ -2144,6 +2324,7 @@ set bracketString=%bracketString%F
 set /a functionNumber=%functionNumber%+1
 set cmdc=!cmd:~16,-3!
 set functionName=!cmdc!
+
 set opened_file=sys.bat
 (
 echo(!pps!goto endfunction%functionNumber%%moduleID%
@@ -2155,8 +2336,9 @@ echo(!pps!set arg4=%%~4
 echo(!pps!set arg5=%%~5
 )>>%opened_file%
 exit /b
-:endfunction632738110260
-goto endfunction642738110260
+:endfunction63152432947
+
+goto endfunction64152432947
 :batcmd
 set arg1=%~1
 set arg2=%~2
@@ -2168,8 +2350,9 @@ set opened_file=sys.bat
 echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction642738110260
-goto endfunction652738110260
+:endfunction64152432947
+
+goto endfunction65152432947
 :endIf
 set arg1=%~1
 set arg2=%~2
@@ -2181,8 +2364,9 @@ set opened_file=sys.bat
 echo(!pps!!pes!^)
 )>>%opened_file%
 exit /b
-:endfunction652738110260
-goto endfunction662738110260
+:endfunction65152432947
+
+goto endfunction66152432947
 :if
 set arg1=%~1
 set arg2=%~2
@@ -2194,13 +2378,15 @@ set cmdc=!cmdc:^>= GTR !
 set cmdc=!cmdc:^<= LSS !
 set bracketString=%bracketString%I
 set cmdc=!cmdc:^&= if !
+
 set opened_file=sys.bat
 (
 echo(!pps!if !cmdc! ^(
 )>>%opened_file%
 exit /b
-:endfunction662738110260
-goto endfunction672738110260
+:endfunction66152432947
+
+goto endfunction67152432947
 :disp
 set arg1=%~1
 set arg2=%~2
@@ -2212,8 +2398,9 @@ set opened_file=sys.bat
 echo(mode 1000
 )>>%opened_file%
 exit /b
-:endfunction672738110260
-goto endfunction682738110260
+:endfunction67152432947
+
+goto endfunction68152432947
 :sortColours
 set arg1=%~1
 set arg2=%~2
@@ -2262,8 +2449,9 @@ set cmdc=!cmdc:#e=%%esc93m%%!
 set cmdc=!cmdc:#f=%%esc97m%%!
 set cmdc=!cmdc!%%esc0m%%
 exit /b
-:endfunction682738110260
-goto endfunction692738110260
+:endfunction68152432947
+
+goto endfunction69152432947
 :print
 set arg1=%~1
 set arg2=%~2
@@ -2273,39 +2461,46 @@ set arg5=%~5
 if "!cmdc!"=="" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$emptyPrint
-set traceback_linenum_%traceback_callNum%=977
+set traceback_linenum_%traceback_callNum%=1166
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=print
 call :emptyPrint
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 echo %bracketString% | findstr A >nul
+
 if not errorlevel 1 (
 goto rawPrint
 )
+
 echo %bracketString% | findstr R >nul
+
 if not errorlevel 1 (
 goto rawPrint
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$sortColours
-set traceback_linenum_%traceback_callNum%=988
+set traceback_linenum_%traceback_callNum%=1182
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=print
 call :sortColours
 set /a traceback_callNum=%traceback_callNum%-1
 :rawPrint
+
 set opened_file=sys.bat
 (
 echo(echo(!cmdc!
 )>>%opened_file%
 exit /b
-:endfunction692738110260
-goto endfunction702738110260
+:endfunction69152432947
+
+goto endfunction70152432947
 :printf
 set arg1=%~1
 set arg2=%~2
@@ -2314,28 +2509,30 @@ set arg4=%~4
 set arg5=%~5
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$sortColours
-set traceback_linenum_%traceback_callNum%=995
+set traceback_linenum_%traceback_callNum%=1191
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=printf
 call :sortColours
 set /a traceback_callNum=%traceback_callNum%-1
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$functionToVar
-set traceback_linenum_%traceback_callNum%=996
+set traceback_linenum_%traceback_callNum%=1192
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=printf
 call :functionToVar
 set /a traceback_callNum=%traceback_callNum%-1
+
 set opened_file=sys.bat
 (
 echo(set /a tbcn1=%%traceback_callNum%%+1
 echo(call echo !cmdc!
 )>>%opened_file%
 exit /b
-:endfunction702738110260
-goto endfunction712738110260
+:endfunction70152432947
+
+goto endfunction71152432947
 :emptyPrint
 set arg1=%~1
 set arg2=%~2
@@ -2347,8 +2544,9 @@ set opened_file=sys.bat
 echo(echo.
 )>>%opened_file%
 exit /b
-:endfunction712738110260
-goto endfunction722738110260
+:endfunction71152432947
+
+goto endfunction72152432947
 :end
 set arg1=%~1
 set arg2=%~2
@@ -2360,8 +2558,9 @@ set opened_file=sys.bat
 echo(!pps!exit
 )>>%opened_file%
 exit /b
-:endfunction722738110260
-goto endfunction732738110260
+:endfunction72152432947
+
+goto endfunction73152432947
 :wait
 set arg1=%~1
 set arg2=%~2
@@ -2371,25 +2570,26 @@ set arg5=%~5
 if /i "!cmdc!"=="user" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$waitUser
-set traceback_linenum_%traceback_callNum%=1014
+set traceback_linenum_%traceback_callNum%=1214
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=wait
 call :waitUser
 set /a traceback_callNum=%traceback_callNum%-1
 ) else (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$waitTime
-set traceback_linenum_%traceback_callNum%=1016
+set traceback_linenum_%traceback_callNum%=1216
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=wait
 call :waitTime
 set /a traceback_callNum=%traceback_callNum%-1
 )
 exit /b
-:endfunction732738110260
-goto endfunction742738110260
+:endfunction73152432947
+
+goto endfunction74152432947
 :waitUser
 set arg1=%~1
 set arg2=%~2
@@ -2401,8 +2601,9 @@ set opened_file=sys.bat
 echo(pause^>nul
 )>>%opened_file%
 exit /b
-:endfunction742738110260
-goto endfunction752738110260
+:endfunction74152432947
+
+goto endfunction75152432947
 :waitTime
 set arg1=%~1
 set arg2=%~2
@@ -2414,8 +2615,9 @@ set opened_file=sys.bat
 echo(!pps!timeout /t !cmdc! /nobreak !pes!^>nul
 )>>%opened_file%
 exit /b
-:endfunction752738110260
-goto endfunction762738110260
+:endfunction75152432947
+
+goto endfunction76152432947
 :clear
 set arg1=%~1
 set arg2=%~2
@@ -2427,8 +2629,9 @@ set opened_file=sys.bat
 echo(cls
 )>>%opened_file%
 exit /b
-:endfunction762738110260
-goto endfunction772738110260
+:endfunction76152432947
+
+goto endfunction77152432947
 :raise
 set arg1=%~1
 set arg2=%~2
@@ -2452,8 +2655,9 @@ echo(pause
 echo(exit
 )>>%opened_file%
 exit /b
-:endfunction772738110260
-goto endfunction782738110260
+:endfunction77152432947
+
+goto endfunction78152432947
 :import
 set arg1=%~1
 set arg2=%~2
@@ -2464,76 +2668,82 @@ if "!cmdc:~0,4!"=="net:" (
 set cmdc=!cmdc:~4!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_net
-set traceback_linenum_%traceback_callNum%=1054
+set traceback_linenum_%traceback_callNum%=1259
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_net
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmdc:~0,6!"=="local:" (
 set cmdc=!cmdc:~6!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_local
-set traceback_linenum_%traceback_callNum%=1059
+set traceback_linenum_%traceback_callNum%=1265
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_local
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if "!cmdc:~0,8!"=="inbuilt:" (
 set cmdc=!cmdc:~8!
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_inbuilt
-set traceback_linenum_%traceback_callNum%=1064
+set traceback_linenum_%traceback_callNum%=1271
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_inbuilt
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if exist "!cmdc!.bat" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_local
-set traceback_linenum_%traceback_callNum%=1068
+set traceback_linenum_%traceback_callNum%=1276
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_local
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 if exist "%~dp0modules\!cmdc!.bat" (
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_inbuilt
-set traceback_linenum_%traceback_callNum%=1072
+set traceback_linenum_%traceback_callNum%=1281
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_inbuilt
 set /a traceback_callNum=%traceback_callNum%-1
 set toReturn_%returnID%_%traceback_callNum%=
 exit /b
 )
+
 set /a traceback_callNum=%traceback_callNum%+1
 set traceback_line_%traceback_callNum%=$import_net
-set traceback_linenum_%traceback_callNum%=1075
+set traceback_linenum_%traceback_callNum%=1285
 set traceback_module_%traceback_callNum%=C2B Compiler
-set traceback_moduleID_%traceback_callNum%=2738110260
+set traceback_moduleID_%traceback_callNum%=152432947
 set traceback_function_%traceback_callNum%=import
 call :import_net
 set /a traceback_callNum=%traceback_callNum%-1
 exit /b
-:endfunction782738110260
-goto endfunction792738110260
+:endfunction78152432947
+
+goto endfunction79152432947
 :import_net
 set arg1=%~1
 set arg2=%~2
@@ -2542,6 +2752,7 @@ set arg4=%~4
 set arg5=%~5
 del download
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/AddisonPascal/c2b/master/modules/!cmdc!.bat', 'download')"
+
 if not exist download (
 echo. 
 color 0c
@@ -2550,23 +2761,26 @@ echo.
 echo Traceback [most recent call last]:
 echo.
 set tracing_back=0
-call :tracing_back_2738110260
-echo C2B Compiler [module ID 2738110260], line 1081, in import_net:
+call :tracing_back_152432947
+echo C2B Compiler [module ID 152432947], line 1293, in import_net:
 echo raise Error: Cannot find online module.
 echo.
 pause
 exit
 )
+
 set opened_file=sys.bat
 (
 type download
 echo.
 )>>%opened_file%
+
 copy download "%~dp0modules\!cmdc!.bat" >nul
 del download
 exit /b
-:endfunction792738110260
-goto endfunction802738110260
+:endfunction79152432947
+
+goto endfunction80152432947
 :import_local
 set arg1=%~1
 set arg2=%~2
@@ -2581,21 +2795,23 @@ echo.
 echo Traceback [most recent call last]:
 echo.
 set tracing_back=0
-call :tracing_back_2738110260
-echo C2B Compiler [module ID 2738110260], line 1092, in import_local:
+call :tracing_back_152432947
+echo C2B Compiler [module ID 152432947], line 1307, in import_local:
 echo raise Error: Cannot find local module.
 echo.
 pause
 exit
 )
+
 set opened_file=sys.bat
 (
 type "!cmdc!.bat"
 echo.
 )>>%opened_file%
 exit /b
-:endfunction802738110260
-goto endfunction812738110260
+:endfunction80152432947
+
+goto endfunction81152432947
 :import_inbuilt
 set arg1=%~1
 set arg2=%~2
@@ -2610,21 +2826,23 @@ echo.
 echo Traceback [most recent call last]:
 echo.
 set tracing_back=0
-call :tracing_back_2738110260
-echo C2B Compiler [module ID 2738110260], line 1101, in import_inbuilt:
+call :tracing_back_152432947
+echo C2B Compiler [module ID 152432947], line 1318, in import_inbuilt:
 echo raise Error: Cannot find inbuilt module
 echo.
 pause
 exit
 )
+
 set opened_file=sys.bat
 (
 type "%~dp0modules\!cmdc!.bat"
 echo.
 )>>%opened_file%
 exit /b
-:endfunction812738110260
-goto endfunction822738110260
+:endfunction81152432947
+
+goto endfunction82152432947
 :export
 set arg1=%~1
 set arg2=%~2
@@ -2641,4 +2859,5 @@ cls
 call %new_location%
 exit
 exit /b
-:endfunction822738110260
+:endfunction82152432947
+
