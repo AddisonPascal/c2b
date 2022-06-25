@@ -87,7 +87,7 @@ exit /b
 if not exist "%temp%\Event-%*" goto eventWait1830725043 %*
 exit /b
 :startOfFile1830725043
-:: c2b paint v0.0.1
+:: c2b paint v0.0.1x
 :: Init
 ::cmd[setlocal enabledelayedexpansion]
 set init__setX=0
@@ -131,7 +131,7 @@ goto afterwhile011830725043
 if %miny% LSS %maxy% (
 goto whiling021830725043
 ) else (
-goto afterwhile021830725043
+goto qft1
 )
 :whiling021830725043
 set /a traceback_callNum=%traceback_callNum%+1
@@ -144,7 +144,7 @@ call :paint.setPixel %minx% %miny% %colourToSet%
 set /a traceback_callNum=%traceback_callNum%-1
 set /a miny=%miny%+1
 goto while021830725043
-:afterwhile021830725043
+:qft1
 set /a minx=%minx%+1
 set miny=%oy%
 goto while011830725043
