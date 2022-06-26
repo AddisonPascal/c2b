@@ -1,0 +1,29 @@
+define.function[or] {
+	if[not defined arg1] {
+		raise Error: or function expected 2 arguments, got 0
+	}
+	if[not defined arg2] {
+		raise Error: or function expected 2 arguments, got 1
+	}
+	if[defined arg3] {
+		raise Error: or function expected 2 arguments, got 3 or more
+	}
+	[arg1=%arg1:^>= GTR %]
+	[arg1=%arg1:^<= LSS %]
+	[arg1=%arg1:^&= if %]
+	[arg1=%arg1:true=1 EQU 1%]
+	[arg1=%arg1:false=1 EQU 2%]
+	[arg2=%arg2:^>= GTR %]
+	[arg2=%arg2:^<= LSS %]
+	[arg2=%arg2:^&= if %]
+	[arg2=%arg2:true=1 EQU 1%]
+	[arg2=%arg2:false=1 EQU 2%]
+	if[%arg1%] {
+		return true
+	}
+	if[%arg2%] {
+		return true
+	}
+	return false
+}
+export
