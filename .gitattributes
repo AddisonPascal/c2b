@@ -1,2 +1,2 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# EOL needs to be CRLF or else windows batch hates it!
+* text eol=crlf
