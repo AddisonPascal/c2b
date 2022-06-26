@@ -87,7 +87,7 @@ exit /b
 if not exist "%temp%\Event-%*" goto eventWait23832631 %*
 exit /b
 :startOfFile23832631
-goto endfunction123832631
+goto qft2
 :or
 set arg1=%~1
 set arg2=%~2
@@ -160,4 +160,4 @@ exit /b
 set toReturn_%returnID%_%traceback_callNum%=false
 exit /b
 exit /b
-:endfunction123832631
+:qft2
