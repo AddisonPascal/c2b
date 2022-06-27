@@ -1,0 +1,106 @@
+# list module v0.0.1
+# $list.create <list name> <item0> <item1> ...
+# $list.set <list name> <index> <value>
+# $list.get <list name> <index>
+# $list.setSize <list name> <size>
+# $list.len <list name>
+# $list.append <list name> <value>
+
+define.function[list.create] {
+	# $list.create <list name> <item0> <item1> ...
+	if[not defined arg1] {
+		raise Error: New list must have name
+	}
+	[list.newListName=%arg1%]
+	[list.newListCounter=-2]
+	cmd[for %%I IN (%*) DO (]
+	cmd[call set /a list.newListCounter=%%list.newListCounter%%+1]
+	cmd[call set list.%%list.newListName%%.%%list.newListCounter%%=%%~I]
+	cmd[)]
+	incr[list.newListCounter]
+	[list.%list.newListName%.len=%list.newListCounter%]
+}
+
+define.function[list.set] {
+	# $list.set <list name> <index> <value>
+	if[not defined arg2] {
+		raise Error: list.set expected 2-3 arguments
+	}
+	
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	
+	cmd[call set list.setListLength=%%list.%arg1%.len%%]
+	if[not %arg2% lss %list.setListLength% & %arg2% geq 0] {
+		raise Error: List assignment index out of range
+	}
+	if[%arg2% < 0] {
+		raise Error: List assignment index out of range
+	}
+	
+	cmd[call set list.%arg1%.%arg2%=%arg3%]
+}
+
+define.function[list.get] {
+	# $list.get <list name> <index>
+	if[not defined arg2] {
+		raise Error: list.get expected 2 arguments
+	}
+	
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	
+	cmd[call set list.getListLength=%%list.%arg1%.len%%]
+	
+	
+	if[not %arg2% lss %list.getListLength% & %arg2% geq 0] {
+		raise Error: List index out of range
+	}
+	if[%arg2% < 0] {
+		raise Error: List index out of range
+	}
+	
+	cmd[call set list.toReturn=%%list.%arg1%.%arg2%%%]
+	return %list.toReturn%
+}
+
+define.function[list.setSize] {
+	# $list.setSize <list name> <size>
+	if[not defined arg2] {
+		raise Error: list.setSize expected 2 arguments
+	}
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	[list.%arg1%.len=%arg2%]
+}
+
+define.function[list.len] {
+	# $list.len <list name>
+	
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	
+	cmd[call set list.toReturn=%%list.%arg1%.len%%]
+	
+	return %list.toReturn%
+}
+
+define.function[list.append] {
+	# $list.append <list name> <value>
+	
+
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	
+	cmd[call set list.appendListLength=%%list.%arg1%.len%%]
+	[list.%arg1%.%list.appendListLength%=%arg2%]
+	incr[list.appendListLength]
+	[list.%arg1%.len=%list.appendListLength%]
+}
+
+export
