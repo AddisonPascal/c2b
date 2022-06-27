@@ -1,10 +1,27 @@
-# list module v0.0.1
+# list module v0.0.2
+
 # $list.create <list name> <item0> <item1> ...
+# Creates list (overwriting existing list is allowed however will not clear existing list items)
+# Not specifying any values creates an empty list. Any amount of parameters are allowed.
+
 # $list.set <list name> <index> <value>
+# Sets the value of an item of list. Index must be within list range.
+# If value is not given it will clear the list item
+
 # $list.get <list name> <index>
+# Returns the value of a list item
+
 # $list.setSize <list name> <size>
+# Sets list length. Decreasing length will not clear existing list items, but they will not be accessible unless list size is increased again.
+
 # $list.len <list name>
+# Returns length of list
+
 # $list.append <list name> <value>
+# Appends a value to a list. If value is not given the new value will be empty
+
+# $list.index <list name> <value>
+# Returns the index of the first occurrence of a value in a list. Empty value is allowed. If the value is not present in the list, will return false
 
 define.function[list.create] {
 	# $list.create <list name> <item0> <item1> ...
@@ -101,6 +118,29 @@ define.function[list.append] {
 	[list.%arg1%.%list.appendListLength%=%arg2%]
 	incr[list.appendListLength]
 	[list.%arg1%.len=%list.appendListLength%]
+}
+
+define.function[list.index] {
+	# $list.index <list name> <value>
+
+	if[not defined list.%~1.len] {
+		raise Error: List "%arg1%" not found
+	}
+	
+	
+	cmd[call set list.indexListLength=%%list.%arg1%.len%%]
+	
+	[list.indexCounter=0]
+	
+	
+	while[%list.indexCounter% < %list.indexListLength%] {
+		cmd[call set list.indexCurrentValue=%%list.%arg1%.%list.indexCounter%%%]
+		if["%list.indexCurrentValue%"=="%arg2%"] {
+			return %list.indexCounter%
+		}
+		incr[list.indexCounter]
+	}
+	return false
 }
 
 export
