@@ -1,0 +1,7 @@
+# substr module
+define.function[substr] {
+	# $substr <string> <starting index> <number of chars>
+	cmd[call set substr.toReturn=%%arg1:~%~2,%~3%%]
+	return %substr.toReturn%
+}
+export
