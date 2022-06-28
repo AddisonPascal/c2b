@@ -1,11 +1,11 @@
 @echo off
 rem Compiled by the c2b Compiler from c2b v0.9.6. 
-rem Module ID: 465019151
+rem Module ID: 51581988
 if "%alreadyStarted%"=="" set traceback_callNum=0
 set alreadyStarted=true
 set esc=
 ver | findstr /c:"Version 10"
-if errorlevel 1 goto noWin10465019151
+if errorlevel 1 goto noWin1051581988
 set esc0m=[0m
 set esc1m=[1m
 set esc4m=[4m
@@ -44,8 +44,8 @@ set esc106m=[106m
 set esc107m=[107m
 set escRewrite=[F[0J
 cls
-goto startOfFile465019151
-:noWin10465019151
+goto startOfFile51581988
+:noWin1051581988
 set esc30m=^&powershell write-host -NoNewline -fore Black 
 set esc34m=^&powershell write-host -NoNewline -fore Blue 
 set esc32m=^&powershell write-host -NoNewline -fore Green 
@@ -64,32 +64,32 @@ set esc93m=^&powershell write-host -NoNewline -fore Yellow
 set esc97m=^&powershell write-host -NoNewline -fore White 
 set esc0m=^&echo(
 cls
-goto startOfFile465019151
-:alertJS465019151
+goto startOfFile51581988
+:alertJS51581988
 mshta javascript:alert("%~1");close();
 exit/b
-:ifIn465019151
+:ifIn51581988
 echo %~2 | findstr /c:%~1
 exit /b 0
-:tracing_back_465019151
-if %tracing_back%==%traceback_callNum% goto end_tracing_back_465019151
+:tracing_back_51581988
+if %tracing_back%==%traceback_callNum% goto end_tracing_back_51581988
 set /a tracing_back=%tracing_back%+1
 call echo %%traceback_module_%tracing_back%%% [module ID %%traceback_moduleID_%tracing_back%%%], line %%traceback_linenum_%tracing_back%%%, in %%traceback_function_%tracing_back%%%:
 call echo %%traceback_line_%tracing_back%%%
-goto tracing_back_465019151
-:end_tracing_back_465019151
+goto tracing_back_51581988
+:end_tracing_back_51581988
 exit /b
-:forceDelete465019151
+:forceDelete51581988
 del %*
-if exist %* call :forceDelete465019151 %*
+if exist %* call :forceDelete51581988 %*
 exit /b
-:eventWait465019151
-if not exist "%temp%\Event-%*" goto eventWait465019151 %*
+:eventWait51581988
+if not exist "%temp%\Event-%*" goto eventWait51581988 %*
 exit /b
-:startOfFile465019151
+:startOfFile51581988
 :: randint module
 
-goto endfunction1465019151
+goto endfunction151581988
 :randint
 set arg1=%~1
 set arg2=%~2
@@ -102,4 +102,22 @@ set /a randint.toReturn=%random% * (%arg2% - %arg1% + 1) / 32768 + %arg1%
 set toReturn_%returnID%_%traceback_callNum%=%randint.toReturn%
 exit /b
 exit /b
-:endfunction1465019151
+:endfunction151581988
+
+goto endfunction251581988
+:randint.true
+set arg1=%~1
+set arg2=%~2
+set arg3=%~3
+set arg4=%~4
+set arg5=%~5
+:: $randint.true <minval> <maxval>
+:: returns random integer between minval and maxval inclusive
+:: uses powershell to create a truly random number however is much slower
+for /f "tokens=*" %%i in ('powershell -Command "(%arg1%..%arg2% | Get-Random)"') do (
+set randint.toReturn=%%i
+)
+set toReturn_%returnID%_%traceback_callNum%=%randint.toReturn%
+exit /b
+exit /b
+:endfunction251581988

@@ -6,4 +6,14 @@ define.function[randint] {
 	define.math[randint.toReturn=%random% * (%arg2% - %arg1% + 1) / 32768 + %arg1%]
 	return %randint.toReturn%
 }
+
+define.function[randint.true] {
+	# $randint.true <minval> <maxval>
+	# returns random integer between minval and maxval inclusive
+	# uses powershell to create a truly random number however is much slower
+	cmd[for /f "tokens=*" %%i in ('powershell -Command "(%arg1%..%arg2% | Get-Random)"') do (]
+	cmd[	set randint.toReturn=%%i]
+	cmd[)]
+	return %randint.toReturn%
+}
 export
