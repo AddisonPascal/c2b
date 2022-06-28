@@ -1,0 +1,9 @@
+# randint module
+
+define.function[randint] {
+	# $randint <minval> <maxval>
+	# returns random integer between minval and maxval inclusive
+	define.math[randint.toReturn=%random% * (%arg2% - %arg1% + 1) / 32768 + %arg1%]
+	return %randint.toReturn%
+}
+export
