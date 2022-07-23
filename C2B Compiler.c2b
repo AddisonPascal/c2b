@@ -1,8 +1,8 @@
 # c2b Compiler by Addison Djatschenko
 # https://github.com/AddisonPascal/c2b
-# Version 0.9.6
+# Version 0.9.7
 
-[version=0.9.6]
+[version=0.9.7]
 cmd[setlocal enabledelayedexpansion]
 
 title[C2B Compiler v%version%]
@@ -1293,13 +1293,18 @@ define.function[import_net] {
 		raise Error: Cannot find online module.
 	}
 	
+	# Converts LF to CRLF endings
+	del[download2]
+	cmd[type download | FIND "" /V > download2]
+	
 	file.append[sys.bat] {
-		cmd[type download]
+		cmd[type download2]
 		print[]
 	}
 	
-	cmd[copy download "%~dp0modules\!cmdc!.bat" >nul]
+	cmd[copy download2 "%~dp0modules\!cmdc!.bat" >nul]
 	del[download]
+	del[download2]
 }
 
 define.function[import_local] {
