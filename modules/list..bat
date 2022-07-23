@@ -146,7 +146,7 @@ set list.%list.newListName%.len=%list.newListCounter%
 exit /b
 :endfunction11561618641
 
-goto endfunction21561618641
+goto ll_ef_qf
 :list.set
 set arg1=%~1
 set arg2=%~2
@@ -220,7 +220,7 @@ exit
 
 call set list.%arg1%.%arg2%=%arg3%
 exit /b
-:endfunction21561618641
+:ll_ef_qf
 
 goto endfunction31561618641
 :list.get
@@ -409,7 +409,7 @@ set list.%arg1%.len=%list.appendListLength%
 exit /b
 :endfunction61561618641
 
-goto endfunction71561618641
+goto efqf_2
 :list.index
 set arg1=%~1
 set arg2=%~2
@@ -458,5 +458,5 @@ goto while011561618641
 set toReturn_%returnID%_%traceback_callNum%=false
 exit /b
 exit /b
-:endfunction71561618641
+:efqf_2
 
