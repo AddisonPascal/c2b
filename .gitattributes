@@ -1,5 +1,2 @@
 # EOL needs to be CRLF or else windows batch hates it!
 * text eol=crlf
-
-# Well even that doesn't work it seems, I guess only way is to treat .bat as binary??
-*.bat binary
